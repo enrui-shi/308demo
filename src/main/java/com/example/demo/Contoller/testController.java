@@ -13,4 +13,6 @@ public class testController {
     public String mainPage(){return "main";}
     @GetMapping("/register")
     public String register(){ return "register";}
+    @GetMapping("/batch")
+    public String batch(){ return "batch";}
 }

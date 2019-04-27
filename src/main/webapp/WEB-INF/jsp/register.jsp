@@ -13,13 +13,13 @@
         </div>
         <form id="register">
             <div class="my-wrap-login-input">
-                <input id="userEmail" type = "text" name = "email" placeholder="email" class="my-login-input"><br>
+                <input id="email" type = "text" name = "email" placeholder="email" class="my-login-input" required><br>
             </div>
             <div class="my-wrap-login-input">
-                <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input"><br>
+                <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required><br>
             </div>
             <div class="my-container-login-btn">
-                <input type="submit" value="Sign Up" />
+                <input class="my-login-btn" type="submit" value="Sign Up" />
             </div>
         </form>
         <div class="my-container-login-btn">

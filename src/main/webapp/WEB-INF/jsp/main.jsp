@@ -22,10 +22,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </head>
     <header class="topnav">
-        <a class="active" onclick="window.location.href='main.html'">Home</a>
+        <a class="active" onclick="window.location.replace('/main')">Home</a>
         <a onclick="window.location.href='map.html'">Map</a>
         <a onclick="window.location.href='report.html'">Report</a>
-        <a onclick="window.location.href='batch.html'">Batch</a>
+        <a onclick="window.location.replace('/batch')">Batch</a>
         <a onclick="window.location.href='about.html'">About</a>
         <input type="image" class="user-icon" onclick="document.getElementById('user01').style.display='block'" src="image/user_icon.jpg" />
     </header>
@@ -37,7 +37,7 @@
                 <div class="w3-center">
                     <span onclick="document.getElementById('user01').style.display='none'" class="close w3-button w3-small w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                     <p><button class="button" type="submit">Change Password</button></p> 
-                    <p><button class="button" type="submit" onclick="window.location.href='login.html'">Logout</button></p> 
+                    <p><button class="button" type="submit" onclick="window.location.replace('/')">Logout</button></p>
                 </div>
             </div>
         </div>
@@ -94,10 +94,10 @@
                     <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
 
                     <label>0</label>
-                    <input type="range" min="0" max="100" value="0" id="naturalContraint"
+                    <input type="range" min="0" max="100" value="0" id="naturalConstraint"
                         onchange="updateTextInput(this.value,this.id);">
                         <label>1&emsp;</label> 
-                    <label id="naturalContraintValue">0.00</label></u><label>&emsp;natural contraint</label>
+                    <label id="naturalConstraintValue">0.00</label></u><label>&emsp;natural constraint</label>
                     </b>
              
                 </div><!--my-slidebar-box div over-->
@@ -105,8 +105,8 @@
                     <form>
                         <label>number of district</label> <input type="number" id="numOfDistrict"><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" id="majority-minority"> <br><p></p>
-                        <label>min threshold（%</label>） <input type="number" id="minThreshold"><br><p></p>
-                        <label>max threshold（%</label>） <input type="number" id="maxThreshold"><br><p></p>
+                        <label>min threshold (%)</label> <input type="number" id="minThreshold"><br><p></p>
+                        <label>max threshold (%)</label> <input type="number" id="maxThreshold"><br><p></p>
                         <label>racial group</label>  <input type="number" id="racial-group"><br><p></p>
                         <label>ethnic group</label> <input type="number" id="ethnic-group"><br><p></p>
                     </form>
