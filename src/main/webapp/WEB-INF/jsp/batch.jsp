@@ -9,10 +9,10 @@
     <header>
         <div class="topnav">
             <a onclick="window.location.replace('/main')">Home</a>
-            <a onclick="window.location.href='map.html'">Map</a>
-            <a onclick="window.location.href='report.html'">Report</a>
+            <a onclick="window.location.replace('/map')">Map</a>
+            <a onclick="window.location.replace('/report')">Report</a>
             <a class="active" onclick="window.location.replace('/batch')">Batch</a>
-            <a onclick="window.location.href='about.html'">About</a>
+            <a onclick="window.location.replace('/about')">About</a>
             <input type="image" class="user-icon" onclick="document.getElementById('user01').style.display='block'" src="image/user_icon.jpg" />
         </div>
     </header>

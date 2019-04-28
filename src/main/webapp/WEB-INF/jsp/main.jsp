@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Main Page</title>
         <script src="/script/slidebar.js"></script>
+        <script src="/script/main.js"></script>
         <script src="/script/selectState.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -22,15 +23,13 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/main')">Home</a>
-        <a onclick="window.location.href='map.html'">Map</a>
-        <a onclick="window.location.href='report.html'">Report</a>
+        <a onclick="window.location.replace('/map')">Map</a>
+        <a onclick="window.location.replace('/report')">Report</a>
         <a onclick="window.location.replace('/batch')">Batch</a>
-        <a onclick="window.location.href='about.html'">About</a>
+        <a onclick="window.location.replace('/about')">About</a>
         <input type="image" class="user-icon" onclick="document.getElementById('user01').style.display='block'" src="image/user_icon.jpg" />
     </header>
     <body>
-
-    
         <div id="user01" class="my-modal">
             <div class="my-modal-content w3-animate-zoom "><br>
                 <div class="w3-center">
@@ -68,55 +67,54 @@
                     <button>Save Current Setting</button><br>
                     <button>Set as default</button>
                 </div><!--setting div over-->
-                <div class="my-slidebar-box">
-                    <b>
-                    <label>0</label>
-                    <input type="range" min="0" max="100" value="0" id="efficiencyGap"
-                        onchange="updateTextInput(this.value,this.id);">
-                    <label>1&emsp;</label>
-                    <u><label id="efficiencyGapValue">0.00</label></u><label>&emsp;efficiency gap</label><br>
-                    <label>0</label>
-                    <input type="range" min="0" max="100" value="0" id="compactness"
-                        onchange="updateTextInput(this.value,this.id);">
-                    <label>1&emsp;</label>
-                    <label id="compactnessValue">0.00</label></u><label>&emsp;compactness</label> <br>
-                    <label>0</label>
-                    <input type="range" min="0" max="100" value="0"id="partisanFairness"
-                        onchange="updateTextInput(this.value,this.id);">
-                    <label>1&emsp;</label>
-                    <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness</label><br>
+                <form id="preference">
+                    <div class="my-slidebar-box">
+                        <b>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="efficiencyGap"
+                                onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <u><label id="efficiencyGapValue">0.00</label></u><label>&emsp;efficiency gap</label><br>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="compactness"
+                                onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness</label> <br>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0"id="partisanFairness"
+                                onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness</label><br>
 
-                    <label>0</label>
-                    <input type="range" min="0" max="100" value="0" id="equalPopulation"
-                        onchange="updateTextInput(this.value,this.id);">
-                        <label>1&emsp;</label>
-                    <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="equalPopulation"
+                                onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
 
-                    <label>0</label>
-                    <input type="range" min="0" max="100" value="0" id="naturalConstraint"
-                        onchange="updateTextInput(this.value,this.id);">
-                        <label>1&emsp;</label> 
-                    <label id="naturalConstraintValue">0.00</label></u><label>&emsp;natural constraint</label>
-                    </b>
-             
-                </div><!--my-slidebar-box div over-->
-                <div class="my-numberInput">
-                    <form>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="naturalConstraint"
+                                onchange="updateTextInput(this.value,this.id);">
+                                <label>1&emsp;</label>
+                            <label id="naturalConstraintValue">0.00</label></u><label>&emsp;natural constraint</label>
+                        </b>
+                    </div><!--my-slidebar-box div over-->
+                    <div class="my-numberInput">
                         <label>number of district</label> <input type="number" id="numOfDistrict"><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" id="majority-minority"> <br><p></p>
                         <label>min threshold (%)</label> <input type="number" id="minThreshold"><br><p></p>
                         <label>max threshold (%)</label> <input type="number" id="maxThreshold"><br><p></p>
-                        <label>racial group</label>  <input type="number" id="racial-group"><br><p></p>
                         <label>ethnic group</label> <input type="number" id="ethnic-group"><br><p></p>
-                    </form>
-                </div><!--my-numberInput div over-->
-                <div class="my-map-button-container">
-                    <button class="my-map-btn"><i class="fa fa-play"></i> Play</button>
-                    <label>&emsp;</label>
-                    <button class="my-map-btn"><i class="fa fa-pause"></i> Pause</button>  
-                    <label>&emsp;</label> 
-                    <button class="my-map-btn"><i class="fa fa-stop"></i> Stop</button>
-                </div><!--my-map-button-container div over-->
+                    </div><!--my-numberInput div over-->
+
+                    <div class="my-map-button-container">
+                        <button onlick="submitSlidebarForm()" class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play</button>
+                        <label>&emsp;</label>
+                        <button class="my-map-btn"><i class="fa fa-pause"></i> Pause</button>
+                        <label>&emsp;</label>
+                        <button class="my-map-btn"><i class="fa fa-stop"></i> Stop</button>
+                    </div><!--my-map-button-container div over-->
+                </form>
             </div><!--sidebar div over-->
         </div><!--main div over-->
     </body>

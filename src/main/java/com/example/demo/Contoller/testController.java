@@ -15,4 +15,10 @@ public class testController {
     public String register(){ return "register";}
     @GetMapping("/batch")
     public String batch(){ return "batch";}
+    @GetMapping("/about")
+    public String about(){ return "about";}
+    @GetMapping("/map")
+    public String map(){ return "map";}
+    @GetMapping("/report")
+    public String report(){ return "report";}
 }
