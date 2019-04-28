@@ -18,6 +18,7 @@ public class Cluster {
 
     private Demographic demographic;
 
+    @OneToMany
     private List<ClusterEdge> clusterEdges;
 
     private boolean paired;

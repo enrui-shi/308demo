@@ -17,7 +17,7 @@
         <br>
         <form id="login" action>
             <div class="my-wrap-login-input">
-                <input id="email" type = "text" name = "email" placeholder="ID" class="my-login-input" required><br>
+                <input id="email" type = "text" name = "email" placeholder="email" class="my-login-input" required><br>
             </div>
             <div class="my-wrap-login-input">
                 <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required><br>
