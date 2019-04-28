@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <title>Main Page</title>
         <script src="/script/slidebar.js"></script>
-        <script src="script/login.js"></script>
         <script src="/script/selectState.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -55,9 +54,9 @@
             <div class="select-state">
                 <button onclick="dropDownSelection();" class="select-state-btn"><i class="fa fa-caret-down"></i> Select State</button>
                 <div id="myStateDropDown" class="dropdown-content">
-                    <input type="button" id="NY" value="New York">
-                    <input type="button" id="OH" value="Ohio">
-                    <input type="button" id="NJ" value="New Jersey">
+                    <input onclick="selectNY()" type="button" id="NY" value="New York">
+                    <input onclick="selectOH()" type="button" id="OH" value="Ohio">
+                    <input onclick="selectNJ()" type="button" id="NJ" value="New Jersey">
                 </div>
             </div><!--select-state div over-->
             <div id = "sidebar">
