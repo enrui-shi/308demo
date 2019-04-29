@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class PrecinctEdge {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    private String id;
     @OneToOne
     private Precinct precinct1;
     @OneToOne
@@ -18,11 +18,11 @@ public class PrecinctEdge {
 
     private double demographicJoinability;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

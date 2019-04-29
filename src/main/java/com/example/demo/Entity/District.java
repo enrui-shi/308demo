@@ -10,7 +10,7 @@ public class District {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long districtId;
+    private String districtId;
 
     @OneToMany
     private List<Precinct> precincts;
@@ -26,4 +26,11 @@ public class District {
 
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
+
+    public District(List<Precinct> precincts, Demographic demographic, String districtId) {
+        this.precincts = precincts;
+        this.demographic = demographic;
+        this.districtId = districtId;
+
+    }
 }

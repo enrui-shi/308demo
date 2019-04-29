@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Precinct {
     @Id
-    private Long precinctID;
+    private String precinctID;
 
     private ElectionResult electionResult;
 
@@ -23,11 +23,11 @@ public class Precinct {
 
     private String county;
 
-    public Long getPrecinctID() {
+    public String getPrecinctID() {
         return precinctID;
     }
 
-    public void setPrecinctID(Long precinctID) {
+    public void setPrecinctID(String precinctID) {
         this.precinctID = precinctID;
     }
 

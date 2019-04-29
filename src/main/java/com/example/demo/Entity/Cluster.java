@@ -8,7 +8,7 @@ public class Cluster implements Comparable< Cluster > {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private String id;
 
     @OneToMany
     private List<Precinct> precincts;
@@ -22,6 +22,10 @@ public class Cluster implements Comparable< Cluster > {
     private List<ClusterEdge> clusterEdges;
 
     private boolean paired;
+
+    public String getId() {
+        return id;
+    }
 
     public List<Precinct> getPrecincts() {
         return precincts;

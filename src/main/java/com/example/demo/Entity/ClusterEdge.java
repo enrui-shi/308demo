@@ -19,6 +19,14 @@ public class ClusterEdge {
 
     private double demographicJoinability;
 
+    public double getCountyJoinability() {
+        return countyJoinability;
+    }
+
+    public double getDemographicJoinability() {
+        return demographicJoinability;
+    }
+
     public double getJoinability(){
         Double joinability = (demographicJoinability+countyJoinability)/2;
         return joinability;
@@ -32,6 +40,12 @@ public class ClusterEdge {
             return null;
         }
     }
+
+    public void merge(ClusterEdge ce){
+        this.countyJoinability  = (this.countyJoinability+ce.getCountyJoinability())/2;
+        this.demographicJoinability = (this.demographicJoinability+ce.getDemographicJoinability())/2;
+    }
+
     public Cluster updateCluster(Cluster oldC, Cluster newC){
         if(oldC == this.cluster1){
             cluster1 = newC;
@@ -42,9 +56,7 @@ public class ClusterEdge {
         }
         return null;
     }
-    public void merge(ClusterEdge ce){
 
-    }
 
 
 
