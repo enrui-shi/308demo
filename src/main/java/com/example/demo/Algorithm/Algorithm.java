@@ -30,6 +30,7 @@ public class Algorithm {
     public void startGraphPartition(){
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
         while(clusters.size()/2>targetNumber) {
+
             Collections.sort(clusters);
             int pickIndex = (int)Math.floor(clusters.size() * 0.8);
             List<Cluster> tempClusters = new ArrayList<>();
@@ -37,11 +38,23 @@ public class Algorithm {
                 tempClusters.add(clusters.get(i));
             }
             clusters.removeAll(tempClusters);
+
             for(int i = 0; i<clusters.size();i++){
                 Cluster cluster = clusters.get(i);
-
+                Cluster pairedCluster = cluster.getBestNeighbourCluster();
+                if( pairedCluster != null){
+                    clusterPairs.add(new ClusterPair(cluster,pairedCluster));
+                    clusters.remove(cluster);
+                    clusters.remove(pairedCluster);
+                    cluster.setPaired(true);
+                    pairedCluster.setPaired(true);
+                    i--;
+                }
             }
 
+            for(ClusterPair cp:clusterPairs){
+                Cluster c = cp.combine();
+            }
 
         }
     }

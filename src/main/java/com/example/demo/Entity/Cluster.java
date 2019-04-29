@@ -23,13 +23,34 @@ public class Cluster implements Comparable< Cluster > {
 
     private boolean paired;
 
+    public List<ClusterEdge> getClusterEdges() {
+        return clusterEdges;
+    }
+
     public Demographic getDemographic() {
         return demographic;
     }
 
-    public Cluster getBestNeighbourCluster(){
-        return null;
+    public boolean isPaired() {
+        return paired;
+    }
 
+    public void setPaired(boolean paired) {
+        this.paired = paired;
+    }
+
+    public Cluster getBestNeighbourCluster(){
+        Cluster pairCluster = null;
+        Double max = 0.0;
+        for (ClusterEdge ce:clusterEdges) {
+            if(!ce.getConnectCluster(this).isPaired()){
+                if(ce.getJoinability()>max){
+                    max = ce.getJoinability();
+                    pairCluster = ce.getConnectCluster(this);
+                }
+            }
+        }
+        return pairCluster;
     }
 
     @Override
