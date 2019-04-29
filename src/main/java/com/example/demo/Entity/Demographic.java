@@ -14,4 +14,8 @@ public class Demographic {
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn()
     private Map<EthnicGroup,Integer> ethnicData;
+
+    public int getTotalPopulation() {
+        return totalPopulation;
+    }
 }

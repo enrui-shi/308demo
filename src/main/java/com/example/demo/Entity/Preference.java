@@ -37,5 +37,7 @@ public class Preference {
 
     private double naturalConstrainWeight;
 
-
+    public int getNumberOfDistrict() {
+        return numberOfDistrict;
+    }
 }

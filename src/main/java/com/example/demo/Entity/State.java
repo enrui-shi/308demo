@@ -23,4 +23,7 @@ public class State {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
+    public Preference getPreference() {
+        return preference;
+    }
 }
