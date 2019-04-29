@@ -67,8 +67,9 @@
                     <button>Save Current Setting</button><br>
                     <button>Set as default</button>
                 </div><!--setting div over-->
-                <form id="preference">
-                    <div class="my-slidebar-box">
+
+                <div class="my-slidebar-box">
+                    <form id="weight">
                         <b>
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="efficiencyGap"
@@ -95,26 +96,34 @@
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="naturalConstraint"
                                 onchange="updateTextInput(this.value,this.id);">
-                                <label>1&emsp;</label>
+                            <label>1&emsp;</label>
                             <label id="naturalConstraintValue">0.00</label></u><label>&emsp;natural constraint</label>
                         </b>
-                    </div><!--my-slidebar-box div over-->
-                    <div class="my-numberInput">
+                    </form>
+                </div><!--my-slidebar-box div over-->
+                <div class="my-numberInput">
+                    <form id="slidebarNumber">
                         <label>number of district</label> <input type="number" id="numOfDistrict"><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" id="majority-minority"> <br><p></p>
-                        <label>min threshold (%)</label> <input type="number" id="minThreshold"><br><p></p>
-                        <label>max threshold (%)</label> <input type="number" id="maxThreshold"><br><p></p>
-                        <label>ethnic group</label> <input type="number" id="ethnic-group"><br><p></p>
-                    </div><!--my-numberInput div over-->
+                        <label>ethnic group: African-American</label><br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minAA"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxAA"><br><p></p>
+                        <label>ethnic group: Asian</label><br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minAsian"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxAsian"><br><p></p>
+                        <label>ethnic group: Latino</label><br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minLatino"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxLatino"><br><p></p>
+                    </form>
+                </div><!--my-numberInput div over-->
 
-                    <div class="my-map-button-container">
-                        <button onlick="submitSlidebarForm()" class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play</button>
+                <div class="my-map-button-container">
+                    <button class="my-map-btn" onlick="slideForm()" type="submit"><i class="fa fa-play"></i> Play</button>
                         <label>&emsp;</label>
                         <button class="my-map-btn"><i class="fa fa-pause"></i> Pause</button>
                         <label>&emsp;</label>
                         <button class="my-map-btn"><i class="fa fa-stop"></i> Stop</button>
-                    </div><!--my-map-button-container div over-->
-                </form>
+                </div><!--my-map-button-container div over-->
             </div><!--sidebar div over-->
         </div><!--main div over-->
     </body>

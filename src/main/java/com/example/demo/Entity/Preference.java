@@ -6,7 +6,7 @@ import org.springframework.data.domain.Range;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import java.util.List;
 
 @Embeddable
@@ -16,8 +16,14 @@ public class Preference {
 
     private int numberOfDistrict;
 
-    @Embedded
-    private Bound minorityBound;
+    @OneToOne
+    private Bound africanAmericanBound;
+
+    @OneToOne
+    private Bound asianBound;
+
+    @OneToOne
+    private Bound latinoBound;
 
     private String ethnicGroup;
 
