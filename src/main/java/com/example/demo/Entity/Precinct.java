@@ -12,7 +12,7 @@ public class Precinct {
     @Id
     private Long precinctID;
 
-    private ElectionResult lectionResult;
+    private ElectionResult electionResult;
 
     @OneToMany
     private List<PrecinctEdge> precinctEdges;
@@ -31,12 +31,12 @@ public class Precinct {
         this.precinctID = precinctID;
     }
 
-    public ElectionResult getLectionResult() {
-        return lectionResult;
+    public ElectionResult getElectionResult() {
+        return electionResult;
     }
 
-    public void setLectionResult(ElectionResult lectionResult) {
-        this.lectionResult = lectionResult;
+    public void setElectionResult(ElectionResult electionResult) {
+        this.electionResult = electionResult;
     }
 
     public List<PrecinctEdge> getPrecinctEdges() {

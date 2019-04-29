@@ -9,6 +9,7 @@ import java.util.Map;
 public class Demographic {
 
     private int totalPopulation;
+
     @ElementCollection
     @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
@@ -23,8 +24,17 @@ public class Demographic {
         return ethnicData;
     }
 
+    public void setTotalPopulation(int totalPopulation) {
+        this.totalPopulation = totalPopulation;
+    }
+
+    public void setEthnicData(Map<EthnicGroup, Integer> ethnicData) {
+        this.ethnicData = ethnicData;
+    }
+
     public void merge(Demographic d){
         totalPopulation+=d.totalPopulation;
         ethnicData.forEach((k,v)->v+=d.getEthnicData().get(k));
     }
+
 }
