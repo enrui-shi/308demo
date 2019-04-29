@@ -11,13 +11,14 @@ public class Cluster {
     private long id;
 
     @OneToMany
-    private List<Precinct> precincs;
+    private List<Precinct> precincts;
 
     @OneToMany
     private List<Cluster> neighborClusters;
 
     private Demographic demographic;
 
+    @OneToMany
     private List<ClusterEdge> clusterEdges;
 
     private boolean paired;
