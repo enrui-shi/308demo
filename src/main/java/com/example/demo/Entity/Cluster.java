@@ -23,6 +23,10 @@ public class Cluster implements Comparable< Cluster > {
 
     private boolean paired;
 
+    public List<Precinct> getPrecincts() {
+        return precincts;
+    }
+
     public List<Cluster> getNeighborClusters() {
         return neighborClusters;
     }
@@ -43,6 +47,14 @@ public class Cluster implements Comparable< Cluster > {
         this.paired = paired;
     }
 
+    public void merge(Cluster c){
+        precincts.addAll(c.getPrecincts());
+        neighborClusters.addAll(c.neighborClusters);
+        neighborClusters.remove(this);
+        demographic.merge(c.getDemographic());
+
+    }
+
     public Cluster getBestNeighbourCluster(){
         Cluster pairCluster = null;
         Double max = 0.0;
@@ -58,7 +70,7 @@ public class Cluster implements Comparable< Cluster > {
     }
 
     public ClusterEdge getEdgeByCluster(Cluster c){
-        for(ClusterEdge ce:this.clusterEdges){
+        for(ClusterEdge ce: clusterEdges){
             if(ce.getConnectCluster(this) == c){
                 return ce;
             }
@@ -72,11 +84,9 @@ public class Cluster implements Comparable< Cluster > {
         int population2 = o.getDemographic().getTotalPopulation();
         if(population1>population2){
             return 1;
-        }
-        else if(population1 == population2){
+        }else if(population1 == population2){
             return 0;
-        }
-        else{
+        }else{
             return -1;
         }
     }

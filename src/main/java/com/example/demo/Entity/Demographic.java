@@ -18,4 +18,13 @@ public class Demographic {
     public int getTotalPopulation() {
         return totalPopulation;
     }
+
+    public Map<EthnicGroup, Integer> getEthnicData() {
+        return ethnicData;
+    }
+
+    public void merge(Demographic d){
+        totalPopulation+=d.totalPopulation;
+        ethnicData.forEach((k,v)->v+=d.getEthnicData().get(k));
+    }
 }

@@ -20,29 +20,30 @@ public class ClusterEdge {
     private double demographicJoinability;
 
     public double getJoinability(){
-        return (demographicJoinability+countyJoinability)/2;
+        Double joinability = (demographicJoinability+countyJoinability)/2;
+        return joinability;
     }
     public Cluster getConnectCluster(Cluster c){
-        if(c == this.cluster1){
-            return this.cluster2;
-        }
-        else if(c == this.cluster2){
-            return this.cluster1;
-        }
-        else{
+        if(c == cluster1){
+            return cluster2;
+        }else if(c == this.cluster2){
+            return cluster1;
+        }else{
             return null;
         }
     }
     public Cluster updateCluster(Cluster oldC, Cluster newC){
         if(oldC == this.cluster1){
-            this.cluster1 = newC;
-            return this.cluster2;
-        }
-        else if(oldC == this.cluster2){
-            this.cluster2 = newC;
-            return this.cluster1;
+            cluster1 = newC;
+            return cluster2;
+        }else if(oldC == this.cluster2){
+            cluster2 = newC;
+            return cluster1;
         }
         return null;
+    }
+    public void merge(ClusterEdge ce){
+
     }
 
 
