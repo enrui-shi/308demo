@@ -1,6 +1,10 @@
 .range{
     width:50px
 }
+.inputNum{
+    width:125px;
+}
+
 .textField{
     display:block;
     float:left;

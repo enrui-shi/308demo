@@ -1,34 +1,26 @@
-        //init map
-        document.onload = function loadMap(){
-            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-        }
-        function openSidebar() {
-            document.getElementById("main").style.marginRight = "30%";
-            document.getElementById("sidebar").style.width = "30%";
-            document.getElementById("sidebar").style.display = "block";
-            document.getElementById("sidebar").style.animation = "popup 0.5s";
-        }
-        function closeSidebar() {
-            document.getElementById("main").style.marginRight = "0%";
-            document.getElementById("sidebar").style.animation = "popin 0.5s"; 
-            document.getElementById("sidebar").style.display = "none"; 
-        }
-        function updateTextInput(val, id) {
-            document.getElementById(id + "Value").innerHTML = val / 100;
-            if (val == 100) {
-                document.getElementById(id + "Value").innerHTML = "1.00";
+// get slide bar value
+$(document).ready(function () {
+    var preference_form = $("#preference");
+    preference_form.submit(function (e) {
+        var preference_data = {efficiencyGapWeight: $('#efficiencyGap').val(), compactnessWeight: $('#compactness').val(),
+            partisanFairnessWeight:$('#partisanFairness').val(),equalPopulationWeight:$('#equalPopulation').val(),
+            naturalConstraintWeight:$('#naturalConstraint').val(), numberOfDistrict:$('#numOfDistrict').val(),
+            majorityMinorityDistrictNumber:$('#majority-minority').val(), minThreshold:$('#minThreshold').val(),
+            maxThreshold:$('#maxThreshold').val()};
+        e.preventDefault();
+        console.log(preference_data.efficiencyGapWeight, " ", preference_data.password);
+        $.ajax({
+            type: 'post',
+            url: '/user/main',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(preference_data),
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                window.location.replace("/main");
+
             }
-            else if (val == 0) {
-                document.getElementById(id + "Value").innerHTML = "0.00";
-            }
-            else if (val % 10 == 0) {
-                document.getElementById(id + "Value").innerHTML = val / 100 + "0";
-            }
-        }  
-        function sideSetting(){
-            if(document.getElementById("setting").style.display == "block"){
-                document.getElementById("setting").style.display = "none";
-            }else{
-                document.getElementById("setting").style.display = "block";
-            }
-        }                                      
+        })
+    });
+});
+

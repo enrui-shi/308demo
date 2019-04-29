@@ -1,5 +1,17 @@
 // initialize the map
-var map = L.map('map').setView([39.96, -83.00], 9);
+var map = L.map('map').setView([39.96, -83.00], 5);
+
+// select state
+function selectOH(){
+    map.setView([40.4173, -82.9071], 9);
+}
+function selectNY(){
+    map.setView([40.7128, -74.0060], 9);
+}
+function selectNJ(){
+    map.setView([40.0583, -74.4057], 9);
+}
+
 // load a tile layer(worldwide)
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,

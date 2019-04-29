@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var register_form = $("#register");
     register_form.submit( function(e) {
-        var register_data = { userEmail: $('#userEmail').val() , password: $('#password').val() };
+        var register_data = { userEmail: $('#email').val() , password: $('#password').val() };
         e.preventDefault();
         console.log(register_data.userEmail," ",register_data.password)
         $.ajax({
