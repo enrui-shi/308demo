@@ -23,6 +23,10 @@ public class State {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
+    public State(Preference preference){
+        this.preference = preference;
+    }
+
     public State(Set<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
         this.districts = districts;
         this.precincts = precincts;
