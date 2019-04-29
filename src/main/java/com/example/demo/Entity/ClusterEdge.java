@@ -25,12 +25,26 @@ public class ClusterEdge {
     public Cluster getConnectCluster(Cluster c){
         if(c == this.cluster1){
             return this.cluster2;
-        }else if (c == this.cluster2){
+        }
+        else if(c == this.cluster2){
             return this.cluster1;
-        }else{
+        }
+        else{
             return null;
         }
     }
+    public Cluster updateCluster(Cluster oldC, Cluster newC){
+        if(oldC == this.cluster1){
+            this.cluster1 = newC;
+            return this.cluster2;
+        }
+        else if(oldC == this.cluster2){
+            this.cluster2 = newC;
+            return this.cluster1;
+        }
+        return null;
+    }
+
 
 
 

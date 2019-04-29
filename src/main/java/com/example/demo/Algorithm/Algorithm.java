@@ -30,33 +30,38 @@ public class Algorithm {
     public void startGraphPartition(){
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
         while(clusters.size()/2>targetNumber) {
+            List<Cluster> tempClusters = new ArrayList<>();
+            int pickIndex = (int)Math.floor(clusters.size() * 0.8);
 
             Collections.sort(clusters);
-            int pickIndex = (int)Math.floor(clusters.size() * 0.8);
-            List<Cluster> tempClusters = new ArrayList<>();
             for(int i = pickIndex; i< clusters.size();i++){
                 tempClusters.add(clusters.get(i));
             }
             clusters.removeAll(tempClusters);
 
-            for(int i = 0; i<clusters.size();i++){
-                Cluster cluster = clusters.get(i);
-                Cluster pairedCluster = cluster.getBestNeighbourCluster();
-                if( pairedCluster != null){
-                    clusterPairs.add(new ClusterPair(cluster,pairedCluster));
-                    clusters.remove(cluster);
-                    clusters.remove(pairedCluster);
-                    cluster.setPaired(true);
-                    pairedCluster.setPaired(true);
-                    i--;
-                }
-            }
+            determineCandidatePair();
 
             for(ClusterPair cp:clusterPairs){
                 Cluster c = cp.combine();
             }
 
         }
+    }
+
+    public void determineCandidatePair(){
+        for(int i = 0; i<this.clusters.size();i++){
+            Cluster cluster = this.clusters.get(i);
+            Cluster pairedCluster = cluster.getBestNeighbourCluster();
+            if( pairedCluster != null){
+                clusterPairs.add(new ClusterPair(cluster,pairedCluster));
+                this.clusters.remove(cluster);
+                this.clusters.remove(pairedCluster);
+                cluster.setPaired(true);
+                pairedCluster.setPaired(true);
+                i--;
+            }
+        }
+
     }
 
 }

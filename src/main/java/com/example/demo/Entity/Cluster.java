@@ -23,6 +23,10 @@ public class Cluster implements Comparable< Cluster > {
 
     private boolean paired;
 
+    public List<Cluster> getNeighborClusters() {
+        return neighborClusters;
+    }
+
     public List<ClusterEdge> getClusterEdges() {
         return clusterEdges;
     }
@@ -42,7 +46,7 @@ public class Cluster implements Comparable< Cluster > {
     public Cluster getBestNeighbourCluster(){
         Cluster pairCluster = null;
         Double max = 0.0;
-        for (ClusterEdge ce:clusterEdges) {
+        for(ClusterEdge ce:clusterEdges) {
             if(!ce.getConnectCluster(this).isPaired()){
                 if(ce.getJoinability()>max){
                     max = ce.getJoinability();
@@ -51,6 +55,15 @@ public class Cluster implements Comparable< Cluster > {
             }
         }
         return pairCluster;
+    }
+
+    public ClusterEdge getEdgeByCluster(Cluster c){
+        for(ClusterEdge ce:this.clusterEdges){
+            if(ce.getConnectCluster(this) == c){
+                return ce;
+            }
+        }
+        return null;
     }
 
     @Override
