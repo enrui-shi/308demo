@@ -1,5 +1,5 @@
 // initialize the map
-var map = L.map('map').setView([39.96, -83.00], 5);
+var map = L.map('map').setView([39.96, -83.00], 7);
 
 // select state
 function selectOH(){
