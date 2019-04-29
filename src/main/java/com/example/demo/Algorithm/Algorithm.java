@@ -5,11 +5,14 @@ import com.example.demo.Entity.ClusterEdge;
 import com.example.demo.Entity.State;
 import com.example.demo.Type.ClusterPair;
 import com.example.demo.Type.Summary;
+import com.example.demo.Entity.District;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Algorithm {
 
@@ -79,8 +82,11 @@ public class Algorithm {
         }
     }
     public void toDistrict(){
-        for(Cluster c:this.clusters){
-
+        Map<String,String> idMap = new HashMap<>();
+        for(int i = 0;i<clusters.size();i++){
+            Cluster c = clusters.get(i);
+            District d = new District(c.getPrecincts(),c.getDemographic(),Integer.toString(i));
+            idMap.put(Integer.toString(i),c.getId());
         }
     }
 
