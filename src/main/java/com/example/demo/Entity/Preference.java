@@ -12,7 +12,7 @@ import java.util.List;
 @Embeddable
 public class Preference {
 
-    private int majorityMinorityDistricNumber;
+    private int majorityMinorityDistrictNumber;
 
     private int numberOfDistrict;
 
@@ -24,8 +24,6 @@ public class Preference {
 
     @OneToOne
     private Bound latinoBound;
-
-    private String ethnicGroup;
 
     private double efficiencyGapWeight;
 

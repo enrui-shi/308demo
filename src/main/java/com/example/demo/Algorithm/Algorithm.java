@@ -29,6 +29,7 @@ public class Algorithm {
 
     public void startGraphPartition(){
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
+
         while(clusters.size()/2>targetNumber) {
             List<Cluster> tempClusters = new ArrayList<>();
             int pickIndex = (int)Math.floor(clusters.size() * 0.8);
@@ -52,6 +53,7 @@ public class Algorithm {
         for(int i = 0; i<this.clusters.size();i++){
             Cluster cluster = this.clusters.get(i);
             Cluster pairedCluster = cluster.getBestNeighbourCluster();
+
             if( pairedCluster != null){
                 clusterPairs.add(new ClusterPair(cluster,pairedCluster));
                 this.clusters.remove(cluster);
