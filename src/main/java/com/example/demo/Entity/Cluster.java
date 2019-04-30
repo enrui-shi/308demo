@@ -8,7 +8,8 @@ public class Cluster implements Comparable< Cluster > {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    private Long id;
+
 
     @OneToMany
     private List<Precinct> precincts;
@@ -23,7 +24,7 @@ public class Cluster implements Comparable< Cluster > {
 
     private boolean paired;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,7 +62,7 @@ public class Cluster implements Comparable< Cluster > {
 
     public Cluster getBestNeighbourCluster(){
         Cluster pairCluster = null;
-        Double max = 0.0;
+        double max = 0.0;
         for(ClusterEdge ce:clusterEdges) {
             if(!ce.getConnectCluster(this).isPaired()){
                 if(ce.getJoinability()>max){

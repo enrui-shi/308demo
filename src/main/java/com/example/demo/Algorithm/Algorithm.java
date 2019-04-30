@@ -86,7 +86,10 @@ public class Algorithm {
         for(int i = 0;i<clusters.size();i++){
             Cluster c = clusters.get(i);
             District d = new District(c.getPrecincts(),c.getDemographic(),Integer.toString(i));
-            idMap.put(Integer.toString(i),c.getId());
+            idMap.put(c.getId(),Integer.toString(i));
+        }
+        for(ClusterEdge ce:clusterEdges){
+
         }
     }
 

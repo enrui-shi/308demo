@@ -56,6 +56,7 @@ function getPrecinctColor(w) {
         case 'Democratic': return "#66b2ff"; // blue
     }
 }
+
 function precinctStyle(feature) {
     return {
         weight: 2,
