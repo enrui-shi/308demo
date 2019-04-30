@@ -87,6 +87,7 @@ public class Batch {
         this.natureConstrainBound = natureConstrainBound;
     }
     public Preference generatePreference(){
-        Preference p = new Preference(numDistrict,)
+        Preference p = new Preference(numDistrict,compactnessBound.generateValue(),partisanFairnessBound.generateValue(),equalPopulationBound.generateValue());
+        return p;
     }
 }

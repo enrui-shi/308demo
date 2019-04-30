@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
-import javax.persistence.Embeddable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Embeddable
 public class Preference {
-
+    @ElementCollection
+    @CollectionTable()
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn()
     private Map<EthnicGroup,Integer> ethnicGroupNumber;
 
     private int numberOfDistrict;
 
-    @OneToMany
+    @ElementCollection
+    @CollectionTable()
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn()
     private Map<EthnicGroup,Bound> ethnicGroupBound;
 
     private double efficiencyGapWeight;
@@ -30,13 +35,11 @@ public class Preference {
 
     private double naturalConstrainWeight;
 
-    public Preference(int numberOfDistrict, double efficiencyGapWeight, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight, double naturalConstrainWeight) {
+    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight) {
         this.numberOfDistrict = numberOfDistrict;
-        this.efficiencyGapWeight = efficiencyGapWeight;
         this.compactnessWeight = compactnessWeight;
         this.partisanFairnessWeight = partisanFairnessWeight;
         this.equalPopulationWeight = equalPopulationWeight;
-        this.naturalConstrainWeight = naturalConstrainWeight;
     }
 
     public int getNumberByGroup(EthnicGroup eg){

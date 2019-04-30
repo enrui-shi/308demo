@@ -1,10 +1,9 @@
 package com.example.demo.Entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import com.example.demo.Enum.StateName;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,9 @@ public class Precinct {
     private Long precinctID;
 
     private ElectionResult electionResult;
+
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
 
     @OneToMany
     private List<PrecinctEdge> precinctEdges;
