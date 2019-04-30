@@ -1,5 +1,6 @@
 package com.example.demo.Contoller;
 import com.example.demo.Entity.User;
+import com.example.demo.Type.Status;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -19,36 +20,39 @@ public class UserController {
     // Create User
 
     @PostMapping(value = "/register", produces = "application/json")
-    public User createUser(@RequestBody User user, HttpSession session) {
+    public Status createUser(@RequestBody User user, HttpSession session) {
 
         user.setPassword(encoder.encode(user.getPassword()));
         System.out.println(user.getUserEmail());
-        return userRepository.save(user);
+        userRepository.save(user);
+        return new Status("ok");
     }
 
 
 
     @PostMapping(value = "/login", produces = "application/json")
-    public User login(@RequestBody User user, HttpSession session) {
+    public Status login(@RequestBody User user, HttpSession session) {
         Optional<User> currentUser = userRepository.findByUserEmail(user.getUserEmail());
+            // check if the user exist
         if (!currentUser.isPresent()) {
-            return null;
+            return new Status("error");
+            // check password
         } else if(encoder.matches(user.getPassword(),currentUser.get().getPassword())) {
             session.setAttribute("currentUser", currentUser);
-            return currentUser.get();
+            return new Status("ok");
         }else{
-            return null;
+            return new Status("error");
         }
 
     }
 
     @PostMapping("/logout")
-    public String logout(@RequestBody User user, HttpSession session) {
+    public Status logout(@RequestBody User user, HttpSession session) {
         if (session.getAttribute("currentUser") == null) {
-            return "{status:\"error\"}";
+            return new Status("error");
         } else {
             session.setAttribute("currentUser", null);
-            return "{status:\"OK\"}";
+            return new Status("ok");
         }
 
     }
