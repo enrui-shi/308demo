@@ -18,7 +18,7 @@ public class mainController {
         System.out.println("lalalal");
         StateName stateName1 = StateName.valueOf(stateName);
         State state = new State(stateName1);
-        System.out.println("Number of district in State " + state.getPreference().getNumberOfDistrict());
+        System.out.println("State: " + state.getStateName());
         return state;
     }
 
