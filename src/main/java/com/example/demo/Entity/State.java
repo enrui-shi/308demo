@@ -74,5 +74,8 @@ public class State {
     public void setStateName(StateName stateName) {
         this.stateName = stateName;
     }
+    public void addDistrict(District d){
+        districts.add(d);
+    }
 
 }

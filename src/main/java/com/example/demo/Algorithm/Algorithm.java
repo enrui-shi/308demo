@@ -52,8 +52,6 @@ public class Algorithm {
         }
         finish(targetNumber);
         toDistrict();
-
-
     }
 
     public void determineCandidatePair(){
@@ -82,14 +80,20 @@ public class Algorithm {
         }
     }
     public void toDistrict(){
-        Map<String,String> idMap = new HashMap<>();
+        Map<Long,District> idMap = new HashMap<>();
         for(int i = 0;i<clusters.size();i++){
             Cluster c = clusters.get(i);
-            //District d = new District(c.getPrecincts(),c.getDemographic(),(Long)i);
-            //idMap.put(c.getId(),Integer.toString(i));
+            District d = new District(c.getPrecincts(),c.getDemographic(),(long)i);
+            idMap.put(c.getId(),d);
+            currentState.addDistrict(d);
         }
         for(ClusterEdge ce:clusterEdges){
-
+            long id1 = ce.getCluster1().getId();
+            long id2 = ce.getCluster2().getId();
+            District d1 = idMap.get(id1);
+            District d2 = idMap.get(id2);
+            d1.addNeiborDistrict(d2);
+            d2.addNeiborDistrict(d1);
         }
     }
 
