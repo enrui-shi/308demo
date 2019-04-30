@@ -25,6 +25,8 @@ public class Algorithm {
 
     private List<Summary> summarys;
 
+    private Map<Long,District>pctDstMap;
+
     public Algorithm() {
     }
 
@@ -101,6 +103,7 @@ public class Algorithm {
             idMap.put(c.getId(),d);
             currentState.addDistrict(d);
         }
+        currentState.setMinorityTarget();
         for(ClusterEdge ce:clusterEdges){
             long id1 = ce.getCluster1().getId();
             long id2 = ce.getCluster2().getId();
@@ -109,6 +112,12 @@ public class Algorithm {
             d1.addNeighborDistrict(d2);
             d2.addNeighborDistrict(d1);
         }
+    }
+
+    public void startSimulateAnnealing(){
+
+
+
     }
 
 

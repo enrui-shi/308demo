@@ -36,4 +36,5 @@ public class Move {
         Map<EthnicGroup, Bound> groupBound = p.getEthnicGroupBound();
         return from.checkMinorityBound(groupBound,precinct) && to.checkMinorityBound(groupBound,precinct);
     }
+
 }
