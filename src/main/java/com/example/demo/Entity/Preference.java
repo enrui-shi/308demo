@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 
-import javax.persistence.Embeddable;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @Embeddable
 public class Preference {
-
+    @ElementCollection
+    @CollectionTable()
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn()
     private Map<EthnicGroup,Integer> ethnicGroupNumber;
 
     private int numberOfDistrict;
 
-    @OneToMany
+    @ElementCollection
+    @CollectionTable()
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn()
     private Map<EthnicGroup,Bound> ethnicGroupBound;
 
     private double efficiencyGapWeight;
