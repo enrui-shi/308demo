@@ -16,6 +16,7 @@
         <title>Main Page</title>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="/script/slidebar.js"></script>
         <script src="/script/main.js"></script>
         <script src="/script/selectState.js"></script>
@@ -100,14 +101,16 @@
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
                         <label>number of district</label> <input type="number" id="numOfDistrict"><br><p></p>
-                        <label>number of majority-minority district</label> <input type="number" id="majority-minority"> <br><p></p>
                         <label style="color: red;">ethnic group: African-American</label><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" id="mmAA"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAA"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAA"><br><p></p>
                         <label style="color: yellow;">ethnic group: Asian</label><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" id="mmAsian"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAsian"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAsian"><br><p></p>
                         <label style="color: blue">ethnic group: Latino</label><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" id="mmLatino"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minLatino"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxLatino"><br><p></p>
                     </div><!--my-numberInput div over-->

@@ -11,6 +11,12 @@ $(document).ready(function () {
         preference_data[naturalConstraintWeight] = $('#naturalConstraint').val();
         preference_data[numberOfDistrict] = $('#numOfDistrict').val();
         preference_data[majorityMinorityDistrictNumber] = $('#majority-minority').val();
+        var mm_data = {};
+        mm_data[AFRIAN_AMERICAN] = $('#mmAA').val();
+        mm_data[ASIAN_PACIFIC] = $('#mmAsian').val();
+        mm_data[LATINO] = $('#mmLatino').val();
+
+        preference_data[ethnicGroupNumber] = mm_data;
 
         var enthnic_data = {};
 
@@ -26,7 +32,7 @@ $(document).ready(function () {
         console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.ethnicGroupBound);
         $.ajax({
             type: 'post',
-            url: '/home/main/startAlgorithm',
+            url: '/home/main/startPhaseOne',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(preference_data),
             dataType: "json",

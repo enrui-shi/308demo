@@ -17,6 +17,7 @@ $(document).ready(function(){
         $.ajax({
             type: 'post',
             url: '/batch/createBatch',
+            header: {"accept": "application/json"},
             contentType:"application/json; charset=utf-8",
             data: JSON.stringify(batch_data),
             dataType:"json",
