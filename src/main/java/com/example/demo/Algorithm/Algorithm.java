@@ -1,14 +1,11 @@
 package com.example.demo.Algorithm;
 
-import com.example.demo.Entity.Cluster;
-import com.example.demo.Entity.ClusterEdge;
-import com.example.demo.Entity.State;
-import com.example.demo.Type.ClusterPair;
-import com.example.demo.Type.Summary;
-import com.example.demo.Entity.District;
+import com.example.demo.Entity.*;
+import com.example.demo.Enum.EthnicGroup;
+import com.example.demo.Enum.StateName;
+import com.example.demo.Type.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +15,8 @@ public class Algorithm {
 
     private List<Cluster> clusters;
 
+    private List<Cluster> tempClusters;
+
     private List<ClusterEdge> clusterEdges;
 
     private State currentState;
@@ -25,6 +24,9 @@ public class Algorithm {
     private List<ClusterPair> clusterPairs;
 
     private List<Summary> summarys;
+
+    public Algorithm() {
+    }
 
     public Algorithm(State currentState) {
         this.currentState = currentState;
@@ -42,7 +44,7 @@ public class Algorithm {
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
         while(clusters.size()/2>targetNumber) {
-            List<Cluster> tempClusters = new ArrayList<>();
+            tempClusters = new ArrayList<>();
             int pickIndex = (int)Math.floor(clusters.size() * 0.8);
             Collections.sort(clusters);
             for(int i = pickIndex; i< clusters.size();i++){
@@ -63,15 +65,19 @@ public class Algorithm {
     }
 
     public void determineCandidatePair(){
-        for(int i = 0; i<this.clusters.size();i++){
-            Cluster cluster = this.clusters.get(i);
+        while(clusters.size()!=0){
+            int index = (int)(Math.random()*clusters.size());
+            Cluster cluster = clusters.get(index);
             Cluster pairedCluster = cluster.getBestNeighbourCluster();
-            if( pairedCluster != null){
+            if(pairedCluster != null){
                 clusterPairs.add(new ClusterPair(cluster,pairedCluster));
-                this.clusters.remove(cluster);
-                this.clusters.remove(pairedCluster);
+                clusters.remove(cluster);
+                clusters.remove(pairedCluster);
                 cluster.setPaired(true);
                 pairedCluster.setPaired(true);
+            }else{
+                tempClusters.add(cluster);
+                clusters.remove(cluster);
             }
         }
     }
@@ -100,9 +106,22 @@ public class Algorithm {
             long id2 = ce.getCluster2().getId();
             District d1 = idMap.get(id1);
             District d2 = idMap.get(id2);
-            d1.addNeiborDistrict(d2);
-            d2.addNeiborDistrict(d1);
+            d1.addNeighborDistrict(d2);
+            d2.addNeighborDistrict(d1);
         }
+    }
+
+
+
+
+    public List<Summary>runBatch(Batch b){
+        for(int i = 0;i<b.getNumBatch();i++){
+
+
+        }
+
+
+        return summarys;
     }
 
 }

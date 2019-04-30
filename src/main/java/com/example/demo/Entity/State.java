@@ -1,10 +1,14 @@
 package com.example.demo.Entity;
 
 
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.Set;
+import java.util.List;
+
 
 @Entity
 public class State {
@@ -13,7 +17,7 @@ public class State {
     private Long stateId;
 
     @OneToMany
-    private Set<District> districts;
+    private List<District> districts;
 
     @OneToMany
     private Set<Precinct> precincts;
@@ -27,7 +31,7 @@ public class State {
         this.stateName = stateName;
     }
 
-    public State(Set<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
+    public State(List<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
         this.districts = districts;
         this.precincts = precincts;
         this.preference = preference;
@@ -38,7 +42,7 @@ public class State {
         return stateId;
     }
 
-    public Set<District> getDistricts() {
+    public List<District> getDistricts() {
         return districts;
     }
 
@@ -59,7 +63,7 @@ public class State {
         this.stateId = stateId;
     }
 
-    public void setDistricts(Set<District> districts) {
+    public void setDistricts(List<District> districts) {
         this.districts = districts;
     }
 
@@ -76,6 +80,14 @@ public class State {
     }
     public void addDistrict(District d){
         districts.add(d);
+    }
+
+    public void setMinorityTarget(){
+        for(EthnicGroup eg:preference.getEthnicGroupNumber().keySet()){
+            districts.sort(Comparator.comparing(d->d.getDemographic().getRatioByGroup(eg)));
+
+        }
+
     }
 
 }
