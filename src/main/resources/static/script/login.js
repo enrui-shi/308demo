@@ -8,6 +8,9 @@ $(document).ready(function(){
             type: 'post',
             url: '/user/login',
             contentType:"application/json; charset=utf-8",
+            headers: {
+                Accept: "application/json; charset=utf-8"
+            },
             data: JSON.stringify(login_data),
             dataType:"json",
             success: function (data){
