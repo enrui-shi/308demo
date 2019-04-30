@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.example.demo.Enum.StateName;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class Cluster implements Comparable< Cluster > {
     public Long getId() {
         return id;
     }
+
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
 
     public List<Precinct> getPrecincts() {
         return precincts;

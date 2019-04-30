@@ -1,10 +1,8 @@
 package com.example.demo.Algorithm;
 
 import com.example.demo.Entity.*;
-import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
-import com.example.demo.Service.ClusterService;
-import com.example.demo.Service.StateService;
+import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
 
 import java.util.ArrayList;
@@ -126,27 +124,19 @@ public class Algorithm {
 
 
 
-    public List<Summary>runBatch(Batch b, ClusterService clusterService, StateService stateService){
+    public List<Summary>runBatch(Batch b,  BatchService batchService){
         List<Summary> summarys = new ArrayList<>();
         for(int i = 0;i<b.getNumBatch();i++){
-            Preference p = b.generatePreference();
-            StateName stateName = StateName.OH;
-            if(b.getStateName().equals("New Jersey")){
-                stateName = StateName.NJ;
-            }else if(b.getStateName().equals("New York")){
-                stateName = StateName.NY;
-            }
+            StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);
-            this.clusters = clusterService.getClusters(stateName);
-            currentState.setPreference(p);
+            this.clusters = batchService.getClusters(stateName);
+            this.clusterEdges = batchService.getClusterEdges(stateName);
+            currentState.setPreference(b.generatePreference());
             this.startGraphPartition();
             Summary s = this.startSimulateAnnealing();
-            stateService.addState(currentState);
+            batchService.addState(currentState);
             summarys.add(s);
         }
-
-
         return summarys;
     }
-
 }

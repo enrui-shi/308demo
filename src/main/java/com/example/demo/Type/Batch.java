@@ -40,6 +40,16 @@ public class Batch {
         return stateName;
     }
 
+    public StateName getEnumStateName(){
+        if(stateName.equals("New York")){
+            return StateName.NY;
+        }else if (stateName.equals("Ohio")){
+            return StateName.OH;
+        }else{
+            return StateName.NJ;
+        }
+    }
+
     public Bound getNumOfMMBound() {
         return numOfMMBound;
     }
