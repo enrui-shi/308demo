@@ -32,8 +32,7 @@ public class mainController {
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
         Map<String, String> response = new HashMap();
-        response.put("status", "error");
-        response.put("error", "cannot find user");
+        response.put("status", "ok");
         return response;
     }
 
