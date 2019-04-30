@@ -7,9 +7,11 @@ import com.example.demo.Enum.StateName;
 import com.example.demo.repository.ClusterRepository;
 import com.example.demo.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BatchService {
     @Autowired
     StateRepository stateRepository;
