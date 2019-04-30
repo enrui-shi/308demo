@@ -23,9 +23,7 @@ public class batchController {
     @PostMapping(value = "/creatBatch", consumes = "application/json", produces = "application/json")
     public void createBatch(@RequestBody Batch batch, HttpSession session){
         System.out.println("create batch");
-        StateName stateName = StateName.valueOf(batch.getStateName());
-        State state = new State(stateName);
-        Algorithm algorithm = new Algorithm(state);
-        //algorithm.runBatch(batch, stateRepository);
+        Algorithm algorithm = new Algorithm();
+        algorithm.runBatch(batch);
     }
 }

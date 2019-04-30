@@ -71,4 +71,11 @@ public class District {
             }
         }
     }
+
+    public String toString(){
+        return "district: {" +
+                "districtID:" + districtId +
+                ", demographic=" + demographic.toString() +
+                '}';
+    }
 }

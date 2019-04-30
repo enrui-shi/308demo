@@ -47,8 +47,8 @@ public class Demographic {
     @Override
     public String toString() {
         return "Demographic{" +
-                "totalPopulation=" + totalPopulation +
-                ", ethnicData=" + ethnicData.toString() +
+                "totalPopulation:" + totalPopulation +
+                ", ethnicData:" + ethnicData.toString() +
                 '}';
     }
 }

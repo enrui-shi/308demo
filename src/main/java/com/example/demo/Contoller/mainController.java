@@ -4,15 +4,14 @@ import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
-import com.example.demo.Type.DistrictForGUI;
-import com.example.demo.Type.Status;
 
 import org.json.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import java.io.IOException;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,13 +37,13 @@ public class mainController {
     }
 
     @PostMapping(value = "/main/startPhaseOne", consumes = "application/json", produces = "application/json")
-    public Map startAlgorithm(@RequestBody Preference preference, HttpSession session){
+    public JsonNode startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException{
         System.out.println("get user input preference");
         if(session.getAttribute("stateName") == null) {
-            Map<String,String> response = new HashMap();
-            response.put("status","error");
-            response.put("error","select state first");
-            return response;
+            String response = "{\"status\", \"error\", \"error\", \"select state first\"}";
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode responseNode = mapper.readTree(response);
+            return responseNode;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
             State state = new State(stateName);
@@ -56,17 +55,18 @@ public class mainController {
 
             Map<Long, District> pctDstMap = algorithm.getPctDstMap();
 
-            for(Map.Entry<Long,District> entry: pctDstMap.entrySet()) {
-                String json = "{ \"precinctID\" : \""+entry.getKey()+"\", \"doors\" : 5 }";
-
-            }
-
             /* map precinct Id to district (districtID, district_demographic) */
-            Map<Long, DistrictForGUI> phaseOneReturn = new HashMap();
+            String phaseOneJson = "{ return: [";
+            for(Map.Entry<Long,District> entry: pctDstMap.entrySet()) {
+                phaseOneJson += "{ \"precinctID\" : \""+entry.getKey()+"\", "+entry.getValue().toString()+"} , ";
+            }
+            phaseOneJson += "] }";
 
-            //DistrictForGUI dGUI = new DistrictForGUI();
+            /* convert string to json */
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode resultNode = mapper.readTree(phaseOneJson);
 
-            return phaseOneReturn;
+            return resultNode;
         }
     }
 }
