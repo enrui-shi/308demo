@@ -11,8 +11,12 @@ $(document).ready(function(){
             data: JSON.stringify(login_data),
             dataType:"json",
             success: function (data){
-                window.location.replace("/main");
-                console.log(data);
+                if(data == null){
+                    alert("Password or email is incorrect");
+                } else {
+                    window.location.replace("/main");
+                    console.log(data);
+                }
             }
         })
     })

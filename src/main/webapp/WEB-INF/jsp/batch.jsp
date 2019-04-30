@@ -3,6 +3,7 @@
         <link rel="stylesheet" type="text/css" href="style/batchstyle.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="/script/batch.js"></script>
         <title>BatchRun</title>
     </head>
@@ -60,8 +61,8 @@
                 </b>
                 <label class = "textField">Nature Constrain Weight:</label>
                 <b>
-                    <input type="number" class="range" name="ncMIN"> to
-                    <input type="number" class="range" name="ncMAX"><br>
+                    <input type="number" class="range" name="ncMIN" step="0.01" min = "0" max = "1"> to
+                    <input type="number" class="range" name="ncMAX" step="0.01" min = "0" max = "1"><br>
                 </b>
                 </b>
                 <label class = "textField"></label>

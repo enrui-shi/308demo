@@ -112,7 +112,7 @@
                         <label>max population (%)</label> <input type="number" id="maxLatino"><br><p></p>
                     </div><!--my-numberInput div over-->
                     <div class="my-map-button-container">
-                        <button class="my-map-btn" onlick="slideForm()" type="submit"><i class="fa fa-play"></i> Play</button>
+                        <button class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play</button>
                         <label>&emsp;</label>
                         <button class="my-map-btn"><i class="fa fa-pause"></i> Pause</button>
                         <label>&emsp;</label>

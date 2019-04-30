@@ -2,6 +2,7 @@
 $(document).ready(function () {
     var preference_form = $('#preference');
     preference_form.submit(function (e){
+        console.log("start to send preference date")
         var preference_data = {};
         preference_data[efficiencyGapWeight] = $('#efficiencyGap').val();
         preference_data[compactnessWeight] = $('#compactness').val();
@@ -13,9 +14,9 @@ $(document).ready(function () {
 
         var enthnic_data = {};
 
-        enthnic_data[AFRIAN_AMERICAN] = { upperBound: $('#maxAA').val(), lowerBound: $('#minAA').val() };
-        ethnicGroupBound[ASIAN_PACIFIC] = { upperBound: $('#maxAsian').val(), lowerBound: $('#minAsian').val() };
-        ethnicGroupBound[LATINO] = { upperBound: $('#maxLatino').val(), lowerBound: $('#minLatino').val() };
+        enthnic_data[AFRIAN_AMERICAN] = { upperBound: $('#maxAA').val()/100, lowerBound: $('#minAA').val()/100 };
+        enthnic_data[ASIAN_PACIFIC] = { upperBound: $('#maxAsian').val()/100, lowerBound: $('#minAsian').val()/100 };
+        enthnic_data[LATINO] = { upperBound: $('#maxLatino').val()/100, lowerBound: $('#minLatino').val()/100 };
 
         preference_data[ethnicGroupBound] = enthnic_data ;
 
@@ -35,5 +36,6 @@ $(document).ready(function () {
             }
         })
     })
+    $('#menubtn').prop('disabled', true);
 });
 
