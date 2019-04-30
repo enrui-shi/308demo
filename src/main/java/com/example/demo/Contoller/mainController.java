@@ -1,9 +1,9 @@
 package com.example.demo.Contoller;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
-import com.example.demo.repository.StateRepository;
-
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.demo.Algorithm.Algorithm;
+import com.example.demo.Enum.StateName;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +13,13 @@ import java.util.List;
 @RequestMapping("/home")
 public class mainController {
 
-    StateRepository stateRepository;
-
     @PostMapping(value = "/main/startAlgorithm", consumes = "application/json", produces = "application/json")
-    public State createState(@RequestBody Preference preference){
+    public State createState(@RequestParam String stateName){
         System.out.println("lalalal");
-        State state = new State(preference);
+        StateName stateName1 = StateName.valueOf(stateName);
+        State state = new State(stateName1);
         System.out.println("Number of district in State " + state.getPreference().getNumberOfDistrict());
-        return stateRepository.save(state);
+        return state;
     }
 
     /*@PostMapping(value = "/batch", consumes = "application/json", produces = "application/json")

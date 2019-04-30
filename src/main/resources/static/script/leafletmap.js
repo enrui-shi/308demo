@@ -4,12 +4,31 @@ var map = L.map('map').setView([39.96, -83.00], 7);
 // select state
 function selectOH(){
     map.setView([40.4173, -82.9071], 9);
+
+    $.post("/user/main/startAlgorithm", { stateName: 'OH' },function(data) {
+        console.log(data);
+    }).fail(function(){
+        console.log("error");
+    });
 }
 function selectNY(){
     map.setView([40.7128, -74.0060], 9);
+
+    $.post("/user/main/startAlgorithm", { stateName: 'NY' },function(data) {
+        console.log(data);
+    }).fail(function(){
+        console.log("error");
+    });
+
 }
 function selectNJ(){
     map.setView([40.0583, -74.4057], 9);
+
+    $.post("/user/main/startAlgorithm", { stateName: 'NJ' },function(data) {
+        console.log(data);
+    }).fail(function(){
+        console.log("error");
+    });
 }
 
 // load a tile layer(worldwide)
