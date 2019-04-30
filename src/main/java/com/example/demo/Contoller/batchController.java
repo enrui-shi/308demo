@@ -24,6 +24,6 @@ public class batchController {
     public void createBatch(@RequestBody Batch batch, HttpSession session){
         System.out.println("create batch");
         Algorithm algorithm = new Algorithm();
-        algorithm.runBatch(batch);
+        //algorithm.runBatch(batch);
     }
 }
