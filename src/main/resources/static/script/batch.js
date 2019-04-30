@@ -6,6 +6,7 @@ $(document).ready(function(){
         var batch_data = {};
         batch_data[stateName] = $("input[name='state']:checked").val();
         batch_data[numBatch] = $('#num-of-batch').val();
+        batch_data[numDistrict] = $('#num-of-district').val();
         batch_data[numOfMMBound] = { mmMIN: $("input[name='mmMIN']").val(), mmMAX: $("input[name='mmMAX']").val()};
         batch_data[equalPopulationBound] = { eqMIN: $("input[name='eqMIN']").val(), eqMAX: $("input[name='eqMAX']").val()};
         batch_data[compactnessBound] = { cMIN: $("input[name='cMIN']").val(), cMAX: $("input[name='cMAX']").val()};

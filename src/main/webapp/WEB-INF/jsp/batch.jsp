@@ -39,6 +39,8 @@
                 </b>
                 <label class = "textField"> Number of batch:</label>
                 <b> <input id="num-of-batch" class="inputNum" type="number" step="1"> <br></b>
+                <label class = "textField"> Number of district:</label>
+                <b> <input id="num-of-district" class="inputNum" type="number" step="1"> <br></b>
                 <label class = "textField">Number of majority minority:</label>
                 <b>
                     <input type="number" class="range" name="mmMIN" step="1" min = "0" max = "10000000"> to
