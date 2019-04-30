@@ -16,7 +16,7 @@ public class District {
     private Long districtId;
 
     @OneToMany
-    private List<Precinct> precincts;
+    private Map<Long,Precinct> precincts;
 
     private Demographic demographic;
 
@@ -34,12 +34,22 @@ public class District {
         this.neighborDistrict.add(d);
     }
 
+    public void setMinorityTarget(boolean minorityTarget) {
+        this.minorityTarget = minorityTarget;
+    }
+
+    public void setTargetEthnic(EthnicGroup targetEthnic) {
+        this.targetEthnic = targetEthnic;
+    }
+
     public Demographic getDemographic() {
         return demographic;
     }
 
-    public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
-        this.precincts = precincts;
+    public District(List<Precinct>precincts, Demographic demographic, Long districtId) {
+        for(Precinct p:precincts){
+            this.precincts.put(p.getPrecinctID(),p);
+        }
         this.demographic = demographic;
         this.districtId = districtId;
         this.neighborDistrict = new ArrayList<>();
@@ -50,8 +60,7 @@ public class District {
             return true;
         }else{
             Bound ethnicBound = groupBound.get(targetEthnic);
-            int sign = 1;
-            if(precincts.contains(p)){
+            if(precincts.containsValue(p)){
                 int total = demographic.getTotalPopulation() - p.getDemographic().getTotalPopulation();
                 int group = demographic.getNumberByGroup(targetEthnic) - p.getDemographic().getNumberByGroup(targetEthnic);
                 return ethnicBound.checkInbound((double) group / total);

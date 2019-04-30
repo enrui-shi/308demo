@@ -5,9 +5,11 @@ import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.List;
+import java.util.Map;
 
 
 @Entity
@@ -83,9 +85,14 @@ public class State {
     }
 
     public void setMinorityTarget(){
-        for(EthnicGroup eg:preference.getEthnicGroupNumber().keySet()){
+        Map<EthnicGroup,Integer>groups = preference.getEthnicGroupNumber();
+        for(EthnicGroup eg:groups.keySet()){
             districts.sort(Comparator.comparing(d->d.getDemographic().getRatioByGroup(eg)));
-
+            for(int i =1;i<=groups.get(eg);i++){
+                District d=districts.get(districts.size()-i);
+                d.setMinorityTarget(true);
+                d.setTargetEthnic(eg);
+            }
         }
 
     }
