@@ -34,7 +34,7 @@ public class mainController {
         return response;
     }
 
-    @PostMapping("/main/startPhaseOne", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/main/startPhaseOne", consumes = "application/json", produces = "application/json")
     public JsonNode startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException{
         System.out.println("get user input preference");
         if(session.getAttribute("stateName") == null) {
