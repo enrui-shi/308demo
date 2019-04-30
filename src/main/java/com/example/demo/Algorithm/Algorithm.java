@@ -23,8 +23,6 @@ public class Algorithm {
 
     private List<ClusterPair> clusterPairs;
 
-    private List<Summary> summarys;
-
     private Map<Long,District>pctDstMap;
 
     public Algorithm() {
@@ -42,9 +40,6 @@ public class Algorithm {
         return currentState;
     }
 
-    public List<Summary> getSummarys() {
-        return summarys;
-    }
 
     public void startGraphPartition(){
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
@@ -118,19 +113,30 @@ public class Algorithm {
         }
     }
 
-    public void startSimulateAnnealing(){
+    public Summary startSimulateAnnealing(){
 
 
-
+        return null;
     }
 
 
 
 
     public List<Summary>runBatch(Batch b){
+        List<Summary> summarys = new ArrayList<>();
         for(int i = 0;i<b.getNumBatch();i++){
-
-
+            Preference p = b.generatePreference();
+            StateName stateName = StateName.OH;
+            if(b.getStateName().equals("New Jersey")){
+                stateName = StateName.NJ;
+            }else if(b.getStateName().equals("New York")){
+                stateName = StateName.NY;
+            }
+            State state = new State(stateName);
+            state.setPreference(p);
+            this.startGraphPartition();
+            Summary s = this.startSimulateAnnealing();
+            summarys.add(s);
         }
 
 

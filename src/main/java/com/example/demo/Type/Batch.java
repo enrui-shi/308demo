@@ -2,6 +2,7 @@ package com.example.demo.Type;
 
 
 import com.example.demo.Entity.Preference;
+import com.example.demo.Enum.StateName;
 
 public class Batch {
 
@@ -23,12 +24,12 @@ public class Batch {
     public Batch(int numBatch, int numDistrict, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
         this.numBatch = numBatch;
         this.numDistrict = numDistrict;
-        this.stateName = stateName;
         this.numOfMMBound = numOfMMBound;
         this.equalPopulationBound = equalPopulationBound;
         this.compactnessBound = compactnessBound;
         this.partisanFairnessBound = partisanFairnessBound;
         this.natureConstrainBound = natureConstrainBound;
+
     }
 
     public int getNumBatch() {
