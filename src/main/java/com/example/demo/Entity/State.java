@@ -23,8 +23,8 @@ public class State {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
-    public State(Preference preference){
-        this.preference = preference;
+    public State(StateName stateName) {
+        this.stateName = stateName;
     }
 
     public State(Set<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
@@ -73,6 +73,9 @@ public class State {
 
     public void setStateName(StateName stateName) {
         this.stateName = stateName;
+    }
+    public void addDistrict(District d){
+        districts.add(d);
     }
 
 }

@@ -11,7 +11,7 @@ $(document).ready(function(){
             data: JSON.stringify(login_data),
             dataType:"json",
             success: function (data){
-                window.location.replace("/home/main");
+                window.location.replace("/main");
                 console.log(data);
             }
         })

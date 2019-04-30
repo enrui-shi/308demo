@@ -1,18 +1,52 @@
-// initialize the map
+/* initialize the map */
 var map = L.map('map').setView([39.96, -83.00], 7);
 
-// select state
+/* select state */
 function selectOH(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.4173, -82.9071], 9);
+    $.ajax({
+        type: 'post',
+        url: "/home/main/createState?stateName=OH",
+        contentType:"application/json; charset=utf-8",
+        //data: select_data,
+        dataType:"json",
+        success: function (data){
+            console.log(data);
+        }
+    })
+
 }
 function selectNY(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.7128, -74.0060], 9);
+    $.ajax({
+        type: 'post',
+        url: "/home/main/createState?stateName=NY",
+        contentType:"application/json; charset=utf-8",
+        //data: select_data,
+        dataType:"json",
+        success: function (data){
+            console.log(data);
+        }
+    })
 }
 function selectNJ(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.0583, -74.4057], 9);
+    $.ajax({
+        type: 'post',
+        url: "/home/main/createState?stateName=NJ",
+        contentType:"application/json; charset=utf-8",
+        //data: select_data,
+        dataType:"json",
+        success: function (data){
+            console.log(data);
+        }
+    })
 }
 
-// load a tile layer(worldwide)
+/* load a tile layer(worldwide) */
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -24,7 +58,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 var districtLayer;
 var precinctLayer;
 
-// control that shows precinct info on hover
+/* control that shows precinct info on hover */
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -49,7 +83,7 @@ info.update = function (props, layer) {
 
 info.addTo(map);
 
-// set up map style
+/* set up map style */
 function getPrecinctColor(w) {
     switch (w) {
         case 'Republican': return "#ff6666"; // red
@@ -78,7 +112,7 @@ function districtStyle(feature) {
     };
 }
 
-// mouse hover
+/* mouse hover */
 function precinctHoverFeature(e) {
     var layer = e.target;
     layer.setStyle({
@@ -92,7 +126,7 @@ function precinctHoverFeature(e) {
     }
     info.update(layer.feature.properties, precinctLayer);
 }
-// mouse remove
+/* mouse remove */
 function resetPrecinct(e) {
     e.target.setStyle( {
         weight: 2,
@@ -108,7 +142,7 @@ function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
 
-// set up event
+/* set up event */
 function precinctOnEachFeature(feature, layer) {
     layer.on({
         mouseover: precinctHoverFeature,
@@ -123,7 +157,7 @@ function districtOnEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
-// add data into map
+/* add data into map */
 /* way one
 $.getJSON("../data/OH_final.json" , function( result ){
     L.geoJSON(result.features, {
@@ -132,7 +166,7 @@ $.getJSON("../data/OH_final.json" , function( result ){
     }
 }).addTo(map);
 });*/
-/* way two*/
+/* way two */
 precinctLayer = L.geoJSON(precinctsData.map, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
@@ -142,7 +176,7 @@ districtLayer = L.geoJSON(districtsData,{
     onEachFeature: districtOnEachFeature
 }).addTo(map);
 
-// show different layers when zoom in/out
+/* show different layers when zoom in/out */
 map.on('zoomend', function () {
     currentZoom = map.getZoom();
     if (currentZoom < 8) {

@@ -28,6 +28,10 @@ public class District {
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
 
+    public void addNeiborDistrict(District d){
+        this.neighborDistrict.add(d);
+    }
+
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
         this.precincts = precincts;
         this.demographic = demographic;
