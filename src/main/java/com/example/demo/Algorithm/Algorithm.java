@@ -3,6 +3,8 @@ package com.example.demo.Algorithm;
 import com.example.demo.Entity.*;
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
+import com.example.demo.Service.ClusterService;
+import com.example.demo.Service.StateService;
 import com.example.demo.Type.*;
 
 import java.util.ArrayList;
@@ -114,7 +116,9 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing(){
+        for(District d:currentState.getDistricts()){
 
+        }
 
         return null;
     }
@@ -122,7 +126,7 @@ public class Algorithm {
 
 
 
-    public List<Summary>runBatch(Batch b){
+    public List<Summary>runBatch(Batch b, ClusterService clusterService, StateService stateService){
         List<Summary> summarys = new ArrayList<>();
         for(int i = 0;i<b.getNumBatch();i++){
             Preference p = b.generatePreference();
@@ -132,10 +136,12 @@ public class Algorithm {
             }else if(b.getStateName().equals("New York")){
                 stateName = StateName.NY;
             }
-            State state = new State(stateName);
-            state.setPreference(p);
+            this.currentState = new State(stateName);
+            this.clusters = clusterService.getClusters(stateName);
+            currentState.setPreference(p);
             this.startGraphPartition();
             Summary s = this.startSimulateAnnealing();
+            stateService.addState(currentState);
             summarys.add(s);
         }
 
