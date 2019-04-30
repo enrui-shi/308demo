@@ -30,6 +30,14 @@ public class Algorithm {
         this.currentState = currentState;
     }
 
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public List<Summary> getSummarys() {
+        return summarys;
+    }
+
     public void startGraphPartition(){
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 

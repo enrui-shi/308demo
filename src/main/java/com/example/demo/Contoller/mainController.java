@@ -3,6 +3,7 @@ import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
+import com.example.demo.Type.Status;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,25 +17,30 @@ import javax.servlet.http.HttpSession;
 public class mainController {
 
     @PostMapping(value = "/main/createState", consumes = "application/json", produces = "application/json")
-    public StateName createState(@RequestParam String stateName, HttpSession session){
+    public Status createState(@RequestParam String stateName, HttpSession session){
         System.out.println("create state");
         StateName stateName1 = StateName.valueOf(stateName);
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
-        return stateName1;
+        Status status = new Status("'status': 'OK'");
+        return status;
     }
 
     @PostMapping(value = "/main/startAlgorithm", consumes = "application/json", produces = "application/json")
-    public Algorithm startAlgorithm(@RequestBody Preference preference, HttpSession session){
+    public Status startAlgorithm(@RequestBody Preference preference, HttpSession session){
         if(session.getAttribute("stateName") == null) {
-            return null;
+            Status status = new Status("'status': 'error', 'error':'select state first'");
+            return status;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
             State state = new State(stateName);
             state.setPreference(preference);
             Algorithm algorithm = new Algorithm(state);
             algorithm.startGraphPartition();
-            return algorithm;
+            // TO DO
+            algorithm.getCurrentState();
+            Status status = new Status("'status':'OK'");
+            return status;
         }
     }
 }
