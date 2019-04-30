@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.africanAmericanBound);
+        console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.ethnicGroupBound);
         $.ajax({
             type: 'post',
             url: '/home/main/startAlgorithm',
