@@ -10,7 +10,7 @@ import java.util.Set;
 public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String stateId;
+    private Long stateId;
 
     @OneToMany
     private Set<District> districts;
@@ -30,7 +30,7 @@ public class State {
         this.stateName = stateName;
     }
 
-    public String getStateId() {
+    public Long getStateId() {
         return stateId;
     }
 
@@ -51,7 +51,7 @@ public class State {
     }
 
 
-    public void setStateId(String stateId) {
+    public void setStateId(Long stateId) {
         this.stateId = stateId;
     }
 

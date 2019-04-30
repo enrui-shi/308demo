@@ -19,6 +19,8 @@ public class ClusterEdge {
 
     private double demographicJoinability;
 
+
+
     public double getCountyJoinability() {
         return countyJoinability;
     }
