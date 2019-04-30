@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -69,5 +70,17 @@ public class Precinct {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    @Override
+    public String toString() {
+        return "Precinct{" +
+                "precinctID=" + precinctID +
+                ", electionResult=" + electionResult.toString() +
+                ", precinctEdges=" + precinctEdges.toString() +
+                ", demographic=" + demographic.toString() +
+                ", majMinRatio=" + majMinRatio +
+                ", county='" + county + '\'' +
+                '}';
     }
 }

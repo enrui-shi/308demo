@@ -8,16 +8,12 @@ public class Batch {
 
     private String stateName;
 
-    @OneToOne
     private Bound numOfMMBound;
 
-    @OneToOne
     private Bound equalPopulationBound;
 
-    @OneToOne
     private Bound compactnessBound;
 
-    @OneToOne
     private Bound partisanFairnessBound;
 
     @OneToOne

@@ -32,4 +32,12 @@ public class ElectionResult {
     public void setWinner(Party winner) {
         this.winner = winner;
     }
+
+    @Override
+    public String toString() {
+        return "ElectionResult{" +
+                "voteData=" + voteData.toString() +
+                ", winner=" + winner +
+                '}';
+    }
 }

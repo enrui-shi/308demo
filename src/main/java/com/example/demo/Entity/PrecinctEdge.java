@@ -7,10 +7,10 @@ public class PrecinctEdge {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    private Precinct precinct1;
-    @OneToOne
-    private Precinct precinct2;
+
+    private Long precinct1;
+
+    private Long precinct2;
 
     private double countyJoinability;
 
@@ -26,19 +26,19 @@ public class PrecinctEdge {
         this.id = id;
     }
 
-    public Precinct getPrecinct1() {
+    public Long getPrecinct1() {
         return precinct1;
     }
 
-    public void setPrecinct1(Precinct precinct1) {
+    public void setPrecinct1(Long precinct1) {
         this.precinct1 = precinct1;
     }
 
-    public Precinct getPrecinct2() {
+    public Long getPrecinct2() {
         return precinct2;
     }
 
-    public void setPrecinct2(Precinct precinct2) {
+    public void setPrecinct2(Long precinct2) {
         this.precinct2 = precinct2;
     }
 
@@ -64,5 +64,17 @@ public class PrecinctEdge {
 
     public void setDemographicJoinability(double demographicJoinability) {
         this.demographicJoinability = demographicJoinability;
+    }
+
+    @Override
+    public String toString() {
+        return "PrecinctEdge{" +
+                "id=" + id +
+                ", precinct1=" + precinct1 +
+                ", precinct2=" + precinct2 +
+                ", countyJoinability=" + countyJoinability +
+                ", natureJoinability=" + natureJoinability +
+                ", demographicJoinability=" + demographicJoinability +
+                '}';
     }
 }

@@ -37,4 +37,11 @@ public class Demographic {
         ethnicData.forEach((k,v)->v+=d.getEthnicData().get(k));
     }
 
+    @Override
+    public String toString() {
+        return "Demographic{" +
+                "totalPopulation=" + totalPopulation +
+                ", ethnicData=" + ethnicData.toString() +
+                '}';
+    }
 }

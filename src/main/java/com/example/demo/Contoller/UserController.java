@@ -21,8 +21,7 @@ public class UserController {
     @PostMapping(value = "/register", produces = "application/json")
     public User createUser(@RequestBody User user, HttpSession session) {
 
-        CharSequence sequence = user.getPassword();
-        user.setPassword(encoder.encode(sequence));
+        user.setPassword(encoder.encode(user.getPassword()));
         System.out.println(user.getUserEmail());
         return userRepository.save(user);
     }
