@@ -30,6 +30,10 @@ public class Algorithm {
     public Algorithm() {
     }
 
+    public Map<Long, District> getPctDstMap() {
+        return pctDstMap;
+    }
+
     public Algorithm(State currentState) {
         this.currentState = currentState;
     }

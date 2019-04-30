@@ -41,6 +41,17 @@ $(document).ready(function () {
                 console.log(data);
             }
         })
+        $.ajax({
+            type: 'post',
+            url: '/home/main/startPhaseTwo',
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                /* response from controller */
+                console.log(data);
+            }
+        })
     })
     $('#menubtn').prop('disabled', true);
 });

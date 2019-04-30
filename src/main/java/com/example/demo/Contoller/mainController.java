@@ -54,16 +54,16 @@ public class mainController {
 
             session.setAttribute("state", algorithm.getCurrentState());
 
-            List<District> districts = algorithm.getCurrentState().getDistricts();
+            Map<Long, District> pctDstMap = algorithm.getPctDstMap();
+
+            for(Map.Entry<Long,District> entry: pctDstMap.entrySet()) {
+                String json = "{ \"precinctID\" : \""+entry.getKey()+"\", \"doors\" : 5 }";
+
+            }
 
             /* map precinct Id to district (districtID, district_demographic) */
             Map<Long, DistrictForGUI> phaseOneReturn = new HashMap();
 
-           /* for(int i = 0; i < districts.size(); i++) {
-                for(int j=0; j < districts[i].) {
-
-                }
-            }*/
             //DistrictForGUI dGUI = new DistrictForGUI();
 
             return phaseOneReturn;
