@@ -26,8 +26,6 @@ $(document).ready(function () {
             success: function (data) {
                 /* response from controller */
                 console.log(data);
-                window.location.replace("/main");
-
             }
         })
     })

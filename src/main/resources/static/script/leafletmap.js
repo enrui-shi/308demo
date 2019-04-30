@@ -3,8 +3,8 @@ var map = L.map('map').setView([39.96, -83.00], 7);
 
 /* select state */
 function selectOH(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.4173, -82.9071], 9);
-    //var select_data = JSON.stringify({ stateName: OH }),
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=OH",
@@ -12,30 +12,38 @@ function selectOH(){
         //data: select_data,
         dataType:"json",
         success: function (data){
-            window.location.replace("/main");
             console.log(data);
         }
     })
 
 }
 function selectNY(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.7128, -74.0060], 9);
-
-    $.post("/home/main/createState", JSON.stringify({ stateName: 'NY' }),function(data) {
-        console.log(data);
-    }).fail(function(){
-        console.log("error");
-    });
-
+    $.ajax({
+        type: 'post',
+        url: "/home/main/createState?stateName=NY",
+        contentType:"application/json; charset=utf-8",
+        //data: select_data,
+        dataType:"json",
+        success: function (data){
+            console.log(data);
+        }
+    })
 }
 function selectNJ(){
+    $('#menubtn').prop('disabled', false);
     map.setView([40.0583, -74.4057], 9);
-
-    $.post("/home/main/createState", JSON.stringify({ stateName: 'NJ' }),function(data) {
-        console.log(data);
-    }).fail(function(){
-        console.log("error");
-    });
+    $.ajax({
+        type: 'post',
+        url: "/home/main/createState?stateName=NJ",
+        contentType:"application/json; charset=utf-8",
+        //data: select_data,
+        dataType:"json",
+        success: function (data){
+            console.log(data);
+        }
+    })
 }
 
 /* load a tile layer(worldwide) */

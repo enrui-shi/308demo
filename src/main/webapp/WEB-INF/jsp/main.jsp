@@ -47,7 +47,7 @@
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
-                <button onclick= "openSidebar();" ><i class="fa fa-bars"></i> Menu</button>
+                <button id="menubtn" onclick= "openSidebar();" disabled><i class="fa fa-bars"></i> Menu</button>
             </div><!--my-menu div over-->
             <div class="select-state">
                 <button onclick="dropDownSelection();" class="select-state-btn"><i class="fa fa-caret-down"></i> Select State</button>
