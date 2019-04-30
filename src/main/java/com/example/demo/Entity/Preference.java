@@ -2,7 +2,10 @@ package com.example.demo.Entity;
 
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Type.Bound;
+
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 import javax.persistence.Embeddable;
 import javax.persistence.OneToMany;
@@ -10,7 +13,7 @@ import javax.persistence.OneToMany;
 @Embeddable
 public class Preference {
 
-    private int majorityMinorityDistrictNumber;
+    private Map<EthnicGroup,Integer> ethnicGroupNumber;
 
     private int numberOfDistrict;
 
@@ -27,13 +30,14 @@ public class Preference {
 
     private double naturalConstrainWeight;
 
-    public int getMajorityMinorityDistrictNumber() {
-        return majorityMinorityDistrictNumber;
+    public int getNumberByGroup(EthnicGroup eg){
+        return ethnicGroupNumber.get(eg);
     }
 
-    public Map<EthnicGroup, Bound> getEthnicGroupBound() {
-        return ethnicGroupBound;
+    public Map<EthnicGroup, Integer> getEthnicGroupNumber() {
+        return ethnicGroupNumber;
     }
+
 
     public double getEfficiencyGapWeight() {
         return efficiencyGapWeight;
@@ -55,9 +59,6 @@ public class Preference {
         return naturalConstrainWeight;
     }
 
-    public void setMajorityMinorityDistrictNumber(int majorityMinorityDistrictNumber) {
-        this.majorityMinorityDistrictNumber = majorityMinorityDistrictNumber;
-    }
 
     public void setNumberOfDistrict(int numberOfDistrict) {
         this.numberOfDistrict = numberOfDistrict;

@@ -1,9 +1,11 @@
 package com.example.demo.Entity;
 
 
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.List;
 
@@ -78,6 +80,14 @@ public class State {
     }
     public void addDistrict(District d){
         districts.add(d);
+    }
+
+    public void setMinorityTarget(){
+        for(EthnicGroup eg:preference.getEthnicGroupNumber().keySet()){
+            districts.sort(Comparator.comparing(d->d.getDemographic().getRatioByGroup(eg)));
+
+        }
+
     }
 
 }

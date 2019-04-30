@@ -40,6 +40,9 @@ public class Demographic {
     public int getNumberByGroup(EthnicGroup eg){
         return ethnicData.get(eg);
     }
+    public double getRatioByGroup(EthnicGroup eg){
+        return (double)(ethnicData.get(eg)/totalPopulation);
+    }
 
     @Override
     public String toString() {

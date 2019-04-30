@@ -34,6 +34,10 @@ public class District {
         this.neighborDistrict.add(d);
     }
 
+    public Demographic getDemographic() {
+        return demographic;
+    }
+
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
         this.precincts = precincts;
         this.demographic = demographic;
@@ -48,12 +52,14 @@ public class District {
             Bound ethnicBound = groupBound.get(targetEthnic);
             int sign = 1;
             if(precincts.contains(p)){
-                sign = -1;
+                int total = demographic.getTotalPopulation() - p.getDemographic().getTotalPopulation();
+                int group = demographic.getNumberByGroup(targetEthnic) - p.getDemographic().getNumberByGroup(targetEthnic);
+                return ethnicBound.checkInbound((double) group / total);
+            }else {
+                int total = demographic.getTotalPopulation() + p.getDemographic().getTotalPopulation();
+                int group = demographic.getNumberByGroup(targetEthnic) + p.getDemographic().getNumberByGroup(targetEthnic);
+                return ethnicBound.checkInbound((double) group / total);
             }
-            int total = demographic.getTotalPopulation()+ sign*p.getDemographic().getTotalPopulation();
-            int group = demographic.getNumberByGroup(targetEthnic)+ sign*p.getDemographic().getNumberByGroup(targetEthnic);
-            return ethnicBound.checkInbound((double)group/total);
         }
-
     }
 }

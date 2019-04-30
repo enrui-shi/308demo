@@ -101,7 +101,6 @@ public class Algorithm {
             idMap.put(c.getId(),d);
             currentState.addDistrict(d);
         }
-
         for(ClusterEdge ce:clusterEdges){
             long id1 = ce.getCluster1().getId();
             long id2 = ce.getCluster2().getId();
