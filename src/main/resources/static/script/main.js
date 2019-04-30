@@ -10,9 +10,15 @@ $(document).ready(function () {
         preference_data[naturalConstraintWeight] = $('#naturalConstraint').val();
         preference_data[numberOfDistrict] = $('#numOfDistrict').val();
         preference_data[majorityMinorityDistrictNumber] = $('#majority-minority').val();
-        preference_data[africanAmericanBound] = { upperBound: $('#maxAA').val(), lowerBound: $('#minAA').val() };
-        preference_data[asianBound] = { upperBound: $('#maxAsian').val(), lowerBound: $('#minAsian').val() };
-        preference_data[latinoBound] = { upperBound: $('#maxLatino').val(), lowerBound: $('#minLatino').val() };
+
+        var enthnic_data = {};
+
+        enthnic_data[AFRIAN_AMERICAN] = { upperBound: $('#maxAA').val(), lowerBound: $('#minAA').val() };
+        ethnicGroupBound[ASIAN_PACIFIC] = { upperBound: $('#maxAsian').val(), lowerBound: $('#minAsian').val() };
+        ethnicGroupBound[LATINO] = { upperBound: $('#maxLatino').val(), lowerBound: $('#minLatino').val() };
+
+        preference_data[ethnicGroupBound] = enthnic_data ;
+
 
         e.preventDefault();
 
