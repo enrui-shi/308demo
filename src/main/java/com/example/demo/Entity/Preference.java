@@ -28,4 +28,8 @@ public class Preference {
     public int getNumberOfDistrict() {
         return numberOfDistrict;
     }
+
+    public Map<EthnicGroup, Bound> getEthnicGroupBound() {
+        return ethnicGroupBound;
+    }
 }

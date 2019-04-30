@@ -12,4 +12,13 @@ public class Bound {
     private double upperBound;
 
     private double lowerBound;
+
+    public Bound(double upperBound, double lowerBound) {
+        this.upperBound = upperBound;
+        this.lowerBound = lowerBound;
+    }
+
+    public boolean checkInbound(double value){
+        return value<upperBound &&value>lowerBound;
+    }
 }

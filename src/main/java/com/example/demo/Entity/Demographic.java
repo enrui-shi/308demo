@@ -37,6 +37,10 @@ public class Demographic {
         ethnicData.forEach((k,v)->v+=d.getEthnicData().get(k));
     }
 
+    public int getNumberByGroup(EthnicGroup eg){
+        return ethnicData.get(eg);
+    }
+
     @Override
     public String toString() {
         return "Demographic{" +

@@ -5,6 +5,8 @@ import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.List;
+
 
 @Entity
 public class State {
@@ -13,7 +15,7 @@ public class State {
     private Long stateId;
 
     @OneToMany
-    private Set<District> districts;
+    private List<District> districts;
 
     @OneToMany
     private Set<Precinct> precincts;
@@ -27,7 +29,7 @@ public class State {
         this.stateName = stateName;
     }
 
-    public State(Set<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
+    public State(List<District> districts, Set<Precinct> precincts, Preference preference, StateName stateName) {
         this.districts = districts;
         this.precincts = precincts;
         this.preference = preference;
@@ -38,7 +40,7 @@ public class State {
         return stateId;
     }
 
-    public Set<District> getDistricts() {
+    public List<District> getDistricts() {
         return districts;
     }
 
@@ -59,7 +61,7 @@ public class State {
         this.stateId = stateId;
     }
 
-    public void setDistricts(Set<District> districts) {
+    public void setDistricts(List<District> districts) {
         this.districts = districts;
     }
 
