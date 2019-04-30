@@ -1,10 +1,13 @@
 package com.example.demo.Type;
 
 
+import com.example.demo.Entity.Preference;
+
 public class Batch {
 
     private int numBatch;
 
+    private int numDistrict;
     private String stateName;
 
     private Bound numOfMMBound;
@@ -17,8 +20,9 @@ public class Batch {
 
     private Bound natureConstrainBound;
 
-    public Batch(int numBatch, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
+    public Batch(int numBatch, int numDistrict, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
         this.numBatch = numBatch;
+        this.numDistrict = numDistrict;
         this.stateName = stateName;
         this.numOfMMBound = numOfMMBound;
         this.equalPopulationBound = equalPopulationBound;
@@ -81,5 +85,8 @@ public class Batch {
 
     public void setNatureConstrainBound(Bound natureConstrainBound) {
         this.natureConstrainBound = natureConstrainBound;
+    }
+    public Preference generatePreference(){
+        Preference p = new Preference(numDistrict,)
     }
 }

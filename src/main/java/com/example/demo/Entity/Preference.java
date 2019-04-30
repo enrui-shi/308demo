@@ -30,6 +30,15 @@ public class Preference {
 
     private double naturalConstrainWeight;
 
+    public Preference(int numberOfDistrict, double efficiencyGapWeight, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight, double naturalConstrainWeight) {
+        this.numberOfDistrict = numberOfDistrict;
+        this.efficiencyGapWeight = efficiencyGapWeight;
+        this.compactnessWeight = compactnessWeight;
+        this.partisanFairnessWeight = partisanFairnessWeight;
+        this.equalPopulationWeight = equalPopulationWeight;
+        this.naturalConstrainWeight = naturalConstrainWeight;
+    }
+
     public int getNumberByGroup(EthnicGroup eg){
         return ethnicGroupNumber.get(eg);
     }

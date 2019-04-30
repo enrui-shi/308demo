@@ -21,4 +21,7 @@ public class Bound {
     public boolean checkInbound(double value){
         return value<upperBound &&value>lowerBound;
     }
+    public double generateValue(){
+        return (Math.random())*(upperBound-lowerBound)+lowerBound;
+    }
 }
