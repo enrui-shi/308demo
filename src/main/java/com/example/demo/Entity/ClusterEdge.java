@@ -20,7 +20,6 @@ public class ClusterEdge {
     private double demographicJoinability;
 
 
-
     public double getCountyJoinability() {
         return countyJoinability;
     }
@@ -30,7 +29,7 @@ public class ClusterEdge {
     }
 
     public double getJoinability(){
-        Double joinability = (demographicJoinability+countyJoinability)/2;
+        double joinability = (demographicJoinability+countyJoinability)/2;
         return joinability;
     }
     public Cluster getConnectCluster(Cluster c){
