@@ -2,7 +2,7 @@ $(document).ready(function(){
     console.log('submit batch run data');
     var batch_form = $("#batch");
     batch_form.submit( function(e) {
-        var preferenceBound = {}
+        console.log("11111111111111")
         var batch_data = {};
         batch_data[stateName] = $("input[name='state']:checked").val();
         batch_data[numBatch] = $('#num-of-batch').val();
@@ -22,6 +22,7 @@ $(document).ready(function(){
             dataType:"json",
             success: function (data){
                 console.log(data);
+                window.location.replace("/main");
             }
         })
     })

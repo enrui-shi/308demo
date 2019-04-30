@@ -9,13 +9,11 @@ function selectOH(){
         type: 'post',
         url: "/home/main/createState?stateName=OH",
         contentType:"application/json; charset=utf-8",
-        //data: select_data,
         dataType:"json",
         success: function (data){
             console.log(data);
         }
     })
-
 }
 function selectNY(){
     $('#menubtn').prop('disabled', false);
@@ -24,7 +22,6 @@ function selectNY(){
         type: 'post',
         url: "/home/main/createState?stateName=NY",
         contentType:"application/json; charset=utf-8",
-        //data: select_data,
         dataType:"json",
         success: function (data){
             console.log(data);
@@ -38,7 +35,6 @@ function selectNJ(){
         type: 'post',
         url: "/home/main/createState?stateName=NJ",
         contentType:"application/json; charset=utf-8",
-        //data: select_data,
         dataType:"json",
         success: function (data){
             console.log(data);
