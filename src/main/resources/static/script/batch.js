@@ -16,13 +16,13 @@ $(document).ready(function(){
         console.log(batch_data.state," ",batch_data.numBatch)
         $.ajax({
             type: 'post',
-            url: '/home/batch',
+            url: '/batch/createBatch',
             contentType:"application/json; charset=utf-8",
             data: JSON.stringify(batch_data),
             dataType:"json",
             success: function (data){
                 console.log(data);
-                window.location.replace("/home/main");
+                window.location.replace("/main");
 
             }
         })
