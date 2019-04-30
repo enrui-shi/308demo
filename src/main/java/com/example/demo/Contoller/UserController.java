@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,28 +22,34 @@ public class UserController {
     // Create User
 
     @PostMapping(value = "/register", produces = "application/json")
-    public Status createUser(@RequestBody User user, HttpSession session) {
+    public User createUser(@RequestBody User user, HttpSession session) {
 
         user.setPassword(encoder.encode(user.getPassword()));
         System.out.println(user.getUserEmail());
         userRepository.save(user);
-        return new Status("ok");
+        return userRepository.save(user);
     }
 
 
 
     @PostMapping(value = "/login", produces = "application/json")
-    public Status login(@RequestBody User user, HttpSession session) {
+    public Map login(@RequestBody User user, HttpSession session) {
         Optional<User> currentUser = userRepository.findByUserEmail(user.getUserEmail());
+        Map<String,String> resopnse = new HashMap();
             // check if the user exist
         if (!currentUser.isPresent()) {
-            return new Status("error");
+            resopnse.put("status","error");
+            resopnse.put("error","cannot find user");
+            return resopnse;
             // check password
         } else if(encoder.matches(user.getPassword(),currentUser.get().getPassword())) {
             session.setAttribute("currentUser", currentUser);
-            return new Status("ok");
+            resopnse.put("status","ok");
+            return resopnse;
         }else{
-            return new Status("error");
+            resopnse.put("status","error");
+            resopnse.put("error","wrong password");
+            return resopnse;
         }
 
     }

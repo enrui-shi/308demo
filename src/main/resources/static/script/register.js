@@ -7,6 +7,9 @@ $(document).ready(function(){
         $.ajax({
             type: 'post',
             url: '/user/register',
+            headers: {
+                Accept: "*/*"
+            },
             contentType:"application/json; charset=utf-8",
             data: JSON.stringify(register_data),
             dataType:"json",
