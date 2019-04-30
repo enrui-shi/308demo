@@ -23,7 +23,8 @@
                 <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required><br>
             </div>
             <div class="my-container-login-btn">
-            <input class="my-login-btn" type="submit" value="Sign In" />
+                <input class="my-login-btn" type="submit" value="Sign In" />
+                <input class="my-login-btn" id="guest" onclick="window.location.replace('/main')" value="Guest Login">
             </div>
         </form>
         <br>
