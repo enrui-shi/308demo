@@ -1,22 +1,20 @@
 package com.example.demo.Contoller;
+
 import com.example.demo.Entity.District;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
 
-import org.json.*;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
+
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -68,5 +66,18 @@ public class mainController {
 
             return resultNode;
         }
+    }
+
+    private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
+
+    /* long pulling request to response to GUI */
+    @RequestMapping("/main/startPhaseTwo")
+    public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException{
+
+        State s = (State) session.getAttribute("state");
+        Algorithm a = new Algorithm(s);
+        a.startSimulateAnnealing();
+        // TO DO
+        return phaseTwoResult;
     }
 }

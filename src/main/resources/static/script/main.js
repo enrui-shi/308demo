@@ -42,11 +42,10 @@ $(document).ready(function () {
             }
         })
         $.ajax({
-            type: 'post',
-            url: '/home/main/startPhaseTwo',
+            type: 'get',
+            url: "/home/main/startPhaseTwo",
             contentType: "application/json; charset=utf-8",
-            data: {},
-            dataType: "json",
+            header: {"accept": "application/json"},
             success: function (data) {
                 /* response from controller */
                 console.log(data);

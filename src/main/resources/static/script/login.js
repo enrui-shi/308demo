@@ -14,8 +14,8 @@ $(document).ready(function(){
             data: JSON.stringify(login_data),
             dataType:"json",
             success: function (data){
-                if(data == null){
-                    alert("Password or email is incorrect");
+                if(data.status == 'error'){
+                    alert(data.error);
                 } else {
                     window.location.replace("/main");
                     console.log(data);
