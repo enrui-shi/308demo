@@ -20,7 +20,7 @@ public class batchController {
     @Autowired
     StateRepository stateRepository;
 
-    @PostMapping(value = "/batch/creatBatch", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/creatBatch", consumes = "application/json", produces = "application/json")
     public void createBatch(@RequestBody Batch batch, HttpSession session){
         System.out.println("create batch");
         StateName stateName = StateName.valueOf(batch.getStateName());

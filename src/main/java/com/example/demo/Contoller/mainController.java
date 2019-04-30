@@ -22,7 +22,7 @@ public class mainController {
         StateName stateName1 = StateName.valueOf(stateName);
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
-        Status status = new Status("'status': 'OK'");
+        Status status = new Status("'status': 'ok'");
         return status;
     }
 
@@ -40,7 +40,7 @@ public class mainController {
             algorithm.startGraphPartition();
             // TO DO
             algorithm.getCurrentState();
-            Status status = new Status("'status':'OK'");
+            Status status = new Status("'status':'ok'");
             return status;
         }
     }
