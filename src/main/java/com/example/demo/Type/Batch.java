@@ -1,6 +1,5 @@
 package com.example.demo.Type;
 
-import javax.persistence.OneToOne;
 
 public class Batch {
 
@@ -16,7 +15,6 @@ public class Batch {
 
     private Bound partisanFairnessBound;
 
-    @OneToOne
     private Bound natureConstrainBound;
 
     public Batch(int numBatch, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
