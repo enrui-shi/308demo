@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class Summary {
 
-    private Map<Party,Integer> seatsByParty;
+    private Map<Party, Integer> seatsByParty;
 
-    private Map<Measurement,Double> objectiveFunctionValue;
+    private Map<Measurement, Double> objectiveFunctionValue;
 
     private Long stateId;
 
@@ -18,3 +18,4 @@ public class Summary {
 
     private int majorityMinorityDistrict;
 }
+

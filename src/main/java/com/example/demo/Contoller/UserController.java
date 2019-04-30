@@ -1,4 +1,5 @@
 package com.example.demo.Contoller;
+
 import com.example.demo.Entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,24 +31,23 @@ public class UserController {
     }
 
 
-
     @PostMapping(value = "/login", produces = "application/json")
     public Map login(@RequestBody User user, HttpSession session) {
         Optional<User> currentUser = userRepository.findByUserEmail(user.getUserEmail());
-        Map<String,String> response = new HashMap();
-            // check if the user exist
+        Map<String, String> response = new HashMap();
+        // check if the user exist
         if (!currentUser.isPresent()) {
-            response.put("status","error");
-            response.put("error","cannot find user");
+            response.put("status", "error");
+            response.put("error", "cannot find user");
             return response;
             // check password
-        } else if(encoder.matches(user.getPassword(),currentUser.get().getPassword())) {
+        } else if (encoder.matches(user.getPassword(), currentUser.get().getPassword())) {
             session.setAttribute("currentUser", currentUser);
-            response.put("status","ok");
+            response.put("status", "ok");
             return response;
-        }else{
-            response.put("status","error");
-            response.put("error","wrong password");
+        } else {
+            response.put("status", "error");
+            response.put("error", "wrong password");
             return response;
         }
 
@@ -55,14 +55,14 @@ public class UserController {
 
     @PostMapping("/logout")
     public Map logout(@RequestBody User user, HttpSession session) {
-        Map<String,String> response = new HashMap();
+        Map<String, String> response = new HashMap();
         if (session.getAttribute("currentUser") == null) {
-            response.put("status","error");
-            response.put("error","no user login");
+            response.put("status", "error");
+            response.put("error", "no user login");
             return response;
         } else {
             session.setAttribute("currentUser", null);
-            response.put("status","ok");
+            response.put("status", "ok");
             return response;
         }
 

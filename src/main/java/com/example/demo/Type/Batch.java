@@ -40,12 +40,12 @@ public class Batch {
         return stateName;
     }
 
-    public StateName getEnumStateName(){
-        if(stateName.equals("New York")){
+    public StateName getEnumStateName() {
+        if (stateName.equals("New York")) {
             return StateName.NY;
-        }else if (stateName.equals("Ohio")){
+        } else if (stateName.equals("Ohio")) {
             return StateName.OH;
-        }else{
+        } else {
             return StateName.NJ;
         }
     }
@@ -97,8 +97,9 @@ public class Batch {
     public void setNatureConstrainBound(Bound natureConstrainBound) {
         this.natureConstrainBound = natureConstrainBound;
     }
-    public Preference generatePreference(){
-        Preference p = new Preference(numDistrict,compactnessBound.generateValue(),partisanFairnessBound.generateValue(),equalPopulationBound.generateValue());
+
+    public Preference generatePreference() {
+        Preference p = new Preference(numDistrict, compactnessBound.generateValue(), partisanFairnessBound.generateValue(), equalPopulationBound.generateValue());
         return p;
     }
 }

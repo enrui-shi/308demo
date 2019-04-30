@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class ClusterEdge {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne
     private Cluster cluster1;
@@ -40,40 +40,36 @@ public class ClusterEdge {
         return demographicJoinability;
     }
 
-    public double getJoinability(){
-        double joinability = (demographicJoinability+countyJoinability)/2;
+    public double getJoinability() {
+        double joinability = (demographicJoinability + countyJoinability) / 2;
         return joinability;
     }
-    public Cluster getConnectCluster(Cluster c){
-        if(c == cluster1){
+
+    public Cluster getConnectCluster(Cluster c) {
+        if (c == cluster1) {
             return cluster2;
-        }else if(c == this.cluster2){
+        } else if (c == this.cluster2) {
             return cluster1;
-        }else{
+        } else {
             return null;
         }
     }
 
-    public void merge(ClusterEdge ce){
-        this.countyJoinability  = (this.countyJoinability+ce.getCountyJoinability())/2;
-        this.demographicJoinability = (this.demographicJoinability+ce.getDemographicJoinability())/2;
+    public void merge(ClusterEdge ce) {
+        this.countyJoinability = (this.countyJoinability + ce.getCountyJoinability()) / 2;
+        this.demographicJoinability = (this.demographicJoinability + ce.getDemographicJoinability()) / 2;
     }
 
-    public Cluster updateCluster(Cluster oldC, Cluster newC){
-        if(oldC == this.cluster1){
+    public Cluster updateCluster(Cluster oldC, Cluster newC) {
+        if (oldC == this.cluster1) {
             cluster1 = newC;
             return cluster2;
-        }else if(oldC == this.cluster2){
+        } else if (oldC == this.cluster2) {
             cluster2 = newC;
             return cluster1;
         }
         return null;
     }
-
-
-
-
-
 
 
 }

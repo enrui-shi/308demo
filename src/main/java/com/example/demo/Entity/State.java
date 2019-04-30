@@ -80,16 +80,17 @@ public class State {
     public void setStateName(StateName stateName) {
         this.stateName = stateName;
     }
-    public void addDistrict(District d){
+
+    public void addDistrict(District d) {
         districts.add(d);
     }
 
-    public void setMinorityTarget(){
-        Map<EthnicGroup,Integer>groups = preference.getEthnicGroupNumber();
-        for(EthnicGroup eg:groups.keySet()){
-            districts.sort(Comparator.comparing(d->d.getDemographic().getRatioByGroup(eg)));
-            for(int i =1;i<=groups.get(eg);i++){
-                District d=districts.get(districts.size()-i);
+    public void setMinorityTarget() {
+        Map<EthnicGroup, Integer> groups = preference.getEthnicGroupNumber();
+        for (EthnicGroup eg : groups.keySet()) {
+            districts.sort(Comparator.comparing(d -> d.getDemographic().getRatioByGroup(eg)));
+            for (int i = 1; i <= groups.get(eg); i++) {
+                District d = districts.get(districts.size() - i);
                 d.setMinorityTarget(true);
                 d.setTargetEthnic(eg);
             }

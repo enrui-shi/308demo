@@ -14,7 +14,7 @@ public class Demographic {
     @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn()
-    private Map<EthnicGroup,Integer> ethnicData;
+    private Map<EthnicGroup, Integer> ethnicData;
 
     public int getTotalPopulation() {
         return totalPopulation;
@@ -32,16 +32,17 @@ public class Demographic {
         this.ethnicData = ethnicData;
     }
 
-    public void merge(Demographic d){
-        totalPopulation+=d.totalPopulation;
-        ethnicData.forEach((k,v)->v+=d.getEthnicData().get(k));
+    public void merge(Demographic d) {
+        totalPopulation += d.totalPopulation;
+        ethnicData.forEach((k, v) -> v += d.getEthnicData().get(k));
     }
 
-    public int getNumberByGroup(EthnicGroup eg){
+    public int getNumberByGroup(EthnicGroup eg) {
         return ethnicData.get(eg);
     }
-    public double getRatioByGroup(EthnicGroup eg){
-        return (double)(ethnicData.get(eg)/totalPopulation);
+
+    public double getRatioByGroup(EthnicGroup eg) {
+        return (double) (ethnicData.get(eg) / totalPopulation);
     }
 
     @Override

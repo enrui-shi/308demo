@@ -23,7 +23,7 @@ public class Algorithm {
 
     private List<ClusterPair> clusterPairs;
 
-    private Map<Long,District>pctDstMap;
+    private Map<Long, District> pctDstMap;
 
     public Algorithm() {
     }
@@ -41,21 +41,21 @@ public class Algorithm {
     }
 
 
-    public void startGraphPartition(){
+    public void startGraphPartition() {
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
-        while(clusters.size()/2>targetNumber) {
+        while (clusters.size() / 2 > targetNumber) {
             tempClusters = new ArrayList<>();
-            int pickIndex = (int)Math.floor(clusters.size() * 0.8);
+            int pickIndex = (int) Math.floor(clusters.size() * 0.8);
             Collections.sort(clusters);
-            for(int i = pickIndex; i< clusters.size();i++){
+            for (int i = pickIndex; i < clusters.size(); i++) {
                 tempClusters.add(clusters.get(i));
             }
             clusters.removeAll(tempClusters);
 
             determineCandidatePair();
 
-            for(ClusterPair cp:clusterPairs){
+            for (ClusterPair cp : clusterPairs) {
                 Cluster c = cp.combine();
                 clusters.add(c);
             }
@@ -65,45 +65,47 @@ public class Algorithm {
         toDistrict();
     }
 
-    public void determineCandidatePair(){
-        while(clusters.size()!=0){
-            int index = (int)(Math.random()*clusters.size());
+    public void determineCandidatePair() {
+        while (clusters.size() != 0) {
+            int index = (int) (Math.random() * clusters.size());
             Cluster cluster = clusters.get(index);
             Cluster pairedCluster = cluster.getBestNeighbourCluster();
-            if(pairedCluster != null){
-                clusterPairs.add(new ClusterPair(cluster,pairedCluster));
+            if (pairedCluster != null) {
+                clusterPairs.add(new ClusterPair(cluster, pairedCluster));
                 clusters.remove(cluster);
                 clusters.remove(pairedCluster);
                 cluster.setPaired(true);
                 pairedCluster.setPaired(true);
-            }else{
+            } else {
                 tempClusters.add(cluster);
                 clusters.remove(cluster);
             }
         }
     }
-    public void finish(int target){
-        while(clusters.size()>target){
+
+    public void finish(int target) {
+        while (clusters.size() > target) {
             Collections.sort(clusters);
             Cluster c1 = clusters.get(0);
             Cluster c2 = c1.getBestNeighbourCluster();
-            ClusterPair cp = new ClusterPair(c1,c2);
+            ClusterPair cp = new ClusterPair(c1, c2);
             clusters.remove(c1);
             clusters.remove(c2);
             c1 = cp.combine();
             clusters.add(c1);
         }
     }
-    public void toDistrict(){
-        Map<Long,District> idMap = new HashMap<>();
-        for(int i = 0;i<clusters.size();i++){
+
+    public void toDistrict() {
+        Map<Long, District> idMap = new HashMap<>();
+        for (int i = 0; i < clusters.size(); i++) {
             Cluster c = clusters.get(i);
-            District d = new District(c.getPrecincts(),c.getDemographic(),(long)i);
-            idMap.put(c.getId(),d);
+            District d = new District(c.getPrecincts(), c.getDemographic(), (long) i);
+            idMap.put(c.getId(), d);
             currentState.addDistrict(d);
         }
         currentState.setMinorityTarget();
-        for(ClusterEdge ce:clusterEdges){
+        for (ClusterEdge ce : clusterEdges) {
             long id1 = ce.getCluster1().getId();
             long id2 = ce.getCluster2().getId();
             District d1 = idMap.get(id1);
@@ -113,8 +115,8 @@ public class Algorithm {
         }
     }
 
-    public Summary startSimulateAnnealing(){
-        for(District d:currentState.getDistricts()){
+    public Summary startSimulateAnnealing() {
+        for (District d : currentState.getDistricts()) {
 
         }
 
@@ -122,11 +124,9 @@ public class Algorithm {
     }
 
 
-
-
-    public List<Summary>runBatch(Batch b,  BatchService batchService){
+    public List<Summary> runBatch(Batch b, BatchService batchService) {
         List<Summary> summarys = new ArrayList<>();
-        for(int i = 0;i<b.getNumBatch();i++){
+        for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);
             this.clusters = batchService.getClusters(stateName);

@@ -25,11 +25,12 @@ public class BatchService {
     public void addState(State s) {
         stateRepository.save(s);
     }
-    public List<ClusterEdge> getClusterEdges(StateName stateName){
+
+    public List<ClusterEdge> getClusterEdges(StateName stateName) {
         return ClusterEdgeRepository.findAllByStateName(stateName);
     }
 
-    public List<Cluster>getClusters(StateName stateName){
+    public List<Cluster> getClusters(StateName stateName) {
         return ClusterRepository.findAllByStateName(stateName);
     }
 

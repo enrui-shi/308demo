@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Bound {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private double upperBound;
@@ -18,10 +18,11 @@ public class Bound {
         this.lowerBound = lowerBound;
     }
 
-    public boolean checkInbound(double value){
-        return value<upperBound &&value>lowerBound;
+    public boolean checkInbound(double value) {
+        return value < upperBound && value > lowerBound;
     }
-    public double generateValue(){
-        return (Math.random())*(upperBound-lowerBound)+lowerBound;
+
+    public double generateValue() {
+        return (Math.random()) * (upperBound - lowerBound) + lowerBound;
     }
 }

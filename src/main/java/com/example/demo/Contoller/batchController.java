@@ -1,4 +1,5 @@
 package com.example.demo.Contoller;
+
 import com.example.demo.Entity.State;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
@@ -24,10 +25,10 @@ public class batchController {
     BatchService batchService;
 
     @PostMapping(value = "/creatBatch", consumes = "application/json", produces = "application/json")
-    public List<Summary> createBatch(@RequestBody Batch batch, HttpSession session){
+    public List<Summary> createBatch(@RequestBody Batch batch, HttpSession session) {
         System.out.println("create batch");
         Algorithm algorithm = new Algorithm();
-        return algorithm.runBatch(batch,batchService);
+        return algorithm.runBatch(batch, batchService);
     }
 
 }

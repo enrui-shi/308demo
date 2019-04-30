@@ -15,7 +15,7 @@ public class Preference {
     @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn()
-    private Map<EthnicGroup,Integer> ethnicGroupNumber;
+    private Map<EthnicGroup, Integer> ethnicGroupNumber;
 
     private int numberOfDistrict;
 
@@ -23,7 +23,7 @@ public class Preference {
     @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn()
-    private Map<EthnicGroup,Bound> ethnicGroupBound;
+    private Map<EthnicGroup, Bound> ethnicGroupBound;
 
     private double efficiencyGapWeight;
 
@@ -42,7 +42,7 @@ public class Preference {
         this.equalPopulationWeight = equalPopulationWeight;
     }
 
-    public int getNumberByGroup(EthnicGroup eg){
+    public int getNumberByGroup(EthnicGroup eg) {
         return ethnicGroupNumber.get(eg);
     }
 

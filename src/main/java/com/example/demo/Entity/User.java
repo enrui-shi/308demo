@@ -1,10 +1,11 @@
 package com.example.demo.Entity;
+
 import javax.persistence.*;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(unique = true)
@@ -12,11 +13,12 @@ public class User {
 
     private String password;
 
-    protected User(){}
+    protected User() {
+    }
 
-    public User(String userEmail,String password){
-        this.userEmail=userEmail;
-        this.password=password;
+    public User(String userEmail, String password) {
+        this.userEmail = userEmail;
+        this.password = password;
     }
 
     public Long getId() {

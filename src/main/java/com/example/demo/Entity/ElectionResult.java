@@ -12,7 +12,7 @@ public class ElectionResult {
     @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn()
-    private Map<Party,Integer> voteData;
+    private Map<Party, Integer> voteData;
 
     @Enumerated(EnumType.STRING)
     private Party winner;

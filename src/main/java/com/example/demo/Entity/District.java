@@ -12,11 +12,11 @@ import java.util.Map;
 public class District {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long districtId;
 
     @OneToMany
-    private Map<Long,Precinct> precincts;
+    private Map<Long, Precinct> precincts;
 
     private Demographic demographic;
 
@@ -30,7 +30,7 @@ public class District {
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
 
-    public void addNeighborDistrict(District d){
+    public void addNeighborDistrict(District d) {
         this.neighborDistrict.add(d);
     }
 
@@ -46,25 +46,25 @@ public class District {
         return demographic;
     }
 
-    public District(List<Precinct>precincts, Demographic demographic, Long districtId) {
-        for(Precinct p:precincts){
-            this.precincts.put(p.getPrecinctID(),p);
+    public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
+        for (Precinct p : precincts) {
+            this.precincts.put(p.getPrecinctID(), p);
         }
         this.demographic = demographic;
         this.districtId = districtId;
         this.neighborDistrict = new ArrayList<>();
     }
 
-    public boolean checkMinorityBound(Map<EthnicGroup,Bound> groupBound, Precinct p){
-        if(!this.minorityTarget){
+    public boolean checkMinorityBound(Map<EthnicGroup, Bound> groupBound, Precinct p) {
+        if (!this.minorityTarget) {
             return true;
-        }else{
+        } else {
             Bound ethnicBound = groupBound.get(targetEthnic);
-            if(precincts.containsValue(p)){
+            if (precincts.containsValue(p)) {
                 int total = demographic.getTotalPopulation() - p.getDemographic().getTotalPopulation();
                 int group = demographic.getNumberByGroup(targetEthnic) - p.getDemographic().getNumberByGroup(targetEthnic);
                 return ethnicBound.checkInbound((double) group / total);
-            }else {
+            } else {
                 int total = demographic.getTotalPopulation() + p.getDemographic().getTotalPopulation();
                 int group = demographic.getNumberByGroup(targetEthnic) + p.getDemographic().getNumberByGroup(targetEthnic);
                 return ethnicBound.checkInbound((double) group / total);
@@ -72,7 +72,7 @@ public class District {
         }
     }
 
-    public String toString(){
+    public String toString() {
         return "district: {" +
                 "districtID:" + districtId +
                 ", demographic=" + demographic.toString() +

@@ -6,10 +6,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Cluster implements Comparable< Cluster > {
+public class Cluster implements Comparable<Cluster> {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 
@@ -57,7 +57,7 @@ public class Cluster implements Comparable< Cluster > {
         this.paired = paired;
     }
 
-    public void merge(Cluster c){
+    public void merge(Cluster c) {
         precincts.addAll(c.getPrecincts());
         neighborClusters.addAll(c.neighborClusters);
         neighborClusters.remove(this);
@@ -65,12 +65,12 @@ public class Cluster implements Comparable< Cluster > {
 
     }
 
-    public Cluster getBestNeighbourCluster(){
+    public Cluster getBestNeighbourCluster() {
         Cluster pairCluster = null;
         double max = 0.0;
-        for(ClusterEdge ce:clusterEdges) {
-            if(!ce.getConnectCluster(this).isPaired()){
-                if(ce.getJoinability()>=max){
+        for (ClusterEdge ce : clusterEdges) {
+            if (!ce.getConnectCluster(this).isPaired()) {
+                if (ce.getJoinability() >= max) {
                     max = ce.getJoinability();
                     pairCluster = ce.getConnectCluster(this);
                 }
@@ -79,9 +79,9 @@ public class Cluster implements Comparable< Cluster > {
         return pairCluster;
     }
 
-    public ClusterEdge getEdgeByCluster(Cluster c){
-        for(ClusterEdge ce: clusterEdges){
-            if(ce.getConnectCluster(this) == c){
+    public ClusterEdge getEdgeByCluster(Cluster c) {
+        for (ClusterEdge ce : clusterEdges) {
+            if (ce.getConnectCluster(this) == c) {
                 return ce;
             }
         }
@@ -92,11 +92,11 @@ public class Cluster implements Comparable< Cluster > {
     public int compareTo(Cluster o) {
         int population1 = demographic.getTotalPopulation();
         int population2 = o.getDemographic().getTotalPopulation();
-        if(population1>population2){
+        if (population1 > population2) {
             return 1;
-        }else if(population1 == population2){
+        } else if (population1 == population2) {
             return 0;
-        }else{
+        } else {
             return -1;
         }
     }

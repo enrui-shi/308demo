@@ -9,9 +9,12 @@ import com.example.demo.Enum.StateName;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
+
 import java.io.IOException;
+
 import org.springframework.web.context.request.async.DeferredResult;
 
 import org.springframework.web.bind.annotation.*;
@@ -23,21 +26,21 @@ import javax.servlet.http.HttpSession;
 public class mainController {
 
     @PostMapping(value = "/main/createState", consumes = "application/json", produces = "application/json")
-    public Map createState(@RequestParam String stateName, HttpSession session){
+    public Map createState(@RequestParam String stateName, HttpSession session) {
         System.out.println("get statename");
         StateName stateName1 = StateName.valueOf(stateName);
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
-        Map<String,String> response = new HashMap();
-        response.put("status","error");
-        response.put("error","cannot find user");
+        Map<String, String> response = new HashMap();
+        response.put("status", "error");
+        response.put("error", "cannot find user");
         return response;
     }
 
     @PostMapping(value = "/main/startPhaseOne", consumes = "application/json", produces = "application/json")
-    public JsonNode startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException{
+    public JsonNode startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException {
         System.out.println("get user input preference");
-        if(session.getAttribute("stateName") == null) {
+        if (session.getAttribute("stateName") == null) {
             String response = "{\"status\", \"error\", \"error\", \"select state first\"}";
             ObjectMapper mapper = new ObjectMapper();
             JsonNode responseNode = mapper.readTree(response);
@@ -55,8 +58,8 @@ public class mainController {
 
             /* map precinct Id to district (districtID, district_demographic) */
             String phaseOneJson = "{ return: [";
-            for(Map.Entry<Long,District> entry: pctDstMap.entrySet()) {
-                phaseOneJson += "{ \"precinctID\" : \""+entry.getKey()+"\", "+entry.getValue().toString()+"} , ";
+            for (Map.Entry<Long, District> entry : pctDstMap.entrySet()) {
+                phaseOneJson += "{ \"precinctID\" : \"" + entry.getKey() + "\", " + entry.getValue().toString() + "} , ";
             }
             phaseOneJson += "] }";
 
@@ -72,7 +75,7 @@ public class mainController {
 
     /* long pulling request to response to GUI */
     @RequestMapping("/main/startPhaseTwo")
-    public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException{
+    public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException {
 
         State s = (State) session.getAttribute("state");
         Algorithm a = new Algorithm(s);
