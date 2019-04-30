@@ -5,6 +5,7 @@ import com.example.demo.Type.Bound;
 import java.util.Map;
 
 import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
 
 @Embeddable
 public class Preference {
@@ -13,6 +14,7 @@ public class Preference {
 
     private int numberOfDistrict;
 
+    @OneToMany
     private Map<EthnicGroup,Bound> ethnicGroupBound;
 
     private double efficiencyGapWeight;

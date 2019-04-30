@@ -18,7 +18,7 @@ public class mainController {
 
     @PostMapping(value = "/main/createState", consumes = "application/json", produces = "application/json")
     public Status createState(@RequestParam String stateName, HttpSession session){
-        System.out.println("create state");
+        System.out.println("get statename");
         StateName stateName1 = StateName.valueOf(stateName);
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
@@ -28,6 +28,7 @@ public class mainController {
 
     @PostMapping(value = "/main/startAlgorithm", consumes = "application/json", produces = "application/json")
     public Status startAlgorithm(@RequestBody Preference preference, HttpSession session){
+        System.out.println("get user input preference");
         if(session.getAttribute("stateName") == null) {
             Status status = new Status("'status': 'error', 'error':'select state first'");
             return status;
