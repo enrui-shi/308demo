@@ -52,6 +52,7 @@ function selectOH(){
         onEachFeature: districtOnEachFeature
     }).addTo(map);
 }
+
 function selectNY(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
@@ -68,6 +69,7 @@ function selectNY(){
         }
     })
 }
+
 function selectNJ(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);

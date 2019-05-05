@@ -4,6 +4,7 @@ import com.example.demo.Entity.District;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import java.util.HashMap;
@@ -49,6 +50,12 @@ public class mainController {
             State state = new State(stateName);
             state.setPreference(preference);
             Algorithm algorithm = new Algorithm(state);
+            System.out.println(preference.getNumberOfDistrict());
+            System.out.println(preference.getCompactnessWeight());
+            for(EthnicGroup key: preference.getEthnicGroupNumber().keySet()) {
+                System.out.println(key);
+            }
+
             algorithm.startGraphPartition();
 
             session.setAttribute("state", algorithm.getCurrentState());
