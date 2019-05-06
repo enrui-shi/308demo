@@ -50,11 +50,12 @@ public class mainController {
             State state = new State(stateName);
             state.setPreference(preference);
             Algorithm algorithm = new Algorithm(state);
+            /* for test
             System.out.println(preference.getNumberOfDistrict());
             System.out.println(preference.getCompactnessWeight());
             for(EthnicGroup key: preference.getEthnicGroupNumber().keySet()) {
                 System.out.println(key);
-            }
+            }*/
 
             algorithm.startGraphPartition();
 
