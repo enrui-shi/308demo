@@ -23,7 +23,7 @@
                     </div>
                 </form>
                 <div class="my-container-login-btn">
-                    <button onclick="window.location.replace('/')" class="my-login-btn">Login </button>
+                    <button onclick="window.location.replace('/login')" class="my-login-btn">Login </button>
                 </div>
             </div>
         </div>

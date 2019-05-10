@@ -27,7 +27,7 @@
                 <br>
                 <br>
                 <br>
-                <input class="my-login-btn" id="guest" onclick="window.location.replace('/main')" value="Guest Login">
+                <input class="my-login-btn" id="guest" onclick="window.location.replace('/')" value="Guest Login">
             </div>
         </form>
         <br>

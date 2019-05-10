@@ -4,9 +4,11 @@ function clickProfile() {
     if($.cookie('currentuser')=="") {
         document.getElementById('in').style.display = 'block';
         document.getElementById('out').style.display = 'none';
+        document.getElementById('my-menu').style.display = 'none';
     } else {
         document.getElementById('out').style.display = 'block';
         document.getElementById('in').style.display = 'none';
+        document.getElementById('my-menu').style.display = 'block';
     }
 }
 

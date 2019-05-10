@@ -21,7 +21,9 @@ var precinctLayer;
 function selectOH(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
-    $('#menubtn').prop('disabled', false);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.4173, -82.9071], 9);
     $.ajax({
         type: 'post',
@@ -56,7 +58,9 @@ function selectOH(){
 function selectNY(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
-    $('#menubtn').prop('disabled', false);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.7128, -74.0060], 9);
     $.ajax({
         type: 'post',
@@ -73,7 +77,9 @@ function selectNY(){
 function selectNJ(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
-    $('#menubtn').prop('disabled', false);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.0583, -74.4057], 9);
     $.ajax({
         type: 'post',

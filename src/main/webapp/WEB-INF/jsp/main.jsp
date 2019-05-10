@@ -24,7 +24,7 @@
         <script src="/script/guest.js"></script>
     </head>
     <header class="topnav">
-        <a class="active" onclick="window.location.replace('/main')">Home</a>
+        <a class="active" onclick="window.location.replace('/')">Home</a>
         <a onclick="window.location.replace('/map')">Map</a>
         <a onclick="window.location.replace('/report')">Report</a>
         <a onclick="window.location.replace('/batch')">Batch</a>
@@ -53,7 +53,7 @@
             <div class="my-menu">
                 <button id="menubtn" onclick= "openSidebar();" disabled><i class="fa fa-bars"></i> Menu</button>
             </div><!--my-menu div over-->
-            <div class="select-state">
+            <div class="select-state" id="select-state">
                 <button onclick="dropDownSelection();" class="select-state-btn"><i class="fa fa-caret-down"></i> Select State</button>
                 <div id="myStateDropDown" class="dropdown-content">
                     <input onclick="selectNY()" type="button" id="NY" value="New York">

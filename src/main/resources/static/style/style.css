@@ -131,6 +131,7 @@ html {
   }
 .my-modal-content button{
   align-items: center;
+  padding-left: 10px;
 }
 /* top bar style end*/
 

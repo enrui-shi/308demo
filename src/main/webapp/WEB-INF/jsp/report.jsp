@@ -9,7 +9,7 @@
         <script src="/script/guest.js"></script>
     </head>
     <header class="topnav">
-        <a onclick="window.location.replace('/main')">Home</a>
+        <a onclick="window.location.replace('/')">Home</a>
         <a onclick="window.location.replace('/map')">Map</a>
         <a class="active" onclick="window.location.replace('/report')">Report</a>
         <a onclick="window.location.replace('/batch')">Batch</a>
