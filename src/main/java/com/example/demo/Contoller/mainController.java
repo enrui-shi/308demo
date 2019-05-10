@@ -4,6 +4,7 @@ import com.example.demo.Entity.District;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import java.util.HashMap;
@@ -32,8 +33,7 @@ public class mainController {
         session.setAttribute("stateName", stateName1);
         System.out.println("State: " + stateName);
         Map<String, String> response = new HashMap();
-        response.put("status", "error");
-        response.put("error", "cannot find user");
+        response.put("status", "ok");
         return response;
     }
 
@@ -50,6 +50,13 @@ public class mainController {
             State state = new State(stateName);
             state.setPreference(preference);
             Algorithm algorithm = new Algorithm(state);
+            /* for test
+            System.out.println(preference.getNumberOfDistrict());
+            System.out.println(preference.getCompactnessWeight());
+            for(EthnicGroup key: preference.getEthnicGroupNumber().keySet()) {
+                System.out.println(key);
+            }*/
+
             algorithm.startGraphPartition();
 
             session.setAttribute("state", algorithm.getCurrentState());

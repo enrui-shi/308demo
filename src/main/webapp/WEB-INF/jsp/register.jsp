@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="/script/register.js"></script>
+        <script src="/script/guest.js"></script>
     </head>
     <body>
         <div class="my-container-login" style="background-color:white;">
@@ -23,7 +24,7 @@
                     </div>
                 </form>
                 <div class="my-container-login-btn">
-                    <button onclick="window.location.replace('/')" class="my-login-btn">Login </button>
+                    <button onclick="window.location.replace('/login')" class="my-login-btn">Login </button>
                 </div>
             </div>
         </div>

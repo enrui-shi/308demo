@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
     @RequestMapping("/")
-    public String index() {
-        return "login";
-    }
-
-    @GetMapping("/main")
     public String mainPage() {
         return "main";
+    }
+
+    @GetMapping("/login")
+    public String index() {
+        return "login";
     }
 
     @GetMapping("/register")

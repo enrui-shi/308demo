@@ -1,9 +1,29 @@
 /* initialize the map */
-var map = L.map('map').setView([39.96, -83.00], 7);
+var map = L.map('map').setView([37, -94], 4.5);
+
+/* load a tile layer(worldwide) */
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox.light'
+}).addTo(map);
+
+var stateLayer = L.geoJSON(statesData,{
+}).addTo(map);
+
+var districtLayer;
+var precinctLayer;
+
 
 /* select state */
 function selectOH(){
-    $('#menubtn').prop('disabled', false);
+    if(map.hasLayer(stateLayer))
+        map.removeLayer(stateLayer);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.4173, -82.9071], 9);
     $.ajax({
         type: 'post',
@@ -15,9 +35,32 @@ function selectOH(){
             console.log(data);
         }
     })
+    /* add data into map */
+    /* way one
+    $.getJSON("../data/OH_final.json" , function( result ){
+        L.geoJSON(result.features, {
+        style: function(feature) {
+            //style: myStyle
+        }
+    }).addTo(map);
+    });*/
+    /* way two */
+    precinctLayer = L.geoJSON(precinctsData.map, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+    districtLayer = L.geoJSON(districtsData,{
+        style: districtStyle,
+        onEachFeature: districtOnEachFeature
+    }).addTo(map);
 }
+
 function selectNY(){
-    $('#menubtn').prop('disabled', false);
+    if(map.hasLayer(stateLayer))
+        map.removeLayer(stateLayer);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.7128, -74.0060], 9);
     $.ajax({
         type: 'post',
@@ -29,9 +72,18 @@ function selectNY(){
             console.log(data);
         }
     })
+    precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
 }
+
 function selectNJ(){
-    $('#menubtn').prop('disabled', false);
+    if(map.hasLayer(stateLayer))
+        map.removeLayer(stateLayer);
+    if($.cookie('currentuser') != "") {
+        $('#menubtn').prop('disabled', false);
+    }
     map.setView([40.0583, -74.4057], 9);
     $.ajax({
         type: 'post',
@@ -45,17 +97,6 @@ function selectNJ(){
     })
 }
 
-/* load a tile layer(worldwide) */
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.light'
-}).addTo(map);
-
-var districtLayer;
-var precinctLayer;
 
 /* control that shows precinct info on hover */
 var info = L.control();
@@ -156,24 +197,7 @@ function districtOnEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
-/* add data into map */
-/* way one
-$.getJSON("../data/OH_final.json" , function( result ){
-    L.geoJSON(result.features, {
-    style: function(feature) {
-        //style: myStyle
-    }
-}).addTo(map);
-});*/
-/* way two */
-precinctLayer = L.geoJSON(precinctsData.map, {
-    style: precinctStyle,
-    onEachFeature: precinctOnEachFeature
-}).addTo(map);
-districtLayer = L.geoJSON(districtsData,{
-    style: districtStyle,
-    onEachFeature: districtOnEachFeature
-}).addTo(map);
+
 
 /* show different layers when zoom in/out */
 map.on('zoomend', function () {

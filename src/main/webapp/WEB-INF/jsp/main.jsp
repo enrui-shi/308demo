@@ -20,22 +20,24 @@
         <script src="/script/slidebar.js"></script>
         <script src="/script/main.js"></script>
         <script src="/script/selectState.js"></script>
+        <script src="/script/logout.js"></script>
+        <script src="/script/guest.js"></script>
     </head>
     <header class="topnav">
-        <a class="active" onclick="window.location.replace('/main')">Home</a>
+        <a class="active" onclick="window.location.replace('/')">Home</a>
         <a onclick="window.location.replace('/map')">Map</a>
         <a onclick="window.location.replace('/report')">Report</a>
         <a onclick="window.location.replace('/batch')">Batch</a>
         <a onclick="window.location.replace('/about')">About</a>
-        <input type="image" class="user-icon" onclick="document.getElementById('user01').style.display='block'" src="image/user_icon.jpg" />
+        <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
     <body>
         <div id="user01" class="my-modal">
             <div class="my-modal-content w3-animate-zoom "><br>
                 <div class="w3-center">
                     <span onclick="document.getElementById('user01').style.display='none'" class="close w3-button w3-small w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                    <p><button class="button" type="submit">Change Password</button></p> 
-                    <p><button class="button" type="submit" onclick="window.location.replace('/')">Logout</button></p>
+                    <p><button class="button" id="in" onclick="window.location.replace('/login')">Login</button></p>
+                    <p><button class="button" id="out" onclick="logout()">Logout</button></p>
                 </div>
             </div>
         </div>
@@ -43,14 +45,16 @@
         <div id="main">
             <div class="map-content">
                 <div id="map"></div>
+                <script type = "text/javascript" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/new_ohio_data.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
+                <script type = "text/javascript" src = "/data/NY_map_data.js"></script>
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
                 <button id="menubtn" onclick= "openSidebar();" disabled><i class="fa fa-bars"></i> Menu</button>
             </div><!--my-menu div over-->
-            <div class="select-state">
+            <div class="select-state" id="select-state">
                 <button onclick="dropDownSelection();" class="select-state-btn"><i class="fa fa-caret-down"></i> Select State</button>
                 <div id="myStateDropDown" class="dropdown-content">
                     <input onclick="selectNY()" type="button" id="NY" value="New York">
