@@ -48,6 +48,7 @@
                 <script type = "text/javascript" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/new_ohio_data.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
+                <script type = "text/javascript" src = "/data/NY_map_data.js"></script>
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">

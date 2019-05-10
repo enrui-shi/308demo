@@ -72,6 +72,10 @@ function selectNY(){
             console.log(data);
         }
     })
+    precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
 }
 
 function selectNJ(){
