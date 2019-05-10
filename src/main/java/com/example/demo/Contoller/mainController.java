@@ -54,7 +54,7 @@ public class mainController {
 
             session.setAttribute("state", algorithm.getCurrentState());
 
-            Map<Long, District> pctDstMap = algorithm.getPctDstMap();
+            Map<Long, District> pctDstMap = algorithm.getPrecinctToDistrict();
 
             /* map precinct Id to district (districtID, district_demographic) */
             String phaseOneJson = "{ return: [";

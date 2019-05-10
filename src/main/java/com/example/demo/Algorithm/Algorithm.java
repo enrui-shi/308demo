@@ -21,15 +21,15 @@ public class Algorithm {
 
     private State currentState;
 
-    private List<ClusterPair> clusterPairs;
+    private List<ClusterPair> clusterPairs = new ArrayList<ClusterPair>();
 
-    private Map<Long, District> pctDstMap;
+    private Map<Long, District> precinctToDistrict;
 
     public Algorithm() {
     }
 
-    public Map<Long, District> getPctDstMap() {
-        return pctDstMap;
+    public Map<Long, District> getPrecinctToDistrict() {
+        return precinctToDistrict;
     }
 
     public Algorithm(State currentState) {
@@ -125,7 +125,7 @@ public class Algorithm {
 
 
     public List<Summary> runBatch(Batch b, BatchService batchService) {
-        List<Summary> summarys = new ArrayList<>();
+        List<Summary> summaries = new ArrayList<>();
         for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);
@@ -135,8 +135,8 @@ public class Algorithm {
             this.startGraphPartition();
             Summary s = this.startSimulateAnnealing();
             batchService.addState(currentState);
-            summarys.add(s);
+            summaries.add(s);
         }
-        return summarys;
+        return summaries;
     }
 }
