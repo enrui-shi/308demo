@@ -15,6 +15,7 @@ $(document).ready(function(){
             dataType:"json",
             success: function (data){
                 console.log(data);
+                $.cookie('currentuser', register_data.userEmail);
                 window.location.replace("/");
 
             }
