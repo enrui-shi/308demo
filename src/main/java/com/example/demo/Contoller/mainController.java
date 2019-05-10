@@ -70,6 +70,8 @@ public class mainController {
             }
             phaseOneJson += "] }";
 
+            System.out.println(phaseOneJson);
+
             /* convert string to json */
             ObjectMapper mapper = new ObjectMapper();
             JsonNode resultNode = mapper.readTree(phaseOneJson);

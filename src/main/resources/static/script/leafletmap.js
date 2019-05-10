@@ -13,6 +13,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 var stateLayer = L.geoJSON(statesData,{
 }).addTo(map);
 
+var demoLayer = L.geoJSON(precinctDemo,{}).addTo(map);
+
 var districtLayer;
 var precinctLayer;
 
@@ -21,6 +23,7 @@ var precinctLayer;
 function selectOH(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
+    document.getElementById("myStateDropDown").style.display = "none";
     if($.cookie('currentuser') != "") {
         $('#menubtn').prop('disabled', false);
     }
@@ -49,7 +52,7 @@ function selectOH(){
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
-    districtLayer = L.geoJSON(districtsData,{
+    precinctDemoeoJSON(districtsData,{
         style: districtStyle,
         onEachFeature: districtOnEachFeature
     }).addTo(map);
@@ -58,6 +61,7 @@ function selectOH(){
 function selectNY(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
+    document.getElementById("myStateDropDown").style.display = "none";
     if($.cookie('currentuser') != "") {
         $('#menubtn').prop('disabled', false);
     }
@@ -81,6 +85,7 @@ function selectNY(){
 function selectNJ(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
+    document.getElementById("myStateDropDown").style.display = "none";
     if($.cookie('currentuser') != "") {
         $('#menubtn').prop('disabled', false);
     }

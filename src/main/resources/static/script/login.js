@@ -20,7 +20,7 @@ $(document).ready(function(){
                     // set up the current user
                     $.cookie('currentuser', $('#email').val());
                     // jump to the main page
-                    window.location.replace("/main");
+                    window.location.replace("/");
                     console.log(data);
                 }
             }

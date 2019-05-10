@@ -27,6 +27,8 @@ public class District {
 
     private boolean minorityDistrict;
 
+    private String color;
+
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
 
@@ -75,7 +77,8 @@ public class District {
     public String toString() {
         return "district: {" +
                 "districtID:" + districtId +
-                ", demographic=" + demographic.toString() +
+                ", d_color:" + color +
+                "," + demographic.toString() +
                 '}';
     }
 

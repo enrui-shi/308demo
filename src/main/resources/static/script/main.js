@@ -30,16 +30,16 @@ $(document).ready(function () {
                 console.log(data);
             }
         })
-        $.ajax({
+        /*$.ajax({
             type: 'get',
             url: "/home/main/startPhaseTwo",
             contentType: "application/json; charset=utf-8",
             header: {"accept": "application/json"},
             success: function (data) {
-                /* response from controller */
+                 response from controller
                 console.log(data);
             }
-        })
+        })*/
     })
     $('#menubtn').prop('disabled', true);
 });

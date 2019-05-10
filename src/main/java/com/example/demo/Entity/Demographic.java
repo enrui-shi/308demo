@@ -45,9 +45,11 @@ public class Demographic {
         return (double) (ethnicData.get(eg) / totalPopulation);
     }
 
+    
+
     @Override
     public String toString() {
-        return "Demographic{" +
+        return "Demographic: {" +
                 "totalPopulation:" + totalPopulation +
                 ", ethnicData:" + ethnicData.toString() +
                 '}';
