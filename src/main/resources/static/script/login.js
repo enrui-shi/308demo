@@ -17,6 +17,9 @@ $(document).ready(function(){
                 if(data.status == 'error'){
                     alert(data.error);
                 } else {
+                    // set up the current user
+                    $.cookie('currentuser', $('#email').val());
+                    // jump to the main page
                     window.location.replace("/main");
                     console.log(data);
                 }

@@ -129,6 +129,9 @@ html {
      outline:0;
      width:300px
   }
+.my-modal-content button{
+  align-items: center;
+}
 /* top bar style end*/
 
 /* map style */

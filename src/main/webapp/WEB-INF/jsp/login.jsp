@@ -25,6 +25,8 @@
             <div class="my-container-login-btn">
                 <input class="my-login-btn" type="submit" value="Sign In" />
                 <br>
+                <br>
+                <br>
                 <input class="my-login-btn" id="guest" onclick="window.location.replace('/main')" value="Guest Login">
             </div>
         </form>
