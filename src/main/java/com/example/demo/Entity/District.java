@@ -32,6 +32,14 @@ public class District {
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
 
+    public List<District> getNeighborDistrict() {
+        return neighborDistrict;
+    }
+
+    public void setNeighborDistrict(List<District> neighborDistrict) {
+        this.neighborDistrict = neighborDistrict;
+    }
+
     public String getColor() {
         return color;
     }

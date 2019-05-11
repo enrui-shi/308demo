@@ -59,11 +59,13 @@ public class mainController {
 
             algorithm.startGraphPartition();
 
+            algorithm.setColor();
+
             session.setAttribute("state", algorithm.getCurrentState());
 
             Map<Long, District> pctDstMap = algorithm.getPctDstMap();
 
-            /* map precinct Id to district (districtID, district_demographic) */
+            // map precinct Id to district (districtID, district_demographic)
             String phaseOneJson = "{ return: [";
             for (Map.Entry<Long, District> entry : pctDstMap.entrySet()) {
                 phaseOneJson += "{ \"precinctID\" : \"" + entry.getKey() + "\", " + entry.getValue().toString() + "} , ";
@@ -72,7 +74,7 @@ public class mainController {
 
             System.out.println(phaseOneJson);
 
-            /* convert string to json */
+            // convert string to json
             ObjectMapper mapper = new ObjectMapper();
             JsonNode resultNode = mapper.readTree(phaseOneJson);
 
