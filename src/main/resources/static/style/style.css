@@ -31,9 +31,10 @@ html {
   box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-moz-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-webkit-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-o-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-ms-box-shadow:0 5px 10px 0 rgba(0,0,0,.1)
 }
 
-.my-wrap-login-input{width:100%;position:relative;border-bottom:2px solid #adadad;margin-bottom:37px}
+.my-wrap-login-input{width:100%;position:relative; margin-bottom:37px}
 .my-login-input{
   border-style:none;
+  border-bottom:2px solid #adadad;
   width:100%;
 }
 .my-login-logo {

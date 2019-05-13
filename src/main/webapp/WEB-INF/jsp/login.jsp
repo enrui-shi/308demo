@@ -18,10 +18,12 @@
         <br>
         <form id="login" action>
             <div class="my-wrap-login-input">
-                <input id="email" type = "text" name = "email" placeholder="email" class="my-login-input" required><br>
+                <input id="email" type = "email" name = "email" placeholder="email" class="my-login-input" required>
+                <span id="emailerror" style="color:red"></span>
             </div>
             <div class="my-wrap-login-input">
-                <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required><br>
+                <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required>
+                <span id="psderror" style="color:red"></span>
             </div>
             <div class="my-container-login-btn">
                 <input class="my-login-btn" type="submit" value="Sign In" />

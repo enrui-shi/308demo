@@ -15,8 +15,18 @@ $(document).ready(function(){
             dataType:"json",
             success: function (data){
                 if(data.status == 'error'){
-                    alert(data.error);
+                    if(data.error == 'cannot find user') {
+                        document.getElementById('psderror').style.display="none";
+                        document.getElementById('emailerror').style.display="block";
+                        document.getElementById('emailerror').innerHTML="Can't find this email!";
+                    } else {
+                        document.getElementById('emailerror').style.display="none";
+                        document.getElementById('psderror').style.display="block";
+                        document.getElementById('psderror').innerHTML="Password is incorrect!";
+                    }
                 } else {
+                    document.getElementById('emailerror').style.display="none";
+                    document.getElementById('psderror').style.display="none";
                     // set up the current user
                     $.cookie('currentuser', $('#email').val());
                     // jump to the main page

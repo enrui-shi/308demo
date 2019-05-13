@@ -44,13 +44,13 @@
 
         <div id="main">
             <div class="map-content">
-                <div id="map"></div>
-                <script type = "text/javascript" src = "/data/state.js"></script>
+                <!--<div id="map"></div>
+                <script type = "text/javaipt" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/new_ohio_data.js"></script>
                 <script type = "text/javascript" src = "/data/final_Ohio_precinct.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
                 <script type = "text/javascript" src = "/data/NY_map_data.js"></script>
-                <script src = "/script/leafletmap.js"></script>
+                <script src = "/script/leafletmap.js"></script>-->
             </div><!--map-content div over-->
             <div class="my-menu">
                 <button id="menubtn" onclick= "openSidebar();" disabled><i class="fa fa-bars"></i> Menu</button>
