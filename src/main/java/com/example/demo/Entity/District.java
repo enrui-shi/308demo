@@ -89,6 +89,23 @@ public class District {
             }
         }
     }
+    public List<Precinct> getBoundPrecinct(){
+        List<Precinct>bound = new ArrayList<>();
+        for(Precinct p :precincts.values()){
+            if(!this.isInnerPrecinct(p)){
+                bound.add(p);
+            }
+        }
+        return null;
+    }
+    public boolean isInnerPrecinct(Precinct pct){
+        for( Precinct p:pct.getNeighbourPrecincts()){
+            if(!precincts.containsValue(p)){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public String toString() {
         return "{\"district\": {" +
