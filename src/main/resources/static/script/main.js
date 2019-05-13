@@ -28,6 +28,8 @@ $(document).ready(function () {
             success: function (data) {
                 /* response from controller */
                 console.log(data);
+                console.log("color color : "+data.colors);
+                precinctLayer.setStyle({fillColor: setPrecinctColor(precinctLayer, data.colors)});
             }
         })
         /*$.ajax({

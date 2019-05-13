@@ -163,6 +163,7 @@ public class Algorithm {
         checkColor();
     }
 
+    // check if adjacent districts are in different colors
     public void checkColor() {
         List<District> d = currentState.getDistricts();
         for(int i=0; i<d.size(); i++) {
