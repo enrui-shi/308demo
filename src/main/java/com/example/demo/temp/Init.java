@@ -7,6 +7,7 @@ import com.example.demo.Entity.Precinct;
 import com.example.demo.Entity.PrecinctEdge;
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.Party;
+import com.example.demo.Enum.StateName;
 import com.example.demo.Service.PrecinctEdgeService;
 import com.example.demo.Service.PrecinctService;
 import com.example.demo.repository.PrecinctRepository;
@@ -46,6 +47,7 @@ public class Init implements CommandLineRunner {
             for (int i = 0; i < p_arr.size(); i++) {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
+                precinct.setStateName(StateName.OH);
                 precincts.put(precinct.getPrecinctID(), precinct);
             }
             System.out.println(precincts.size());
@@ -81,20 +83,24 @@ public class Init implements CommandLineRunner {
             System.out.println(e);
         }
         int count = 0;
-//        for(PrecinctEdge precinctEdge: precinctEdges){
-//            //precinctEdgeService.addPrecinctEdge(precinctEdge);
-//            System.out.println(count++);
-//        }
-//        count=0;
-//        for(Precinct p:precincts.values()){
-//            if(p.getPrecinctEdges()==null){
-//
-//            }else {
-//                //precinctServices.addPrecinct(p);
-//                System.out.println(p.getPrecinctID());
-//                //System.out.println(count++);
-//            }
-//        }
+        for(PrecinctEdge precinctEdge: precinctEdges){
+            precinctEdgeService.addPrecinctEdge(precinctEdge);
+            System.out.println(count++);
+        }
+        count=0;
+        for(Precinct p:precincts.values()){
+            if(p.getPrecinctEdges()==null){
+
+            }else {
+                System.out.println(p.getPrecinctID());
+                for(PrecinctEdge pe:p.getPrecinctEdges()){
+                    System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
+                }
+                precinctServices.addPrecinct(p);
+
+                //System.out.println(count++);
+            }
+        }
 
     }
 

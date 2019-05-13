@@ -17,12 +17,14 @@ public class Precinct {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
-    @OneToMany
+    @ManyToMany
     private List<PrecinctEdge> precinctEdges;
 
     private Demographic demographic;
 
     private double majMinRatio;
+
+    private List<Precinct>NeighbourPrecincts;
 
     private String county;
 
@@ -32,6 +34,14 @@ public class Precinct {
 
     public void setPrecinctID(Long precinctID) {
         this.precinctID = precinctID;
+    }
+
+    public StateName getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(StateName stateName) {
+        this.stateName = stateName;
     }
 
     public ElectionResult getElectionResult() {
@@ -72,6 +82,10 @@ public class Precinct {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    public List<Precinct> getNeighbourPrecincts() {
+        return NeighbourPrecincts;
     }
 
     @Override
