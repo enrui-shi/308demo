@@ -22,12 +22,19 @@ public class UserController {
     // Create User
 
     @PostMapping(value = "/register", produces = "application/json")
-    public User createUser(@RequestBody User user, HttpSession session) {
-
-        user.setPassword(encoder.encode(user.getPassword()));
-        System.out.println(user.getUserEmail());
-        userRepository.save(user);
-        return userRepository.save(user);
+    public Map createUser(@RequestBody User user, HttpSession session) {
+        Optional<User> currentUser = userRepository.findByUserEmail(user.getUserEmail());
+        Map<String, String> response = new HashMap();
+        if(!currentUser.isPresent()) {
+            user.setPassword(encoder.encode(user.getPassword()));
+            System.out.println(user.getUserEmail());
+            userRepository.save(user);
+            response.put("status", "ok");
+        } else {
+            response.put("status", "error");
+            response.put("error", "email exists");
+        }
+        return response;
     }
 
 

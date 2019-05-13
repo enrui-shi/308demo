@@ -27,8 +27,26 @@ public class District {
 
     private boolean minorityDistrict;
 
+    private String color;
+
     @Enumerated(EnumType.STRING)
     private EthnicGroup targetEthnic;
+
+    public List<District> getNeighborDistrict() {
+        return neighborDistrict;
+    }
+
+    public void setNeighborDistrict(List<District> neighborDistrict) {
+        this.neighborDistrict = neighborDistrict;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public void addNeighborDistrict(District d) {
         this.neighborDistrict.add(d);
@@ -73,10 +91,23 @@ public class District {
     }
 
     public String toString() {
-        return "district: {" +
-                "districtID:" + districtId +
-                ", demographic=" + demographic.toString() +
-                '}';
+        return "{\"district\": {" +
+                "\"districtID\":" + districtId +
+                ", \"d_color\":" + color +
+                ", " + precinctString() +
+                "," + demographic.toString() +
+                "}}";
+    }
+
+    public String precinctString() {
+        String str = "\"precincts\":[";
+        for (Map.Entry<Long, Precinct> entry : precincts.entrySet()) {
+            str += "{ \"precinctID\" : \"" + entry.getKey() + "\"} , ";
+        }
+        str.substring(0, (str.length()-1)); // delete the extra ","
+        str += "]";
+        return str;
+
     }
 
 }

@@ -15,9 +15,14 @@ $(document).ready(function(){
             dataType:"json",
             success: function (data){
                 console.log(data);
-                $.cookie('currentuser', register_data.userEmail);
-                window.location.replace("/");
-
+                if(data.status == 'error') {
+                    document.getElementById('error').style.display="block";
+                    document.getElementById('error').innerHTML="Email exists!";
+                } else {
+                    document.getElementById('error').style.display="none";
+                    $.cookie('currentuser', register_data.userEmail);
+                    window.location.replace("/");
+                }
             }
         })
     })

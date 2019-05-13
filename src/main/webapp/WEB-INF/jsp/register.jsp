@@ -14,10 +14,11 @@
                 </div>
                 <form id="register">
                     <div class="my-wrap-login-input">
-                        <input id="email" type = "text" name = "email" placeholder="email" class="my-login-input" required><br>
+                        <input id="email" type = "text" name = "email" placeholder="email" class="my-login-input" required>
+                        <span id="error" style="color:red"></span>
                     </div>
                     <div class="my-wrap-login-input">
-                        <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required><br>
+                        <input id="password" type = "password" name = "password" placeholder="Password" class="my-login-input" required>
                     </div>
                     <div class="my-container-login-btn">
                         <input class="my-login-btn" type="submit" value="Sign Up" />

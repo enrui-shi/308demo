@@ -59,18 +59,35 @@ public class mainController {
 
             algorithm.startGraphPartition();
 
+            algorithm.setColor();
+
             session.setAttribute("state", algorithm.getCurrentState());
 
+<<<<<<< HEAD
             Map<Long, District> pctDstMap = algorithm.getPrecinctToDistrict();
+=======
+            List<District> districts = algorithm.getCurrentState().getDistricts();
+>>>>>>> 4194416895b174339b954a80a05e1ea58b937cc4
 
-            /* map precinct Id to district (districtID, district_demographic) */
-            String phaseOneJson = "{ return: [";
-            for (Map.Entry<Long, District> entry : pctDstMap.entrySet()) {
-                phaseOneJson += "{ \"precinctID\" : \"" + entry.getKey() + "\", " + entry.getValue().toString() + "} , ";
+            // map precinct Id to district (districtID, district_demographic)
+            String phaseOneJson = "{ \"colors\": [";
+            for (int i=0; i<districts.size(); i++) {
+                phaseOneJson += districts.get(i).toString() + ",";
             }
+            phaseOneJson.substring(0, (phaseOneJson.length()-1));
             phaseOneJson += "] }";
 
-            /* convert string to json */
+            System.out.println(phaseOneJson);
+
+            /*String phaseOneJson =  "{ \"colors\": [" +
+            "{\"district\" : {\"districtID\": \"01\","+
+                    "\"d_color\": \"#ff0000\"," +
+                    "\"precincts\": [{\"precinctID\": \"01\"},{\"precinctID\": \"02\"},{\"precinctID\": \"03\"}]"+
+            "}"+
+            "}]};";*/
+
+
+            // convert string to json
             ObjectMapper mapper = new ObjectMapper();
             JsonNode resultNode = mapper.readTree(phaseOneJson);
 

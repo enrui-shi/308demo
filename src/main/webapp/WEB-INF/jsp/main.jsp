@@ -45,8 +45,9 @@
         <div id="main">
             <div class="map-content">
                 <div id="map"></div>
-                <script type = "text/javascript" src = "/data/state.js"></script>
+                <script type = "text/javaipt" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/new_ohio_data.js"></script>
+                <script type = "text/javascript" src = "/data/final_Ohio_precinct.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
                 <script type = "text/javascript" src = "/data/NY_map_data.js"></script>
                 <script src = "/script/leafletmap.js"></script>
@@ -85,7 +86,7 @@
                             <label>1&emsp;</label>
                             <label id="compactnessValue">0.00</label></u><label>&emsp;compactness</label> <br>
                             <label>0</label>
-                            <input type="range" min="0" max="100" value="0"id="partisanFairness"
+                            <input type="range" min="0" max="100" value="0" id="partisanFairness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
                             <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness</label><br>

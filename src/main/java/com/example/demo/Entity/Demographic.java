@@ -45,11 +45,14 @@ public class Demographic {
         return (double) (ethnicData.get(eg) / totalPopulation);
     }
 
+
+
     @Override
     public String toString() {
-        return "Demographic{" +
-                "totalPopulation:" + totalPopulation +
-                ", ethnicData:" + ethnicData.toString() +
+        return "\"Demographic\": {" +
+                "\"totalPopulation\":" + totalPopulation +
+                // TO DO enum toString() might be an error
+                ", \"ethnicData\":" + ethnicData.toString().replace('=',':') +
                 '}';
     }
 }

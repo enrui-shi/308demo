@@ -6,6 +6,7 @@ import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -138,5 +139,52 @@ public class Algorithm {
             summaries.add(s);
         }
         return summaries;
+    }
+
+    // set district color after phase one finish
+    public void setColor() {
+        String[] colors = new String[]{"#ff0000","#0040ff","#ff8000","#00ff00","#ffb3d9","#9900cc","#ffff00","#006600"};
+        List<District> d = currentState.getDistricts();
+        int needColor = 0;
+        for(int i=0; i<d.size(); i++) {
+            if(d.get(i).getColor().equals("")) {
+                d.get(i).setColor(colors[0]);
+                List<District> neighbor = d.get(i).getNeighborDistrict();
+                for (int j = 0; j < neighbor.size(); j++) {
+                    if(neighbor.get(j).getColor().equals("")) {
+                        needColor++;
+                        if(needColor <= 7) {
+                            neighbor.get(j).setColor(colors[needColor]);
+                        }
+                    }
+                }
+            }
+        }
+        checkColor();
+    }
+
+    // check if adjacent districts are in different colors
+    public void checkColor() {
+        List<District> d = currentState.getDistricts();
+        for(int i=0; i<d.size(); i++) {
+            List<District> neighbor = d.get(i).getNeighborDistrict();
+            for(int j=0; j < neighbor.size(); j++) {
+                // color is same ==> change neighbor color
+                if(d.get(i).getColor().equals(neighbor.get(j).getColor())){
+                    List<District> dnn = neighbor.get(j).getNeighborDistrict();
+                    ArrayList<String> notUsedColor = new ArrayList<>(Arrays.asList("#ff0000","#0040ff","#ff8000",
+                            "#00ff00","#ffb3d9","#9900cc","#ffff00","#006600"));
+                    for(int k=0; k<dnn.size(); k++){
+                        notUsedColor.remove(dnn.get(k).getColor());
+                    }
+                    if(notUsedColor.size() > 0) {
+                        neighbor.get(j).setColor(notUsedColor.get(0));
+                    } else {
+                        System.out.println("colors are not enough!!!");
+                        neighbor.get(j).setColor("#00ffff");
+                    }
+                }
+            }
+        }
     }
 }

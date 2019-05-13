@@ -28,18 +28,34 @@ $(document).ready(function () {
             success: function (data) {
                 /* response from controller */
                 console.log(data);
+                console.log("color color : "+data.colors);
+                if(map.hasLayer(precinctLayer))
+                    map.removeLayer(precinctLayer);
+                precinctLayer = L.geoJSON(precinctsData.map, {
+                    onEachFeature: precinctOnEachFeature,
+                    style: function(feature) {
+                        for(var i=0; i < data.colors.length; i++) {
+                            if(feature.id == data.colors[i].precinctID){
+                                console.log("id is "+ data.colors[i].precinctID);
+                                console.log("layer id is "+feature.id);
+                                console.log("district color is "+data.colors[i].district.color);
+                                return {fillColor:data.colors[i].district.color};
+                            }
+                        }
+                    }
+                }).addTo(map);
             }
         })
-        $.ajax({
+        /*$.ajax({
             type: 'get',
             url: "/home/main/startPhaseTwo",
             contentType: "application/json; charset=utf-8",
             header: {"accept": "application/json"},
             success: function (data) {
-                /* response from controller */
+                 response from controller
                 console.log(data);
             }
-        })
+        })*/
     })
     $('#menubtn').prop('disabled', true);
 });
