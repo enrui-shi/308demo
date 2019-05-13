@@ -13,11 +13,30 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 var stateLayer = L.geoJSON(statesData,{
 }).addTo(map);
 
-var demoLayer = L.geoJSON(precinctDemo,{}).addTo(map);
+//var demoLayer = L.geoJSON(precinctDemo,{}).addTo(map);
 
 var districtLayer;
 var precinctLayer;
 
+/* add data into map */
+/* way one
+$.getJSON("../data/OH_final.json" , function( result ){
+    L.geoJSON(result.features, {
+    style: function(feature) {
+        //style: myStyle
+    }
+}).addTo(map);
+});*/
+/* way two */
+precinctLayer = L.geoJSON(precinctsData.map, {
+    style: precinctStyle,
+    onEachFeature: precinctOnEachFeature
+}).addTo(map);
+
+/*districtLayer = L.geoJSON(districtsData.map, {
+    style: districtStyle,
+    onEachFeature: districtOnEachFeature
+}).addTo(map);*/
 
 /* select state */
 function selectOH(){
@@ -28,6 +47,7 @@ function selectOH(){
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.4173, -82.9071], 9);
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=OH",
@@ -38,24 +58,7 @@ function selectOH(){
             console.log(data);
         }
     })
-    /* add data into map */
-    /* way one
-    $.getJSON("../data/OH_final.json" , function( result ){
-        L.geoJSON(result.features, {
-        style: function(feature) {
-            //style: myStyle
-        }
-    }).addTo(map);
-    });*/
-    /* way two */
-    precinctLayer = L.geoJSON(precinctsData.map, {
-        style: precinctStyle,
-        onEachFeature: precinctOnEachFeature
-    }).addTo(map);
-    precinctDemoeoJSON(districtsData,{
-        style: districtStyle,
-        onEachFeature: districtOnEachFeature
-    }).addTo(map);
+
 }
 
 function selectNY(){
@@ -66,6 +69,12 @@ function selectNY(){
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.7128, -74.0060], 9);
+
+    precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=NY",
@@ -76,10 +85,6 @@ function selectNY(){
             console.log(data);
         }
     })
-    precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-        style: precinctStyle,
-        onEachFeature: precinctOnEachFeature
-    }).addTo(map);
 }
 
 function selectNJ(){
@@ -90,6 +95,7 @@ function selectNJ(){
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.0583, -74.4057], 9);
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=NJ",
@@ -119,9 +125,10 @@ info.update = function (props, layer) {
             : 'Hover over a district');
     }else{
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
-            '<b>' + props.name + '</b><br /> total voting: ' + props.total_vote
-            + '</b><br /> Democratic: ' + props.d_vote
-            + '</b><br /> Republican: ' + props.r_vote
+            '<b>' + props.name + '</b><br /> id: ' + props.id
+            + '</b><br /> total voting: ' + props.properties.total_vote
+            + '</b><br /> Democratic: ' + props.properties.d_vote
+            + '</b><br /> Republican: ' + props.properties.r_vote
             : 'Hover over a precinct');
     }
 };
@@ -131,8 +138,8 @@ info.addTo(map);
 /* set up map style */
 function getPrecinctColor(w) {
     switch (w) {
-        case 'Republican': return "#ff6666"; // red
-        case 'Democratic': return "#66b2ff"; // blue
+        case 'Republican': return "#ff6666";
+        case 'Democratic': return "#66b2ff";
     }
 }
 
@@ -147,15 +154,17 @@ function precinctStyle(feature) {
     };
 }
 
+
 function districtStyle(feature) {
     return {
         weight: 2,
         opacity: 1,
         color: 'black',
         dashArray: '3',
-        fillOpacity: 0.1,
+        fillOpacity: 0.1
     };
 }
+
 
 /* mouse hover */
 function precinctHoverFeature(e) {
@@ -169,7 +178,7 @@ function precinctHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature.properties, precinctLayer);
+    info.update(layer.feature, precinctLayer);
 }
 /* mouse remove */
 function resetPrecinct(e) {

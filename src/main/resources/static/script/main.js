@@ -29,7 +29,21 @@ $(document).ready(function () {
                 /* response from controller */
                 console.log(data);
                 console.log("color color : "+data.colors);
-                precinctLayer.setStyle({fillColor: setPrecinctColor(precinctLayer, data.colors)});
+                if(map.hasLayer(precinctLayer))
+                    map.removeLayer(precinctLayer);
+                precinctLayer = L.geoJSON(precinctsData.map, {
+                    onEachFeature: precinctOnEachFeature,
+                    style: function(feature) {
+                        for(var i=0; i < data.colors.length; i++) {
+                            if(feature.id == data.colors[i].precinctID){
+                                console.log("id is "+ data.colors[i].precinctID);
+                                console.log("layer id is "+feature.id);
+                                console.log("district color is "+data.colors[i].district.color);
+                                return {fillColor:data.colors[i].district.color};
+                            }
+                        }
+                    }
+                }).addTo(map);
             }
         })
         /*$.ajax({

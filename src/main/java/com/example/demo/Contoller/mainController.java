@@ -57,7 +57,7 @@ public class mainController {
                 System.out.println(key);
             }*/
 
-            algorithm.startGraphPartition();
+            /*algorithm.startGraphPartition();
 
             algorithm.setColor();
 
@@ -66,11 +66,15 @@ public class mainController {
             Map<Long, District> pctDstMap = algorithm.getPctDstMap();
 
             // map precinct Id to district (districtID, district_demographic)
-            String phaseOneJson = "{ return: [";
+            String phaseOneJson = "{ \"colors\": [";
             for (Map.Entry<Long, District> entry : pctDstMap.entrySet()) {
                 phaseOneJson += "{ \"precinctID\" : \"" + entry.getKey() + "\", " + entry.getValue().toString() + "} , ";
             }
-            phaseOneJson += "] }";
+            phaseOneJson += "] }";*/
+
+            // try color two precincts in Ohio
+            String phaseOneJson = "{ \"colors\": [{ \"precinctID\":\"4741\" , \"district\" : {\"color\": \"#006600\"}}, " +
+                    "{ \"precinctID\": \"4792\" , \"district\" : {\"color\": \"#ff8000\"}} ]}";
 
             System.out.println(phaseOneJson);
 
