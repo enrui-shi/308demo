@@ -57,7 +57,7 @@ public class mainController {
                 System.out.println(key);
             }*/
 
-            algorithm.startGraphPartition();
+           /* algorithm.startGraphPartition();
 
             algorithm.setColor();
 
@@ -73,15 +73,19 @@ public class mainController {
             phaseOneJson.substring(0, (phaseOneJson.length()-1));
             phaseOneJson += "] }";
 
-            System.out.println(phaseOneJson);
+            System.out.println(phaseOneJson);*/
 
-            /*String phaseOneJson =  "{ \"colors\": [" +
+            String phaseOneJson =  "{ \"colors\": [" +
             "{\"district\" : {\"districtID\": \"01\","+
                     "\"d_color\": \"#ff0000\"," +
-                    "\"precincts\": [{\"precinctID\": \"01\"},{\"precinctID\": \"02\"},{\"precinctID\": \"03\"}]"+
-            "}"+
-            "}]};";*/
-
+                    "\"precincts\": [{\"precinctID\": \"9083\"},{\"precinctID\": \"7\"},{\"precinctID\": \"6\"}]"+
+            "}},"+
+            "{\"district\" : {\"districtID\": \"02\","+
+            "\"d_color\": \"#ff0000\"," +
+            "\"precincts\": [{\"precinctID\": \"8\"},{\"precinctID\": \"11\"},{\"precinctID\": \"23\"}]"+
+            "}}"+
+            "]}";
+            System.out.println(phaseOneJson);
 
             // convert string to json
             ObjectMapper mapper = new ObjectMapper();
