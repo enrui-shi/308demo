@@ -117,8 +117,9 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
+        List<Precinct>moveable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
-
+            moveable.addAll(d.getBoundPrecinct());
         }
 
         return null;

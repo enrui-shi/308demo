@@ -24,6 +24,8 @@ public class Precinct {
 
     private double majMinRatio;
 
+    private List<Precinct>NeighbourPrecincts;
+
     private String county;
 
     public Long getPrecinctID() {
@@ -80,6 +82,10 @@ public class Precinct {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    public List<Precinct> getNeighbourPrecincts() {
+        return NeighbourPrecincts;
     }
 
     @Override
