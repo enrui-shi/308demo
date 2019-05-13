@@ -63,11 +63,10 @@ public class mainController {
 
             session.setAttribute("state", algorithm.getCurrentState());
 
-<<<<<<< HEAD
             Map<Long, District> pctDstMap = algorithm.getPrecinctToDistrict();
-=======
+
             List<District> districts = algorithm.getCurrentState().getDistricts();
->>>>>>> 4194416895b174339b954a80a05e1ea58b937cc4
+
 
             // map precinct Id to district (districtID, district_demographic)
             String phaseOneJson = "{ \"colors\": [";
