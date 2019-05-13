@@ -57,26 +57,31 @@ public class mainController {
                 System.out.println(key);
             }*/
 
-            /*algorithm.startGraphPartition();
+            algorithm.startGraphPartition();
 
             algorithm.setColor();
 
             session.setAttribute("state", algorithm.getCurrentState());
 
-            Map<Long, District> pctDstMap = algorithm.getPctDstMap();
+            List<District> districts = algorithm.getCurrentState().getDistricts();
 
             // map precinct Id to district (districtID, district_demographic)
             String phaseOneJson = "{ \"colors\": [";
-            for (Map.Entry<Long, District> entry : pctDstMap.entrySet()) {
-                phaseOneJson += "{ \"precinctID\" : \"" + entry.getKey() + "\", " + entry.getValue().toString() + "} , ";
+            for (int i=0; i<districts.size(); i++) {
+                phaseOneJson += districts.get(i).toString() + ",";
             }
-            phaseOneJson += "] }";*/
-
-            // try color two precincts in Ohio
-            String phaseOneJson = "{ \"colors\": [{ \"precinctID\":\"4741\" , \"district\" : {\"color\": \"#006600\"}}, " +
-                    "{ \"precinctID\": \"4792\" , \"district\" : {\"color\": \"#ff8000\"}} ]}";
+            phaseOneJson.substring(0, (phaseOneJson.length()-1));
+            phaseOneJson += "] }";
 
             System.out.println(phaseOneJson);
+
+            /*String phaseOneJson =  "{ \"colors\": [" +
+            "{\"district\" : {\"districtID\": \"01\","+
+                    "\"d_color\": \"#ff0000\"," +
+                    "\"precincts\": [{\"precinctID\": \"01\"},{\"precinctID\": \"02\"},{\"precinctID\": \"03\"}]"+
+            "}"+
+            "}]};";*/
+
 
             // convert string to json
             ObjectMapper mapper = new ObjectMapper();

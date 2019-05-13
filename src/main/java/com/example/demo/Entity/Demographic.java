@@ -49,10 +49,10 @@ public class Demographic {
 
     @Override
     public String toString() {
-        return "Demographic: {" +
-                "totalPopulation:" + totalPopulation +
+        return "\"Demographic\": {" +
+                "\"totalPopulation\":" + totalPopulation +
                 // TO DO enum toString() might be an error
-                ", ethnicData:" + ethnicData.toString().replace('=',':') +
+                ", \"ethnicData\":" + ethnicData.toString().replace('=',':') +
                 '}';
     }
 }

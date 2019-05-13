@@ -91,11 +91,23 @@ public class District {
     }
 
     public String toString() {
-        return "district: {" +
-                "districtID:" + districtId +
-                ", d_color:" + color +
+        return "{\"district\": {" +
+                "\"districtID\":" + districtId +
+                ", \"d_color\":" + color +
+                ", " + precinctString() +
                 "," + demographic.toString() +
-                '}';
+                "}}";
+    }
+
+    public String precinctString() {
+        String str = "\"precincts\":[";
+        for (Map.Entry<Long, Precinct> entry : precincts.entrySet()) {
+            str += "{ \"precinctID\" : \"" + entry.getKey() + "\"} , ";
+        }
+        str.substring(0, (str.length()-1)); // delete the extra ","
+        str += "]";
+        return str;
+
     }
 
 }
