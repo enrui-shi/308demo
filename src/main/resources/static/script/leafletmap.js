@@ -24,6 +24,9 @@ var NY_precinctLayer;
 var NJ_districtLayer;
 var NJ_precinctLayer;
 
+var precinctLayer;
+var districtLayer;
+
 /* add data into map */
 /* way one
 $.getJSON("../data/OH_final.json" , function( result ){
@@ -34,10 +37,10 @@ $.getJSON("../data/OH_final.json" , function( result ){
 }).addTo(map);
 });*/
 /* way two */
-/*OH_precinctLayer = L.geoJSON(OH_precinctsData, {
+OH_precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
-}).addTo(map);*/
+}).addTo(map);
 
 NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
     style: precinctStyle,
