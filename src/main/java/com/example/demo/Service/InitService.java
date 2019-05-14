@@ -11,6 +11,9 @@ import com.example.demo.repository.PrecinctRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class InitService {
     @Autowired
@@ -33,5 +36,18 @@ public class InitService {
     }
     public void addElectionResult(ElectionResult e){
         electionResultRepository.save(e);
+    }
+    public void addAllElectionResult(List<ElectionResult> es){
+        electionResultRepository.saveAll(es);
+    }
+    public void addAllPrecinctEdge(List<PrecinctEdge> edges){
+        precinctEdgeRepository.saveAll(edges);
+    }
+    public void addAllPrecinct(Map<Long, Precinct> precincts){
+        precinctRepository.saveAll(precincts.values());
+    }
+
+    public void addAllDemographic(List<Demographic> ds){
+        demographicRepository.saveAll(ds);
     }
 }

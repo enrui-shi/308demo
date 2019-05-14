@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.example.demo.Enum.StateName;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,10 @@ public class PrecinctEdge {
     private double natureJoinability;
 
     private double demographicJoinability;
+
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
+
 
     public Long getId() {
         return id;
@@ -64,6 +70,14 @@ public class PrecinctEdge {
 
     public void setDemographicJoinability(double demographicJoinability) {
         this.demographicJoinability = demographicJoinability;
+    }
+
+    public StateName getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(StateName stateName) {
+        this.stateName = stateName;
     }
 
     @Override
