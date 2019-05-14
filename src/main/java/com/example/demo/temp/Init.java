@@ -48,6 +48,7 @@ public class Init implements CommandLineRunner {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
                 precinct.setStateName(StateName.OH);
+                precinct.setNeighbourPrecincts(new ArrayList<Long>());
                 precincts.put(precinct.getPrecinctID(), precinct);
             }
             System.out.println(precincts.size());
@@ -76,6 +77,8 @@ public class Init implements CommandLineRunner {
                 }
                 precinct1.getPrecinctEdges().add(precinctEdge);
                 precinct2.getPrecinctEdges().add(precinctEdge);
+                precinct1.getNeighbourPrecincts().add(p2);
+                precinct2.getNeighbourPrecincts().add(p1);
             }
             System.out.println(count);
 
@@ -168,9 +171,9 @@ public class Init implements CommandLineRunner {
     }
 
     static double CalDemoJoinability(Precinct p1, Precinct p2) {
-        int p1_total = p1.getDemographic().getTotalPopulation();
+        double p1_total = p1.getDemographic().getTotalPopulation();
         Map<EthnicGroup, Integer> p1_data = p1.getDemographic().getEthnicData();
-        int p2_total = p2.getDemographic().getTotalPopulation();
+        double p2_total = p2.getDemographic().getTotalPopulation();
         Map<EthnicGroup, Integer> p2_data = p2.getDemographic().getEthnicData();
         if (p1_total == 0 || p2_total == 0) {
             return 0;
@@ -179,7 +182,7 @@ public class Init implements CommandLineRunner {
             double white_differ = Math.abs((p1_data.get(EthnicGroup.WHITE) / p1_total) - (p2_data.get(EthnicGroup.WHITE) / p2_total));
             double l_differ = Math.abs((p1_data.get(EthnicGroup.LATINO) / p1_total) - (p2_data.get(EthnicGroup.LATINO) / p2_total));
             double asia_differ = Math.abs((p1_data.get(EthnicGroup.ASIAN_PACIFIC) / p1_total) - (p2_data.get(EthnicGroup.ASIAN_PACIFIC) / p2_total));
-            return 1 - (aa_differ + white_differ + l_differ + asia_differ) / 4;
+            return 1.0 - (aa_differ + white_differ + l_differ + asia_differ) / 4;
         }
     }
 }

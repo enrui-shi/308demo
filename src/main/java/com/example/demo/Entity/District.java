@@ -99,11 +99,11 @@ public class District {
         return bound;
     }
     public boolean isInnerPrecinct(Precinct pct){
-        for( Precinct p:pct.getNeighbourPrecincts()){
-            if(!precincts.containsValue(p)){
-                return false;
-            }
-        }
+//        for( Precinct p:pct.getNeighbourPrecincts()){
+//            if(!precincts.containsValue(p)){
+//                return false;
+//            }
+//        }
         return true;
     }
 

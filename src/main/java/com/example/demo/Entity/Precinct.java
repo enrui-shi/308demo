@@ -24,6 +24,7 @@ public class Precinct {
 
     private double majMinRatio;
 
+    @ElementCollection
     private List<Long>NeighbourPrecincts;
 
     private String county;
@@ -42,6 +43,10 @@ public class Precinct {
 
     public void setStateName(StateName stateName) {
         this.stateName = stateName;
+    }
+
+    public void setNeighbourPrecincts(List<Long> neighbourPrecincts) {
+        NeighbourPrecincts = neighbourPrecincts;
     }
 
     public ElectionResult getElectionResult() {
