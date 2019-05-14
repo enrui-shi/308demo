@@ -133,11 +133,9 @@ public class Algorithm {
             List<District>toDistrict = getToDistrict(candidate);
             for(District to:toDistrict){
                 Move move = new Move(from,to,candidate);
-                if (move.checkMajorityMinority(currentState.getPreference())){
+                if (move.checkMajorityMinority(currentState.getPreference())) {
 
                 }
-
-
             }
 
 
