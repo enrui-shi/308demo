@@ -169,11 +169,11 @@ public class Algorithm {
     public List<District>getToDistrict(Precinct p) {
         District from = getPrecinctBelongs(p.getPrecinctID());
         List<District>to = new ArrayList<>();
-        for(long np :p.getNeighbourPrecincts()) {
-            if(getPrecinctBelongs(np)!= from){
-                to.add(getPrecinctBelongs(np));
-            }
-        }
+//        for(long np :p.getNeighbourPrecincts()) {
+//            if(getPrecinctBelongs(np)!= from){
+//                to.add(getPrecinctBelongs(np));
+//            }
+//        }
         return to;
     }
 
