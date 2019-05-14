@@ -1,0 +1,559 @@
+{
+    "edges": [
+        {
+            "county": true, 
+            "precinct2": 5984, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5984, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5986, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5986, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5989, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5989, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5988
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6267, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5986, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5986, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6235, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6236, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6266, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6286, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6242, 
+            "precinct1": 5984
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5974, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5970, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5969, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5963, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5960, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5961, 
+            "precinct1": 5980
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5974, 
+            "precinct1": 5981
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5965, 
+            "precinct1": 5981
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5963, 
+            "precinct1": 5981
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5975, 
+            "precinct1": 5981
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5967, 
+            "precinct1": 5981
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5989, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5989, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5762, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6242, 
+            "precinct1": 5983
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6286, 
+            "precinct1": 5986
+        }, 
+        {
+            "county": true, 
+            "precinct2": 4929, 
+            "precinct1": 5986
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5986
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5986
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5726
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5989
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5985, 
+            "precinct1": 5989
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5989
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5987, 
+            "precinct1": 5989
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6242, 
+            "precinct1": 5989
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6242, 
+            "precinct1": 5985
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5771, 
+            "precinct1": 5987
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5766, 
+            "precinct1": 5987
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5987
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 5987
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 4932
+        }, 
+        {
+            "county": true, 
+            "precinct2": 5982, 
+            "precinct1": 4936
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6794, 
+            "precinct1": 7044
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6793, 
+            "precinct1": 7044
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 7044
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6793, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6793, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 6794
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6819
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6822
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6799, 
+            "precinct1": 7582
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6803
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6799, 
+            "precinct1": 6803
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6790, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6790, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6755, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6787, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6789, 
+            "precinct1": 6792
+        }, 
+        {
+            "county": true, 
+            "precinct2": 7576, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6787, 
+            "precinct1": 6797
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6790, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6790, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 7043, 
+            "precinct1": 6793
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 6818
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6790
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6791, 
+            "precinct1": 6790
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6755, 
+            "precinct1": 6790
+        }, 
+        {
+            "county": true, 
+            "precinct2": 7043, 
+            "precinct1": 6790
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 7576
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 7576
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 7576
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 7046
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 7046
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6791
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6795, 
+            "precinct1": 6791
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6787, 
+            "precinct1": 6791
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6798, 
+            "precinct1": 7583
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6787, 
+            "precinct1": 6795
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6787, 
+            "precinct1": 6798
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6799, 
+            "precinct1": 6798
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6799, 
+            "precinct1": 6798
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 6798
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6796, 
+            "precinct1": 6798
+        }, 
+        {
+            "county": true, 
+            "precinct2": 6781, 
+            "precinct1": 6799
+        }
+    ]
+}
