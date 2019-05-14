@@ -21,7 +21,7 @@ public class Cluster implements Comparable<Cluster> {
 
     private Demographic demographic;
 
-    @OneToMany
+    @ManyToMany
     private List<ClusterEdge> clusterEdges;
 
     private boolean paired;

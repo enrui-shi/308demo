@@ -10,13 +10,13 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.light'
 }).addTo(map);
 
-var stateLayer = L.geoJSON(statesData,{
-}).addTo(map);
+var stateLayer = L.geoJSON(statesData,{}).addTo(map);
 
 //var demoLayer = L.geoJSON(precinctDemo,{}).addTo(map);
 
 var districtLayer;
 var precinctLayer;
+var hashmap = [];
 
 /* add data into map */
 /* way one
@@ -144,6 +144,7 @@ function getPrecinctColor(w) {
 }
 
 function precinctStyle(feature) {
+    hashmap[['OH', feature.id]] = feature.geometry.coordinates;
     return {
         weight: 2,
         opacity: 1,

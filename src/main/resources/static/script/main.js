@@ -29,21 +29,31 @@ $(document).ready(function () {
                 /* response from controller */
                 console.log(data);
                 console.log("color color : "+data.colors);
-                if(map.hasLayer(precinctLayer))
-                    map.removeLayer(precinctLayer);
-                precinctLayer = L.geoJSON(precinctsData.map, {
+
+                districtLayer = L.geoJSON(precinctsData.map, {
                     onEachFeature: precinctOnEachFeature,
                     style: function(feature) {
                         for(var i=0; i < data.colors.length; i++) {
-                            if(feature.id == data.colors[i].precinctID){
-                                console.log("id is "+ data.colors[i].precinctID);
+                            for(var j=0; j<data.colors[i].district.precincts.length; j++)
+                            if(feature.id == data.colors[i].district.precincts[j]){
+                                console.log("id is "+ data.colors[i].district.precincts[j]);
                                 console.log("layer id is "+feature.id);
-                                console.log("district color is "+data.colors[i].district.color);
-                                return {fillColor:data.colors[i].district.color};
+                                console.log("district color is "+data.colors[i].district.d_color);
+                                return {fillColor:data.colors[i].district.d_color};
                             }
                         }
                     }
                 }).addTo(map);
+                console.log("id is "+ data.colors[0].district.precincts[0].precinctID);
+                console.log("district color is "+data.colors[0].district.d_color);
+                console.log(hashmap[['OH', data.colors[0].district.precincts[0].precinctID]][0]);
+                var latlngs = hashmap[['OH', data.colors[0].district.precincts[0].precinctID]][0];
+                var polygon1 = L.polygon(latlngs, {fillColor: "#212529"}).addTo(map);
+                /*for(var i=0; i < data.colors.length; i++) {
+                    for (var j = 0; j < data.colors[i].district.precincts.length; j++) {
+
+                    }
+                }*/
             }
         })
         /*$.ajax({

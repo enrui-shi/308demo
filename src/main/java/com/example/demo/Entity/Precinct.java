@@ -17,7 +17,7 @@ public class Precinct {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
-    @OneToMany
+    @ManyToMany
     private List<PrecinctEdge> precinctEdges;
 
     private Demographic demographic;
@@ -34,6 +34,14 @@ public class Precinct {
 
     public void setPrecinctID(Long precinctID) {
         this.precinctID = precinctID;
+    }
+
+    public StateName getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(StateName stateName) {
+        this.stateName = stateName;
     }
 
     public ElectionResult getElectionResult() {
