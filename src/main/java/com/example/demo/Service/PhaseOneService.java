@@ -38,7 +38,7 @@ public class PhaseOneService {
         List<Cluster> clusters = new ArrayList<>();
 
         for(int i=0; i<precincts.size(); i++) {
-            Cluster c = new Cluster(a.getCurrentState().getStateName(), precincts.get(i).getDemographic());
+            Cluster c = new Cluster(precincts.get(i).getPrecinctID(), a.getCurrentState().getStateName(), precincts.get(i).getDemographic());
             clusters.add(c);
         }
 
