@@ -24,6 +24,16 @@ public class ClusterEdge {
 
     private double demographicJoinability;
 
+    public ClusterEdge(Long id, Cluster cluster1, Cluster cluster2, StateName stateName, double countyJoinability, double natureJoinability, double demographicJoinability) {
+        this.id = id;
+        this.cluster1 = cluster1;
+        this.cluster2 = cluster2;
+        this.stateName = stateName;
+        this.countyJoinability = countyJoinability;
+        this.natureJoinability = natureJoinability;
+        this.demographicJoinability = demographicJoinability;
+    }
+
     public Cluster getCluster1() {
         return cluster1;
     }

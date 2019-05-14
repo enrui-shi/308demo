@@ -40,7 +40,7 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_data.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
@@ -60,7 +60,7 @@ public class Init implements CommandLineRunner {
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_edges.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
@@ -120,6 +120,7 @@ public class Init implements CommandLineRunner {
         initService.addAllDemographic(ds);
         System.out.println("starting add preciects");
         initService.addAllPrecinct(precincts);
+        System.out.println("finished!!!!!!!!!!!!!!!");
 
     }
 
