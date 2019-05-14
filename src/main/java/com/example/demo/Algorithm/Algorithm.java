@@ -130,7 +130,7 @@ public class Algorithm {
             int index = randomIndex(movable.size());
             Precinct candidate = movable.get(index);
             District from = getPrecinctBelongs(candidate.getPrecinctID());
-            List<District>toDistrict = getToDistrict(candidate.getPrecinctID());
+            List<District>toDistrict = getToDistrict(candidate);
             for(District to:toDistrict){
                 Move move = new Move(from,to,candidate);
                 if (move.checkMajorityMinority(currentState.getPreference())){
@@ -168,8 +168,8 @@ public class Algorithm {
         return (int) (Math.random() * size);
     }
 
-    public List<District>getToDistrict(Long p) {
-        District from = getPrecinctBelongs(p);
+    public List<District>getToDistrict(Precinct p) {
+        District from = getPrecinctBelongs(p.getPrecinctID());
         List<District>to = new ArrayList<>();
         for(long np :p.getNeighbourPrecincts()) {
             if(getPrecinctBelongs(np)!= from){
