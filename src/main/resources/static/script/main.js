@@ -1,5 +1,7 @@
 // get slide bar value
 $(document).ready(function () {
+    $('#phase1').prop('disabled', false);
+    $('#phase2').prop('disabled', true);
     var preference_form = $('#preference');
     preference_form.submit(function (e){
         console.log("start to send preference date")
@@ -27,46 +29,41 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 /* response from controller */
-                console.log(data);
                 console.log("color color : "+data.colors);
 
                 districtLayer = L.geoJSON(precinctsData.map, {
                     onEachFeature: precinctOnEachFeature,
                     style: function(feature) {
                         for(var i=0; i < data.colors.length; i++) {
-                            for(var j=0; j<data.colors[i].district.precincts.length; j++)
-                            if(feature.id == data.colors[i].district.precincts[j]){
-                                console.log("id is "+ data.colors[i].district.precincts[j]);
+                            if(feature.id == data.colors.keys[i]){
+                                console.log("id is "+ data.colors.keys[i]);
                                 console.log("layer id is "+feature.id);
-                                console.log("district color is "+data.colors[i].district.d_color);
-                                return {fillColor:data.colors[i].district.d_color};
+                                console.log("district color is "+data.colors[feature.id]);
+                                return {fillColor:data.colors[feature.id]};
                             }
                         }
                     }
                 }).addTo(map);
-                console.log("id is "+ data.colors[0].district.precincts[0].precinctID);
-                console.log("district color is "+data.colors[0].district.d_color);
-                console.log(hashmap[['OH', data.colors[0].district.precincts[0].precinctID]][0]);
-                var latlngs = hashmap[['OH', data.colors[0].district.precincts[0].precinctID]][0];
-                var polygon1 = L.polygon(latlngs, {fillColor: "#212529"}).addTo(map);
-                /*for(var i=0; i < data.colors.length; i++) {
-                    for (var j = 0; j < data.colors[i].district.precincts.length; j++) {
 
-                    }
-                }*/
+                // enable phase2 button to start simulating annealing
+                $('#phase2').prop('disabled', false);
+                $('#phase1').prop('disabled', true);
+                function ajaxPhase2() {
+                    $.ajax({
+                        type: 'get',
+                        url: "/home/main/startPhaseTwo",
+                        contentType: "application/json; charset=utf-8",
+                        header: {"accept": "application/json"},
+                        success: function (data) {
+                            console.log(data);
+                            // after phase two finish, enable playphase1
+                            $('#phase1').prop('disabled', false);
+                            $('#phase2').prop('disabled', true);
+                        }
+                    })
+                }
             }
         })
-        /*$.ajax({
-            type: 'get',
-            url: "/home/main/startPhaseTwo",
-            contentType: "application/json; charset=utf-8",
-            header: {"accept": "application/json"},
-            success: function (data) {
-                 response from controller
-                console.log(data);
-            }
-        })*/
     })
-    $('#menubtn').prop('disabled', true);
 });
 

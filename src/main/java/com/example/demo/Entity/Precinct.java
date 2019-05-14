@@ -24,7 +24,7 @@ public class Precinct {
 
     private double majMinRatio;
 
-    private List<Long>NeighbourPrecincts;
+    private List<Long> NeighbourPrecincts;
 
     private String county;
 
