@@ -20,6 +20,8 @@ $(document).ready(function () {
 
         e.preventDefault();
 
+        fakeLog("Current preference:");
+        fakeLog("<&nbsp>Weight of efficiency:" );
         console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.ethnicGroupBound);
         $.ajax({
             type: 'post',
