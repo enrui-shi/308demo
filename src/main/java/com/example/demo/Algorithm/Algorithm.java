@@ -26,18 +26,23 @@ public class Algorithm {
 
     private Map<Long, District> precinctToDistrict;
 
-    private int totalPopulation;
 
     public Algorithm() {
+    }
+
+    public Algorithm(State currentState) {
+        this.currentState = currentState;
+    }
+
+    public Algorithm(State currentState, Map<Long, District> precinctToDistrict) {
+        this.currentState = currentState;
+        this.precinctToDistrict = precinctToDistrict;
     }
 
     public Map<Long, District> getPrecinctToDistrict() {
         return precinctToDistrict;
     }
 
-    public Algorithm(State currentState) {
-        this.currentState = currentState;
-    }
 
     public State getCurrentState() {
         return currentState;
@@ -119,32 +124,73 @@ public class Algorithm {
             d1.addNeighborDistrict(d2);
             d2.addNeighborDistrict(d1);
         }
+        for(District d :idMap.values()){
+            for( Long pID  :d.getPrecincts().keySet()){
+                precinctToDistrict.put(pID,d);
+            }
+        }
     }
 
     public Summary startSimulateAnnealing() {
         List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
             double score = measureDistrict(d);
+            d.setScore(score);
             movable.addAll(d.getBoundPrecinct());
         }
         while (movable.size()!=0){
             int index = randomIndex(movable.size());
             Precinct candidate = movable.get(index);
-            District from = getPrecinctBelongs(candidate.getPrecinctID());
-            List<District>toDistrict = getToDistrict(candidate);
-            for(District to:toDistrict){
-                Move move = new Move(from,to,candidate);
-                if (move.checkMajorityMinority(currentState.getPreference())) {
+            Move move = testMove(candidate);
+            if(move != null){
+                move.execute();
+                for(Long p :candidate.getNeighbourPrecincts()){
+                    if(precinctToDistrict.get(p)== move.getFrom()){
+
+                    }
 
                 }
+
             }
+
+
 
         }
 
         return null;
     }
 
+    public Move testMove(Precinct candidate){
+        District from = getPrecinctBelongs(candidate.getPrecinctID());
+        List<District>toDistrict = getToDistrict(candidate);
+        Map<Double,Move> scoreChange = new HashMap<>();
+        for(District to:toDistrict){
+            Move move = new Move(from,to,candidate);
+            double origin = from.getScore()+to.getScore();
+            if (move.checkMajorityMinority(currentState.getPreference())) {
+                double changed = changedObjectiveFunction(from,candidate)+ changedObjectiveFunction(to,candidate);
+                if(changed-origin>0){
+                    scoreChange.put(changed-origin,move);
+                }
+            }
+        }
+        if(!scoreChange.isEmpty()){
+            double max = 0.0;
+            for(double key:scoreChange.keySet()){
+                if(key>max){
+                    max = key;
+                }
+            }
+           return scoreChange.get(max);
+        }
+        return null;
+
+    }
+
     public double measureDistrict(District d){
+        return 0;
+    }
+    public double changedObjectiveFunction(District d, Precinct p){
         return 0;
     }
 

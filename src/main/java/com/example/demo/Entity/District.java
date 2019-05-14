@@ -63,6 +63,19 @@ public class District {
         this.targetEthnic = targetEthnic;
     }
 
+    public Map<Long, Precinct> getPrecincts() {
+        return precincts;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+
     public Demographic getDemographic() {
         return demographic;
     }
@@ -83,7 +96,8 @@ public class District {
     }
 
     public void addPrecinct(Precinct p){
-
+        this.demographic.merge(p.getDemographic());
+        precincts.put(p.getPrecinctID(),p);
     }
 
     public boolean checkMinorityBound(Map<EthnicGroup, Bound> groupBound, Precinct p) {
