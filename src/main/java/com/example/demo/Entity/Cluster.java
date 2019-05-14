@@ -12,6 +12,8 @@ public class Cluster implements Comparable<Cluster> {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
 
     @OneToMany
     private List<Precinct> precincts;
@@ -27,12 +29,34 @@ public class Cluster implements Comparable<Cluster> {
 
     private boolean paired;
 
+    public Cluster(StateName stateName, Demographic demographic) {
+        this.stateName = stateName;
+        this.demographic = demographic;
+    }
+
+    public void setPrecincts(List<Precinct> precincts) {
+        this.precincts = precincts;
+    }
+
+    public void setNeighborClusters(List<Cluster> neighborClusters) {
+        this.neighborClusters = neighborClusters;
+    }
+
+    public void setDemographic(Demographic demographic) {
+        this.demographic = demographic;
+    }
+
+    public void setClusterEdges(List<ClusterEdge> clusterEdges) {
+        this.clusterEdges = clusterEdges;
+    }
+
+    public void setStateName(StateName stateName) {
+        this.stateName = stateName;
+    }
+
     public Long getId() {
         return id;
     }
-
-    @Enumerated(EnumType.STRING)
-    private StateName stateName;
 
     public List<Precinct> getPrecincts() {
         return precincts;
@@ -101,4 +125,6 @@ public class Cluster implements Comparable<Cluster> {
             return -1;
         }
     }
+
+
 }

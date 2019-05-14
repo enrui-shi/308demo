@@ -11,11 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
+import com.example.demo.Service.PhaseOneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,9 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/home")
 public class mainController {
+    @Autowired
+    PhaseOneService p1s;
+
 
     @PostMapping(value = "/main/createState", consumes = "application/json", produces = "application/json")
     public Map createState(@RequestParam String stateName, HttpSession session) {
@@ -47,9 +52,6 @@ public class mainController {
             return responseNode;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
-            State state = new State(stateName);
-            state.setPreference(preference);
-            Algorithm algorithm = new Algorithm(state);
             /* for test
             System.out.println(preference.getNumberOfDistrict());
             System.out.println(preference.getCompactnessWeight());
@@ -57,9 +59,8 @@ public class mainController {
                 System.out.println(key);
             }*/
 
-            algorithm.startGraphPartition();
+            Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
 
-            algorithm.setColor();
 
             session.setAttribute("state", algorithm.getCurrentState());
 
