@@ -22,6 +22,7 @@ public class Algorithm {
 
     private State currentState;
 
+
     private List<ClusterPair> clusterPairs = new ArrayList<ClusterPair>();
 
     private Map<Long, District> precinctToDistrict;
@@ -38,6 +39,15 @@ public class Algorithm {
         this.currentState = currentState;
         this.precinctToDistrict = precinctToDistrict;
     }
+
+    public void setClusters(List<Cluster> clusters) {
+        this.clusters = clusters;
+    }
+
+    public void setClusterEdges(List<ClusterEdge> clusterEdges) {
+        this.clusterEdges = clusterEdges;
+    }
+
 
     public Map<Long, District> getPrecinctToDistrict() {
         return precinctToDistrict;
