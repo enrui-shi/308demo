@@ -10,13 +10,19 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.light'
 }).addTo(map);
 
-var stateLayer = L.geoJSON(statesData,{}).addTo(map);
 
-//var demoLayer = L.geoJSON(precinctDemo,{}).addTo(map);
+var stateLayer = L.geoJSON(statesData,{
+    style: stateStyle,
+    onEachFeature: stateOnEachFeature
+}).addTo(map);
 
-var districtLayer;
-var precinctLayer;
-var hashmap = [];
+
+var OH_districtLayer;
+var OH_precinctLayer;
+var NY_districtLayer;
+var NY_precinctLayer;
+var NJ_districtLayer;
+var NJ_precinctLayer;
 
 /* add data into map */
 /* way one
@@ -28,15 +34,25 @@ $.getJSON("../data/OH_final.json" , function( result ){
 }).addTo(map);
 });*/
 /* way two */
-precinctLayer = L.geoJSON(precinctsData.map, {
+OH_precinctLayer = L.geoJSON(OH_precinctsData, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
 }).addTo(map);
 
-/*districtLayer = L.geoJSON(districtsData.map, {
+NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+    style: precinctStyle,
+    onEachFeature: precinctOnEachFeature
+}).addTo(map);
+
+NJ_precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
+    style: precinctStyle,
+    onEachFeature: precinctOnEachFeature
+}).addTo(map);
+
+OH_districtLayer = L.geoJSON(districtsData.features, {
     style: districtStyle,
     onEachFeature: districtOnEachFeature
-}).addTo(map);*/
+}).addTo(map);
 
 /* select state */
 function selectOH(){
@@ -119,23 +135,27 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props, layer) {
-    if(layer == districtLayer){
+    if(layer == 'districtLayer'){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
             '<b>District Name: ' + props.name + '</b><br />Population: ' + props.demographic
             : 'Hover over a district');
-    }else{
+    }else if(layer == 'precinctLayer') {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
             '<b>' + props.name + '</b><br /> id: ' + props.id
             + '</b><br /> total voting: ' + props.properties.total_vote
             + '</b><br /> Democratic: ' + props.properties.d_vote
             + '</b><br /> Republican: ' + props.properties.r_vote
             : 'Hover over a precinct');
+    } else {
+        this._div.innerHTML = '<h4>State</h4>' +  (props ?
+            '<b>State Name: ' + props.name
+            : 'Hover over a state');
     }
 };
 
 info.addTo(map);
 
-/* set up map style */
+// set up precinct style
 function getPrecinctColor(w) {
     switch (w) {
         case 'Republican': return "#ff6666";
@@ -144,7 +164,6 @@ function getPrecinctColor(w) {
 }
 
 function precinctStyle(feature) {
-    hashmap[['OH', feature.id]] = feature.geometry.coordinates;
     return {
         weight: 2,
         opacity: 1,
@@ -154,18 +173,6 @@ function precinctStyle(feature) {
         fillColor: getPrecinctColor(feature.properties.winner)
     };
 }
-
-
-function districtStyle(feature) {
-    return {
-        weight: 2,
-        opacity: 1,
-        color: 'black',
-        dashArray: '3',
-        fillOpacity: 0.1
-    };
-}
-
 
 /* mouse hover */
 function precinctHoverFeature(e) {
@@ -179,7 +186,7 @@ function precinctHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, precinctLayer);
+    info.update(layer.feature, 'precinctLayer');
 }
 /* mouse remove */
 function resetPrecinct(e) {
@@ -190,7 +197,88 @@ function resetPrecinct(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, precinctLayer);
+    info.update(null, 'precinctLayer');
+}
+
+// set up district style
+function districtStyle(feature) {
+    return {
+        weight: 2,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.1
+    };
+}
+
+function districtHoverFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 3,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+    info.update(layer.feature, 'districtLayer');
+}
+
+function resetDistrict(e) {
+    e.target.setStyle( {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+    info.update(null, 'districtLayer');
+}
+
+// set up district style
+function getStateColor(n) {
+    switch (n) {
+        case 'Ohio': return "#ff0000";
+        case 'New Jersey': return "#ff6600";
+        case 'New York': return "#ffff00";
+    }
+}
+
+function stateStyle(feature) {
+    return {
+        weight: 2,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.1,
+        fillColor: getStateColor(feature.properties.name)
+    };
+}
+
+function stateHoverFeature(e) {
+    var layer = e.target;
+    layer.setStyle({
+        weight: 3,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+    info.update(layer.feature, 'stateLayer');
+}
+
+function resetState(e) {
+    e.target.setStyle( {
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    });
+    info.update(null, 'stateLayer');
 }
 
 function zoomToFeature(e) {
@@ -198,6 +286,14 @@ function zoomToFeature(e) {
 }
 
 /* set up event */
+function stateOnEachFeature(feature, layer) {
+    layer.on({
+        mouseover: stateHoverFeature,
+        mouseout: resetState,
+        click: zoomToFeature
+    });
+}
+
 function precinctOnEachFeature(feature, layer) {
     layer.on({
         mouseover: precinctHoverFeature,
@@ -205,10 +301,11 @@ function precinctOnEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
+
 function districtOnEachFeature(feature, layer) {
     layer.on({
-        //mouseover: districtHoverFeature,
-        //mouseout: resetdistrict,
+        mouseover: districtHoverFeature,
+        mouseout: resetDistrict,
         click: zoomToFeature
     });
 }
@@ -218,18 +315,36 @@ function districtOnEachFeature(feature, layer) {
 map.on('zoomend', function () {
     currentZoom = map.getZoom();
     if (currentZoom < 8) {
-        /* set up district boundary*/
-        if(map.hasLayer(precinctLayer))
-            map.removeLayer(precinctLayer);
-        map.addLayer(districtLayer);
+        // show district boundary
+        if(map.hasLayer(OH_precinctLayer))
+            map.removeLayer(OH_precinctLayer);
+        map.addLayer(OH_districtLayer);
+        if(map.hasLayer(NY_precinctLayer))
+            map.removeLayer(NY_precinctLayer);
+        map.addLayer(NY_districtLayer);
+        if(map.hasLayer(NJ_precinctLayer))
+            map.removeLayer(NJ_precinctLayer);
+        map.addLayer(NJ_districtLayer);
     }
     else if(currentZoom <= 9 && currentZoom >=8){
-        map.addLayer(districtLayer);
-        map.addLayer(precinctLayer);
+        // show both
+        map.addLayer(OH_districtLayer);
+        map.addLayer(OH_precinctLayer);
+        map.addLayer(NY_districtLayer);
+        map.addLayer(NY_precinctLayer);
+        map.addLayer(NJ_districtLayer);
+        map.addLayer(NJ_precinctLayer);
     }
     else{
-        if(map.hasLayer(districtLayer))
-            map.removeLayer(districtLayer);
-        map.addLayer(precinctLayer);
+        // show precinct boundary
+        if(map.hasLayer(OH_districtLayer))
+            map.removeLayer(OH_districtLayer);
+        map.addLayer(OH_precinctLayer);
+        if(map.hasLayer(NY_districtLayer))
+            map.removeLayer(NY_districtLayer);
+        map.addLayer(NY_precinctLayer);
+        if(map.hasLayer(NJ_districtLayer))
+            map.removeLayer(NJ_districtLayer);
+        map.addLayer(NJ_precinctLayer);
     }
 });
