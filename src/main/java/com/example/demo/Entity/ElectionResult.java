@@ -5,11 +5,18 @@ import com.example.demo.Enum.Party;
 import javax.persistence.*;
 import java.util.Map;
 
-@Embeddable
+@Entity
 public class ElectionResult {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @ElementCollection
+    @CollectionTable(name="EMP_election")
     @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn(name="Party")
+    @Column(name="data")
     private Map<Party, Integer> voteData;
 
     @Enumerated(EnumType.STRING)

@@ -8,6 +8,7 @@ import com.example.demo.Entity.PrecinctEdge;
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.Party;
 import com.example.demo.Enum.StateName;
+import com.example.demo.Service.InitService;
 import com.example.demo.Service.PrecinctEdgeService;
 import com.example.demo.Service.PrecinctService;
 import com.example.demo.repository.PrecinctRepository;
@@ -30,10 +31,8 @@ import java.util.Map;
 @Component
 public class Init implements CommandLineRunner {
     @Autowired
-    private PrecinctService precinctServices;
+    private InitService initService;
 
-    @Autowired
-    private PrecinctEdgeService precinctEdgeService;
 
     public void run(String args[]) {
         JSONParser parser = new JSONParser();
@@ -41,7 +40,7 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/final_Ohio_precinct.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_data.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
@@ -57,7 +56,7 @@ public class Init implements CommandLineRunner {
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/ohio_edge_final.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
@@ -87,7 +86,7 @@ public class Init implements CommandLineRunner {
         }
         int count = 0;
         for(PrecinctEdge precinctEdge: precinctEdges){
-           // precinctEdgeService.addPrecinctEdge(precinctEdge);
+           initService.addPrecinctEdge(precinctEdge);
             System.out.println(count++);
         }
         count=0;
@@ -100,7 +99,9 @@ public class Init implements CommandLineRunner {
                     System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
                 }
                 System.out.println(p);
-                //precinctServices.addPrecinct(p);
+                initService.addDemographic(p.getDemographic());
+                initService.addElectionResult(p.getElectionResult());
+                initService.addPrecinct(p);
 
                 //System.out.println(count++);
             }
