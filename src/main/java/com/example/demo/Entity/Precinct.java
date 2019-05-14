@@ -24,7 +24,7 @@ public class Precinct {
 
     private double majMinRatio;
 
-    private List<Precinct>NeighbourPrecincts;
+    private List<Long>NeighbourPrecincts;
 
     private String county;
 
@@ -76,7 +76,7 @@ public class Precinct {
         this.county = county;
     }
 
-    public List<Precinct> getNeighbourPrecincts() {
+    public List<Long> getNeighbourPrecincts() {
         return NeighbourPrecincts;
     }
 

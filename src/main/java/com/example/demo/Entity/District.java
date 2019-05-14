@@ -96,7 +96,7 @@ public class District {
                 bound.add(p);
             }
         }
-        return null;
+        return bound;
     }
     public boolean isInnerPrecinct(Precinct pct){
         for( Precinct p:pct.getNeighbourPrecincts()){

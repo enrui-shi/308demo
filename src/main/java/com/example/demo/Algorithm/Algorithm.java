@@ -26,6 +26,8 @@ public class Algorithm {
 
     private Map<Long, District> precinctToDistrict;
 
+    private int totalPopulation;
+
     public Algorithm() {
     }
 
@@ -46,16 +48,18 @@ public class Algorithm {
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
         while (clusters.size() / 2 > targetNumber) {
+            System.out.print("Try to merge "+clusters.size()+" clusters");
             tempClusters = new ArrayList<>();
             int pickIndex = (int) Math.floor(clusters.size() * 0.8);
             Collections.sort(clusters);
             for (int i = pickIndex; i < clusters.size(); i++) {
                 tempClusters.add(clusters.get(i));
             }
+            System.out.print("The smallest removed cluster has population "+tempClusters.get(0).getDemographic().getTotalPopulation());
             clusters.removeAll(tempClusters);
 
             determineCandidatePair();
-
+            System.out.print("Find "+clusterPairs.size()+" pairs");
             for (ClusterPair cp : clusterPairs) {
                 Cluster c = cp.combine();
                 clusters.add(c);
@@ -68,7 +72,7 @@ public class Algorithm {
 
     public void determineCandidatePair() {
         while (clusters.size() != 0) {
-            int index = (int) (Math.random() * clusters.size());
+            int index =randomIndex(clusters.size()) ;
             Cluster cluster = clusters.get(index);
             Cluster pairedCluster = cluster.getBestNeighbourCluster();
             if (pairedCluster != null) {
@@ -85,6 +89,7 @@ public class Algorithm {
     }
 
     public void finish(int target) {
+        System.out.print("Final step with "+clusters.size());
         while (clusters.size() > target) {
             Collections.sort(clusters);
             Cluster c1 = clusters.get(0);
@@ -117,9 +122,25 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
-        List<Precinct>moveable = new ArrayList<>();
+        List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
-            moveable.addAll(d.getBoundPrecinct());
+            movable.addAll(d.getBoundPrecinct());
+        }
+        while (movable.size()!=0){
+            int index = randomIndex(movable.size());
+            Precinct candidate = movable.get(index);
+            District from = getPrecinctBelongs(candidate.getPrecinctID());
+            List<District>toDistrict = getToDistrict(candidate.getPrecinctID());
+            for(District to:toDistrict){
+                Move move = new Move(from,to,candidate);
+                if (move.checkMajorityMinority(currentState.getPreference())){
+
+                }
+
+
+            }
+
+
         }
 
         return null;
@@ -142,19 +163,40 @@ public class Algorithm {
         return summaries;
     }
 
+
+    public int randomIndex(int size){
+        return (int) (Math.random() * size);
+    }
+
+    public List<District>getToDistrict(Long p) {
+        District from = getPrecinctBelongs(p);
+        List<District>to = new ArrayList<>();
+        for(long np :p.getNeighbourPrecincts()) {
+            if(getPrecinctBelongs(np)!= from){
+                to.add(getPrecinctBelongs(np));
+            }
+        }
+        return to;
+    }
+
+    public District getPrecinctBelongs(long p) {
+        return precinctToDistrict.get(p);
+    }
+
+
     // set district color after phase one finish
     public void setColor() {
         String[] colors = new String[]{"#ff0000","#0040ff","#ff8000","#00ff00","#ffb3d9","#9900cc","#ffff00","#006600"};
         List<District> d = currentState.getDistricts();
         int needColor = 0;
-        for(int i=0; i<d.size(); i++) {
-            if(d.get(i).getColor().equals("")) {
+        for (int i=0; i<d.size(); i++) {
+            if (d.get(i).getColor().equals("")) {
                 d.get(i).setColor(colors[0]);
                 List<District> neighbor = d.get(i).getNeighborDistrict();
                 for (int j = 0; j < neighbor.size(); j++) {
-                    if(neighbor.get(j).getColor().equals("")) {
+                    if (neighbor.get(j).getColor().equals("")) {
                         needColor++;
-                        if(needColor <= 7) {
+                        if (needColor <= 7) {
                             neighbor.get(j).setColor(colors[needColor]);
                         }
                     }
