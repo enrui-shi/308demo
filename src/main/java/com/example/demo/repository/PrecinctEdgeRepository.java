@@ -1,9 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.Entity.Precinct;
 import com.example.demo.Entity.PrecinctEdge;
+import com.example.demo.Enum.StateName;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PrecinctEdgeRepository extends JpaRepository<PrecinctEdge, Long> {
+import java.util.List;
 
+public interface PrecinctEdgeRepository extends JpaRepository<PrecinctEdge, Long> {
+    List<PrecinctEdge> findAllByStateName(StateName stateName);
 }
