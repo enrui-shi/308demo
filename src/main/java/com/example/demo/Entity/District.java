@@ -27,6 +27,8 @@ public class District {
 
     private boolean minorityDistrict;
 
+    private double score;
+
     private String color;
 
     @Enumerated(EnumType.STRING)
@@ -73,6 +75,15 @@ public class District {
         this.neighborDistrict = new ArrayList<>();
     }
 
+    public void removePrecinct(Precinct p){
+
+
+    }
+
+    public void addPrecinct(Precinct p){
+
+    }
+
     public boolean checkMinorityBound(Map<EthnicGroup, Bound> groupBound, Precinct p) {
         if (!this.minorityTarget) {
             return true;
@@ -99,11 +110,11 @@ public class District {
         return bound;
     }
     public boolean isInnerPrecinct(Precinct pct){
-//        for( Precinct p:pct.getNeighbourPrecincts()){
-//            if(!precincts.containsValue(p)){
-//                return false;
-//            }
-//        }
+        for( Long p:pct.getNeighbourPrecincts()){
+            if(!precincts.containsKey(p)){
+                return false;
+            }
+        }
         return true;
     }
 

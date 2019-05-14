@@ -31,12 +31,18 @@ public class Move {
         return precinct;
     }
 
+
+
     /*
         true for accept, false for reject
      */
     public boolean checkMajorityMinority(Preference p) {
         Map<EthnicGroup, Bound> groupBound = p.getEthnicGroupBound();
         return from.checkMinorityBound(groupBound, precinct) && to.checkMinorityBound(groupBound, precinct);
+    }
+
+    public void execute(){
+
     }
 
 }

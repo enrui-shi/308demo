@@ -124,6 +124,7 @@ public class Algorithm {
     public Summary startSimulateAnnealing() {
         List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
+            double score = measureDistrict(d);
             movable.addAll(d.getBoundPrecinct());
         }
         while (movable.size()!=0){
@@ -138,10 +139,13 @@ public class Algorithm {
                 }
             }
 
-
         }
 
         return null;
+    }
+
+    public double measureDistrict(District d){
+        return 0;
     }
 
 
@@ -169,11 +173,11 @@ public class Algorithm {
     public List<District>getToDistrict(Precinct p) {
         District from = getPrecinctBelongs(p.getPrecinctID());
         List<District>to = new ArrayList<>();
-//        for(long np :p.getNeighbourPrecincts()) {
-//            if(getPrecinctBelongs(np)!= from){
-//                to.add(getPrecinctBelongs(np));
-//            }
-//        }
+        for(long np :p.getNeighbourPrecincts()) {
+            if(getPrecinctBelongs(np)!= from){
+                to.add(getPrecinctBelongs(np));
+            }
+        }
         return to;
     }
 
