@@ -45,7 +45,7 @@
         <div id="main">
             <div class="map-content">
                 <div id="map"></div>
-                <script type = "text/javaipt" src = "/data/state.js"></script>
+                <script type = "text/javascript" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/new_ohio_data.js"></script>
                 <script type = "text/javascript" src = "/data/final_Ohio_precinct.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
