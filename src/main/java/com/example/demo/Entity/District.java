@@ -76,7 +76,8 @@ public class District {
     }
 
     public void removePrecinct(Precinct p){
-
+        this.demographic.removeDemo(p.getDemographic());
+        precincts.remove(p.getPrecinctID());
 
     }
 

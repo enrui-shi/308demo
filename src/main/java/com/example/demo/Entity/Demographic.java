@@ -47,13 +47,11 @@ public class Demographic {
 
 
     public void removeDemo(Demographic d){
-
-
-    }
-
-    public void addDemo(Demographic d){
+        totalPopulation -= d.totalPopulation;
+        ethnicData.forEach((k, v) -> v -= d.getEthnicData().get(k));
 
     }
+
 
     @Override
     public String toString() {
