@@ -28,3 +28,7 @@ function sideSetting(){
         document.getElementById("setting").style.display = "block";
     }
 }
+
+function fakeLog(str){
+    document.getElementById('log').innerHTML += '<br>' + str;
+}
