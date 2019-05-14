@@ -6,12 +6,16 @@ import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Type.Bound;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Move {
     private District from;
     private District to;
     private Precinct precinct;
+    private double changedToScore;
+    private double changedFromScore;
 
     public Move(District from, District to, Precinct precinct) {
         this.from = from;
@@ -42,7 +46,10 @@ public class Move {
     }
 
     public void execute(){
-
+        from.removePrecinct(precinct);
+        to.addPrecinct(precinct);
+        from.setScore(changedFromScore);
+        to.setScore(changedToScore);
     }
 
 }
