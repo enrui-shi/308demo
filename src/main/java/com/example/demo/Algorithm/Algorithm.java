@@ -156,7 +156,9 @@ public class Algorithm {
                 move.execute();
                 for(Long p :candidate.getNeighbourPrecincts()){
                     if(precinctToDistrict.get(p)== move.getFrom()){
-
+                        movable.add(move.getFrom().getPrecincts().get(p));
+                    }else if( precinctToDistrict.get(p) ==move.getTo()){
+                        movable.remove(move.getTo().getPrecincts().get(p));
                     }
 
                 }
