@@ -63,6 +63,7 @@ public class mainController {
 
 
             session.setAttribute("state", algorithm.getCurrentState());
+            session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
 
             Map<Long, District> precinctToDistrict = algorithm.getPrecinctToDistrict();
 
@@ -92,7 +93,9 @@ public class mainController {
     public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException {
 
         State s = (State) session.getAttribute("state");
-        Algorithm a = new Algorithm(s);
+        Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
+        Algorithm a = new Algorithm(s, pToD);
+
         a.startSimulateAnnealing();
         // TO DO
         return phaseTwoResult;

@@ -31,13 +31,19 @@ public class Algorithm {
     public Algorithm() {
     }
 
+    public Algorithm(State currentState) {
+        this.currentState = currentState;
+    }
+
+    public Algorithm(State currentState, Map<Long, District> precinctToDistrict) {
+        this.currentState = currentState;
+        this.precinctToDistrict = precinctToDistrict;
+    }
+
     public Map<Long, District> getPrecinctToDistrict() {
         return precinctToDistrict;
     }
 
-    public Algorithm(State currentState) {
-        this.currentState = currentState;
-    }
 
     public State getCurrentState() {
         return currentState;
