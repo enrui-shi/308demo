@@ -12,6 +12,7 @@ public class Precinct {
     @Id
     private Long precinctID;
 
+    @OneToOne
     private ElectionResult electionResult;
 
     @Enumerated(EnumType.STRING)
