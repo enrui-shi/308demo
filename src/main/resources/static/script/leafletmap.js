@@ -34,10 +34,10 @@ $.getJSON("../data/OH_final.json" , function( result ){
 }).addTo(map);
 });*/
 /* way two */
-OH_precinctLayer = L.geoJSON(OH_precinctsData, {
+/*OH_precinctLayer = L.geoJSON(OH_precinctsData, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
-}).addTo(map);
+}).addTo(map);*/
 
 NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
     style: precinctStyle,
@@ -135,11 +135,11 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props, layer) {
-    if(layer == 'districtLayer'){
+    if(layer == districtLayer){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
             '<b>District Name: ' + props.name + '</b><br />Population: ' + props.demographic
             : 'Hover over a district');
-    }else if(layer == 'precinctLayer') {
+    }else if(layer == precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
             '<b>' + props.name + '</b><br /> id: ' + props.id
             + '</b><br /> total voting: ' + props.properties.total_vote
@@ -186,8 +186,25 @@ function precinctHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, 'precinctLayer');
+    info.update(layer.feature, precinctLayer);
+
+    // hover 2 seconds to display demographic data of the precinct
+    setTimeout(function(){
+        console.log("hover two seconds to show demographic data");
+        $.ajax({
+            type: 'post',
+            url: "/home/main/showDemo?precinctID="+layer.feature.properties.id,
+            contentType:"application/json; charset=utf-8",
+            header: {"accept": "application/json"},
+            dataType:"json",
+            success: function (data){
+                console.log(data);
+                alert("success");
+            }
+        })
+    }, 2000);
 }
+
 /* mouse remove */
 function resetPrecinct(e) {
     e.target.setStyle( {
@@ -197,7 +214,7 @@ function resetPrecinct(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, 'precinctLayer');
+    info.update(null, precinctLayer);
 }
 
 // set up district style
@@ -222,7 +239,7 @@ function districtHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, 'districtLayer');
+    info.update(layer.feature, districtLayer);
 }
 
 function resetDistrict(e) {
@@ -233,7 +250,7 @@ function resetDistrict(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, 'districtLayer');
+    info.update(null, districtLayer);
 }
 
 // set up district style
@@ -251,7 +268,7 @@ function stateStyle(feature) {
         opacity: 1,
         color: 'black',
         dashArray: '3',
-        fillOpacity: 0.1,
+        fillOpacity: 0.7,
         fillColor: getStateColor(feature.properties.name)
     };
 }
@@ -262,12 +279,12 @@ function stateHoverFeature(e) {
         weight: 3,
         color: '#666',
         dashArray: '',
-        fillOpacity: 0.7
+        fillOpacity: 0.1
     });
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, 'stateLayer');
+    info.update(layer.feature, stateLayer);
 }
 
 function resetState(e) {
@@ -278,7 +295,7 @@ function resetState(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, 'stateLayer');
+    info.update(null, stateLayer);
 }
 
 function zoomToFeature(e) {
