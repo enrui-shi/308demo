@@ -26,7 +26,7 @@ public class PhaseOneService {
         state.setPreference(preference);
 
         Algorithm algorithm = new Algorithm(state);
-        algorithm.setClusters(initClusters(algorithm));
+        initClusters(algorithm);
 
         algorithm.startGraphPartition();
 
@@ -35,9 +35,14 @@ public class PhaseOneService {
         return algorithm;
     }
 
-    public List<Cluster> initClusters(Algorithm a) {
+    public void initClusters(Algorithm a) {
+        StateName stateName = a.getCurrentState().getStateName();
+
         Map<Long, Precinct> precincts = new HashMap<>();
-        List<Precinct> pList = precinctRepository.findAllByStateName(a.getCurrentState().getStateName());
+        List<Precinct> pList = precinctRepository.findAllByStateName(stateName);
+        // TO DO findallbystatename
+        List<PrecinctEdge> peList = precinctEdgeRepository.findAllByStateName(stateName);
+
         for(int i=0; i<pList.size(); i++) {
             precincts.put(pList.get(i).getPrecinctID(), pList.get(i));
         }
@@ -46,9 +51,10 @@ public class PhaseOneService {
         List<Cluster> cList = new ArrayList<>();
         List<ClusterEdge> ceList = new ArrayList<>();
 
+
         // init cluster with id, stateName, demographic
         for(int i=0; i<precincts.size(); i++) {
-            Cluster c = new Cluster(precincts.get(i).getPrecinctID(), a.getCurrentState().getStateName(), precincts.get(i).getDemographic());
+            Cluster c = new Cluster(precincts.get(i).getPrecinctID(), stateName, precincts.get(i).getDemographic());
             cList.add(c);
             clusters.put(c.getId(), c);
         }
@@ -57,31 +63,27 @@ public class PhaseOneService {
         for(int i=0; i<cList.size(); i++) {
             // find the corresponding precinct by cluster id
             Precinct p = precincts.get(cList.get(i).getId());
-            List<Cluster> neighborList = new ArrayList<>();
             for(int j=0; j<p.getNeighbourPrecincts().size(); j++) {
-                neighborList.add(clusters.get(p.getNeighbourPrecincts().get(j)));
+                cList.get(i).getNeighborClusters().add(clusters.get(p.getNeighbourPrecincts().get(j)));
             }
-            cList.get(i).setNeighborClusters(neighborList);
         }
 
         // set cluster edge
-        for(int i=0; i<cList.size(); i++) {
-            Precinct p = precincts.get(cList.get(i).getId());
-            List<ClusterEdge> edgeList = new ArrayList<>();
-            for(int j=0; j<p.getPrecinctEdges().size(); j++) {
-                PrecinctEdge pe = p.getPrecinctEdges().get(j);
-                ClusterEdge e = new ClusterEdge(pe.getId(), clusters.get(pe.getPrecinct1()), clusters.get(pe.getPrecinct2()), p.getStateName(),
-                        pe.getCountyJoinability(), pe.getNatureJoinability(), pe.getDemographicJoinability());
-                edgeList.add(e);
-
-            }
-            cList.get(i).setClusterEdges(edgeList);
+        for(int i=0; i<peList.size(); i++) {
+            PrecinctEdge pe = peList.get(i);
+            Long p1_ID = pe.getPrecinct1();
+            Long p2_ID = pe.getPrecinct2();
+            Cluster c1 = clusters.get(p1_ID);
+            Cluster c2 = clusters.get(p2_ID);
+            ClusterEdge ce = new ClusterEdge(pe.getId(), c1, c2, stateName, pe.getCountyJoinability(),
+                    pe.getNatureJoinability(), pe.getDemographicJoinability());
+            c1.getClusterEdges().add(ce);
+            c2.getClusterEdges().add(ce);
+            ceList.add(ce);
         }
 
-        return cList;
-    }
-
-    public List<ClusterEdge> convertEdges(List<PrecinctEdge> pes) {
+        a.setClusters(cList);
+        a.setClusterEdges(ceList);
 
     }
 
