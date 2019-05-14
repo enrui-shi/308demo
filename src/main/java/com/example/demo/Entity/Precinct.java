@@ -96,6 +96,10 @@ public class Precinct {
         return NeighbourPrecincts;
     }
 
+    public void setNeighbourPrecincts(List<Long> neighbourPrecincts) {
+        NeighbourPrecincts = neighbourPrecincts;
+    }
+
     @Override
     public String toString() {
         return "Precinct{" +

@@ -52,6 +52,14 @@ public class Demographic {
     }
 
 
+    public void removeDemo(Demographic d){
+
+
+    }
+
+    public void addDemo(Demographic d){
+
+    }
 
     @Override
     public String toString() {
