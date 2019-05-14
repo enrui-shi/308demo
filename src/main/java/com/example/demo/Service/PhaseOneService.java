@@ -6,9 +6,12 @@ import com.example.demo.Enum.StateName;
 
 import com.example.demo.repository.PrecinctEdgeRepository;
 import com.example.demo.repository.PrecinctRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +43,6 @@ public class PhaseOneService {
 
         Map<Long, Precinct> precincts = new HashMap<>();
         List<Precinct> pList = precinctRepository.findAllByStateName(stateName);
-        // TO DO findallbystatename
         List<PrecinctEdge> peList = precinctEdgeRepository.findAllByStateName(stateName);
 
         for(int i=0; i<pList.size(); i++) {
@@ -85,6 +87,26 @@ public class PhaseOneService {
         a.setClusters(cList);
         a.setClusterEdges(ceList);
 
+    }
+
+    public JsonNode returnPhaseOne(Algorithm algorithm) throws IOException {
+        Map<Long, District> precinctToDistrict = algorithm.getPrecinctToDistrict();
+
+        // map precinct Id to district-color
+        String colorPrecinct = "{ \"colors\": [";
+        for (Map.Entry<Long, District> entry : precinctToDistrict.entrySet()) {
+            colorPrecinct += "{\""+entry.getKey()+"\": \""+entry.getValue().getColor()+"\"},";
+        }
+        colorPrecinct.substring(0, (colorPrecinct.length()-1));
+        colorPrecinct += "] }";
+
+        System.out.println(colorPrecinct);
+
+        // convert string to json
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode resultNode = mapper.readTree(colorPrecinct);
+
+        return resultNode;
     }
 
 }

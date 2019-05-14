@@ -65,21 +65,7 @@ public class mainController {
             session.setAttribute("state", algorithm.getCurrentState());
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
 
-            Map<Long, District> precinctToDistrict = algorithm.getPrecinctToDistrict();
-
-            // map precinct Id to district-color
-            String colorPrecinct = "{ \"colors\": [";
-            for (Map.Entry<Long, District> entry : precinctToDistrict.entrySet()) {
-                colorPrecinct += "{\""+entry.getKey()+"\": \""+entry.getValue().getColor()+"\"},";
-            }
-            colorPrecinct.substring(0, (colorPrecinct.length()-1));
-            colorPrecinct += "] }";
-
-            System.out.println(colorPrecinct);
-
-            // convert string to json
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode resultNode = mapper.readTree(colorPrecinct);
+            JsonNode resultNode = p1s.returnPhaseOne(algorithm);
 
             return resultNode;
         }
