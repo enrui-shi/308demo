@@ -9,9 +9,7 @@ import java.util.Map;
 public class ElectionResult {
 
     @ElementCollection
-    @CollectionTable()
     @MapKeyEnumerated(EnumType.STRING)
-    @MapKeyColumn()
     private Map<Party, Integer> voteData;
 
     @Enumerated(EnumType.STRING)

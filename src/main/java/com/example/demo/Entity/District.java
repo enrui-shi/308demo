@@ -18,6 +18,7 @@ public class District {
     @OneToMany
     private Map<Long, Precinct> precincts;
 
+    @OneToOne
     private Demographic demographic;
 
     @OneToMany

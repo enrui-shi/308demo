@@ -5,16 +5,22 @@ import com.example.demo.Enum.EthnicGroup;
 import javax.persistence.*;
 import java.util.Map;
 
-@Embeddable
+@Entity
 public class Demographic {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private int totalPopulation;
 
     @ElementCollection
-    @CollectionTable()
+    @CollectionTable(name="EMP_ethnicData")
     @MapKeyEnumerated(EnumType.STRING)
-    @MapKeyColumn()
+    @MapKeyColumn(name="EthnicGroup")
+    @Column(name="data")
     private Map<EthnicGroup, Integer> ethnicData;
+
 
     public int getTotalPopulation() {
         return totalPopulation;
