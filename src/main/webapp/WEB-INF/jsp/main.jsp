@@ -120,12 +120,13 @@
                         <label>max population (%)</label> <input type="number" id="maxLatino"><br><p></p>
                     </div><!--my-numberInput div over-->
                     <div class="my-map-button-container">
-                        <button class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play</button>
+                        <button id="phase1" class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play Phase One</button>
                         <label>&emsp;</label>
-                        <button class="my-map-btn"><i class="fa fa-pause"></i> Pause</button>
-                        <label>&emsp;</label>
-                        <button class="my-map-btn"><i class="fa fa-stop"></i> Stop</button>
+                        <button id="phase2" class="my-map-btn" onclick="ajaxPhase2()" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
+                    <div class="my-console-container">
+
+                    </div>
                 </form>
             </div><!--sidebar div over-->
         </div><!--main div over-->
