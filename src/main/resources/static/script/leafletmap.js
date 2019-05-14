@@ -28,7 +28,7 @@ $.getJSON("../data/OH_final.json" , function( result ){
 }).addTo(map);
 });*/
 /* way two */
-precinctLayer = L.geoJSON(precinctsData.map, {
+precinctLayer = L.geoJSON(OH_precinctsData, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
 }).addTo(map);
