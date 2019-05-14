@@ -19,6 +19,7 @@ public class Cluster implements Comparable<Cluster> {
     @OneToMany
     private List<Cluster> neighborClusters;
 
+    @OneToOne
     private Demographic demographic;
 
     @ManyToMany

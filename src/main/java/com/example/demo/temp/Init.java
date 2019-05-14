@@ -87,7 +87,7 @@ public class Init implements CommandLineRunner {
         }
         int count = 0;
         for(PrecinctEdge precinctEdge: precinctEdges){
-            precinctEdgeService.addPrecinctEdge(precinctEdge);
+           // precinctEdgeService.addPrecinctEdge(precinctEdge);
             System.out.println(count++);
         }
         count=0;
@@ -99,7 +99,8 @@ public class Init implements CommandLineRunner {
                 for(PrecinctEdge pe:p.getPrecinctEdges()){
                     System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
                 }
-                precinctServices.addPrecinct(p);
+                System.out.println(p);
+                //precinctServices.addPrecinct(p);
 
                 //System.out.println(count++);
             }
@@ -178,10 +179,10 @@ public class Init implements CommandLineRunner {
         if (p1_total == 0 || p2_total == 0) {
             return 0;
         } else {
-            double aa_differ = Math.abs((p1_data.get(EthnicGroup.AFRIAN_AMERICAN) / p1_total) - (p2_data.get(EthnicGroup.AFRIAN_AMERICAN) / p2_total));
-            double white_differ = Math.abs((p1_data.get(EthnicGroup.WHITE) / p1_total) - (p2_data.get(EthnicGroup.WHITE) / p2_total));
-            double l_differ = Math.abs((p1_data.get(EthnicGroup.LATINO) / p1_total) - (p2_data.get(EthnicGroup.LATINO) / p2_total));
-            double asia_differ = Math.abs((p1_data.get(EthnicGroup.ASIAN_PACIFIC) / p1_total) - (p2_data.get(EthnicGroup.ASIAN_PACIFIC) / p2_total));
+            double aa_differ = Math.abs((1.0*p1_data.get(EthnicGroup.AFRIAN_AMERICAN) / p1_total) - (1.0*p2_data.get(EthnicGroup.AFRIAN_AMERICAN) / p2_total));
+            double white_differ = Math.abs((1.0*p1_data.get(EthnicGroup.WHITE) / p1_total) - (1.0*p2_data.get(EthnicGroup.WHITE) / p2_total));
+            double l_differ = Math.abs((1.0*p1_data.get(EthnicGroup.LATINO) / p1_total) - (1.0*p2_data.get(EthnicGroup.LATINO) / p2_total));
+            double asia_differ = Math.abs((1.0*p1_data.get(EthnicGroup.ASIAN_PACIFIC) / p1_total) - (1.0*p2_data.get(EthnicGroup.ASIAN_PACIFIC) / p2_total));
             return 1.0 - (aa_differ + white_differ + l_differ + asia_differ) / 4;
         }
     }

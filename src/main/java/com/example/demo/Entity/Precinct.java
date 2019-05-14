@@ -20,11 +20,18 @@ public class Precinct {
     @ManyToMany
     private List<PrecinctEdge> precinctEdges;
 
+    @OneToOne
     private Demographic demographic;
 
     private double majMinRatio;
 
+
+    @ElementCollection
     private List<Long>NeighbourPrecincts;
+
+    public void setNeighbourPrecincts(List<Long> neighbourPrecincts) {
+        NeighbourPrecincts = neighbourPrecincts;
+    }
 
     private String county;
 
@@ -89,9 +96,6 @@ public class Precinct {
         return NeighbourPrecincts;
     }
 
-    public void setNeighbourPrecincts(List<Long> neighbourPrecincts) {
-        NeighbourPrecincts = neighbourPrecincts;
-    }
 
     @Override
     public String toString() {
