@@ -3,18 +3,18 @@ $(document).ready(function(){
     var batch_form = $("#batch");
     batch_form.submit( function(e) {
         console.log("11111111111111")
-        var batch_data = {};
-        batch_data[stateName] = $("input[name='state']:checked").val();
-        batch_data[numBatch] = $('#num-of-batch').val();
-        batch_data[numDistrict] = $('#num-of-district').val();
-        batch_data[numOfMMBound] = { mmMIN: $("input[name='mmMIN']").val(), mmMAX: $("input[name='mmMAX']").val()};
-        batch_data[equalPopulationBound] = { eqMIN: $("input[name='eqMIN']").val(), eqMAX: $("input[name='eqMAX']").val()};
-        batch_data[compactnessBound] = { cMIN: $("input[name='cMIN']").val(), cMAX: $("input[name='cMAX']").val()};
-        batch_data[partisanFairnessBound] = { pfMIN: $("input[name='pfMIN']").val(), pfMAX: $("input[name='pfMAX']").val()};
-        batch_data[natureConstrainBound] = { ncMIN: $("input[name='ncMIN']").val(), ncMAX: $("input[name='ncMAX']").val()};
+        var mm_data = { mmMIN: $("input[name='mmMIN']").val(), mmMAX: $("input[name='mmMAX']").val()};
+        var ep_data = { eqMIN: $("input[name='eqMIN']").val(), eqMAX: $("input[name='eqMAX']").val()};
+        var c_data = { cMIN: $("input[name='cMIN']").val(), cMAX: $("input[name='cMAX']").val()};
+        var pf_data = { pfMIN: $("input[name='pfMIN']").val(), pfMAX: $("input[name='pfMAX']").val()};
+        var nc_data = { ncMIN: $("input[name='ncMIN']").val(), ncMAX: $("input[name='ncMAX']").val()};
+
+        var batch_data = {stateName:$("input[name='state']:checked").val(), numBatch: $('#num-of-batch').val(),
+            numDistrict: $('#num-of-district').val(), numOfMMBound: mm_data, equalPopulationBound: ep_data, compactnessBound: c_data,
+            partisanFairnessBound: pf_data, natureConstrainBound: nc_data};
 
         e.preventDefault();
-        console.log(batch_data.state," ",batch_data.numBatch)
+        console.log(batch_data.stateName," ",batch_data.numBatch)
         $.ajax({
             type: 'post',
             url: '/batch/createBatch',
@@ -24,7 +24,6 @@ $(document).ready(function(){
             dataType:"json",
             success: function (data){
                 console.log(data);
-                window.location.replace("/main");
             }
         })
     })

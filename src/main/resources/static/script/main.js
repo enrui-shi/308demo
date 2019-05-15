@@ -33,6 +33,10 @@ $(document).ready(function () {
                 /* response from controller */
                 console.log("color color : "+data.colors);
 
+                if(map.hasLayer(districtLayer)){
+                    map.removeLayer(districtLayer);
+                }
+
                 if((data.colors.keys[0]/10000000) == 1) {
                     districtLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
                         onEachFeature: precinctOnEachFeature,
