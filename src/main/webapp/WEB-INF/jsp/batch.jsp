@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="/script/batch.js"></script>
         <script src="/script/logout.js"></script>
         <script src="/script/guest.js"></script>
@@ -75,8 +76,17 @@
                 <label class = "textField"></label>
                 <b>
                 </b>
-                <input type = "submit" value = "submit" style = "float:right" class = "submit-btn">
+                <input type = "submit" value = "submit" onclick="document.getElementById('batchrun').style.display='block'"
+                       style = "float:right" class = "submit-btn">
             </fieldset>
         </form>
+
+        <div id="batchrun" class="my-batch-modal">
+            <div class="my-batch-modal-content w3-animate-zoom "><br>
+                <div class="w3-center">
+                    <span onclick="document.getElementById('batchrun').style.display='none'" class="close w3-button w3-small w3-hover-red w3-display-center" title="Close Modal">&times;</span>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
