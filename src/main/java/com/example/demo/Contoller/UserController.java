@@ -29,6 +29,7 @@ public class UserController {
             user.setPassword(encoder.encode(user.getPassword()));
             System.out.println(user.getUserEmail());
             userRepository.save(user);
+            session.setAttribute("currentUser", currentUser);
             response.put("status", "ok");
         } else {
             response.put("status", "error");

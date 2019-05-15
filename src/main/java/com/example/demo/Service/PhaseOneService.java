@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhaseOneService {
@@ -39,7 +40,7 @@ public class PhaseOneService {
     }
 
     public void initClusters(Algorithm a) {
-       /* StateName stateName = a.getCurrentState().getStateName();
+        StateName stateName = a.getCurrentState().getStateName();
 
         Map<Long, Precinct> precincts = new HashMap<>();
         List<Precinct> pList = precinctRepository.findAllByStateName(stateName);
@@ -85,7 +86,7 @@ public class PhaseOneService {
         }
 
         a.setClusters(cList);
-        a.setClusterEdges(ceList);*/
+        a.setClusterEdges(ceList);
 
     }
 
@@ -107,6 +108,15 @@ public class PhaseOneService {
         JsonNode resultNode = mapper.readTree(colorPrecinct);
 
         return resultNode;
+    }
+
+    public void showDemo(Long p_ID) {
+        Optional<Precinct> p = precinctRepository.findById(p_ID);
+        if(p.isPresent()){
+            Precinct precinct = p.get();
+
+            System.out.println(precinct.getDemographic());
+        }
     }
 
 }

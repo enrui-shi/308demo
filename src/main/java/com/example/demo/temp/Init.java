@@ -17,16 +17,16 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 //@Component
 public class Init implements CommandLineRunner {
@@ -40,23 +40,27 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_data.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_data.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
-                precinct.setStateName(StateName.OH);
+                precinct.setStateName(StateName.NJ);
                 precinct.setNeighbourPrecincts(new ArrayList<Long>());
                 precincts.put(precinct.getPrecinctID(), precinct);
             }
             System.out.println(precincts.size());
-        } catch (Exception e) {
+        } catch (ParseException e) {
+            System.out.println(e);
+        } catch(FileNotFoundException e){
+            System.out.println(e);
+        } catch (IOException e){
             System.out.println(e);
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_test_edges.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
@@ -81,31 +85,42 @@ public class Init implements CommandLineRunner {
             }
             System.out.println(count);
 
-        } catch (Exception e) {
+        } catch (ParseException e) {
+            System.out.println(e);
+        } catch(FileNotFoundException e){
+            System.out.println(e);
+        } catch (IOException e){
             System.out.println(e);
         }
         int count = 0;
-        for(PrecinctEdge precinctEdge: precinctEdges){
-           initService.addPrecinctEdge(precinctEdge);
-            System.out.println(count++);
-        }
+        System.out.println("number of precinct to insert :"+precincts.size()) ;
+        System.out.println("number to insert:" +precinctEdges.size());
+        System.out.println("starting add edges");
+        initService.addAllPrecinctEdge(precinctEdges);
+        System.out.println("add edges success");
         count=0;
+        List<Demographic> ds=new ArrayList<Demographic>();
+        List<ElectionResult> es=new ArrayList<ElectionResult>();
         for(Precinct p:precincts.values()){
             if(p.getPrecinctEdges()==null){
-
             }else {
                 System.out.println(p.getPrecinctID());
                 for(PrecinctEdge pe:p.getPrecinctEdges()){
                     System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
                 }
                 System.out.println(p);
-                initService.addDemographic(p.getDemographic());
-                initService.addElectionResult(p.getElectionResult());
-                initService.addPrecinct(p);
-
+                ds.add(p.getDemographic());
+                es.add(p.getElectionResult());
                 //System.out.println(count++);
             }
         }
+        System.out.println("starting add electionresult");
+        initService.addAllElectionResult(es);
+        System.out.println("starting add demographic");
+        initService.addAllDemographic(ds);
+        System.out.println("starting add preciects");
+        initService.addAllPrecinct(precincts);
+        System.out.println("finished!!!!!!!!!!!!!!!");
 
     }
 
@@ -162,6 +177,7 @@ public class Init implements CommandLineRunner {
         PrecinctEdge precinctEdge = new PrecinctEdge();
         precinctEdge.setPrecinct1(p1.getPrecinctID());
         precinctEdge.setPrecinct2(p2.getPrecinctID());
+        precinctEdge.setStateName(p1.getStateName());
         if ((boolean) edge.get("county")) {
             precinctEdge.setCountyJoinability(1);
         } else {

@@ -7,6 +7,7 @@ function clickProfile() {
         document.getElementById('out').style.display = 'none';
         document.getElementById('menubtn').style.display = 'none';
     } else {
+        console.log(""+$.cookie('currentuser'));
         document.getElementById('out').style.display = 'block';
         document.getElementById('in').style.display = 'none';
         document.getElementById('menubtn').style.display = 'block';
