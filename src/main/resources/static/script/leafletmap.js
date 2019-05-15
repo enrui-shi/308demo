@@ -17,13 +17,8 @@ var stateLayer = L.geoJSON(statesData,{
 }).addTo(map);
 
 
-var OH_districtLayer;
-var OH_precinctLayer;
-var NY_districtLayer;
-var NY_precinctLayer;
-var NJ_districtLayer;
-var NJ_precinctLayer;
-
+var districtLayer;
+var precinctLayer;
 
 /* add data into map */
 /* way one
@@ -51,6 +46,16 @@ function selectOH(){
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.4173, -82.9071], 9);
+
+    precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+
+    districtLayer = L.geoJSON(districtsData.features, {
+        style: districtStyle,
+        onEachFeature: districtOnEachFeature
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
@@ -106,6 +111,7 @@ function selectNJ(){
     }).addTo(map);
 
 
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=NJ",
@@ -129,13 +135,13 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props, layer) {
-    if(layer == NY_districtLayer){
+    if(layer == districtLayer){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
             '<b>District Name: ' + props.name + '</b><br />Population: ' + props.demographic
             : 'Hover over a district');
-    }else if(layer == NY_precinctLayer) {
+    }else if(layer == precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
-            '<b>' + props.name + '</b><br /> id: ' + props.id
+            '<b>' + props.name + '</b><br /> id: ' + props.properties.id
             + '</b><br /> total voting: ' + props.properties.total_vote
             + '</b><br /> Democratic: ' + props.properties.d_vote
             + '</b><br /> Republican: ' + props.properties.r_vote
@@ -180,7 +186,7 @@ function precinctHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, NY_precinctLayer);
+    info.update(layer.feature, precinctLayer);
 
     // hover 2 seconds to display demographic data of the precinct
     setTimeout(function(){
@@ -207,7 +213,7 @@ function resetPrecinct(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, NY_precinctLayer);
+    info.update(null, precinctLayer);
 }
 
 // set up district style
@@ -232,7 +238,7 @@ function districtHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, NY_districtLayer);
+    info.update(layer.feature, districtLayer);
 }
 
 function resetDistrict(e) {
@@ -243,7 +249,7 @@ function resetDistrict(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, NY_districtLayer);
+    info.update(null, districtLayer);
 }
 
 // set up district style
@@ -324,52 +330,22 @@ function districtOnEachFeature(feature, layer) {
 /* show different layers when zoom in/out */
 map.on('zoomend', function () {
     currentZoom = map.getZoom();
-    NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-        style: precinctStyle,
-        onEachFeature: precinctOnEachFeature
-    }).addTo(map);
-
-    NJ_precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
-        style: precinctStyle,
-        onEachFeature: precinctOnEachFeature
-    }).addTo(map);
-
-    NY_districtLayer = L.geoJSON(districtsData.features, {
-        style: districtStyle,
-        onEachFeature: districtOnEachFeature
-    }).addTo(map);
 
     if (currentZoom < 8) {
         // show district boundary
-        /*if(map.hasLayer(OH_precinctLayer))
-            map.removeLayer(OH_precinctLayer);
-        map.addLayer(OH_districtLayer);*/
-        if(map.hasLayer(NY_precinctLayer))
-            map.removeLayer(NY_precinctLayer);
-        map.addLayer(NY_districtLayer);
-        if(map.hasLayer(NJ_precinctLayer))
-            map.removeLayer(NJ_precinctLayer);
-        map.addLayer(NJ_districtLayer);
+        if(map.hasLayer(precinctLayer))
+            map.removeLayer(precinctLayer);
+        map.addLayer(districtLayer);
     }
     else if(currentZoom <= 9 && currentZoom >=8){
         // show both
-        /*map.addLayer(OH_districtLayer);
-        map.addLayer(OH_precinctLayer);*/
-        map.addLayer(NY_districtLayer);
-        map.addLayer(NY_precinctLayer);
-        map.addLayer(NJ_districtLayer);
-        map.addLayer(NJ_precinctLayer);
+        map.addLayer(districtLayer);
+        map.addLayer(precinctLayer);
     }
     else{
         // show precinct boundary
-        /*if(map.hasLayer(OH_districtLayer))
-            map.removeLayer(OH_districtLayer);
-        map.addLayer(OH_precinctLayer);*/
-        if(map.hasLayer(NY_districtLayer))
-            map.removeLayer(NY_districtLayer);
-        map.addLayer(NY_precinctLayer);
-        if(map.hasLayer(NJ_districtLayer))
-            map.removeLayer(NJ_districtLayer);
-        map.addLayer(NJ_precinctLayer);
+        if(map.hasLayer(districtLayer))
+            map.removeLayer(districtLayer);
+        map.addLayer(precinctLayer);
     }
 });
