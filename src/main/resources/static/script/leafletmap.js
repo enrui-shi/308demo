@@ -42,10 +42,15 @@ function selectOH(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.4173, -82.9071], 9);
+
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
         style: precinctStyle,
@@ -74,10 +79,15 @@ function selectNY(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.7128, -74.0060], 9);
+
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
         style: precinctStyle,
@@ -100,10 +110,15 @@ function selectNJ(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.0583, -74.4057], 9);
+
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
         style: precinctStyle,
@@ -200,7 +215,23 @@ function precinctHoverFeature(e) {
             success: function (data){
                 console.log(data);
 
+                var popContent;
+                if(data.Demographic == 'Undefined'){
+                    popContent = "<b>demographic in precinct "+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
+                    layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                } else {
+                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>"
+                        + "<br>totalPopulation: "+data.totalPopulation + "<br>ASIAN_PACIFIC: "+data.ASIAN_PACIFIC
+                        + "<br>LATINO: "+data.LATINO + "<br>WHITE: "+data.WHITE + "<br>AFRIAN_AMERICAN: "+data.AFRIAN_AMERICAN;
 
+                    layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                }
             }
         })
     }, 2000);

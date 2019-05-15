@@ -1,11 +1,10 @@
 function clickProfile() {
     document.getElementById('user01').style.display = 'block';
     // check if user login
-    if($.cookie('currentuser')=="") {
+    if($.cookie('currentuser')=="" || $.cookie('currentuser') == undefined) {
         console.log($.cookie('currentuser'));
         document.getElementById('in').style.display = 'block';
         document.getElementById('out').style.display = 'none';
-        document.getElementById('menubtn').style.display = 'none';
     } else {
         console.log(""+$.cookie('currentuser'));
         document.getElementById('out').style.display = 'block';

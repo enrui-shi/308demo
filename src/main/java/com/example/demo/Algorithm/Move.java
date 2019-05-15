@@ -44,6 +44,14 @@ public class Move {
         Map<EthnicGroup, Bound> groupBound = p.getEthnicGroupBound();
         return from.checkMinorityBound(groupBound, precinct) && to.checkMinorityBound(groupBound, precinct);
     }
+    public void undo(){
+        from.addPrecinct(precinct);
+        to.removePrecinct(precinct);
+    }
+    public void tryMove(){
+        from.removePrecinct(precinct);
+        to.addPrecinct(precinct);
+    }
 
     public void execute(){
         from.removePrecinct(precinct);
