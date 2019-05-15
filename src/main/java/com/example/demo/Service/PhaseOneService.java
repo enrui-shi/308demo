@@ -8,6 +8,7 @@ import com.example.demo.Enum.*;
 import com.example.demo.repository.PrecinctEdgeRepository;
 import com.example.demo.repository.PrecinctRepository;
 import com.example.demo.temp.GVAL;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +34,22 @@ public class PhaseOneService {
         State state = new State(stateName);
         state.setPreference(preference);
 
+        ObjectMapper objectMapper = new ObjectMapper();
         Algorithm algorithm = new Algorithm(state);
+        try{
         if(stateName == stateName.OH) {
-            algorithm.setClusterEdges(GVAL.ohe);
-            algorithm.setClusters(GVAL.oh);
+            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ohe), new TypeReference<List<ClusterEdge>>(){}));
+            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.oh), new TypeReference<List<Cluster>>(){}));
         } else if(stateName == stateName.NY) {
-            algorithm.setClusterEdges(GVAL.nye);
-            algorithm.setClusters(GVAL.ny);
+            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nye), new TypeReference<List<ClusterEdge>>(){}));
+            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ny), new TypeReference<List<Cluster>>(){}));
         } else {
-            algorithm.setClusterEdges(GVAL.nje);
-            algorithm.setClusters(GVAL.nj);
+            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nje), new TypeReference<List<ClusterEdge>>(){}));
+            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nj), new TypeReference<List<Cluster>>(){}));
         }
-
+        }catch (Exception e){
+            System.out.println(e);
+        }
         algorithm.startGraphPartition();
 
         algorithm.setColor();
