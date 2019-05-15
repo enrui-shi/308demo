@@ -259,27 +259,15 @@ function resetPrecinct(e) {
     info.update(null, precinctLayer);
 }
 
-function getOriginalColor(i) {
-    if((i%100) == 1 || (i%100) == 4 || (i%100) == 7 || (i%100) == 29 )
-        return "#ff0000";
-    else if((i%100) == 2 || (i%100) == 5 || (i%100) == 8)
-        return "#0040ff";
-    else if((i%100) == 3 || (i%100) == 6 || (i%100) == 9 || (i%100) == 14 )
-        return "#00ffff";
-    else if((i%100) == 10 || (i%100) == 27 || (i%100) == 16)
-        return "#ffff00";
-    else if((i%100) == 11 || (i%100) == 13 || (i%100) == 17)
-        return "#ff8000";
-    else if((i%100) == 12 || (i%100) == 16 || (i%100) == 18)
-        return "#9900cc";
-    else if((i%100) == 13 || (i%100) == 15 || (i%100) == 19)
-        return "#ccccff";
-    else if((i%100) == 20 || (i%100) == 24 || (i%100) == 25)
-        return "#00004d";
-    else if((i%100) == 21 || (i%100) == 23 || (i%100) == 26)
-        return "#006600";
-    else
-        return "#ffb3d9";
+function getOriginalColor() {
+    var picker = ['0','1','2','3','4','5','6','7','8','9','a','b','c','e','f'];
+    var color1 = '#';
+    for(var count=0; count<6; count++){
+        var random = Math.floor(Math.random() * 15);
+        color1 += picker[random];
+    }
+    console.log("random pick color "+color1);
+    return color1;
 }
 
 // set up district style
@@ -289,7 +277,7 @@ function districtStyle(feature) {
         opacity: 1,
         dashArray: '3',
         fillOpacity: 0.7,
-        fillColor: getOriginalColor(feature.properties.id)
+        fillColor: getOriginalColor()
     };
 }
 
