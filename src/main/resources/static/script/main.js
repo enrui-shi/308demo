@@ -33,20 +33,50 @@ $(document).ready(function () {
                 /* response from controller */
                 console.log("color color : "+data.colors);
 
-                districtLayer = L.geoJSON(precinctsData.map, {
-                    onEachFeature: precinctOnEachFeature,
-                    style: function(feature) {
-                        for(var i=0; i < data.colors.length; i++) {
-                            if(feature.id == data.colors.keys[i]){
-                                console.log("id is "+ data.colors.keys[i]);
-                                console.log("layer id is "+feature.id);
-                                console.log("district color is "+data.colors[feature.id]);
-                                return {fillColor:data.colors[feature.id]};
+                if((data.colors.keys[0]/10000000) == 1) {
+                    districtLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            for (var i = 0; i < data.colors.length; i++) {
+                                if (feature.id == data.colors.keys[i]) {
+                                    console.log("id is " + data.colors.keys[i]);
+                                    console.log("layer id is " + feature.id);
+                                    console.log("district color is " + data.colors[feature.id]);
+                                    return {fillColor: data.colors[feature.id]};
+                                }
                             }
                         }
-                    }
-                }).addTo(map);
+                    }).addTo(map);
+                } else if((data.colors.keys[0]/10000000) == 2) {
+                    districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            for (var i = 0; i < data.colors.length; i++) {
+                                if (feature.id == data.colors.keys[i]) {
+                                    console.log("id is " + data.colors.keys[i]);
+                                    console.log("layer id is " + feature.id);
+                                    console.log("district color is " + data.colors[feature.id]);
+                                    return {fillColor: data.colors[feature.id]};
+                                }
+                            }
+                        }
+                    }).addTo(map);
 
+                } else {
+                    districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            for (var i = 0; i < data.colors.length; i++) {
+                                if (feature.id == data.colors.keys[i]) {
+                                    console.log("id is " + data.colors.keys[i]);
+                                    console.log("layer id is " + feature.id);
+                                    console.log("district color is " + data.colors[feature.id]);
+                                    return {fillColor: data.colors[feature.id]};
+                                }
+                            }
+                        }
+                    }).addTo(map);
+                }
                 // enable phase2 button to start simulating annealing
                 $('#phase2').prop('disabled', false);
                 $('#phase1').prop('disabled', true);
@@ -69,7 +99,7 @@ $(document).ready(function () {
                               ajaxPhase2();
                           }
                       }
-                  });
+                    });
                 }
             }
         })

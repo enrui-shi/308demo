@@ -161,11 +161,11 @@ info.update = function (props, layer) {
     if(layer == districtLayer){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
             '<b>District ID: ' + props.id + '</b><br />Population of AfricanAmerican: ' + props.AfricanAmerican
-            '</b><br />Total population: ' + props.total
-            '</b><br />Population of Hispanic: ' + props.Hispanic
-            '</b><br />Population of India: ' + props.Indian
-            '</b><br />Population of Asian: ' + props.Asian
-            '</b><br />Population of White: ' + props.White
+            +'</b><br />Total population: ' + props.total
+            +'</b><br />Population of Hispanic: ' + props.Hispanic
+            +'</b><br />Population of India: ' + props.Indian
+            +'</b><br />Population of Asian: ' + props.Asian
+            +'</b><br />Population of White: ' + props.White
             : 'Hover over a district');
     }else if(layer == precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?

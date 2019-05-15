@@ -67,9 +67,15 @@ public class PhaseOneService {
 
         System.out.println(colorPrecinct);
 
+        JsonNode resultNode = null;
+
         // convert string to json
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode resultNode = mapper.readTree(colorPrecinct);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            resultNode = mapper.readTree(colorPrecinct);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
         return resultNode;
     }
