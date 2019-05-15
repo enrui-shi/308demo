@@ -50,6 +50,9 @@ public class Algorithm {
         this.clusterEdges = clusterEdges;
     }
 
+    public List<ClusterEdge> getClusterEdges() {
+        return clusterEdges;
+    }
 
     public Map<Long, District> getPrecinctToDistrict() {
         return precinctToDistrict;
@@ -80,6 +83,7 @@ public class Algorithm {
             determineCandidatePair();
             System.out.println("Find "+clusterPairs.size()+" pairs");
             for (ClusterPair cp : clusterPairs) {
+                System.out.println("C1 is "+cp.getCluster1().getId()+" C2 is "+cp.getCluster2().getId());
                 Cluster c = cp.combine();
                 clusters.add(c);
             }

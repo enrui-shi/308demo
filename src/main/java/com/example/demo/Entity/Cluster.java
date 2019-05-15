@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,10 @@ public class Cluster implements Comparable<Cluster> {
 
     private boolean paired;
 
-    public Cluster(){};
+    public Cluster(){
+        neighborClusters = new ArrayList<>();
+        clusterEdges = new ArrayList<>();
+    };
 
     public Cluster(Long id, StateName stateName, Demographic demographic) {
         this.id = id;
@@ -39,6 +43,10 @@ public class Cluster implements Comparable<Cluster> {
 
     public void setPrecincts(List<Precinct> precincts) {
         this.precincts = precincts;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setNeighborClusters(List<Cluster> neighborClusters) {
