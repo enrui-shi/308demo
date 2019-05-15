@@ -91,10 +91,6 @@ public class mainController {
     public Map showDemo(@RequestParam Long precinctID, HttpSession session) {
         System.out.println(precinctID);
         // find precinct demographic data
-        p1s.showDemo(precinctID);
-
-        Map<String, String> response = new HashMap();
-        response.put("status", "ok");
-        return response;
+        return p1s.showDemo(precinctID);
     }
 }

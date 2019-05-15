@@ -12,7 +12,7 @@ public class ElectionResult {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="EMP_election")
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn(name="Party")
