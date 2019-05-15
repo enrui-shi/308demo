@@ -50,22 +50,28 @@ $(document).ready(function () {
                 // enable phase2 button to start simulating annealing
                 $('#phase2').prop('disabled', false);
                 $('#phase1').prop('disabled', true);
+
+                // start phase2
                 function ajaxPhase2() {
                     $.ajax({
-                        type: 'get',
-                        url: "/home/main/startPhaseTwo",
-                        contentType: "application/json; charset=utf-8",
-                        header: {"accept": "application/json"},
-                        success: function (data) {
-                            console.log(data);
-                            // after phase two finish, enable playphase1
-                            $('#phase1').prop('disabled', false);
-                            $('#phase2').prop('disabled', true);
-                        }
-                    })
+                      type: 'get',
+                      url: "/home/main/startPhaseTwo",
+                      contentType: "application/json; charset=utf-8",
+                      header: {"accept": "application/json"},
+                      success:function(data) {
+                          console.log(data);
+                          if (data.status == 'end') {
+                              // after phase two finish, enable playphase1
+                              $('#phase1').prop('disabled', false);
+                              $('#phase2').prop('disabled', true);
+                          } else {
+                              // continue send ajax call
+                              ajaxPhase2();
+                          }
+                      }
+                  });
                 }
             }
         })
     })
 });
-
