@@ -15,6 +15,22 @@ $(document).ready(function(){
 
         e.preventDefault();
         console.log(batch_data.stateName," ",batch_data.numBatch)
+
+        /*function startBatch() {
+            var elem = document.getElementById("myBar");
+            var width = 1;
+            var id = setInterval(frame, 100000);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                } else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1  + '%';
+                }
+            }
+        }*/
+
         $.ajax({
             type: 'post',
             url: '/batch/createBatch',

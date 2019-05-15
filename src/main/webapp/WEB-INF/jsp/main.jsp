@@ -62,7 +62,7 @@
                 <div id="myStateDropDown" class="dropdown-content">
                     <input onclick="selectNY()" type="button" id="NY" value="New York">
                     <input onclick="selectOH()" type="button" id="OH" value="Ohio">
-                    <input onclick="selectNJ()" type="button" id="NJ" value="New Jersey">
+                    <input onclick="selectIA()" type="button" id="IA" value="Iowa">
                 </div>
             </div><!--select-state div over-->
             <div id = "sidebar">

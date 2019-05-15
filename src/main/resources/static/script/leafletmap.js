@@ -115,33 +115,33 @@ function selectNY(){
     })
 }
 
-function selectNJ(){
+function selectIA(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
     if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
-    map.setView([40.0583, -74.4057], 9);
+    map.setView([41.8780, -93.0977], 9);
 
     if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
     if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
-    precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
+    /*precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    districtLayer = L.geoJSON(NJ_districtsData.FeatureCollection, {
+    districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);
+    }).addTo(map);*/
 
     $.ajax({
         type: 'post',
-        url: "/home/main/createState?stateName=NJ",
+        url: "/home/main/createState?stateName=IA",
         contentType:"application/json; charset=utf-8",
         header: {"accept": "application/json"},
         dataType:"json",
