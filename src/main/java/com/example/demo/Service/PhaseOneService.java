@@ -59,11 +59,8 @@ public class PhaseOneService {
 
 
         // init cluster with id, stateName, demographic
-        for(int i=0; i<precincts.size(); i++) {
-            System.out.println("null pointer check");
-            System.out.println(precincts.get(i).getPrecinctID());
-            System.out.println(precincts.get(i).getDemographic());
-            Cluster c = new Cluster(precincts.get(i).getPrecinctID(), stateName, precincts.get(i).getDemographic());
+        for(int i=0; i<pList.size(); i++) {
+            Cluster c = new Cluster(pList.get(i).getPrecinctID(), stateName, pList.get(i).getDemographic());
             cList.add(c);
             clusters.put(c.getId(), c);
         }
@@ -78,8 +75,10 @@ public class PhaseOneService {
         }
 
         // set cluster edge
+        System.out.println(peList);
         for(int i=0; i<peList.size(); i++) {
             PrecinctEdge pe = peList.get(i);
+            System.out.println(pe);
             Long p1_ID = pe.getPrecinct1();
             Long p2_ID = pe.getPrecinct2();
             Cluster c1 = clusters.get(p1_ID);

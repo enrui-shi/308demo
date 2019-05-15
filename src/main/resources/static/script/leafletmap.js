@@ -47,6 +47,11 @@ function selectOH(){
     }
     map.setView([40.4173, -82.9071], 9);
 
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
+
     precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
@@ -79,6 +84,11 @@ function selectNY(){
     }
     map.setView([40.7128, -74.0060], 9);
 
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
+
     precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
@@ -104,6 +114,11 @@ function selectNJ(){
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.0583, -74.4057], 9);
+
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
         style: precinctStyle,
@@ -201,12 +216,20 @@ function precinctHoverFeature(e) {
                 console.log(data);
                 var popContent;
                 if(data.Demographic == 'Undefined'){
-                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
+                    popContent = "<b>demographic in precinct "+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
                     layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
                 } else {
-                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>";
+                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>"
+                        + "<br>totalPopulation: "+data.totalPopulation + "<br>ASIAN_PACIFIC: "+data.ASIAN_PACIFIC
+                        + "<br>LATINO: "+data.LATINO + "<br>WHITE: "+data.WHITE + "<br>AFRIAN_AMERICAN: "+data.AFRIAN_AMERICAN;
 
                     layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
                 }
             }
         })
