@@ -1,6 +1,7 @@
 package com.example.demo.Algorithm;
 
 import com.example.demo.Entity.*;
+import com.example.demo.Enum.Party;
 import com.example.demo.Enum.StateName;
 import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
@@ -11,6 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+
+import static com.example.demo.Application.newJ;
 
 public class Algorithm {
 
@@ -60,21 +63,22 @@ public class Algorithm {
 
 
     public void startGraphPartition() {
+        System.out.println("######Start Graph Partition##########");
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
         while (clusters.size() / 2 > targetNumber) {
-            System.out.print("Try to merge "+clusters.size()+" clusters");
+            System.out.println("Try to merge "+clusters.size()+" clusters");
             tempClusters = new ArrayList<>();
             int pickIndex = (int) Math.floor(clusters.size() * 0.8);
             Collections.sort(clusters);
             for (int i = pickIndex; i < clusters.size(); i++) {
                 tempClusters.add(clusters.get(i));
             }
-            System.out.print("The smallest removed cluster has population "+tempClusters.get(0).getDemographic().getTotalPopulation());
+            System.out.println("The smallest removed cluster has population "+tempClusters.get(0).getDemographic().getTotalPopulation());
             clusters.removeAll(tempClusters);
 
             determineCandidatePair();
-            System.out.print("Find "+clusterPairs.size()+" pairs");
+            System.out.println("Find "+clusterPairs.size()+" pairs");
             for (ClusterPair cp : clusterPairs) {
                 Cluster c = cp.combine();
                 clusters.add(c);
@@ -86,6 +90,7 @@ public class Algorithm {
     }
 
     public void determineCandidatePair() {
+        System.out.println("Find Candidate Pair");
         while (clusters.size() != 0) {
             int index =randomIndex(clusters.size()) ;
             Cluster cluster = clusters.get(index);
@@ -104,7 +109,7 @@ public class Algorithm {
     }
 
     public void finish(int target) {
-        System.out.print("Final step with "+clusters.size());
+        System.out.println("Final step with "+clusters.size());
         while (clusters.size() > target) {
             Collections.sort(clusters);
             Cluster c1 = clusters.get(0);
@@ -142,6 +147,7 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
+        List <Long>used = new ArrayList<>();
         List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
             double score = measureDistrict(d);
@@ -151,6 +157,7 @@ public class Algorithm {
         while (movable.size()!=0){
             int index = randomIndex(movable.size());
             Precinct candidate = movable.get(index);
+
             Move move = testMove(candidate);
             if(move != null){
                 move.execute();
@@ -204,6 +211,28 @@ public class Algorithm {
     }
     public double changedObjectiveFunction(District d, Precinct p){
         return 0;
+    }
+
+    public double compactnessMeasure(District d){
+        int bound = d.getBoundPrecinct().size();
+        int total = d.getPrecincts().size();
+        return (total-bound)/total;
+    }
+    public double checkPoliticalFairness(District d){
+        int dvote = 0;
+        int rvote = 0;
+        for(Precinct p:d.getPrecincts().values()){
+            dvote+=p.getElectionResult().getVoteData().get(Party.DEMOCRATIC);
+            rvote+=p.getElectionResult().getVoteData().get(Party.REPUBLICAN);
+        }
+        int total = dvote+rvote;
+        double winrate = 0.0;
+        if(dvote>rvote){
+            winrate = (dvote/total-0.5)*2;
+        }else{
+            winrate = (rvote/total -0.5)*2;
+        }
+        return 1.0-winrate;
     }
 
 

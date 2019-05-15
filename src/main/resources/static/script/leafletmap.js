@@ -214,6 +214,7 @@ function precinctHoverFeature(e) {
             dataType:"json",
             success: function (data){
                 console.log(data);
+
                 var popContent;
                 if(data.Demographic == 'Undefined'){
                     popContent = "<b>demographic in precinct "+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
