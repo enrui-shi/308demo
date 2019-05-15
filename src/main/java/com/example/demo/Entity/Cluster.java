@@ -105,7 +105,9 @@ public class Cluster implements Comparable<Cluster> {
         Cluster pairCluster = null;
         double max = 0.0;
         for (ClusterEdge ce : clusterEdges) {
-            System.out.println(ce.getCluster1().getId()+" & "+ce.getCluster2().getId()+"& "+ ce.getConnectCluster(this).getId());
+            System.out.print(ce.getCluster1().getId());
+            System.out.print(" & "+ce.getCluster2().getId());
+            System.out.println(" & "+ ce.getConnectCluster(this).getId());
             if (!ce.getConnectCluster(this).isPaired()) {
                 if (ce.getJoinability() >= max) {
                     max = ce.getJoinability();
@@ -124,6 +126,11 @@ public class Cluster implements Comparable<Cluster> {
             }
         }
         return null;
+    }
+    public void updateNeighbour(Cluster old, Cluster n){
+        neighborClusters.remove(old);
+        neighborClusters.add(n);
+
     }
 
     @Override
