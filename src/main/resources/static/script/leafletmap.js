@@ -100,6 +100,12 @@ function selectNJ(){
     }
     map.setView([40.0583, -74.4057], 9);
 
+    precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=NJ",
@@ -347,8 +353,8 @@ map.on('zoomend', function () {
     }
     else if(currentZoom <= 9 && currentZoom >=8){
         // show both
-        map.addLayer(OH_districtLayer);
-        map.addLayer(OH_precinctLayer);
+        /*map.addLayer(OH_districtLayer);
+        map.addLayer(OH_precinctLayer);*/
         map.addLayer(NY_districtLayer);
         map.addLayer(NY_precinctLayer);
         map.addLayer(NJ_districtLayer);

@@ -110,7 +110,7 @@
                         <label>number of majority-minority district</label> <input type="number" id="mmAA"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAA"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAA"><br><p></p>
-                        <label style="color: yellow;">ethnic group: Asian</label><br><p></p>
+                        <label style="color: orange;">ethnic group: Asian</label><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" id="mmAsian"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAsian"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAsian"><br><p></p>
