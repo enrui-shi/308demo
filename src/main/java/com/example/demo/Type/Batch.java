@@ -21,6 +21,10 @@ public class Batch {
 
     private Bound natureConstrainBound;
 
+    public Batch() {
+
+    }
+
     public Batch(int numBatch, int numDistrict, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
         this.numBatch = numBatch;
         this.numDistrict = numDistrict;

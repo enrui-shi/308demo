@@ -129,7 +129,7 @@ function selectIA(){
     if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
-    /*precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+    precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
@@ -137,7 +137,7 @@ function selectIA(){
     districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
