@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import com.example.demo.Enum.StateName;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,9 @@ public class PrecinctEdge {
     private Long precinct1;
 
     private Long precinct2;
+
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
 
     private double countyJoinability;
 

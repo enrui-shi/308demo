@@ -5,6 +5,7 @@ import com.example.demo.Type.Bound;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -141,6 +142,23 @@ public class District {
                 ", " + precinctString() +
                 "," + demographic.toString() +
                 "}}";
+    }
+
+    public boolean checkContiguity(){
+        List<Precinct>bound = this.getBoundPrecinct();
+        List<Precinct>used = new ArrayList<>();
+        boolean flag = true;
+        Precinct p = bound.get(0);
+        while(flag ||used.size() == bound.size()){
+            flag = false;
+            for(long neighbour:p.getNeighbourPrecincts()){
+                if(bound.contains(precincts.get(neighbour))&& (!used.contains(precincts.get(neighbour)))){
+                    used.add(precincts.get(neighbour));
+                    flag = true;
+                }
+            }
+        }
+        return used.size() == bound.size();
     }
 
     public String precinctString() {

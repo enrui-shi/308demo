@@ -28,7 +28,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+//@Component
 public class Init implements CommandLineRunner {
     @Autowired
     private InitService initService;

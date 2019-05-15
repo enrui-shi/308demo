@@ -200,7 +200,7 @@ function precinctHoverFeature(e) {
             dataType:"json",
             success: function (data){
                 console.log(data);
-                alert("success");
+                //alert("success");
             }
         })
     }, 2000);
