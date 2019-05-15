@@ -158,7 +158,6 @@ public class Algorithm {
 
             Move move = testMove(candidate);
             if(move != null){
-                move.execute();
                 for(Long p :candidate.getNeighbourPrecincts()){
                     if(precinctToDistrict.get(p)== move.getFrom()){
                         movable.add(move.getFrom().getPrecincts().get(p));
@@ -185,7 +184,9 @@ public class Algorithm {
             Move move = new Move(from,to,candidate);
             double origin = from.getScore()+to.getScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
-                double changed = changedObjectiveFunction(from,candidate)+ changedObjectiveFunction(to,candidate);
+                move.tryMove();
+                double changed =measureDistrict(move.getTo())+measureDistrict(move.getFrom());
+                move.undo();
                 if(changed-origin>0){
                     scoreChange.put(changed-origin,move);
                 }
@@ -205,9 +206,6 @@ public class Algorithm {
     }
 
     public double measureDistrict(District d){
-        return 0;
-    }
-    public double changedObjectiveFunction(District d, Precinct p){
         return 0;
     }
 

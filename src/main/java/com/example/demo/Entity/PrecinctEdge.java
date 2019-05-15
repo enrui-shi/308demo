@@ -23,9 +23,6 @@ public class PrecinctEdge {
 
     private double demographicJoinability;
 
-    @Enumerated(EnumType.STRING)
-    private StateName stateName;
-
 
     public Long getId() {
         return id;

@@ -13,6 +13,9 @@ public class Bound {
 
     private double lowerBound;
 
+    public Bound(){
+
+    }
     public Bound(double upperBound, double lowerBound) {
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
