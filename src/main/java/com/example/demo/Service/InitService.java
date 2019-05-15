@@ -55,5 +55,8 @@ public class InitService {
     public List<Precinct> getPrecinctsByState(StateName stateName){
         return precinctRepository.findAllByStateName(stateName);
     }
+    public List<PrecinctEdge> getPrecinctEdgeByState(StateName stateName){
+        return precinctEdgeRepository.findAllByStateName(stateName);
+    }
 
 }

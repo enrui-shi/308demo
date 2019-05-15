@@ -21,7 +21,9 @@ public class Global implements CommandLineRunner {
         System.out.println("finish");
         System.out.println(njP.size());
         System.out.println("start init Nj edge");
-        List<PrecinctEdge> njE = initService.
+        List<PrecinctEdge> njE = initService.getPrecinctEdgeByState(StateName.NJ);
+        System.out.println("finish");
+        System.out.println(njE.size());
     }
 
 
