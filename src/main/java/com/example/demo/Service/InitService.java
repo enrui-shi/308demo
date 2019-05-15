@@ -4,6 +4,7 @@ import com.example.demo.Entity.Demographic;
 import com.example.demo.Entity.ElectionResult;
 import com.example.demo.Entity.Precinct;
 import com.example.demo.Entity.PrecinctEdge;
+import com.example.demo.Enum.StateName;
 import com.example.demo.repository.DemographicRepository;
 import com.example.demo.repository.ElectionResultRepository;
 import com.example.demo.repository.PrecinctEdgeRepository;
@@ -50,4 +51,9 @@ public class InitService {
     public void addAllDemographic(List<Demographic> ds){
         demographicRepository.saveAll(ds);
     }
+
+    public List<Precinct> getPrecinctsByState(StateName stateName){
+        return precinctRepository.findAllByStateName(stateName);
+    }
+
 }

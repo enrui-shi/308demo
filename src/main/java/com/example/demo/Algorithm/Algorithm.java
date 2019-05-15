@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import static com.example.demo.Application.newJ;
+
 public class Algorithm {
 
     private List<Cluster> clusters;

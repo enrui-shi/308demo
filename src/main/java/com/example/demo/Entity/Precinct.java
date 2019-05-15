@@ -12,16 +12,16 @@ public class Precinct {
     @Id
     private Long precinctID;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private ElectionResult electionResult;
 
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<PrecinctEdge> precinctEdges;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Demographic demographic;
 
     private double majMinRatio;

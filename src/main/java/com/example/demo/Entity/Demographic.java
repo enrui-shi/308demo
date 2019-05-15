@@ -14,7 +14,7 @@ public class Demographic {
 
     private int totalPopulation;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="EMP_ethnicData")
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn(name="EthnicGroup")
