@@ -187,7 +187,6 @@ function precinctHoverFeature(e) {
             dataType:"json",
             success: function (data){
                 console.log(data);
-                alert("success");
             }
         })
     }, 2000);
@@ -333,7 +332,7 @@ map.on('zoomend', function () {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
     }).addTo(map);
-    
+
     if (currentZoom < 8) {
         // show district boundary
         /*if(map.hasLayer(OH_precinctLayer))
