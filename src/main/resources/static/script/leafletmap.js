@@ -52,12 +52,12 @@ function selectOH(){
     if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
-    precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+    /*precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
-    }).addTo(map);
+    }).addTo(map);*/
 
-    districtLayer = L.geoJSON(districtsData.features, {
+    districtLayer = L.geoJSON(OH_districtsData.features, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
     }).addTo(map);
@@ -94,6 +94,11 @@ function selectNY(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
+    districtLayer = L.geoJSON(NY_districtsData.features, {
+        style: districtStyle,
+        onEachFeature: districtOnEachFeature
+    }).addTo(map);
+
     $.ajax({
         type: 'post',
         url: "/home/main/createState?stateName=NY",
@@ -125,7 +130,10 @@ function selectNJ(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-
+    districtLayer = L.geoJSON(NJ_districtsData.features, {
+        style: districtStyle,
+        onEachFeature: districtOnEachFeature
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
@@ -152,7 +160,12 @@ info.onAdd = function (map) {
 info.update = function (props, layer) {
     if(layer == districtLayer){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
-            '<b>District Name: ' + props.name + '</b><br />Population: ' + props.demographic
+            '<b>District ID: ' + props.id + '</b><br />Population of AfricanAmerican: ' + props.AfricanAmerican
+            '</b><br />Total population: ' + props.total
+            '</b><br />Population of Hispanic: ' + props.Hispanic
+            '</b><br />Population of India: ' + props.Indian
+            '</b><br />Population of Asian: ' + props.Asian
+            '</b><br />Population of White: ' + props.White
             : 'Hover over a district');
     }else if(layer == precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
@@ -271,7 +284,7 @@ function districtHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, districtLayer);
+    info.update(layer.feature.properties, districtLayer);
 }
 
 function resetDistrict(e) {
