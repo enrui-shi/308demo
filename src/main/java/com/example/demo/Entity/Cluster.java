@@ -129,5 +129,16 @@ public class Cluster implements Comparable<Cluster> {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Cluster{" +
+                "id=" + id +
+                ", stateName=" + stateName +
+                ", precincts=" + precincts +
+                ", neighborClusters=" + neighborClusters +
+                ", demographic=" + demographic +
+                ", clusterEdges=" + clusterEdges +
+                ", paired=" + paired +
+                '}';
+    }
 }

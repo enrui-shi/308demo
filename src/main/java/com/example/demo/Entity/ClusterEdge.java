@@ -122,5 +122,16 @@ public class ClusterEdge {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return "ClusterEdge{" +
+                "id=" + id +
+                ", cluster1=" + cluster1 +
+                ", cluster2=" + cluster2 +
+                ", stateName=" + stateName +
+                ", countyJoinability=" + countyJoinability +
+                ", natureJoinability=" + natureJoinability +
+                ", demographicJoinability=" + demographicJoinability +
+                '}';
+    }
 }
