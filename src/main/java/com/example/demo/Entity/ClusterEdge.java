@@ -21,7 +21,6 @@ public class ClusterEdge {
     private double countyJoinability;
 
     private double natureJoinability;
-
     private double demographicJoinability;
 
     public ClusterEdge(Long id, Cluster cluster1, Cluster cluster2, StateName stateName, double countyJoinability, double natureJoinability, double demographicJoinability) {

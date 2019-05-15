@@ -31,6 +31,7 @@ public class Global implements CommandLineRunner {
         Map<Long,Cluster> cmap= new HashMap<>();
         for(Precinct p:njP){
             Cluster c=new Cluster();
+            c.setId(p.getPrecinctID());
             List<Precinct> cPs = new ArrayList<Precinct>();
             cPs.add(p);
             c.setPrecincts(cPs);

@@ -50,6 +50,9 @@ public class Algorithm {
         this.clusterEdges = clusterEdges;
     }
 
+    public List<ClusterEdge> getClusterEdges() {
+        return clusterEdges;
+    }
 
     public Map<Long, District> getPrecinctToDistrict() {
         return precinctToDistrict;
@@ -62,6 +65,7 @@ public class Algorithm {
 
 
     public void startGraphPartition() {
+        initData();
         System.out.println("######Start Graph Partition##########");
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
@@ -79,6 +83,7 @@ public class Algorithm {
             determineCandidatePair();
             System.out.println("Find "+clusterPairs.size()+" pairs");
             for (ClusterPair cp : clusterPairs) {
+                System.out.println("C1 is "+cp.getCluster1().getId()+" C2 is "+cp.getCluster2().getId());
                 Cluster c = cp.combine();
                 clusters.add(c);
             }
@@ -86,6 +91,15 @@ public class Algorithm {
         }
         finish(targetNumber);
         toDistrict();
+    }
+
+    public void initData(){
+        for (ClusterEdge ce:this.clusterEdges){
+            ce.getCluster1().addCE(ce);
+            ce.getCluster2().addCE(ce);
+            ce.getCluster1().addNeighbour(ce.getCluster2());
+            ce.getCluster2().addNeighbour(ce.getCluster1());
+        }
     }
 
     public void determineCandidatePair() {

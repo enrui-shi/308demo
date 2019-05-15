@@ -16,9 +16,19 @@ public class ClusterPair {
         this.cluster2 = cluster2;
     }
 
+    public Cluster getCluster1() {
+        return cluster1;
+    }
+
+    public Cluster getCluster2() {
+        return cluster2;
+    }
+
     public Cluster combine() {
         List<ClusterEdge> edges2 = cluster2.getClusterEdges();
+        int c = 0;
         for (ClusterEdge ce2 : edges2) {
+            System.out.println(c++);
             Cluster connect = ce2.updateCluster(cluster2, cluster1);
             if (cluster1.getNeighborClusters().contains(connect)) {
                 ClusterEdge ce1 = cluster1.getEdgeByCluster(connect);
