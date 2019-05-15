@@ -47,9 +47,11 @@
                 <div id="map"></div>
                 <script type = "text/javascript" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/OH_precincts.js"></script>
-                <script type = "text/javascript" src = "/data/ohio_district.js"></script>
                 <script type = "text/javascript" src = "/data/NY_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/NJ_precincts.js"></script>
+                <script type = "text/javascript" src = "/data/OH_districts.js"></script>
+                <script type = "text/javascript" src = "/data/NY_districts.js"></script>
+                <script type = "text/javascript" src = "/data/NJ_districts.js"></script>
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
