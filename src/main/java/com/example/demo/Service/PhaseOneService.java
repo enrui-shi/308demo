@@ -38,8 +38,12 @@ public class PhaseOneService {
         Algorithm algorithm = new Algorithm(state);
         try{
         if(stateName == stateName.OH) {
-            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ohe), new TypeReference<List<ClusterEdge>>(){}));
-            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.oh), new TypeReference<List<Cluster>>(){}));
+            System.out.println("OH DATA LOAD");
+            //algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ohe), new TypeReference<List<ClusterEdge>>(){}));
+            //algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.oh), new TypeReference<List<Cluster>>(){}));
+            algorithm.setClusterEdges(GVAL.ohe);
+            algorithm.setClusters(GVAL.oh);
+            System.out.println(algorithm.getClusterEdges().get(0));
         } else if(stateName == stateName.NY) {
             algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nye), new TypeReference<List<ClusterEdge>>(){}));
             algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ny), new TypeReference<List<Cluster>>(){}));

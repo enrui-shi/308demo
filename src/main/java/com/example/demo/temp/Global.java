@@ -51,7 +51,7 @@ public class Global implements CommandLineRunner {
             ce.setCountyJoinability(pe.getCountyJoinability());
             ce.setDemographicJoinability(pe.getDemographicJoinability());
             ce.setNatureJoinability(pe.getNatureJoinability());
-            GVAL.nje.add(ce);
+            GVAL.ohe.add(ce);
         }
         System.out.println("finish convert edge");
 
