@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import static com.example.demo.Application.newJ;
 
 public class Algorithm {
 
@@ -63,6 +62,7 @@ public class Algorithm {
 
 
     public void startGraphPartition() {
+        initData();
         System.out.println("######Start Graph Partition##########");
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
 
@@ -87,6 +87,15 @@ public class Algorithm {
         }
         finish(targetNumber);
         toDistrict();
+    }
+
+    public void initData(){
+        for (ClusterEdge ce:this.clusterEdges){
+            ce.getCluster1().addCE(ce);
+            ce.getCluster2().addCE(ce);
+            ce.getCluster1().addNeighbour(ce.getCluster2());
+            ce.getCluster2().addNeighbour(ce.getCluster1());
+        }
     }
 
     public void determineCandidatePair() {

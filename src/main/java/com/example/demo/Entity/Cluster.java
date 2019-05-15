@@ -128,6 +128,12 @@ public class Cluster implements Comparable<Cluster> {
             return -1;
         }
     }
+    public void addCE(ClusterEdge ce){
+        clusterEdges.add(ce);
+    }
+    public void addNeighbour(Cluster c){
+        neighborClusters.add(c);
+    }
 
 
 }
