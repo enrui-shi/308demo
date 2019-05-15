@@ -49,6 +49,7 @@
                 <script type = "text/javascript" src = "/data/OH_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/ohio_district.js"></script>
                 <script type = "text/javascript" src = "/data/NY_precincts.js"></script>
+                <script type = "text/javascript" src = "/data/NJ_precincts.js"></script>
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
@@ -124,7 +125,7 @@
                         <button id="phase2" class="my-map-btn" onclick="ajaxPhase2()" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
                     <div class="my-console-container">
-
+                        <p id="log"></p>
                     </div>
                 </form>
             </div><!--sidebar div over-->

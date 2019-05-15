@@ -24,8 +24,6 @@ var NY_precinctLayer;
 var NJ_districtLayer;
 var NJ_precinctLayer;
 
-var precinctLayer;
-var districtLayer;
 
 /* add data into map */
 /* way one
@@ -37,10 +35,10 @@ $.getJSON("../data/OH_final.json" , function( result ){
 }).addTo(map);
 });*/
 /* way two */
-OH_precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+/*OH_precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
     style: precinctStyle,
     onEachFeature: precinctOnEachFeature
-}).addTo(map);
+}).addTo(map);*/
 
 NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
     style: precinctStyle,
@@ -52,7 +50,7 @@ NJ_precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
     onEachFeature: precinctOnEachFeature
 }).addTo(map);
 
-OH_districtLayer = L.geoJSON(districtsData.features, {
+NY_districtLayer = L.geoJSON(districtsData.features, {
     style: districtStyle,
     onEachFeature: districtOnEachFeature
 }).addTo(map);
@@ -138,11 +136,11 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props, layer) {
-    if(layer == districtLayer){
+    if(layer == NY_districtLayer){
         this._div.innerHTML = '<h4>District</h4>' +  (props ?
             '<b>District Name: ' + props.name + '</b><br />Population: ' + props.demographic
             : 'Hover over a district');
-    }else if(layer == precinctLayer) {
+    }else if(layer == NY_precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
             '<b>' + props.name + '</b><br /> id: ' + props.id
             + '</b><br /> total voting: ' + props.properties.total_vote
@@ -151,7 +149,7 @@ info.update = function (props, layer) {
             : 'Hover over a precinct');
     } else {
         this._div.innerHTML = '<h4>State</h4>' +  (props ?
-            '<b>State Name: ' + props.name
+            '<b>State Name: ' + props
             : 'Hover over a state');
     }
 };
@@ -189,7 +187,7 @@ function precinctHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, precinctLayer);
+    info.update(layer.feature, NY_precinctLayer);
 
     // hover 2 seconds to display demographic data of the precinct
     setTimeout(function(){
@@ -217,7 +215,7 @@ function resetPrecinct(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, precinctLayer);
+    info.update(null, NY_precinctLayer);
 }
 
 // set up district style
@@ -242,7 +240,7 @@ function districtHoverFeature(e) {
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    info.update(layer.feature, districtLayer);
+    info.update(layer.feature, NY_districtLayer);
 }
 
 function resetDistrict(e) {
@@ -253,7 +251,7 @@ function resetDistrict(e) {
         dashArray: '3',
         fillOpacity: 0.7
     });
-    info.update(null, districtLayer);
+    info.update(null, NY_districtLayer);
 }
 
 // set up district style
@@ -336,9 +334,9 @@ map.on('zoomend', function () {
     currentZoom = map.getZoom();
     if (currentZoom < 8) {
         // show district boundary
-        if(map.hasLayer(OH_precinctLayer))
+        /*if(map.hasLayer(OH_precinctLayer))
             map.removeLayer(OH_precinctLayer);
-        map.addLayer(OH_districtLayer);
+        map.addLayer(OH_districtLayer);*/
         if(map.hasLayer(NY_precinctLayer))
             map.removeLayer(NY_precinctLayer);
         map.addLayer(NY_districtLayer);
@@ -357,9 +355,9 @@ map.on('zoomend', function () {
     }
     else{
         // show precinct boundary
-        if(map.hasLayer(OH_districtLayer))
+        /*if(map.hasLayer(OH_districtLayer))
             map.removeLayer(OH_districtLayer);
-        map.addLayer(OH_precinctLayer);
+        map.addLayer(OH_precinctLayer);*/
         if(map.hasLayer(NY_districtLayer))
             map.removeLayer(NY_districtLayer);
         map.addLayer(NY_precinctLayer);

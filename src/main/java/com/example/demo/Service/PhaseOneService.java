@@ -39,7 +39,7 @@ public class PhaseOneService {
     }
 
     public void initClusters(Algorithm a) {
-        StateName stateName = a.getCurrentState().getStateName();
+       /* StateName stateName = a.getCurrentState().getStateName();
 
         Map<Long, Precinct> precincts = new HashMap<>();
         List<Precinct> pList = precinctRepository.findAllByStateName(stateName);
@@ -85,7 +85,7 @@ public class PhaseOneService {
         }
 
         a.setClusters(cList);
-        a.setClusterEdges(ceList);
+        a.setClusterEdges(ceList);*/
 
     }
 
