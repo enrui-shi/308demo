@@ -12,18 +12,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Component
+@Component
 public class Global implements CommandLineRunner {
 
     @Autowired
     private InitService initService;
 
     public void run(String args[]){
-        System.out.println("start init NJ precinct");
+        System.out.println("start init OH precinct");
         List<Precinct> njP = initService.getPrecinctsByState(StateName.NJ);
         System.out.println("finish");
         System.out.println(njP.size());
-        System.out.println("start init Nj edge");
+        System.out.println("start init OH edge");
         List<PrecinctEdge> njE = initService.getPrecinctEdgeByState(StateName.NJ);
         System.out.println("finish");
         System.out.println(njE.size());
@@ -40,10 +40,10 @@ public class Global implements CommandLineRunner {
             c.setPaired(false);
             cmap.put(p.getPrecinctID(),c);
         }
-        GVAL.nj = new ArrayList<>(cmap.values());
+        GVAL.oh = new ArrayList<>(cmap.values());
         System.out.println("finish convert precinct");
         System.out.println("start convert edge");
-        GVAL.nje = new ArrayList<ClusterEdge>();
+        GVAL.ohe = new ArrayList<ClusterEdge>();
         for(PrecinctEdge pe:njE){
             ClusterEdge ce=new ClusterEdge();
             ce.setCluster1(cmap.get(pe.getPrecinct1()));
@@ -57,10 +57,10 @@ public class Global implements CommandLineRunner {
 
 
         //check
-        System.out.println(GVAL.nj.size());
-        System.out.println(GVAL.nje.size());
-        System.out.println(GVAL.nj.get(0));
-        System.out.println(GVAL.nje.get(0));
+        System.out.println(GVAL.oh.size());
+        System.out.println(GVAL.ohe.size());
+        System.out.println(GVAL.oh.get(0));
+        System.out.println(GVAL.ohe.get(0));
     }
 
 
