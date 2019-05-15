@@ -40,13 +40,13 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_data.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
-                precinct.setStateName(StateName.OH);
+                precinct.setStateName(StateName.NJ);
                 precinct.setNeighbourPrecincts(new ArrayList<Long>());
                 precincts.put(precinct.getPrecinctID(), precinct);
             }
@@ -60,7 +60,7 @@ public class Init implements CommandLineRunner {
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_edges.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
