@@ -47,9 +47,9 @@ function selectOH(){
     }
     map.setView([40.4173, -82.9071], 9);
 
-    if(map.has(precinctLayer))
+    if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
-    if(map.has(districtLayer))
+    if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
@@ -84,9 +84,9 @@ function selectNY(){
     }
     map.setView([40.7128, -74.0060], 9);
 
-    if(map.has(precinctLayer))
+    if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
-    if(map.has(districtLayer))
+    if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
@@ -115,9 +115,9 @@ function selectNJ(){
     }
     map.setView([40.0583, -74.4057], 9);
 
-    if(map.has(precinctLayer))
+    if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
-    if(map.has(districtLayer))
+    if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
     precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
