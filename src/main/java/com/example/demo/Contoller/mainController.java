@@ -52,12 +52,12 @@ public class mainController {
             return responseNode;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
-            /* for test
+            // for test
             System.out.println(preference.getNumberOfDistrict());
             System.out.println(preference.getCompactnessWeight());
             for(EthnicGroup key: preference.getEthnicGroupNumber().keySet()) {
                 System.out.println(key);
-            }*/
+            }
 
             Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
 
@@ -89,7 +89,10 @@ public class mainController {
 
     @PostMapping(value = "/main/showDemo", consumes = "application/json", produces = "application/json")
     public Map showDemo(@RequestParam Long precinctID, HttpSession session) {
-        System.out.println(precinctID.getClass());
+        System.out.println(precinctID);
+        // find precinct demographic data
+        p1s.showDemo(precinctID);
+
         Map<String, String> response = new HashMap();
         response.put("status", "ok");
         return response;
