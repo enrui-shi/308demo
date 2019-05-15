@@ -52,12 +52,7 @@ public class mainController {
             return responseNode;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
-            // for test
-            System.out.println(preference.getNumberOfDistrict());
-            System.out.println(preference.getCompactnessWeight());
-            for(EthnicGroup key: preference.getEthnicGroupNumber().keySet()) {
-                System.out.println(key);
-            }
+
 
             Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
 
