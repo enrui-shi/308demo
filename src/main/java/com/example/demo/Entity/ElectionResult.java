@@ -38,6 +38,8 @@ public class ElectionResult {
         this.winner = winner;
     }
 
+
+
     @Override
     public String toString() {
         return "ElectionResult{" +

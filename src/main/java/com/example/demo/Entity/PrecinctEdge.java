@@ -14,6 +14,9 @@ public class PrecinctEdge {
 
     private Long precinct2;
 
+    @Enumerated(EnumType.STRING)
+    private StateName stateName;
+
     private double countyJoinability;
 
     private double natureJoinability;
