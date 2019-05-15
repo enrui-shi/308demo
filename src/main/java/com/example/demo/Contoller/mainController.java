@@ -86,4 +86,12 @@ public class mainController {
         // TO DO
         return phaseTwoResult;
     }
+
+    @PostMapping(value = "/main/showDemo", consumes = "application/json", produces = "application/json")
+    public Map showDemo(@RequestParam Long precinctID, HttpSession session) {
+        System.out.println(precinctID.getClass());
+        Map<String, String> response = new HashMap();
+        response.put("status", "ok");
+        return response;
+    }
 }

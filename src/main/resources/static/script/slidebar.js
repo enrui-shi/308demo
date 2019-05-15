@@ -30,5 +30,5 @@ function sideSetting(){
 }
 
 function fakeLog(str){
-    document.getElementById('log').innerHTML += '<br>' + str;
+    //document.getElementById('log').innerHTML += '<br>' + str;
 }
