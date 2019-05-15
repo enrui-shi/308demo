@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Entity.*;
 import com.example.demo.Enum.StateName;
+import com.example.demo.Enum.*;
 
 import com.example.demo.repository.PrecinctEdgeRepository;
 import com.example.demo.repository.PrecinctRepository;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+
+import static com.example.demo.Enum.EthnicGroup.*;
 
 @Service
 public class PhaseOneService {
@@ -57,6 +60,9 @@ public class PhaseOneService {
 
         // init cluster with id, stateName, demographic
         for(int i=0; i<precincts.size(); i++) {
+            System.out.println("null pointer check");
+            System.out.println(precincts.get(i).getPrecinctID());
+            System.out.println(precincts.get(i).getDemographic());
             Cluster c = new Cluster(precincts.get(i).getPrecinctID(), stateName, precincts.get(i).getDemographic());
             cList.add(c);
             clusters.put(c.getId(), c);
@@ -110,12 +116,24 @@ public class PhaseOneService {
         return resultNode;
     }
 
-    public void showDemo(Long p_ID) {
+    public Map showDemo(Long p_ID) {
         Optional<Precinct> p = precinctRepository.findById(p_ID);
         if(p.isPresent()){
             Precinct precinct = p.get();
-
             System.out.println(precinct.getDemographic());
+            Map<String, String> response = new HashMap<>();
+            response.put("Demographic", "found");
+            response.put("totalPopulation", precinct.getDemographic().getTotalPopulation()+"");
+            response.put("ASIAN_PACIFIC", precinct.getDemographic().getEthnicData().get(EthnicGroup.ASIAN_PACIFIC)+"");
+            response.put("LATINO", precinct.getDemographic().getEthnicData().get(LATINO)+"");
+            response.put("WHITE", precinct.getDemographic().getEthnicData().get(WHITE)+"");
+            response.put("AFRIAN_AMERICAN", precinct.getDemographic().getEthnicData().get(AFRIAN_AMERICAN)+"");
+            return response;
+        } else {
+            System.out.println("Can't find precinct");
+            Map<String, String> response = new HashMap();
+            response.put("Demographic", "Undefined");
+            return response;
         }
     }
 

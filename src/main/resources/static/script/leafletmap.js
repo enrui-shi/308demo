@@ -42,7 +42,7 @@ function selectOH(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.4173, -82.9071], 9);
@@ -74,7 +74,7 @@ function selectNY(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.7128, -74.0060], 9);
@@ -100,7 +100,7 @@ function selectNJ(){
     if(map.hasLayer(stateLayer))
         map.removeLayer(stateLayer);
     document.getElementById("myStateDropDown").style.display = "none";
-    if($.cookie('currentuser') != "") {
+    if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
     map.setView([40.0583, -74.4057], 9);
@@ -199,6 +199,15 @@ function precinctHoverFeature(e) {
             dataType:"json",
             success: function (data){
                 console.log(data);
+                var popContent;
+                if(data.Demographic == 'Undefined'){
+                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
+                    layer.bindPopup(popContent);
+                } else {
+                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>";
+
+                    layer.bindPopup(popContent);
+                }
             }
         })
     }, 2000);
