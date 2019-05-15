@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhaseOneService {
@@ -107,6 +108,15 @@ public class PhaseOneService {
         JsonNode resultNode = mapper.readTree(colorPrecinct);
 
         return resultNode;
+    }
+
+    public void showDemo(Long p_ID) {
+        Optional<Precinct> p = precinctRepository.findById(p_ID);
+        if(p.isPresent()){
+            Precinct precinct = p.get();
+
+            System.out.println(precinct.getDemographic());
+        }
     }
 
 }
