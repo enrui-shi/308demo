@@ -40,20 +40,7 @@ $.getJSON("../data/OH_final.json" , function( result ){
     onEachFeature: precinctOnEachFeature
 }).addTo(map);*/
 
-NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-    style: precinctStyle,
-    onEachFeature: precinctOnEachFeature
-}).addTo(map);
 
-NJ_precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
-    style: precinctStyle,
-    onEachFeature: precinctOnEachFeature
-}).addTo(map);
-
-NY_districtLayer = L.geoJSON(districtsData.features, {
-    style: districtStyle,
-    onEachFeature: districtOnEachFeature
-}).addTo(map);
 
 /* select state */
 function selectOH(){
@@ -332,6 +319,21 @@ function districtOnEachFeature(feature, layer) {
 /* show different layers when zoom in/out */
 map.on('zoomend', function () {
     currentZoom = map.getZoom();
+    NY_precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+
+    NJ_precinctLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
+        style: precinctStyle,
+        onEachFeature: precinctOnEachFeature
+    }).addTo(map);
+
+    NY_districtLayer = L.geoJSON(districtsData.features, {
+        style: districtStyle,
+        onEachFeature: districtOnEachFeature
+    }).addTo(map);
+    
     if (currentZoom < 8) {
         // show district boundary
         /*if(map.hasLayer(OH_precinctLayer))
