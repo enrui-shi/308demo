@@ -28,7 +28,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//@Component
+@Component
 public class Init implements CommandLineRunner {
     @Autowired
     private InitService initService;
@@ -40,7 +40,7 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_data.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
@@ -60,7 +60,7 @@ public class Init implements CommandLineRunner {
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/NJ_edges.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
@@ -92,28 +92,30 @@ public class Init implements CommandLineRunner {
         } catch (IOException e){
             System.out.println(e);
         }
-        int count = 0;
-        System.out.println("number of precinct to insert :"+precincts.size()) ;
-        System.out.println("number to insert:" +precinctEdges.size());
-        System.out.println("starting add edges");
-        initService.addAllPrecinctEdge(precinctEdges);
-        System.out.println("add edges success");
-        count=0;
         List<Demographic> ds=new ArrayList<Demographic>();
         List<ElectionResult> es=new ArrayList<ElectionResult>();
         for(Precinct p:precincts.values()){
             if(p.getPrecinctEdges()==null){
+                System.out.println("no EDGE!: "+p.getPrecinctID());
             }else {
-                System.out.println(p.getPrecinctID());
-                for(PrecinctEdge pe:p.getPrecinctEdges()){
-                    System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
-                }
-                System.out.println(p);
+//                System.out.println(p.getPrecinctID());
+//                for(PrecinctEdge pe:p.getPrecinctEdges()){
+//                    System.out.println("edge: "+pe.getPrecinct1()+" "+pe.getPrecinct2());
+//                }
+//                System.out.println(p);
                 ds.add(p.getDemographic());
                 es.add(p.getElectionResult());
                 //System.out.println(count++);
             }
         }
+        System.out.println("number of precinct:"+precincts.size()) ;
+        System.out.println("number to edge:" +precinctEdges.size());
+        System.out.println("number of es:" + es.size());
+        System.out.println("number of ds:" + ds.size());
+        System.out.println("starting add edges");
+        System.out.println(precinctEdges.size());
+        initService.addAllPrecinctEdge(precinctEdges);
+        System.out.println("add edges success");
         System.out.println("starting add electionresult");
         initService.addAllElectionResult(es);
         System.out.println("starting add demographic");
