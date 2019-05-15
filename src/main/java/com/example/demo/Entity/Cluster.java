@@ -29,6 +29,8 @@ public class Cluster implements Comparable<Cluster> {
 
     private boolean paired;
 
+    public Cluster(){};
+
     public Cluster(Long id, StateName stateName, Demographic demographic) {
         this.id = id;
         this.stateName = stateName;

@@ -32,6 +32,7 @@ public class ClusterEdge {
         this.natureJoinability = natureJoinability;
         this.demographicJoinability = demographicJoinability;
     }
+    public ClusterEdge(){};
 
     public Cluster getCluster1() {
         return cluster1;
@@ -47,6 +48,46 @@ public class ClusterEdge {
 
     public double getDemographicJoinability() {
         return demographicJoinability;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCluster1(Cluster cluster1) {
+        this.cluster1 = cluster1;
+    }
+
+    public void setCluster2(Cluster cluster2) {
+        this.cluster2 = cluster2;
+    }
+
+    public StateName getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(StateName stateName) {
+        this.stateName = stateName;
+    }
+
+    public void setCountyJoinability(double countyJoinability) {
+        this.countyJoinability = countyJoinability;
+    }
+
+    public double getNatureJoinability() {
+        return natureJoinability;
+    }
+
+    public void setNatureJoinability(double natureJoinability) {
+        this.natureJoinability = natureJoinability;
+    }
+
+    public void setDemographicJoinability(double demographicJoinability) {
+        this.demographicJoinability = demographicJoinability;
     }
 
     public double getJoinability() {
