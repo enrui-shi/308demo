@@ -37,7 +37,7 @@
                 <label class = "textField"> STATE:</label>
                 <b>
                     NY <input type="radio" name="state" value="NY">
-                    NJ <input type="radio" name="state" value="NJ">
+                    IA <input type="radio" name="state" value="IA">
                     OH <input type="radio" name="state" value="OH"><br>
                 </b>
                 <label class = "textField"> Number of batch:</label>
@@ -82,10 +82,33 @@
         </form>
 
         <div id="batchrun" class="my-batch-modal">
-            <div class="my-batch-modal-content w3-animate-zoom "><br>
-                <div class="w3-center">
-                    <span onclick="document.getElementById('batchrun').style.display='none'" class="close w3-button w3-small w3-hover-red w3-display-center" title="Close Modal">&times;</span>
+            <div class="my-batch-modal-content w3-animate-zoom ">
+                <span onclick="document.getElementById('batchrun').style.display='none'" class="close w3-button w3-small w3-hover-red display-topright" title="Close Modal">&times;</span>
+                <br>
+                <br>
+                <div id="myProgress">
+                    <div id="myBar">10%</div>
                 </div>
+
+                <br>
+                <button onclick="move() class="button">Click Me</button>
+
+                <script>
+                    function move() {
+                        var elem = document.getElementById("myBar");
+                        var width = 10;
+                        var id = setInterval(frame, 10);
+                        function frame() {
+                            if (width >= 100) {
+                                clearInterval(id);
+                            } else {
+                                width++;
+                                elem.style.width = width + '%';
+                                elem.innerHTML = width * 1  + '%';
+                            }
+                        }
+                    }
+                </script>
             </div>
         </div>
     </body>

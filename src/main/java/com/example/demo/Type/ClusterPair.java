@@ -33,6 +33,7 @@ public class ClusterPair {
                 ce1.merge(ce2);
             } else if (connect != cluster1) {
                 cluster1.getClusterEdges().add(ce2);
+                connect.updateNeighbour(cluster2,cluster1);
             }
         }
         cluster1.merge(cluster2);
