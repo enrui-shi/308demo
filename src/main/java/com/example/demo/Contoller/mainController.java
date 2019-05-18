@@ -4,7 +4,6 @@ import com.example.demo.Entity.District;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
-import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
 
 import java.util.HashMap;
@@ -23,6 +22,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
 
 @RestController
 @RequestMapping("/home")
@@ -88,4 +88,5 @@ public class mainController {
         // find precinct demographic data
         return p1s.showDemo(precinctID);
     }
+
 }

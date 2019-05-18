@@ -45,25 +45,6 @@ public class Preference {
         this.equalPopulationWeight = equalPopulationWeight;
     }
 
-    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight,
-                      double equalPopulationWeight, Map<String, Integer> ethnicGroupNumber) {
-        this.numberOfDistrict = numberOfDistrict;
-        this.compactnessWeight = compactnessWeight;
-        this.partisanFairnessWeight = partisanFairnessWeight;
-        this.equalPopulationWeight = equalPopulationWeight;
-        /* convert string to enum type*/
-        this.ethnicGroupNumber = convertEnum(ethnicGroupNumber);
-    }
-
-    public Map<EthnicGroup, Integer> convertEnum(Map<String, Integer> ethnicNumMap){
-        Map<EthnicGroup, Integer> map = new HashMap();
-        for (Map.Entry<String,Integer> entry : ethnicNumMap.entrySet()) {
-            EthnicGroup e1 = EthnicGroup.valueOf(entry.getKey());
-            map.put(e1, entry.getValue());
-        }
-        return map;
-    }
-
     public int getNumberByGroup(EthnicGroup eg) {
         return ethnicGroupNumber.get(eg);
     }

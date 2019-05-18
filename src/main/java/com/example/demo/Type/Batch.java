@@ -26,7 +26,17 @@ public class Batch {
 
     }
 
-
+    public Batch(int numBatch, Bound numDistrictBound, String stateName, Bound numOfMMBound, Bound equalPopulationBound,
+                 Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
+        this.numBatch = numBatch;
+        this.numDistrictBound = numDistrictBound;
+        this.stateName = stateName;
+        this.numOfMMBound = numOfMMBound;
+        this.equalPopulationBound = equalPopulationBound;
+        this.compactnessBound = compactnessBound;
+        this.partisanFairnessBound = partisanFairnessBound;
+        this.natureConstrainBound = natureConstrainBound;
+    }
 
     public int getNumBatch() {
         return numBatch;

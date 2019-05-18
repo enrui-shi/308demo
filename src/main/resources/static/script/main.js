@@ -92,6 +92,7 @@ $(document).ready(function () {
                       url: "/home/main/startPhaseTwo",
                       contentType: "application/json; charset=utf-8",
                       header: {"accept": "application/json"},
+                      dataType: "json",
                       success:function(data) {
                           console.log(data);
                           if (data.status == 'end') {
