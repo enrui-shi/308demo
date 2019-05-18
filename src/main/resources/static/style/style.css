@@ -3,8 +3,8 @@ body{
     background: url("../image/background1.png") no-repeat center center fixed;
 }
 
-html { 
-    background: url("../image/background1.png") no-repeat center center fixed; 
+html {
+    background: url("../image/background1.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -25,7 +25,7 @@ html {
   width:390px;
   overflow:hidden;
   border-style: solid;
-  border-color:#7392B7; 
+  border-color:#7392B7;
   border-radius:10px;
   padding:30px ;
   box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-moz-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-webkit-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-o-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-ms-box-shadow:0 5px 10px 0 rgba(0,0,0,.1)
@@ -44,7 +44,7 @@ html {
 }
 
 .my-container-login-btn{display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;justify-content:center;padding-top:13px}
-.my-login-btn{   
+.my-login-btn{
   background-size: 200% auto;
   background-image: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
   color: #354354;
@@ -59,7 +59,7 @@ html {
 .my-login-btn:hover {
   background-position: right center;
   color: white;
-}  
+}
 /* login style end */
 
 /* top bar style start*/
@@ -84,7 +84,7 @@ html {
     padding: 0;
     color: white;
   }
-  
+
   .topnav a {
     float: left;
     color: #f2f2f2;
@@ -235,7 +235,7 @@ html {
 #sidebar{
   position:absolute;
   right:0px;
-  top:53px; 
+  top:53px;
   width:350px;
   height:100%;
   background-color:white;
@@ -290,7 +290,7 @@ html {
   z-index:12;
   width:210px;
   height: 170px;
-  border-style: solid; 
+  border-style: solid;
   border-width: 1.5px;
   display: none;
   border-radius: 5px;
@@ -302,7 +302,7 @@ html {
   margin:10px;
   border-radius:5px;
   border-style: solid;
-  border-width: 1px; 
+  border-width: 1px;
   border-color: black;
 }
 .setting button:hover{
@@ -333,7 +333,7 @@ html {
   border-width: 3px;
   font-weight: normal;
   /*font-size:85%;*/
-} 
+}
 
 
 .my-slidebar-box label{
@@ -344,7 +344,7 @@ html {
 
 .my-slidebar-box b{
   position:absolute;
-  top:10%; 
+  top:10%;
   margin-right: 0%;
   font-size:80%
 }
