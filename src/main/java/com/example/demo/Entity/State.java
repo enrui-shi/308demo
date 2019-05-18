@@ -6,10 +6,7 @@ import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Entity
@@ -29,7 +26,11 @@ public class State {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
+    public State() {
+    }
+
     public State(StateName stateName) {
+        districts = new ArrayList<>();
         this.stateName = stateName;
     }
 

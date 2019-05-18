@@ -71,10 +71,12 @@ public class Algorithm {
         while (clusters.size() / 2 > targetNumber) {
             System.out.println("Try to merge "+clusters.size()+" clusters");
             tempClusters = new ArrayList<>();
+            clusterPairs = new ArrayList<>();
             int pickIndex = (int) Math.floor(clusters.size() * 0.8);
             Collections.sort(clusters);
             for (int i = pickIndex; i < clusters.size(); i++) {
                 tempClusters.add(clusters.get(i));
+                clusters.get(i).setPaired(true);
             }
             System.out.println("The smallest removed cluster has population "+tempClusters.get(0).getDemographic().getTotalPopulation());
             clusters.removeAll(tempClusters);
@@ -86,7 +88,8 @@ public class Algorithm {
                 Cluster c = cp.combine();
                 clusters.add(c);
             }
-            clusters.addAll(tempClusters);
+            tempBack();
+
         }
         finish(targetNumber);
         toDistrict();
@@ -114,6 +117,7 @@ public class Algorithm {
                 cluster.setPaired(true);
                 pairedCluster.setPaired(true);
             } else {
+                cluster.setPaired(true);
                 tempClusters.add(cluster);
                 clusters.remove(cluster);
             }
@@ -133,13 +137,25 @@ public class Algorithm {
             clusters.add(c1);
         }
     }
+    public void tempBack(){
+        for(Cluster c: tempClusters){
+            c.setPaired(false);
+            clusters.add(c);
+        }
+    }
 
     public void toDistrict() {
         Map<Long, District> idMap = new HashMap<>();
+        clusterEdges = new ArrayList<>();
         for (int i = 0; i < clusters.size(); i++) {
             Cluster c = clusters.get(i);
             District d = new District(c.getPrecincts(), c.getDemographic(), (long) i);
             idMap.put(c.getId(), d);
+            for(ClusterEdge ce:c.getClusterEdges()){
+                if(!clusterEdges.contains(ce)){
+                    clusterEdges.add(ce);
+                }
+            }
             currentState.addDistrict(d);
         }
         currentState.setMinorityTarget();
