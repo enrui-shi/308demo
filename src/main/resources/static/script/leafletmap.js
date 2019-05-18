@@ -307,8 +307,8 @@ function resetDistrict(e) {
 // set up district style
 function getStateColor(n) {
     switch (n) {
-        case 'Ohio': return "#ff0000";
-        case 'New Jersey': return "#ff6600";
+        case 'Iowa': return "#ff0000";
+        case 'Ohio': return "#ff6600";
         case 'New York': return "#ffff00";
     }
 }

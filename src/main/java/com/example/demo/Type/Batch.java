@@ -8,7 +8,8 @@ public class Batch {
 
     private int numBatch;
 
-    private int numDistrict;
+    private Bound numDistrictBound;
+
     private String stateName;
 
     private Bound numOfMMBound;
@@ -25,16 +26,7 @@ public class Batch {
 
     }
 
-    public Batch(int numBatch, int numDistrict, String stateName, Bound numOfMMBound, Bound equalPopulationBound, Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
-        this.numBatch = numBatch;
-        this.numDistrict = numDistrict;
-        this.numOfMMBound = numOfMMBound;
-        this.equalPopulationBound = equalPopulationBound;
-        this.compactnessBound = compactnessBound;
-        this.partisanFairnessBound = partisanFairnessBound;
-        this.natureConstrainBound = natureConstrainBound;
 
-    }
 
     public int getNumBatch() {
         return numBatch;
@@ -45,13 +37,16 @@ public class Batch {
     }
 
     public StateName getEnumStateName() {
-        if (stateName.equals("New York")) {
+        if (stateName.equals("NY")) {
             return StateName.NY;
-        } else if (stateName.equals("Ohio")) {
+        } else if (stateName.equals("OH")) {
             return StateName.OH;
         } else {
             return StateName.NJ;
         }
+    }
+    public Bound getNumDistrictBound() {
+        return numDistrictBound;
     }
 
     public Bound getNumOfMMBound() {
@@ -82,6 +77,10 @@ public class Batch {
         this.stateName = stateName;
     }
 
+    public void setNumDistrictBound(Bound numDistrictBound) {
+        this.numDistrictBound = numDistrictBound;
+    }
+
     public void setNumOfMMBound(Bound numOfMMBound) {
         this.numOfMMBound = numOfMMBound;
     }
@@ -103,7 +102,7 @@ public class Batch {
     }
 
     public Preference generatePreference() {
-        Preference p = new Preference(numDistrict, compactnessBound.generateValue(), partisanFairnessBound.generateValue(), equalPopulationBound.generateValue());
+        Preference p = new Preference((int)numDistrictBound.generateValue(), compactnessBound.generateValue(), partisanFairnessBound.generateValue(), equalPopulationBound.generateValue());
         return p;
     }
 }

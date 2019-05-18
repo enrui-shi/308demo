@@ -3,43 +3,46 @@ $(document).ready(function(){
     var batch_form = $("#batch");
     batch_form.submit( function(e) {
         console.log("11111111111111")
-        var mm_data = { mmMIN: $("input[name='mmMIN']").val(), mmMAX: $("input[name='mmMAX']").val()};
-        var ep_data = { eqMIN: $("input[name='eqMIN']").val(), eqMAX: $("input[name='eqMAX']").val()};
-        var c_data = { cMIN: $("input[name='cMIN']").val(), cMAX: $("input[name='cMAX']").val()};
-        var pf_data = { pfMIN: $("input[name='pfMIN']").val(), pfMAX: $("input[name='pfMAX']").val()};
-        var nc_data = { ncMIN: $("input[name='ncMIN']").val(), ncMAX: $("input[name='ncMAX']").val()};
+        var d_data = {lowerBound: $("input[name='dMIN']").val(), upperBound: $("input[name='dMAX']").val()}
+        var mm_data = { lowerBound: $("input[name='mmMIN']").val(), upperBound: $("input[name='mmMAX']").val()};
+        var ep_data = { lowerBound: $("input[name='eqMIN']").val(), upperBound: $("input[name='eqMAX']").val()};
+        var c_data = { lowerBound: $("input[name='cMIN']").val(), upperBound: $("input[name='cMAX']").val()};
+        var pf_data = { lowerBound: $("input[name='pfMIN']").val(), upperBound: $("input[name='pfMAX']").val()};
+        var nc_data = { lowerBound: $("input[name='ncMIN']").val(), upperBound: $("input[name='ncMAX']").val()};
 
         var batch_data = {stateName:$("input[name='state']:checked").val(), numBatch: $('#num-of-batch').val(),
-            numDistrict: $('#num-of-district').val(), numOfMMBound: mm_data, equalPopulationBound: ep_data, compactnessBound: c_data,
+            numDistrict: d_data, numOfMMBound: mm_data, equalPopulationBound: ep_data, compactnessBound: c_data,
             partisanFairnessBound: pf_data, natureConstrainBound: nc_data};
 
         e.preventDefault();
         console.log(batch_data.stateName," ",batch_data.numBatch)
 
-        /*function startBatch() {
-            var elem = document.getElementById("myBar");
-            var width = 1;
-            var id = setInterval(frame, 100000);
-            function frame() {
-                if (width >= 100) {
-                    clearInterval(id);
-                } else {
-                    width++;
-                    elem.style.width = width + '%';
-                    elem.innerHTML = width * 1  + '%';
-                }
-            }
-        }*/
+        document.getElementById('batchrun').style.display='block';
 
+        var elem = document.getElementById("myBar");
+        var width = 10;
+
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1  + '%';
+            }
+        }
+
+        console.log("start to batch");
         $.ajax({
             type: 'post',
             url: '/batch/createBatch',
+            contentType: "application/json; charset=utf-8",
             header: {"accept": "application/json"},
-            contentType:"application/json; charset=utf-8",
             data: JSON.stringify(batch_data),
-            dataType:"json",
+            dataType: "json",
             success: function (data){
-                console.log(data);
+                var id = setInterval(frame, 10);
+                console.log("batch "+data);
             }
         })
     })
