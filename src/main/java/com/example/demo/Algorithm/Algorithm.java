@@ -24,7 +24,6 @@ public class Algorithm {
 
     private State currentState;
 
-
     private List<ClusterPair> clusterPairs = new ArrayList<ClusterPair>();
 
     private Map<Long, District> precinctToDistrict;
@@ -176,7 +175,7 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
-        List <Long>used = new ArrayList<>();
+        List<Long> used = new ArrayList<>();
         List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
             double score = measureDistrict(d);

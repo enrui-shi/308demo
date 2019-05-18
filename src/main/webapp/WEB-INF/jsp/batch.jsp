@@ -12,7 +12,7 @@
     </head>
     <header>
         <div class="topnav">
-            <a onclick="window.location.replace('/main')">Home</a>
+            <a onclick="window.location.replace('/')">Home</a>
             <a onclick="window.location.replace('/map')">Map</a>
             <a onclick="window.location.replace('/report')">Report</a>
             <a class="active" onclick="window.location.replace('/batch')">Batch</a>
@@ -32,59 +32,66 @@
         </div>
 
         <form id="batch">
-            <fieldset>
-                <legend>Batch Run</legend>
-                <label class = "textField"> STATE:</label>
-                <b>
-                    NY <input type="radio" name="state" value="NY">
-                    NJ <input type="radio" name="state" value="NJ">
-                    OH <input type="radio" name="state" value="OH"><br>
-                </b>
-                <label class = "textField"> Number of batch:</label>
-                <b> <input id="num-of-batch" class="inputNum" type="number" step="1"> <br></b>
-                <label class = "textField"> Number of district:</label>
-                <b> <input id="num-of-district" class="inputNum" type="number" step="1"> <br></b>
-                <label class = "textField">Number of majority minority:</label>
-                <b>
-                    <input type="number" class="range" name="mmMIN" step="1" min = "0" max = "10000000"> to
-                    <input type="number" class="range" name="mmMAX" step="1" min = "0" max = "10000000"><br>
-                </b>
-                <label class = "textField">Equal Population Weight:</label>
-                <b>
-                    <input type="number" class="range" name="eqMIN" step="0.01" min = "0" max = "1"> to
-                    <input type="number" class="range" name="eqMAX" step="0.01" min = "0" max = "1"><br>
-                </b>
-                <label class = "textField">Compactness Weight:</label>
-                <b>
-                    <input type="number" class="range" name="cMIN" step="0.01" min = "0" max = "1"> to
-                    <input type="number" class="range" name="cMAX" step="0.01" min = "0" max = "1"><br>
-                </b>
-                <label class = "textField">Partisan Fairness Weight:</label>
-                <b>
-                    <input type="number" class="range" name="pfMIN" step="0.01" min = "0" max = "1"> to
-                    <input type="number" class="range" name="pfMAX" step="0.01" min = "0" max = "1"><br>
-                </b>
-                <label class = "textField">Nature Constrain Weight:</label>
-                <b>
-                    <input type="number" class="range" name="ncMIN" step="0.01" min = "0" max = "1"> to
-                    <input type="number" class="range" name="ncMAX" step="0.01" min = "0" max = "1"><br>
-                </b>
-                </b>
-                <label class = "textField"></label>
-                <b>
-                </b>
-                <label class = "textField"></label>
-                <b>
-                </b>
-                <input type = "submit" value = "submit" onclick="document.getElementById('batchrun').style.display='block'"
-                       style = "float:right" class = "submit-btn">
-            </fieldset>
+            <h1>Batch Run</h1>
+            <label class = "textField"> STATE:</label>
+            <b>
+                NY <input type="radio" name="state" value="NY">
+                IA <input type="radio" name="state" value="IA">
+                OH <input type="radio" name="state" value="OH"><br>
+            </b>
+            <label class = "textField"> Number of batch:</label>
+            <b> <input id="num-of-batch" class="inputNum" type="number" step="1"> <br></b>
+            <label class = "textField"> Number of district:</label>
+            <b>
+                <input type="number" class="range" name="dMIN" step="1" min = "0" max = "10000"> to
+                <input type="number" class="range" name="dMAX" step="1" min = "0" max = "10000000"><br>
+            </b>
+            <label class = "textField">Number of majority minority:</label>
+            <b>
+                <input type="number" class="range" name="mmMIN" step="1" min = "0" max = "10000"> to
+                <input type="number" class="range" name="mmMAX" step="1" min = "0" max = "10000000"><br>
+            </b>
+            <label class = "textField">Equal Population Weight:</label>
+            <b>
+                <input type="number" class="range" name="eqMIN" step="0.01" min = "0" max = "1"> to
+                <input type="number" class="range" name="eqMAX" step="0.01" min = "0" max = "1"><br>
+            </b>
+            <label class = "textField">Compactness Weight:</label>
+            <b>
+                <input type="number" class="range" name="cMIN" step="0.01" min = "0" max = "1"> to
+                <input type="number" class="range" name="cMAX" step="0.01" min = "0" max = "1"><br>
+            </b>
+            <label class = "textField">Partisan Fairness Weight:</label>
+            <b>
+                <input type="number" class="range" name="pfMIN" step="0.01" min = "0" max = "1"> to
+                <input type="number" class="range" name="pfMAX" step="0.01" min = "0" max = "1"><br>
+            </b>
+            <label class = "textField">Nature Constrain Weight:</label>
+            <b>
+                <input type="number" class="range" name="ncMIN" step="0.01" min = "0" max = "1"> to
+                <input type="number" class="range" name="ncMAX" step="0.01" min = "0" max = "1"><br>
+            </b>
+            </b>
+            <label class = "textField"></label>
+            <b>
+            </b>
+            <label class = "textField"></label>
+            <b>
+            </b>
+            <input type = "submit" value = "submit" style = "float:right" class = "submit-btn">
         </form>
 
         <div id="batchrun" class="my-batch-modal">
-            <div class="my-batch-modal-content w3-animate-zoom "><br>
-                <div class="w3-center">
-                    <span onclick="document.getElementById('batchrun').style.display='none'" class="close w3-button w3-small w3-hover-red w3-display-center" title="Close Modal">&times;</span>
+            <div class="my-batch-modal-content w3-animate-zoom ">
+                <span onclick="document.getElementById('batchrun').style.display='none'" class="close w3-button w3-small w3-hover-red display-topright" title="Close Modal">&times;</span>
+                <br>
+                <br>
+                <div id="myProgress">
+                    <div id="myBar">10%</div>
+                </div>
+                <br>
+                <div>
+                  <span><a>See batch run summaries</a></span>
                 </div>
             </div>
         </div>

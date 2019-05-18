@@ -48,10 +48,10 @@
                 <script type = "text/javascript" src = "/data/state.js"></script>
                 <script type = "text/javascript" src = "/data/OH_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/NY_precincts.js"></script>
-                <script type = "text/javascript" src = "/data/NJ_precincts.js"></script>
+                <script type = "text/javascript" src = "/data/IA_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/OH_districts.js"></script>
                 <script type = "text/javascript" src = "/data/NY_districts.js"></script>
-                <script type = "text/javascript" src = "/data/NJ_districts.js"></script>
+                <script type = "text/javascript" src = "/data/IA_districts.js"></script>
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
@@ -62,7 +62,7 @@
                 <div id="myStateDropDown" class="dropdown-content">
                     <input onclick="selectNY()" type="button" id="NY" value="New York">
                     <input onclick="selectOH()" type="button" id="OH" value="Ohio">
-                    <input onclick="selectNJ()" type="button" id="NJ" value="New Jersey">
+                    <input onclick="selectIA()" type="button" id="IA" value="Iowa">
                 </div>
             </div><!--select-state div over-->
             <div id = "sidebar">
