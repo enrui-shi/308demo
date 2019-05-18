@@ -145,6 +145,7 @@ public class Algorithm {
     }
 
     public void toDistrict() {
+        precinctToDistrict = new HashMap<>();
         Map<Long, District> idMap = new HashMap<>();
         clusterEdges = new ArrayList<>();
         for (int i = 0; i < clusters.size(); i++) {
