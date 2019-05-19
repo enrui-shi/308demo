@@ -173,7 +173,7 @@ info.update = function (props, layer) {
             : 'Hover over a district');
     }else if(layer == precinctLayer) {
         this._div.innerHTML = '<h4>Precinct</h4>' +  (props ?
-            '<b>' + props.name + '</b><br /> id: ' + props.properties.id
+            '<b>' + '</b><br /> id: ' + props.properties.id
             + '</b><br /> total voting: ' + props.properties.total_vote
             + '</b><br /> Democratic: ' + props.properties.d_vote
             + '</b><br /> Republican: ' + props.properties.r_vote
