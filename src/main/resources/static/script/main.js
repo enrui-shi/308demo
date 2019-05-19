@@ -81,6 +81,8 @@ $(document).ready(function () {
                     /* response from controller */
                     console.log("color color 0 : " + data);
                     console.log("color color 1 : " + Object.keys(data));
+                    console.log("color color 2 : " + Object.keys(data)[0]);
+                    console.log("color color 3 : " + data[Object.keys(data)[0]]);
 
                     if (map.hasLayer(districtLayer)) {
                         map.removeLayer(districtLayer);
@@ -92,11 +94,11 @@ $(document).ready(function () {
                             style: function (feature) {
                                 console.log("OH");
                                 for (var i = 0; i < Object.keys(data).length; i++) {
+                                    console.log("id is " + Object.keys(data)[i]);
+                                    console.log("layer id is " + feature.properties.id);
+                                    console.log("district color is " + data[feature.properties.id]);
                                     if (feature.id == Object.keys(data)[i]) {
-                                        console.log("id is " + Object.keys(data)[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data[feature.id]);
-                                        return {fillColor: data[feature.id]};
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }
@@ -109,9 +111,9 @@ $(document).ready(function () {
                                 for (var i = 0; i < Object.keys(data).length; i++) {
                                     if (feature.id == Object.keys(data)[i]) {
                                         console.log("id is " + Object.keys(data)[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data[feature.id]);
-                                        return {fillColor: data[feature.id]};
+                                        console.log("layer id is " + feature.properties.id);
+                                        console.log("district color is " + data[feature.properties.id]);
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }
@@ -124,9 +126,9 @@ $(document).ready(function () {
                                 for (var i = 0; i < Object.keys(data).length; i++) {
                                     if (feature.id == Object.keys(data)[i]) {
                                         console.log("id is " + Object.keys(data)[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data[feature.id]);
-                                        return {fillColor: data[feature.id]};
+                                        console.log("layer id is " + feature.properties.id);
+                                        console.log("district color is " + data[feature.properties.id]);
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }
