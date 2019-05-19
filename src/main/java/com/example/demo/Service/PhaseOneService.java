@@ -72,11 +72,10 @@ public class PhaseOneService {
         for (Map.Entry<Long, District> entry : precinctToDistrict.entrySet()) {
             colorPrecinct += "{\""+entry.getKey()+"\": \""+entry.getValue().getColor()+"\"},";
         }
-        colorPrecinct.substring(0, (colorPrecinct.length()-1));
+        colorPrecinct = colorPrecinct.substring(0, (colorPrecinct.length()-1));
         colorPrecinct += "] }";
 
         System.out.println(colorPrecinct);
-
         // convert string to json
         ObjectMapper mapper = new ObjectMapper();
         JsonNode resultNode = mapper.readTree(colorPrecinct);

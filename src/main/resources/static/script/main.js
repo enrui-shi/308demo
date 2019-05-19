@@ -39,7 +39,7 @@ $(document).ready(function () {
                 console.log("mmmmmmm"+Object.keys(data.colors));
                 console.log("qqqqqqq"+(Object.keys(data.colors)[0])/10000000);
                 if(((Object.keys(data.colors)[0])/10000000) == 1) {
-                    districtLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+                    districtLayer = L.geoJSON(oh_data.FeatureCollection, {
                         onEachFeature: precinctOnEachFeature,
                         style: function (feature) {
                             for (var i = 0; i < Object.keys(data.colors).length; i++) {
