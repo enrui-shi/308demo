@@ -306,11 +306,11 @@ public class Algorithm {
         List<District> d = currentState.getDistricts();
         int needColor = 0;
         for (int i=0; i<d.size(); i++) {
-            if (d.get(i).getColor().equals("")) {
+            if (d.get(i).getColor()==null) {
                 d.get(i).setColor(colors[0]);
                 List<District> neighbor = d.get(i).getNeighborDistrict();
                 for (int j = 0; j < neighbor.size(); j++) {
-                    if (neighbor.get(j).getColor().equals("")) {
+                    if (neighbor.get(j).getColor()==null) {
                         needColor++;
                         if (needColor <= 7) {
                             neighbor.get(j).setColor(colors[needColor]);
@@ -319,7 +319,7 @@ public class Algorithm {
                 }
             }
         }
-        checkColor();
+        //checkColor();
     }
 
     // check if adjacent districts are in different colors
