@@ -106,19 +106,20 @@
                         </b>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
-                        <label>number of district</label> <input type="number" id="numOfDistrict" value="0"><br><p></p>
+                        <span id="inputerror" style="color:red"></span>
+                        <label>number of district</label> <input type="number" id="numOfDistrict" min="0" max="200000" value="0"><br><p></p>
                         <label style="color: red;">ethnic group: African-American</label><br><p></p>
-                        <label>number of majority-minority district</label> <input type="number" id="mmAA" value="0"> <br><p></p>
-                        <label>min population (%)</label> <input type="number" id="minAA" value="0"><br><p></p>
-                        <label>max population (%)</label> <input type="number" id="maxAA" value="0"><br><p></p>
-                        <label style="color: orange;">ethnic group: Asian</label><br><p></p>
-                        <label>number of majority-minority district</label> <input type="number" id="mmAsian" value="0"> <br><p></p>
-                        <label>min population (%)</label> <input type="number" id="minAsian" value="0"><br><p></p>
-                        <label>max population (%)</label> <input type="number" id="maxAsian" value="0"><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" min="0" max="200000" id="mmAA" value="0"> <br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minAA" min="0" max="100" value="0"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxAA" min="0" max="100" value="0"><br><p></p>
+                        <label style="color: orange;">ethnic group: ASIAN_PACIFIC</label><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" id="mmAsian" min="0" max="200000" value="0"> <br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minAsian" min="0" max="100" value="0"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxAsian" min="0" max="100" value="0"><br><p></p>
                         <label style="color: blue">ethnic group: Latino</label><br><p></p>
-                        <label>number of majority-minority district</label> <input type="number" id="mmLatino" value="0"> <br><p></p>
-                        <label>min population (%)</label> <input type="number" id="minLatino" value="0"><br><p></p>
-                        <label>max population (%)</label> <input type="number" id="maxLatino" value="0"><br><p></p>
+                        <label>number of majority-minority district</label> <input type="number" id="mmLatino" min="0" max="200000" value="0"> <br><p></p>
+                        <label>min population (%)</label> <input type="number" id="minLatino" min="0" max="100" value="0"><br><p></p>
+                        <label>max population (%)</label> <input type="number" id="maxLatino" min="0" max="100" value="0"><br><p></p>
                     </div><!--my-numberInput div over-->
                     <div class="my-map-button-container">
                         <button id="phase1" class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play Phase One</button>

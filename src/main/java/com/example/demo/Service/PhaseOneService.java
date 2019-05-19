@@ -32,7 +32,7 @@ public class PhaseOneService {
 
     public Algorithm createAlgorithm(StateName stateName, Preference preference) {
         State state = new State(stateName);
-       
+
         state.setPreference(preference);
 
         ObjectMapper objectMapper = new ObjectMapper();

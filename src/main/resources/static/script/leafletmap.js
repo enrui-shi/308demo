@@ -47,19 +47,17 @@ function selectOH(){
     }
     map.setView([40.4173, -82.9071], 9);
 
-    if(map.hasLayer(precinctLayer)) {
+    if(map.hasLayer(precinctLayer))
       map.removeLayer(precinctLayer);
-    }
-    if(map.hasLayer(districtLayer)){
+    if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
-    }
 
     console.log("load OH data ing...")
 
-    /*precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+    precinctLayer = L.geoJSON(OH_precinctsData.features, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
         style: districtStyle,
