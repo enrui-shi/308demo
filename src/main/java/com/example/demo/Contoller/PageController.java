@@ -31,13 +31,8 @@ public class PageController {
         return "about";
     }
 
-    @GetMapping("/map")
-    public String map() {
-        return "map";
-    }
-
-    @GetMapping("/report")
-    public String report() {
-        return "report";
+    @GetMapping("/summary")
+    public String summary() {
+        return "summary";
     }
 }

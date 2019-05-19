@@ -2,9 +2,10 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" type="text/css" href="style/summarystyle.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <title>Map Page</title>
+        <title>Summary Page</title>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="/script/logout.js"></script>
@@ -12,8 +13,7 @@
     </head>
     <header class="topnav">
         <a onclick="window.location.replace('/')">Home</a>
-        <a class="active" onclick="window.location.replace('/map')">Map</a>
-        <a onclick="window.location.replace('/report')">Report</a>
+        <a class="active" onclick="window.location.replace('/summary')">Summary</a>
         <a onclick="window.location.replace('/batch')">Batch</a>
         <a onclick="window.location.replace('/about')">About</a>
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <h1>View the summary after batch run</h1>
     </body>
     <footer class="my-footer font-small" style="background-color:#333; color:white;">
         <div class="footer-copyright text-center py-3"> © 2019 Copyright: Pirates

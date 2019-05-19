@@ -25,20 +25,23 @@ form{
     position: relative;
     left:33%;
     top:10%;
-
+    border-color: black;
 }
 
 .button {
-    background-color: white;
-    color: black;
-    border: 2px solid #555555;
-    width: 250px;
-  }
-  
-.button:hover {
-    background-color: #555555;
-    color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
+
+.button:hover {
+  background-color: #555555;
+  color: white;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -46,8 +49,8 @@ form{
     padding: 0;
     color: white;
   }
-  
-.topnav a {
+
+  .topnav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -64,6 +67,7 @@ form{
     background-color:#70587c;
     color: white;
   }
+
   .user-icon{
     float:right;
     cursor:pointer;
@@ -73,7 +77,7 @@ form{
 }
 
 .my-modal{
-    z-index:1;
+    z-index:100001;
     display:none;
     padding-top:53px;
     position:fixed;
@@ -85,19 +89,21 @@ form{
     background-color:rgba(0,0,0,0.4)
 }
 
-.my-modal-content{
-    float:right;
-    margin:10px;
-    background-color:#fff;
-    position:relative;
-    padding:0;
-    outline:0;
-    width:300px
-}
+ .my-modal-content{
+     float:right;
+     margin:10px;
+     background-color:#fff;
+     position:relative;
+     padding:0;
+     outline:0;
+     width:300px
+  }
+
 .my-modal-content button{
-    align-items: center;
-    padding-left: 10px;
+  align-items: center;
+  padding-left: 10px;
 }
+
   .submit-btn{
     background-color: #333;
     border: none;

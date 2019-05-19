@@ -4,10 +4,7 @@ import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Type.Bound;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class District {
@@ -17,7 +14,7 @@ public class District {
     private Long districtId;
 
     @OneToMany
-    private Map<Long, Precinct> precincts;
+    private Map<Long, Precinct> precincts ;
 
     @OneToOne
     private Demographic demographic;
@@ -82,6 +79,8 @@ public class District {
     }
 
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
+        this.precincts = new HashMap<>();
+        neighborDistrict = new ArrayList<>();
         for (Precinct p : precincts) {
             this.precincts.put(p.getPrecinctID(), p);
         }

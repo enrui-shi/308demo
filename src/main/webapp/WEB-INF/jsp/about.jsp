@@ -11,9 +11,8 @@
     <script src="/script/guest.js"></script>
 </head>
 <header class="topnav">
-    <a onclick="window.location.replace('/main')">Home</a>
-    <a onclick="window.location.replace('/map')">Map</a>
-    <a onclick="window.location.replace('/report')">Report</a>
+    <a onclick="window.location.replace('/')">Home</a>
+    <a onclick="window.location.replace('/summary')">Summary</a>
     <a onclick="window.location.replace('/batch')">Batch</a>
     <a class="active" onclick="window.location.replace('/about')">About</a>
     <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />

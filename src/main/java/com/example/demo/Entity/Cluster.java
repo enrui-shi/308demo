@@ -95,26 +95,26 @@ public class Cluster implements Comparable<Cluster> {
 
     public void merge(Cluster c) {
         precincts.addAll(c.getPrecincts());
-        neighborClusters.addAll(c.neighborClusters);
+        for(Cluster cl :c.getNeighborClusters()){
+            if(!neighborClusters.contains(cl)){
+                neighborClusters.add(cl);
+            }
+        }
+        neighborClusters.remove(c);
         neighborClusters.remove(this);
         demographic.merge(c.getDemographic());
-
     }
 
     public Cluster getBestNeighbourCluster() {
         Cluster pairCluster = null;
         double max = 0.0;
         for (ClusterEdge ce : clusterEdges) {
-            System.out.print(ce.getCluster1().getId());
-            System.out.print(" & "+ce.getCluster2().getId());
-            System.out.println(" & "+ ce.getConnectCluster(this).getId());
             if (!ce.getConnectCluster(this).isPaired()) {
                 if (ce.getJoinability() >= max) {
                     max = ce.getJoinability();
                     pairCluster = ce.getConnectCluster(this);
                 }
             }
-            System.out.println("finish");
         }
         return pairCluster;
     }
