@@ -49,8 +49,8 @@ public class PhaseOneService {
             algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nye), new TypeReference<List<ClusterEdge>>(){}));
             algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ny), new TypeReference<List<Cluster>>(){}));
         } else {
-            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nje), new TypeReference<List<ClusterEdge>>(){}));
-            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nj), new TypeReference<List<Cluster>>(){}));
+            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ia), new TypeReference<List<ClusterEdge>>(){}));
+            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.iae), new TypeReference<List<Cluster>>(){}));
         }
         }catch (Exception e){
             System.out.println(e);

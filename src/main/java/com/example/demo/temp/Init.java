@@ -46,7 +46,7 @@ public class Init implements CommandLineRunner {
             for (int i = 0; i < p_arr.size(); i++) {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
-                precinct.setStateName(StateName.NJ);
+                precinct.setStateName(StateName.OH);
                 precinct.setNeighbourPrecincts(new ArrayList<Long>());
                 precincts.put(precinct.getPrecinctID(), precinct);
             }

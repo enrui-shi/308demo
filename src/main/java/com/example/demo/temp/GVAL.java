@@ -6,27 +6,27 @@ import com.example.demo.Entity.ClusterEdge;
 import java.util.List;
 
 public class GVAL {
-    public static List<Cluster> nj;
-    public static List<ClusterEdge> nje;
+    public static List<Cluster> ia;
+    public static List<ClusterEdge> iae;
     public static List<Cluster> ny;
     public static List<ClusterEdge> nye;
     public static List<Cluster> oh;
     public static List<ClusterEdge> ohe;
 
-    public static List<Cluster> getNj() {
-        return nj;
+    public static List<Cluster> getIa() {
+        return ia;
     }
 
-    public static void setNj(List<Cluster> nj) {
-        GVAL.nj = nj;
+    public static void setIa(List<Cluster> ia) {
+        GVAL.ia = ia;
     }
 
-    public static List<ClusterEdge> getNje() {
-        return nje;
+    public static List<ClusterEdge> getIae() {
+        return iae;
     }
 
-    public static void setNje(List<ClusterEdge> nje) {
-        GVAL.nje = nje;
+    public static void setIae(List<ClusterEdge> iae) {
+        GVAL.iae = iae;
     }
 
     public static List<Cluster> getNy() {
