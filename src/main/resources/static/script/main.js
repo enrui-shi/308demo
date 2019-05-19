@@ -4,21 +4,26 @@ $(document).ready(function () {
     $('#phase2').prop('disabled', true);
     var preference_form = $('#preference');
     preference_form.submit(function (e){
+        document.getElementById('inputerror').style.display="none";
         console.log("start to send preference date")
         // check form data
         if($('#maxAA').val() < $('#minAA').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="American American min population > max!";
+            e.preventDefault();
         }
         else if(($('#mmAA').val()+$('#mmAsian').val()+$('#mmLatino').val()) > $('#numOfDistrict').val()) {
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Sum of majority minority districts beyond total number!";
+            e.preventDefault();
         } else if($('#maxAsian').val() < $('#minAsian').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Asian min population > max!";
+            e.preventDefault();
         } else if($('#maxLatino').val() < $('#minLatino').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Latino min population > max!";
+            e.preventDefault();
         } else {
             var mm_data = {
                 AFRIAN_AMERICAN: $('#mmAA').val(),

@@ -214,7 +214,7 @@ function precinctHoverFeature(e) {
     info.update(layer.feature, precinctLayer);
 
     // hover 2 seconds to display demographic data of the precinct
-    setTimeout(function(){
+    /*setTimeout(function(){
         console.log("hover two seconds to show demographic data");
         $.ajax({
             type: 'post',
@@ -244,7 +244,7 @@ function precinctHoverFeature(e) {
                 }
             }
         })
-    }, 2000);
+    }, 2000);*/
 }
 
 /* mouse remove */

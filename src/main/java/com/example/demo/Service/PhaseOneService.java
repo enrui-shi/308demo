@@ -71,7 +71,7 @@ public class PhaseOneService {
         for (Map.Entry<Long, District> entry : precinctToDistrict.entrySet()) {
             result.put(Long.toString(entry.getKey()), entry.getValue().getColor());
         }
-
+        System.out.println("phase one finished and start to color");
         return result;
     }
 
