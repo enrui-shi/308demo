@@ -183,9 +183,10 @@ public class Algorithm {
             d.setScore(score);
             movable.addAll(d.getBoundPrecinct());
         }
-        while (movable.size()!=0){
-            int index = randomIndex(movable.size());
-            Precinct candidate = movable.get(index);
+        boolean hasMove = true;
+        while (hasMove){
+            int districtIndex = randomIndex(currentState.getDistricts().size());
+            Precinct candidate = null;
 
             Move move = testMove(candidate);
             if(move != null){

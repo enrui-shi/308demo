@@ -22,6 +22,8 @@ public class District {
     @OneToMany
     private List<District> neighborDistrict;
 
+    private List<Precinct>usedPrecinct;
+
     private boolean minorityTarget;
 
     private boolean minorityDistrict;
@@ -81,6 +83,7 @@ public class District {
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
         this.precincts = new HashMap<>();
         neighborDistrict = new ArrayList<>();
+        usedPrecinct = new ArrayList<>();
         for (Precinct p : precincts) {
             this.precincts.put(p.getPrecinctID(), p);
         }
