@@ -20,11 +20,11 @@ public class Global implements CommandLineRunner {
 
     public void run(String args[]){
         System.out.println("start init OH precinct");
-        List<Precinct> njP = initService.getPrecinctsByState(StateName.NJ);
+        List<Precinct> njP = initService.getPrecinctsByState(StateName.OH);
         System.out.println("finish");
         System.out.println(njP.size());
         System.out.println("start init OH edge");
-        List<PrecinctEdge> njE = initService.getPrecinctEdgeByState(StateName.NJ);
+        List<PrecinctEdge> njE = initService.getPrecinctEdgeByState(StateName.OH);
         System.out.println("finish");
         System.out.println(njE.size());
         System.out.println("Starting convert precinct to cluster");
