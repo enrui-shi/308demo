@@ -64,23 +64,15 @@ public class PhaseOneService {
 
 
 
-    public JsonNode returnPhaseOne(Algorithm algorithm) throws IOException {
+    public Map returnPhaseOne(Algorithm algorithm) throws IOException {
         Map<Long, District> precinctToDistrict = algorithm.getPrecinctToDistrict();
-
+        Map<String, String> result = new HashMap();
         // map precinct Id to district-color
-        String colorPrecinct = "{ \"colors\": [";
         for (Map.Entry<Long, District> entry : precinctToDistrict.entrySet()) {
-            colorPrecinct += "{\""+entry.getKey()+"\": \""+entry.getValue().getColor()+"\"},";
+            result.put(Long.toString(entry.getKey()), entry.getValue().getColor());
         }
-        colorPrecinct = colorPrecinct.substring(0, (colorPrecinct.length()-1));
-        colorPrecinct += "] }";
 
-        System.out.println(colorPrecinct);
-        // convert string to json
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode resultNode = mapper.readTree(colorPrecinct);
-
-        return resultNode;
+        return result;
     }
 
     public Map showDemo(Long p_ID) {
