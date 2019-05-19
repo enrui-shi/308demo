@@ -47,6 +47,7 @@ public class Move {
     public void undo(){
         from.addPrecinct(precinct);
         to.removePrecinct(precinct);
+        from.addUsedPrecinct(precinct);
     }
     public void tryMove(){
         from.removePrecinct(precinct);
@@ -58,6 +59,7 @@ public class Move {
         to.addPrecinct(precinct);
         from.setScore(changedFromScore);
         to.setScore(changedToScore);
+        to.addUsedPrecinct(precinct);
     }
 
 }

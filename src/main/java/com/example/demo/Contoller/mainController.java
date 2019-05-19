@@ -43,13 +43,13 @@ public class mainController {
     }
 
     @PostMapping(value = "/main/startPhaseOne", consumes = "application/json", produces = "application/json")
-    public JsonNode startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException {
+    public Map startAlgorithm(@RequestBody Preference preference, HttpSession session) throws IOException {
         System.out.println("get user input preference");
         if (session.getAttribute("stateName") == null) {
-            String response = "{\"status\", \"error\", \"error\", \"select state first\"}";
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode responseNode = mapper.readTree(response);
-            return responseNode;
+            Map<String, String> response = new HashMap();
+            response.put("status", "error");
+            response.put("error", "select state first");
+            return response;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
 
@@ -60,9 +60,9 @@ public class mainController {
             session.setAttribute("state", algorithm.getCurrentState());
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
 
-            JsonNode resultNode = p1s.returnPhaseOne(algorithm);
+            Map<String, String> result = p1s.returnPhaseOne(algorithm);
 
-            return resultNode;
+            return result;
         }
     }
 

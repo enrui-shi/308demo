@@ -22,7 +22,7 @@ var precinctLayer;
 
 /* add data into map */
 /* way one
-$.getJSON("../data/OH_final.json" , function( result ){
+$.getJSON("../data/OH_final.js" , function( result ){
     L.geoJSON(result.features, {
     style: function(feature) {
         //style: myStyle
@@ -47,14 +47,16 @@ function selectOH(){
     }
     map.setView([40.4173, -82.9071], 9);
 
-    if(map.hasLayer(precinctLayer))
+    if(map.hasLayer(precinctLayer)) {
       map.removeLayer(precinctLayer);
-    if(map.hasLayer(districtLayer))
+    }
+    if(map.hasLayer(districtLayer)){
         map.removeLayer(districtLayer);
+    }
 
     console.log("load OH data ing...")
 
-    precinctLayer = L.geoJSON(OH_precinctsData.features, {
+    precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
@@ -212,7 +214,7 @@ function precinctHoverFeature(e) {
     info.update(layer.feature, precinctLayer);
 
     // hover 2 seconds to display demographic data of the precinct
-    setTimeout(function(){
+    /*setTimeout(function(){
         console.log("hover two seconds to show demographic data");
         $.ajax({
             type: 'post',
@@ -242,7 +244,7 @@ function precinctHoverFeature(e) {
                 }
             }
         })
-    }, 2000);
+    }, 2000);*/
 }
 
 /* mouse remove */

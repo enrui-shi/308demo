@@ -183,25 +183,19 @@ public class Algorithm {
             d.setScore(score);
             movable.addAll(d.getBoundPrecinct());
         }
-        while (movable.size()!=0){
-            int index = randomIndex(movable.size());
-            Precinct candidate = movable.get(index);
-
+        boolean hasMove = true;
+        int count = 1000;
+        while (count!=0){
+            Precinct candidate = null;
+            while(candidate == null) {
+                int districtIndex = randomIndex(currentState.getDistricts().size());
+                currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
+            }
             Move move = testMove(candidate);
             if(move != null){
-                for(Long p :candidate.getNeighbourPrecincts()){
-                    if(precinctToDistrict.get(p)== move.getFrom()){
-                        movable.add(move.getFrom().getPrecincts().get(p));
-                    }else if( precinctToDistrict.get(p) ==move.getTo()){
-                        movable.remove(move.getTo().getPrecincts().get(p));
-                    }
-
-                }
-
+                move.execute();
             }
-
-
-
+            count --;
         }
 
         return null;
@@ -237,6 +231,9 @@ public class Algorithm {
     }
 
     public double measureDistrict(District d){
+        Preference p = currentState.getPreference();
+
+
         return 0;
     }
 
@@ -306,11 +303,11 @@ public class Algorithm {
         List<District> d = currentState.getDistricts();
         int needColor = 0;
         for (int i=0; i<d.size(); i++) {
-            if (d.get(i).getColor().equals("")) {
+            if (d.get(i).getColor()==null) {
                 d.get(i).setColor(colors[0]);
                 List<District> neighbor = d.get(i).getNeighborDistrict();
                 for (int j = 0; j < neighbor.size(); j++) {
-                    if (neighbor.get(j).getColor().equals("")) {
+                    if (neighbor.get(j).getColor()==null) {
                         needColor++;
                         if (needColor <= 7) {
                             neighbor.get(j).setColor(colors[needColor]);
@@ -319,7 +316,7 @@ public class Algorithm {
                 }
             }
         }
-        checkColor();
+        //checkColor();
     }
 
     // check if adjacent districts are in different colors

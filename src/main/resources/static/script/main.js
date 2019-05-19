@@ -2,26 +2,29 @@
 $(document).ready(function () {
     $('#phase1').prop('disabled', false);
     $('#phase2').prop('disabled', true);
-    document.getElementById('inputerror').style.display="none";
     var preference_form = $('#preference');
     preference_form.submit(function (e){
+        document.getElementById('inputerror').style.display="none";
         console.log("start to send preference date")
         // check form data
         if($('#maxAA').val() < $('#minAA').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="American American min population > max!";
+            e.preventDefault();
         }
         else if(($('#mmAA').val()+$('#mmAsian').val()+$('#mmLatino').val()) > $('#numOfDistrict').val()) {
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Sum of majority minority districts beyond total number!";
+            e.preventDefault();
         } else if($('#maxAsian').val() < $('#minAsian').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Asian min population > max!";
+            e.preventDefault();
         } else if($('#maxLatino').val() < $('#minLatino').val()){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Latino min population > max!";
+            e.preventDefault();
         } else {
-
             var mm_data = {
                 AFRIAN_AMERICAN: $('#mmAA').val(),
                 ASIAN_PACIFIC: $('#mmAsian').val(),
@@ -67,6 +70,7 @@ $(document).ready(function () {
             fakeLog("&nbsp&nbspmin population threshold:" + $('#minLatino').val() / 100);
             fakeLog("&nbsp&nbspmax population threshold:" + $('#maxLatino').val() / 100);
 
+            console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.ethnicGroupBound);
             $.ajax({
                 type: 'post',
                 url: '/home/main/startPhaseOne',
@@ -74,52 +78,57 @@ $(document).ready(function () {
                 data: JSON.stringify(preference_data),
                 dataType: "json",
                 success: function (data) {
-                    // response from controller
-                    console.log("color color : " + data.colors);
+                    /* response from controller */
+                    console.log("color color 0 : " + data);
+                    console.log("color color 1 : " + Object.keys(data));
+                    console.log("color color 2 : " + Object.keys(data)[0]);
+                    console.log("color color 3 : " + data[Object.keys(data)[0]]);
 
                     if (map.hasLayer(districtLayer)) {
                         map.removeLayer(districtLayer);
                     }
 
-                    if ((data.colors.keys[0] / 10000000) == 1) {
-                        districtLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+                    if (Object.keys(data)[0].charAt(0) == '1') {
+                        districtLayer = L.geoJSON(oh_data.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                for (var i = 0; i < data.colors.length; i++) {
-                                    if (feature.id == data.colors.keys[i]) {
-                                        console.log("id is " + data.colors.keys[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data.colors[feature.id]);
-                                        return {fillColor: data.colors[feature.id]};
+                                console.log("OH");
+                                for (var i = 0; i < Object.keys(data).length; i++) {
+                                    console.log("id is " + Object.keys(data)[i]);
+                                    console.log("layer id is " + feature.properties.id);
+                                    console.log("district color is " + data[feature.properties.id]);
+                                    if (feature.id == Object.keys(data)[i]) {
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }
                         }).addTo(map);
-                    } else if ((data.colors.keys[0] / 10000000) == 2) {
+                    } else if (Object.keys(data)[0].charAt(0) == '2') {
                         districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                for (var i = 0; i < data.colors.length; i++) {
-                                    if (feature.id == data.colors.keys[i]) {
-                                        console.log("id is " + data.colors.keys[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data.colors[feature.id]);
-                                        return {fillColor: data.colors[feature.id]};
+                                console.log("NY");
+                                for (var i = 0; i < Object.keys(data).length; i++) {
+                                    if (feature.id == Object.keys(data)[i]) {
+                                        console.log("id is " + Object.keys(data)[i]);
+                                        console.log("layer id is " + feature.properties.id);
+                                        console.log("district color is " + data[feature.properties.id]);
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }
                         }).addTo(map);
-
                     } else {
                         districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                for (var i = 0; i < data.colors.length; i++) {
-                                    if (feature.id == data.colors.keys[i]) {
-                                        console.log("id is " + data.colors.keys[i]);
-                                        console.log("layer id is " + feature.id);
-                                        console.log("district color is " + data.colors[feature.id]);
-                                        return {fillColor: data.colors[feature.id]};
+                                console.log("NJ");
+                                for (var i = 0; i < Object.keys(data).length; i++) {
+                                    if (feature.id == Object.keys(data)[i]) {
+                                        console.log("id is " + Object.keys(data)[i]);
+                                        console.log("layer id is " + feature.properties.id);
+                                        console.log("district color is " + data[feature.properties.id]);
+                                        return {fillColor: data[feature.properties.id]};
                                     }
                                 }
                             }

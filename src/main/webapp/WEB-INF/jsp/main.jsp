@@ -45,7 +45,7 @@
             <div class="map-content">
                 <div id="map"></div>
                 <script type = "text/javascript" src = "/data/state.js"></script>
-                <script type = "text/javascript" src = "/data/OH_precincts.js"></script>
+                <script type = "text/javascript" src = "/data/oh_temp.js"></script>
                 <script type = "text/javascript" src = "/data/NY_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/IA_precincts.js"></script>
                 <script type = "text/javascript" src = "/data/OH_districts.js"></script>
