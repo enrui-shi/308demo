@@ -36,14 +36,15 @@ $(document).ready(function () {
                 if(map.hasLayer(districtLayer)){
                     map.removeLayer(districtLayer);
                 }
-
-                if((data.colors.keys[0]/10000000) == 1) {
+                console.log("mmmmmmm"+Object.keys(data.colors));
+                console.log("qqqqqqq"+(Object.keys(data.colors)[0])/10000000);
+                if(((Object.keys(data.colors)[0])/10000000) == 1) {
                     districtLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
                         onEachFeature: precinctOnEachFeature,
                         style: function (feature) {
-                            for (var i = 0; i < data.colors.length; i++) {
-                                if (feature.id == data.colors.keys[i]) {
-                                    console.log("id is " + data.colors.keys[i]);
+                            for (var i = 0; i < Object.keys(data.colors).length; i++) {
+                                if (feature.id == Object.keys(data.colors)[i]) {
+                                    console.log("id is " + Object.keys(data.colors)[i]);
                                     console.log("layer id is " + feature.id);
                                     console.log("district color is " + data.colors[feature.id]);
                                     return {fillColor: data.colors[feature.id]};
@@ -51,13 +52,13 @@ $(document).ready(function () {
                             }
                         }
                     }).addTo(map);
-                } else if((data.colors.keys[0]/10000000) == 2) {
+                } else if(((Object.keys(data.colors)[0])/10000000) == 2) {
                     districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                         onEachFeature: precinctOnEachFeature,
                         style: function (feature) {
-                            for (var i = 0; i < data.colors.length; i++) {
-                                if (feature.id == data.colors.keys[i]) {
-                                    console.log("id is " + data.colors.keys[i]);
+                            for (var i = 0; i < Object.keys(data.colors).length; i++) {
+                                if (feature.id == Object.keys(data.colors)[i]) {
+                                    console.log("id is " + Object.keys(data.colors)[i]);
                                     console.log("layer id is " + feature.id);
                                     console.log("district color is " + data.colors[feature.id]);
                                     return {fillColor: data.colors[feature.id]};
@@ -70,9 +71,9 @@ $(document).ready(function () {
                     districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
                         onEachFeature: precinctOnEachFeature,
                         style: function (feature) {
-                            for (var i = 0; i < data.colors.length; i++) {
-                                if (feature.id == data.colors.keys[i]) {
-                                    console.log("id is " + data.colors.keys[i]);
+                            for (var i = 0; i < Object.keys(data.colors).length; i++) {
+                                if (feature.id == Object.keys(data.colors)[i]) {
+                                    console.log("id is " + Object.keys(data.colors)[i]);
                                     console.log("layer id is " + feature.id);
                                     console.log("district color is " + data.colors[feature.id]);
                                     return {fillColor: data.colors[feature.id]};

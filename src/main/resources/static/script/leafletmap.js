@@ -22,7 +22,7 @@ var precinctLayer;
 
 /* add data into map */
 /* way one
-$.getJSON("../data/OH_final.json" , function( result ){
+$.getJSON("../data/OH_final.js" , function( result ){
     L.geoJSON(result.features, {
     style: function(feature) {
         //style: myStyle
@@ -56,10 +56,10 @@ function selectOH(){
 
     console.log("load OH data ing...")
 
-    /*precinctLayer = L.geoJSON(OH_precinctsData.FeatureCollection, {
+    precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
         style: precinctStyle,
         onEachFeature: precinctOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
         style: districtStyle,
