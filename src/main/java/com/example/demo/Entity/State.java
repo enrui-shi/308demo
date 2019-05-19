@@ -26,6 +26,8 @@ public class State {
     @Enumerated(EnumType.STRING)
     private StateName stateName;
 
+    private int totalPopulation;
+
     public State() {
     }
 
@@ -39,6 +41,7 @@ public class State {
         this.precincts = precincts;
         this.preference = preference;
         this.stateName = stateName;
+        this.totalPopulation = 0;
     }
 
     public Long getStateId() {
@@ -61,6 +64,14 @@ public class State {
         return preference;
     }
 
+    public int getTotalPopulation() {
+        if(totalPopulation == 0){
+            for(District d: districts){
+                totalPopulation+=d.getDemographic().getTotalPopulation();
+            }
+        }
+        return totalPopulation;
+    }
 
     public void setStateId(Long stateId) {
         this.stateId = stateId;

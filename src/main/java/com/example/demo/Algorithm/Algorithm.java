@@ -184,25 +184,18 @@ public class Algorithm {
             movable.addAll(d.getBoundPrecinct());
         }
         boolean hasMove = true;
-        while (hasMove){
-            int districtIndex = randomIndex(currentState.getDistricts().size());
+        int count = 1000;
+        while (count!=0){
             Precinct candidate = null;
-
+            while(candidate == null) {
+                int districtIndex = randomIndex(currentState.getDistricts().size());
+                currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
+            }
             Move move = testMove(candidate);
             if(move != null){
-                for(Long p :candidate.getNeighbourPrecincts()){
-                    if(precinctToDistrict.get(p)== move.getFrom()){
-                        movable.add(move.getFrom().getPrecincts().get(p));
-                    }else if( precinctToDistrict.get(p) ==move.getTo()){
-                        movable.remove(move.getTo().getPrecincts().get(p));
-                    }
-
-                }
-
+                move.execute();
             }
-
-
-
+            count --;
         }
 
         return null;
@@ -238,6 +231,9 @@ public class Algorithm {
     }
 
     public double measureDistrict(District d){
+        Preference p = currentState.getPreference();
+
+
         return 0;
     }
 

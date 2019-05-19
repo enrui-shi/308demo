@@ -22,7 +22,8 @@ public class District {
     @OneToMany
     private List<District> neighborDistrict;
 
-    private List<Precinct>usedPrecinct;
+    @ElementCollection
+    private List<Long>usedPrecincts;
 
     private boolean minorityTarget;
 
@@ -83,7 +84,7 @@ public class District {
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
         this.precincts = new HashMap<>();
         neighborDistrict = new ArrayList<>();
-        usedPrecinct = new ArrayList<>();
+        usedPrecincts = new ArrayList<>();
         for (Precinct p : precincts) {
             this.precincts.put(p.getPrecinctID(), p);
         }
@@ -119,6 +120,7 @@ public class District {
             }
         }
     }
+
     public List<Precinct> getBoundPrecinct(){
         List<Precinct>bound = new ArrayList<>();
         for(Precinct p :precincts.values()){
@@ -127,6 +129,19 @@ public class District {
             }
         }
         return bound;
+    }
+    public Precinct getCandidatePrecinct(){
+        List<Precinct> bp = getBoundPrecinct();
+        for(Precinct p:bp){
+            if(!usedPrecincts.contains(p.getPrecinctID())){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public void addUsedPrecinct(Precinct p){
+        this.usedPrecincts.add(p.getPrecinctID());
     }
     public boolean isInnerPrecinct(Precinct pct){
         for( Long p:pct.getNeighbourPrecincts()){
