@@ -61,10 +61,10 @@ function selectOH(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
+    /*districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);
+    }).addTo(map);*/
 
     $.ajax({
         type: 'post',
@@ -98,10 +98,10 @@ function selectNY(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    districtLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
+    /*districtLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);
+    }).addTo(map);*/
 
     $.ajax({
         type: 'post',
@@ -134,10 +134,10 @@ function selectIA(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
+    /*districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);
+    }).addTo(map);*/
 
     $.ajax({
         type: 'post',

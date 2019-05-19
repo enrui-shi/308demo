@@ -93,14 +93,7 @@ $(document).ready(function () {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
                                 console.log("OH");
-                                for (var i = 0; i < Object.keys(data).length; i++) {
-                                    console.log("id is " + Object.keys(data)[i]);
-                                    console.log("layer id is " + feature.properties.id);
-                                    console.log("district color is " + data[feature.properties.id]);
-                                    if (feature.id == Object.keys(data)[i]) {
-                                        return {fillColor: data[feature.properties.id]};
-                                    }
-                                }
+                                return {fillColor: data[feature.properties.id]};
                             }
                         }).addTo(map);
                     } else if (Object.keys(data)[0].charAt(0) == '2') {
@@ -108,14 +101,7 @@ $(document).ready(function () {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
                                 console.log("NY");
-                                for (var i = 0; i < Object.keys(data).length; i++) {
-                                    if (feature.id == Object.keys(data)[i]) {
-                                        console.log("id is " + Object.keys(data)[i]);
-                                        console.log("layer id is " + feature.properties.id);
-                                        console.log("district color is " + data[feature.properties.id]);
-                                        return {fillColor: data[feature.properties.id]};
-                                    }
-                                }
+                                return {fillColor: data[feature.properties.id]};
                             }
                         }).addTo(map);
                     } else {
@@ -123,14 +109,7 @@ $(document).ready(function () {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
                                 console.log("NJ");
-                                for (var i = 0; i < Object.keys(data).length; i++) {
-                                    if (feature.id == Object.keys(data)[i]) {
-                                        console.log("id is " + Object.keys(data)[i]);
-                                        console.log("layer id is " + feature.properties.id);
-                                        console.log("district color is " + data[feature.properties.id]);
-                                        return {fillColor: data[feature.properties.id]};
-                                    }
-                                }
+                                return {fillColor: data[feature.properties.id]};
                             }
                         }).addTo(map);
                     }
