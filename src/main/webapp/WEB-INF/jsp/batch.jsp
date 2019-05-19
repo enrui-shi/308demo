@@ -40,40 +40,50 @@
           <b>
               NY <input type="radio" name="state" value="NY">
               IA <input type="radio" name="state" value="IA">
-              OH <input type="radio" name="state" value="OH"><br>
+              OH <input type="radio" name="state" value="OH" checked><br>
           </b>
           <label class = "textField"> Number of batch:</label>
-          <b> <input id="num-of-batch" class="inputNum" type="number" step="1"> <br></b>
+          <b> <input id="num-of-batch" class="inputNum" type="number" step="1" value="1"> <br></b>
+          <div class="my-line">
           <label class = "textField"> Number of district:</label>
           <b>
-              <input type="number" class="range" id="dMIN" step="1" min = "0" max = "10000"> to
-              <input type="number" class="range" id="dMAX" step="1" min = "0" max = "10000000"><br>
+              <input type="number" class="range" id="dMIN" value="0" step="1" min = "0" max = "10000"> to
+              <input type="number" class="range" id="dMAX" value="0" step="1" min = "0" max = "10000000">
           </b>
+          <c><span id="derr" style="color:red"></span></c>
+          </div>
           <label class = "textField">Number of majority minority:</label>
           <b>
-              <input type="number" class="range" id="mmMIN" step="1" min = "0" max = "10000"> to
-              <input type="number" class="range" id="mmMAX" step="1" min = "0" max = "10000000"><br>
+              <input type="number" class="range" id="mmMIN" value="0" step="1" min = "0" max = "10000"> to
+              <input type="number" class="range" id="mmMAX" value="0" step="1" min = "0" max = "10000000">
           </b>
+          <c><span id="mmerr" style="color:red"></span></c>
           <label class = "textField">Equal Population Weight:</label>
           <b>
-              <input type="number" class="range" id="eqMIN" step="0.01" min = "0" max = "1"> to
-              <input type="number" class="range" id="eqMAX" step="0.01" min = "0" max = "1"><br>
+              <input type="number" class="range" id="eqMIN" value="0" step="0.01" min = "0" max = "1"> to
+              <input type="number" class="range" id="eqMAX" value="0" step="0.01" min = "0" max = "1">
           </b>
+          <c><span id="eqerr" style="color:red"></span></c>
           <label class = "textField">Compactness Weight:</label>
           <b>
-              <input type="number" class="range" id="cMIN" step="0.01" min = "0" max = "1"> to
-              <input type="number" class="range" id="cMAX" step="0.01" min = "0" max = "1"><br>
+              <input type="number" class="range" id="cMIN" value="0" step="0.01" min = "0" max = "1"> to
+              <input type="number" class="range" id="cMAX" value="0" step="0.01" min = "0" max = "1">
           </b>
+          <c><span id="cerr" style="color:red"></span></c>
           <label class = "textField">Partisan Fairness Weight:</label>
           <b>
-              <input type="number" class="range" id="pfMIN" step="0.01" min = "0" max = "1"> to
-              <input type="number" class="range" id="pfMAX" step="0.01" min = "0" max = "1"><br>
+              <input type="number" class="range" id="pfMIN" value="0" step="0.01" min = "0" max = "1"> to
+              <input type="number" class="range" id="pfMAX" value="0" step="0.01" min = "0" max = "1">
           </b>
+          <c><span id="pferr" style="color:red"></span></c>
           <label class = "textField">Nature Constrain Weight:</label>
           <b>
-              <input type="number" class="range" id="ncMIN" step="0.01" min = "0" max = "1"> to
-              <input type="number" class="range" id="ncMAX" step="0.01" min = "0" max = "1"><br>
+              <input type="number" class="range" id="ncMIN" value="0" step="0.01" min = "0" max = "1"> to
+              <input type="number" class="range" id="ncMAX" value="0" step="0.01" min = "0" max = "1"><br>
           </b>
+          <c><span id="ncerr" style="color:red"></span></c>
+
+          <b>
           </b>
           <label class = "textField"></label>
           <b>

@@ -19,6 +19,14 @@ b{
     width:200px;
     line-height: 30px
 }
+
+c{
+    display:block;
+    float:right;
+    width:280px;
+    line-height: 30px;
+}
+
 form{
     width:500px;
     height:350px;
