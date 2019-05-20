@@ -13,6 +13,8 @@ $(document).ready(function () {
 
     $('#phase1').prop('disabled', false);
     $('#phase2').prop('disabled', true);
+
+
     var preference_form = $('#preference');
     preference_form.submit(function (e){
         document.getElementById('inputerror').style.display="none";
@@ -93,6 +95,18 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log("phase one process start....");
                         ajaxPhaseI();
+
+                        console.log("phase two process is ready ... ")
+                        $.ajax({
+                            type: 'post',
+                            url: "/home/main/startPhaseTwo",
+                            contentType: "application/json; charset=utf-8",
+                            header: {"accept": "application/json"},
+                            dataType: "json",
+                            success: function (data) {
+                                console.log("phase2 ... " + data);
+                            }
+                        })
                     }
                 })
             } else {
@@ -175,6 +189,18 @@ $(document).ready(function () {
                         // enable phase2 button to start simulating annealing
                         $('#phase2').prop('disabled', false);
                         $('#phase1').prop('disabled', true);
+
+                        console.log("phase two process is ready ... ")
+                        $.ajax({
+                            type: 'post',
+                            url: "/home/main/startPhaseTwo",
+                            contentType: "application/json; charset=utf-8",
+                            header: {"accept": "application/json"},
+                            dataType: "json",
+                            success: function (data) {
+                                console.log("phase2 ... " + data);
+                            }
+                        })
                     }
                 })
             }
@@ -267,111 +293,102 @@ $(document).ready(function () {
                     }
                 });
             }
-            function ajaxPhase2(){
-                // start phase 2
-                $.ajax({
-                    type: 'post',
-                    url: "/home/main/startPhaseTwo",
-                    contentType: "application/json; charset=utf-8",
-                    header: {"accept": "application/json"},
-                    dataType: "json",
-                    success: function (data) {
-                        console.log("phase2 ... " + data);
-                    }
-                })
-            }
-            // start to get the change of phase2
-            function ajaxPhaseII() {
-                $.ajax({
-                    type: 'post',
-                    url: "/home/main/getPhaseIIChange",
-                    contentType: "application/json; charset=utf-8",
-                    header: {"accept": "application/json"},
-                    dataType: "json",
-                    success: function (data) {
-                        console.log("if end? 0 is end: "+Object.keys(data)[0]);
-                        console.log("p id list: "+Object.keys(data));
-                        console.log("first color: "+data[Object.keys(data)[0]]);
-                        if (data[Object.keys(data)[0]] == 'end') {
-                            // after phase two finish, enable playphase1
-                            $('#phase1').prop('disabled', false);
-                            $('#phase2').prop('disabled', true);
-                        } else if(data[Object.keys(data)[0]] == 'wait'){
-                            // continue send ajax call
-                            ajaxPhaseII();
-                        } else {
-                          // update GUI
-                          if (map.hasLayer(districtLayer)) {
-                              map.removeLayer(districtLayer);
-                          }
-                          if (map.hasLayer(precinctLayer)) {
-                              map.removeLayer(precinctLayer);
-                          }
-                          if (Object.keys(data)[0].charAt(0) == '1') {
-                              districtLayer = L.geoJSON(oh_data.FeatureCollection, {
-                                  onEachFeature: clusterOnEachFeature,
-                                  style: function (feature) {
-                                      return {
-                                          fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                          opacity: 1, weight: 1, color: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
-                                  onEachFeature: precinctOnEachFeature,
-                                  style: function (feature) {
-                                      return {weight: 2,opacity: 1, dashArray: '3',
-                                        fillOpacity: 0.7, color: 'white',
-                                        fillColor: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              map.removeLayer(precinctLayer);
-                          } else if (Object.keys(data)[0].charAt(0) == '2') {
-                              districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-                                  onEachFeature: clusterOnEachFeature,
-                                  style: function (feature) {
-                                      return {
-                                          fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                          opacity: 1, weight: 1, color: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-                                  onEachFeature: precinctOnEachFeature,
-                                  style: function (feature) {
-                                      return {weight: 2,opacity: 1, dashArray: '3',
-                                        fillOpacity: 0.7, color: 'white',
-                                        fillColor: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              map.removeLayer(precinctLayer);
-                          } else {
-                              districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
-                                  onEachFeature: clusterOnEachFeature,
-                                  style: function (feature) {
-                                      return {
-                                          fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                          opacity: 1, weight: 1, color: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
-                                  onEachFeature: precinctOnEachFeature,
-                                  style: function (feature) {
-                                      return {weight: 2,opacity: 1, dashArray: '3',
-                                        fillOpacity: 0.7, color: 'white',
-                                        fillColor: data[feature.properties.id]
-                                      };
-                                  }
-                              }).addTo(map);
-                              map.removeLayer(precinctLayer);
-                          }
-                        }
-                    }
-                });
-            }
+
+
         }
     })
 });
+
+// start to get the change of phase2
+function ajaxPhaseII() {
+    $.ajax({
+        type: 'post',
+        url: "/home/main/getPhaseIIChange",
+        contentType: "application/json; charset=utf-8",
+        header: {"accept": "application/json"},
+        dataType: "json",
+        success: function (data) {
+            console.log("if end? 0 is end: "+Object.keys(data)[0]);
+            console.log("p id list: "+Object.keys(data));
+            console.log("first color: "+data[Object.keys(data)[0]]);
+            if (data[Object.keys(data)[0]] == 'end') {
+                // after phase two finish, enable playphase1
+                $('#phase1').prop('disabled', false);
+                $('#phase2').prop('disabled', true);
+            } else if(data[Object.keys(data)[0]] == 'wait'){
+                // continue send ajax call
+                ajaxPhaseII();
+            } else {
+                // update GUI
+                if (map.hasLayer(districtLayer)) {
+                    map.removeLayer(districtLayer);
+                }
+                if (map.hasLayer(precinctLayer)) {
+                    map.removeLayer(precinctLayer);
+                }
+                if (Object.keys(data)[0].charAt(0) == '1') {
+                    districtLayer = L.geoJSON(oh_data.FeatureCollection, {
+                        onEachFeature: clusterOnEachFeature,
+                        style: function (feature) {
+                            return {
+                                fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            return {weight: 2,opacity: 1, dashArray: '3',
+                                fillOpacity: 0.7, color: 'white',
+                                fillColor: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    map.removeLayer(precinctLayer);
+                } else if (Object.keys(data)[0].charAt(0) == '2') {
+                    districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                        onEachFeature: clusterOnEachFeature,
+                        style: function (feature) {
+                            return {
+                                fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            return {weight: 2,opacity: 1, dashArray: '3',
+                                fillOpacity: 0.7, color: 'white',
+                                fillColor: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    map.removeLayer(precinctLayer);
+                } else {
+                    districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                        onEachFeature: clusterOnEachFeature,
+                        style: function (feature) {
+                            return {
+                                fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                        onEachFeature: precinctOnEachFeature,
+                        style: function (feature) {
+                            return {weight: 2,opacity: 1, dashArray: '3',
+                                fillOpacity: 0.7, color: 'white',
+                                fillColor: data[feature.properties.id]
+                            };
+                        }
+                    }).addTo(map);
+                    map.removeLayer(precinctLayer);
+                }
+                ajaxPhaseII();
+            }
+        }
+    });
+}
