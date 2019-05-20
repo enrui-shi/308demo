@@ -90,23 +90,23 @@ $(document).ready(function () {
 
                     if (Object.keys(data)[0].charAt(0) == '1') {
                         districtLayer = L.geoJSON(oh_data.FeatureCollection, {
-                            onEachFeature: precinctOnEachFeature,
+                            onEachFeature: clusterOnEachFeature,
                             style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0, color:data[feature.properties.id]};
                             }
                         }).addTo(map);
                     } else if (Object.keys(data)[0].charAt(0) == '2') {
                         districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-                            onEachFeature: precinctOnEachFeature,
+                            onEachFeature: clusterOnEachFeature,
                             style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0, color:data[feature.properties.id]};
                             }
                         }).addTo(map);
                     } else {
                         districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
-                            onEachFeature: precinctOnEachFeature,
+                            onEachFeature: clusterOnEachFeature,
                             style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0, color:data[feature.properties.id]};
                             }
                         }).addTo(map);
                     }

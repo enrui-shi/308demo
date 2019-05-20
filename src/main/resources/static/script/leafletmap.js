@@ -61,10 +61,10 @@ function selectOH(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    /*districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
+    districtLayer = L.geoJSON(OH_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
@@ -98,10 +98,10 @@ function selectNY(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    /*districtLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
+    districtLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
@@ -134,10 +134,10 @@ function selectIA(){
         onEachFeature: precinctOnEachFeature
     }).addTo(map);
 
-    /*districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
+    districtLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
         style: districtStyle,
         onEachFeature: districtOnEachFeature
-    }).addTo(map);*/
+    }).addTo(map);
 
     $.ajax({
         type: 'post',
@@ -213,38 +213,6 @@ function precinctHoverFeature(e) {
     }
     info.update(layer.feature, precinctLayer);
 
-    // hover 2 seconds to display demographic data of the precinct
-    /*setTimeout(function(){
-        console.log("hover two seconds to show demographic data");
-        $.ajax({
-            type: 'post',
-            url: "/home/main/showDemo?precinctID="+layer.feature.properties.id,
-            contentType:"application/json; charset=utf-8",
-            header: {"accept": "application/json"},
-            dataType:"json",
-            success: function (data){
-                console.log(data);
-
-                var popContent;
-                if(data.Demographic == 'Undefined'){
-                    popContent = "<b>demographic in precinct "+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
-                    layer.bindPopup(popContent);
-                    layer.on('mouseover', function (e) {
-                        this.openPopup();
-                    });
-                } else {
-                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>"
-                        + "<br>totalPopulation: "+data.totalPopulation + "<br>ASIAN_PACIFIC: "+data.ASIAN_PACIFIC
-                        + "<br>LATINO: "+data.LATINO + "<br>WHITE: "+data.WHITE + "<br>AFRIAN_AMERICAN: "+data.AFRIAN_AMERICAN;
-
-                    layer.bindPopup(popContent);
-                    layer.on('mouseover', function (e) {
-                        this.openPopup();
-                    });
-                }
-            }
-        })
-    }, 2000);*/
 }
 
 /* mouse remove */
@@ -346,6 +314,53 @@ function resetState(e) {
     info.update(null, stateLayer);
 }
 
+function clusterHoverFeature(e) {
+    var layer = e.target;
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+
+    // hover 2 seconds to display demographic data of the precinct
+    /*setTimeout(function(){
+        console.log("hover two seconds to show demographic data");
+        $.ajax({
+            type: 'post',
+            url: "/home/main/showDemo?precinctID="+layer.feature.properties.id,
+            contentType:"application/json; charset=utf-8",
+            header: {"accept": "application/json"},
+            dataType:"json",
+            success: function (data){
+                console.log(data);
+
+                var popContent;
+                if(data.Demographic == 'Undefined'){
+                    popContent = "<b>demographic in precinct "+ layer.feature.properties.id + "</b><br>Do not find its demographic data";
+                    layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                } else {
+                    popContent = "<b>demographic in precinct"+ layer.feature.properties.id + "</b>"
+                        + "<br>totalPopulation: "+data.totalPopulation + "<br>ASIAN_PACIFIC: "+data.ASIAN_PACIFIC
+                        + "<br>LATINO: "+data.LATINO + "<br>WHITE: "+data.WHITE + "<br>AFRIAN_AMERICAN: "+data.AFRIAN_AMERICAN;
+
+                    layer.bindPopup(popContent);
+                    layer.on('mouseover', function (e) {
+                        this.openPopup();
+                    });
+                }
+            }
+        })
+    }, 2000);*/
+}
+
+function resetCluster(e) {
+    e.target.setStyle( {
+    });
+}
+
+
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
@@ -375,6 +390,13 @@ function districtOnEachFeature(feature, layer) {
     });
 }
 
+function clusterOnEachFeature(feature, layer) {
+    layer.on({
+        mouseover: clusterHoverFeature,
+        mouseout: resetCluster,
+        click: zoomToFeature
+    });
+}
 
 /* show different layers when zoom in/out */
 map.on('zoomend', function () {
