@@ -18,5 +18,13 @@ public class PhaseTwoService {
         return response;
     }
 
-
+    public Map showMinority(Map<Long, District> pToD) {
+        Map<Long, String> result = new HashMap<>();
+        for (Map.Entry<Long, District> entry : pToD.entrySet()) {
+            if(entry.getValue().isMinorityDistrict()) {
+                result.put(entry.getKey(), entry.getValue().getColor());
+            }
+        }
+        return result;
+    }
 }
