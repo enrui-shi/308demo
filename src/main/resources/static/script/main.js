@@ -1,7 +1,10 @@
 // get slide bar value
 $(document).ready(function () {
     document.getElementById('menubtn').style.display = 'none';
-
+    $('#guest_s').prop('disabled', true);
+    $('#guest_b').prop('disabled', true);
+    $('#guest_a').prop('disabled', true);
+    
     // if user log in
     if($.cookie('currentuser') != "" || $.cookie('currentuser') != undefined) {
         $('#guest_s').prop('disabled', false);
@@ -118,7 +121,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -138,7 +141,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -158,7 +161,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -209,7 +212,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -229,7 +232,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -249,7 +252,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -327,7 +330,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
@@ -347,7 +350,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
@@ -367,7 +370,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
