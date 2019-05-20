@@ -45,11 +45,11 @@ public class PhaseOneService {
             algorithm.setClusters(GVAL.oh);
             System.out.println(algorithm.getClusterEdges().get(0));
         } else if(stateName == stateName.NY) {
-            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.nye), new TypeReference<List<ClusterEdge>>(){}));
-            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ny), new TypeReference<List<Cluster>>(){}));
+            algorithm.setClusterEdges(GVAL.nye);
+            algorithm.setClusters(GVAL.ny);
         } else {
-            algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ia), new TypeReference<List<ClusterEdge>>(){}));
-            algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.iae), new TypeReference<List<Cluster>>(){}));
+            algorithm.setClusterEdges(GVAL.ia);
+            algorithm.setClusters(GVAL.iae);
         }
         }catch (Exception e){
             System.out.println(e);
