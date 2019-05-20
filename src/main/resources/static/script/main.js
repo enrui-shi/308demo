@@ -1,6 +1,9 @@
 // get slide bar value
 $(document).ready(function () {
     document.getElementById('menubtn').style.display = 'none';
+    document.getElementById('aa-color-btn').style.display = 'none';
+    document.getElementById('mm-color-btn').style.display = 'none';
+    document.getElementById('original-color-btn').style.display = 'none';
     $('#guest_s').prop('disabled', true);
     $('#guest_b').prop('disabled', true);
     $('#guest_a').prop('disabled', true);
@@ -292,7 +295,9 @@ function ajaxPhaseII() {
             console.log("phase2 ... " + data);
             
             // button show up: display african-american population distribution
-            document.getElementById('#aa-color-btn').style.display='block';
+            document.getElementById('aa-color-btn').style.display='block';
+            document.getElementById('mm-color-btn').style.display = 'block';
+            document.getElementById('original-color-btn').style.display = 'block';
         }
     })
     sleep(2000);

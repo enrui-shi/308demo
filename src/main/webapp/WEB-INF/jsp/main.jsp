@@ -28,7 +28,7 @@
         <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
         <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
         <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
-        <input type="image" class="user-icon" title="user login or logout" onclick="clickProfile() src="image/user_icon.jpg" />
+        <input type="image" class="user-icon" title="user login or logout" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
     <body>
         <div id="user01" class="my-modal">

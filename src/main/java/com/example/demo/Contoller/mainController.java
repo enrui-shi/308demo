@@ -156,10 +156,9 @@ public class mainController {
     }
 
     @PostMapping(value = "/main/showMinority", consumes = "application/json", produces = "application/json")
-    public Map showMinority(@RequestParam Long districtID, HttpSession session) {
-        System.out.println(districtID);
+    public Map showMinority(HttpSession session) {
         Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
         // find precinct demographic data
-        return p2s.showDemoAA(districtID, pToD);
+        return p2s.showMinority(pToD);
     }
 }

@@ -573,7 +573,7 @@ function setMMcolor() {
                     style: function (feature) {
                         return {
                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                            opacity: 0.7, weight: 3, color: 'black'
+                            opacity: 0.7, weight: 1, color: 'black'
                         };
                     }
                 }).addTo(map);
@@ -583,7 +583,7 @@ function setMMcolor() {
                     style: function (feature) {
                         return {
                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                            opacity: 0.7, weight: 3, color: 'black'
+                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                         };
                     }
                 }).addTo(map);
@@ -591,9 +591,10 @@ function setMMcolor() {
                 MMLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
                     onEachFeature: clusterOnEachFeature,
                     style: function (feature) {
+
                         return {
                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                            opacity: 0.7, weight: 3, color: 'black'
+                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                         };
                     }
                 }).addTo(map);
@@ -604,9 +605,11 @@ function setMMcolor() {
     })
 }
 
-function MMOnEachFeature(feature, layer) {
-    layer.on({
-        mouseover: clusterHoverFeature,
-        mouseout:  resetCluster
-    });
+function setOriginalcolor(){
+    if(map.has(MMLayer))
+        map.removeLayer(MMLayer);
+    if(map.has(AALayer))
+        map.remove(AALayer)
+    map.addLayer(precinctLayer);
+    map.addLayer(districtLayer);
 }
