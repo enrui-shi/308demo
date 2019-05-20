@@ -75,7 +75,7 @@
                 </div><!--setting div over-->
                 <form id="preference">
                     <div class="my-slidebar-box">
-                        <b>
+                        <div class="my-slidebar-box-b">
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="compactness"
                                    onchange="updateTextInput(this.value,this.id);">
@@ -97,7 +97,7 @@
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
                             <label id="lengthWidthValue">0.00</label></u><label>&emsp;length width compactness weight</label> <br>
-                        </b>
+                        </div>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
                         <span id="inputerror" style="color:red"></span>

@@ -324,7 +324,7 @@ html {
 .my-slidebar-box{
   position: relative;;
   width:92%;
-  height:15%;
+  height:17.5%;
   left:4%;
   top: 12px;
   padding:2%;
@@ -341,7 +341,7 @@ html {
   font-size:18px;
 }
 
-.my-slidebar-box b{
+.my-slidebar-box-b{
   position:absolute;
   top:10%;
   margin-right: 0%;
@@ -356,7 +356,7 @@ html {
 .my-numberInput{
   position: relative;
   width:92%;
-  height:25%;
+  height:22.6%;
   left:4%;
   padding:2%;
   top:5%;
@@ -389,7 +389,7 @@ html {
   height:7%;
   left:4%;
   padding:2%;
-  top:5%;
+  top:5.5%;
   overflow: scroll;
 }
 
@@ -399,7 +399,7 @@ html {
   height:10%;
   left:4%;
   padding:2%;
-  top:5%;
+  top:5.5%;
   overflow: scroll;
 }
 

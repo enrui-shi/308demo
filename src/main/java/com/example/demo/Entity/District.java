@@ -79,6 +79,14 @@ public class District {
         return precincts;
     }
 
+    public boolean isMinorityDistrict() {
+        return minorityDistrict;
+    }
+
+    public EthnicGroup getTargetEthnic() {
+        return targetEthnic;
+    }
+
     public Map<Measurement, Double> getScore() {
         return measureScore;
     }
@@ -97,6 +105,10 @@ public class District {
 
     public Demographic getDemographic() {
         return demographic;
+    }
+
+    public Map<Measurement, Double> getMeasureScore() {
+        return measureScore;
     }
 
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
