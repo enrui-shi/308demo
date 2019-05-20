@@ -287,6 +287,9 @@ function ajaxPhaseII() {
         dataType: "json",
         success: function (data) {
             console.log("phase2 ... " + data);
+            
+            // button show up: display african-american population distribution
+            document.getElementById('#aa-color-btn').style.display='block';
         }
     })
     sleep(2000);
@@ -307,8 +310,6 @@ function ajaxPhase2() {
                 $('#phase1').prop('disabled', false);
                 $('#phase2').prop('disabled', true);
 
-                // button show up: display african-american population distribution
-                document.getElementById('#aa-color-btn').style.display='block';
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
                 ajaxPhase2();
@@ -388,10 +389,10 @@ function ajaxPhase2() {
 }
 
 function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+             break;
+        }
+     }
 }
