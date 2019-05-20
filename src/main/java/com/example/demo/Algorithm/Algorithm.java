@@ -222,7 +222,6 @@ public class Algorithm {
                 System.out.println(move);
                 move.execute();
                 phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
-                //phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getTo().getColor()));
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
             count --;
@@ -245,8 +244,6 @@ public class Algorithm {
             double origin = from.getTotalScore()+to.getTotalScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
                 move.tryMove();
-
-                //map.put(move.getPrecinct().getPrecinctID(),move.getTo().getColor());
                 phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
                 double changed = -1;
                 if(move.checkContiguity()) {
