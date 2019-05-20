@@ -112,14 +112,14 @@ public class Init implements CommandLineRunner {
         System.out.println("number to edge:" +precinctEdges.size());
         System.out.println("number of es:" + es.size());
         System.out.println("number of ds:" + ds.size());
-        System.out.println("starting add edges");
-        System.out.println(precinctEdges.size());
-        initService.addAllPrecinctEdge(precinctEdges);
-        System.out.println("add edges success");
-        System.out.println("starting add electionresult");
-        initService.addAllElectionResult(es);
-        System.out.println("starting add demographic");
-        initService.addAllDemographic(ds);
+//        System.out.println("starting add edges");
+//        System.out.println(precinctEdges.size());
+//        initService.addAllPrecinctEdge(precinctEdges);
+//        System.out.println("add edges success");
+//        System.out.println("starting add electionresult");
+//        initService.addAllElectionResult(es);
+//        System.out.println("starting add demographic");
+//        initService.addAllDemographic(ds);
         System.out.println("starting add preciects");
         initService.addAllPrecinct(precincts);
         System.out.println("finished!!!!!!!!!!!!!!!");
@@ -132,7 +132,12 @@ public class Init implements CommandLineRunner {
         JSONObject info = (JSONObject) p.get("info");
         JSONObject demo = (JSONObject) p.get("demo");
         JSONObject vote = (JSONObject) p.get("vote");
+        JSONObject bounds = (JSONObject) p.get("bounds");
         //set the value of precinct
+        precinct.setMaxX((double) bounds.get("maxX"));
+        precinct.setMinX((double) bounds.get("minX"));
+        precinct.setMaxY((double) bounds.get("MaxY"));
+        precinct.setMinY((double) bounds.get("MinY"));
         precinct.setPrecinctID(Long.parseLong((String) info.get("id")));
         precinct.setCounty((String) info.get("county"));
         precinct.setDemographic(CreateDemographic(demo));
