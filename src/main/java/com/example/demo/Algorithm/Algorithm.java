@@ -234,6 +234,7 @@ public class Algorithm {
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
 
+
         }
         System.out.println("finish");
         Map<Long,String> map =new HashMap<>();
@@ -253,7 +254,7 @@ public class Algorithm {
             double origin = from.getTotalScore()+to.getTotalScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
                 move.tryMove();
-                phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
+                //phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
                 double changed = -1;
                 if(move.checkContiguity()) {
                     move.setChangedFromScore(measureDistrict(move.getFrom()));
@@ -264,7 +265,7 @@ public class Algorithm {
                 move.undo();
 
                 //phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getFrom().getColor()));
-                phaseTwoChange.add(addChnage(move,move.getFrom().getColor()));
+               // phaseTwoChange.add(addChnage(move,move.getFrom().getColor()));
                 if(changed-origin>0){
                     scoreChange.put(changed-origin,move);
                 }
@@ -344,6 +345,7 @@ public class Algorithm {
 
     public List<Summary> runBatch(Batch b, BatchService batchService,List<Cluster>cls,List<ClusterEdge>ces) {
         List<Summary> summaries = new ArrayList<>();
+        phaseTwoChange = new ArrayList<>();
         for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);

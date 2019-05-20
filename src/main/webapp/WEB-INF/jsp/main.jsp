@@ -25,10 +25,10 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/')">Home</a>
-        <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
         <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
+        <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
         <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
-        <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
+        <input type="image" class="user-icon" title="user login or logout" onclick="clickProfile() src="image/user_icon.jpg" />
     </header>
     <body>
         <div id="user01" class="my-modal">
@@ -54,7 +54,7 @@
                 <script src = "/script/leafletmap.js"></script>
             </div><!--map-content div over-->
             <div class="my-menu">
-                <button id="menubtn" onclick= "openSidebar();" disabled><i class="fa fa-bars"></i> Menu</button>
+                <button id="menubtn" onclick= "openSidebar();" title="Input your preference data" disabled><i class="fa fa-bars"></i> Menu</button>
             </div><!--my-menu div over-->
             <div class="select-state" id="select-state">
                 <button onclick="dropDownSelection();" class="select-state-btn"><i class="fa fa-caret-down"></i> Select State</button>
@@ -69,7 +69,7 @@
             </div>
             <div id = "sidebar">
                 <button onclick = "closeSidebar();" class = "icon"><i class="fa fa-close"></i></button>
-                <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
+                <button onclick="sideSetting();" class = "icon" title="term explain"><i class = "fa fa-question-circle"></i></button>
                 <div class = "setting" id = "setting">
                     <div class="arrow-up"></div>
                     <h3>Term explainning</h3>

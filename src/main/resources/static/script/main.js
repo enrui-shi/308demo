@@ -1,7 +1,10 @@
 // get slide bar value
 $(document).ready(function () {
     document.getElementById('menubtn').style.display = 'none';
-
+    $('#guest_s').prop('disabled', true);
+    $('#guest_b').prop('disabled', true);
+    $('#guest_a').prop('disabled', true);
+    
     // if user log in
     if($.cookie('currentuser') != "" || $.cookie('currentuser') != undefined) {
         $('#guest_s').prop('disabled', false);
@@ -118,7 +121,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -138,7 +141,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -158,7 +161,7 @@ $(document).ready(function () {
                                 style: function (feature) {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -209,7 +212,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -229,7 +232,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -249,7 +252,7 @@ $(document).ready(function () {
                                     style: function (feature) {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -278,7 +281,7 @@ $(document).ready(function () {
 
 function ajaxPhaseII() {
     console.log("phase two process is ready ... ")
-    ajaxPhase2();
+
     $.ajax({
         type: 'post',
         url: "/home/main/startPhaseTwo",
@@ -287,8 +290,13 @@ function ajaxPhaseII() {
         dataType: "json",
         success: function (data) {
             console.log("phase2 ... " + data);
+            
+            // button show up: display african-american population distribution
+            document.getElementById('#aa-color-btn').style.display='block';
         }
     })
+    sleep(2000);
+    ajaxPhase2();
 }
 
 // start to get the change of phase2
@@ -305,8 +313,6 @@ function ajaxPhase2() {
                 $('#phase1').prop('disabled', false);
                 $('#phase2').prop('disabled', true);
 
-                // button show up: display african-american population distribution
-                document.getElementById('#aa-color-btn').style.display='block';
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
                 ajaxPhase2();
@@ -324,7 +330,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
@@ -344,7 +350,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
@@ -364,7 +370,7 @@ function ajaxPhase2() {
                         style: function (feature) {
                             return {
                                 fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                                opacity: 1, weight: 1, color: data[feature.properties.id]
+                                opacity: 0.7, weight: 1, color: data[feature.properties.id]
                             };
                         }
                     }).addTo(map);
@@ -383,4 +389,13 @@ function ajaxPhase2() {
             }
         }
     });
+}
+
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+             break;
+        }
+     }
 }
