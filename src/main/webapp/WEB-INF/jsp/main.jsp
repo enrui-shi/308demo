@@ -25,8 +25,8 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/')">Home</a>
-        <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
         <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
+        <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
         <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
