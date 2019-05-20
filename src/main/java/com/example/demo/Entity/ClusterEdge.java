@@ -3,9 +3,10 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class ClusterEdge {
+public class ClusterEdge implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
