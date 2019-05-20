@@ -14,11 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.demo.Enum.EthnicGroup.*;
@@ -42,25 +38,32 @@ public class PhaseOneService {
             System.out.println("OH DATA LOAD");
             //algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ohe), new TypeReference<List<ClusterEdge>>(){}));
             //algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.oh), new TypeReference<List<Cluster>>(){}));
-//            List<ClusterEdge> ohe_t = new ArrayList<>(GVAL.ohe);
-//            List<Cluster> oh_t = new ArrayList<>(GVAL.oh);
-            algorithm.setClusterEdges(cloneClusterEdge(GVAL.ohe));
-            algorithm.setClusters(cloneCluster(GVAL.oh));
+            Map<Long,Cluster> oh_t = cloneCluster(GVAL.oh);
+            List<ClusterEdge> ohe_t = cloneClusterEdge(GVAL.ohe,oh_t);
+            List<Cluster> oh_l = new ArrayList<>(oh_t.values());
+            algorithm.setClusterEdges(ohe_t);
+            algorithm.setClusters(oh_l);
             System.out.println(algorithm.getClusterEdges().get(0));
         } else if(stateName == stateName.NY) {
             System.out.println("NY DATA LOAD");
-            algorithm.setClusterEdges(cloneClusterEdge(GVAL.nye));
-            algorithm.setClusters(cloneCluster(GVAL.ny));
+            Map<Long,Cluster> ny_t = cloneCluster(GVAL.ny);
+            List<ClusterEdge> nye_t = cloneClusterEdge(GVAL.nye,ny_t);
+            List<Cluster> ny_l = new ArrayList<>(ny_t.values());
+            algorithm.setClusterEdges(nye_t);
+            algorithm.setClusters(ny_l);
         } else {
             System.out.println("IA DATA LOAD");
-            System.out.println(GVAL.iae.size());
-            System.out.println(GVAL.ia.size());
-            algorithm.setClusterEdges(cloneClusterEdge(GVAL.iae));
-            algorithm.setClusters(cloneCluster(GVAL.ia));
+            Map<Long,Cluster> ia_t = cloneCluster(GVAL.ia);
+            List<ClusterEdge> iae_t = cloneClusterEdge(GVAL.iae,ia_t);
+            List<Cluster> ia_l = new ArrayList<>(ia_t.values());
+            System.out.println(ia_t.size());
+            System.out.println(iae_t.size());
+            algorithm.setClusterEdges(iae_t);
+            algorithm.setClusters(ia_l);
         }
         }catch (Exception e){
             System.out.println("error!!!!!!!!!!!!!");
-            System.out.println(e.getStackTrace());
+            System.out.println(e);
         }
         algorithm.startGraphPartition();
 
@@ -121,38 +124,42 @@ public class PhaseOneService {
             return response;
         }
     }
-    public static List<ClusterEdge> cloneClusterEdge(List<ClusterEdge> clusterEdges) {
-        List<ClusterEdge> copy = null;
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos;
-            oos = new ObjectOutputStream(baos);
-            oos.writeObject(clusterEdges);
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            copy = (List<ClusterEdge>) ois.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    public static List<ClusterEdge> cloneClusterEdge(List<ClusterEdge> clusterEdges,Map<Long,Cluster> cmap) {
+        List<ClusterEdge> copy = new ArrayList<>();
+        for(ClusterEdge ce:clusterEdges){
+            ClusterEdge tce = new ClusterEdge();
+            tce.setNatureJoinability(ce.getNatureJoinability());
+            tce.setDemographicJoinability(ce.getDemographicJoinability());
+            tce.setCountyJoinability(ce.getCountyJoinability());
+            tce.setStateName(ce.getStateName());
+            tce.setCluster1(cmap.get(ce.getCluster1().getId()));
+            tce.setCluster2(cmap.get(ce.getCluster2().getId()));
+            copy.add(tce);
         }
+
         return copy;
     }
-    public static List<Cluster> cloneCluster(List<Cluster> clusters) {
-        List<Cluster> copy = null;
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos;
-            oos = new ObjectOutputStream(baos);
-            oos.writeObject(clusters);
-            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            copy = (List<Cluster>) ois.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+    public static Map<Long,Cluster> cloneCluster(List<Cluster> clusters) {
+        Map<Long,Cluster> copy= new HashMap<>();
+        for (Cluster c:clusters){
+            Cluster t = new Cluster();
+            t.setId(c.getId());
+            t.setStateName(c.getStateName());
+            t.setPaired(c.isPaired());
+            Demographic dt =new Demographic();
+            dt.setTotalPopulation(c.getDemographic().getTotalPopulation());
+            Map<EthnicGroup, Integer> tmap = new EnumMap<EthnicGroup, Integer>(EthnicGroup.class);
+            for(EthnicGroup eg: c.getDemographic().getEthnicData().keySet()){
+                tmap.put(eg,c.getDemographic().getEthnicData().get(eg));
+            }
+            dt.setEthnicData(tmap);
+            t.setDemographic(dt);
+            List<Precinct> tp = new ArrayList<>();
+            tp.add(c.getPrecincts().get(0));
+            t.setPrecincts(tp);
+            copy.put(t.getId(),t);
         }
+
         return copy;
     }
 

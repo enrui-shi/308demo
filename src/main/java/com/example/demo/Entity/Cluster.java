@@ -153,6 +153,10 @@ public class Cluster implements Comparable<Cluster> , Serializable {
         neighborClusters.add(c);
     }
 
+    public StateName getStateName() {
+        return stateName;
+    }
+
     @Override
     public String toString() {
         return "Cluster{" +
