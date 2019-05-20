@@ -301,13 +301,13 @@ function ajaxPhase2() {
         header: {"accept": "application/json"},
         dataType: "json",
         success: function (data) {
-            console.log("if end? 0 is end: "+Object.keys(data)[0]);
-            console.log("p id list: "+Object.keys(data));
-            console.log("first color: "+data[Object.keys(data)[0]]);
             if (data[Object.keys(data)[0]] == 'end') {
                 // after phase two finish, enable playphase1
                 $('#phase1').prop('disabled', false);
                 $('#phase2').prop('disabled', true);
+
+                // button show up: display african-american population distribution
+                document.getElementById('#aa-color-btn').style.display='block';
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
                 ajaxPhase2();

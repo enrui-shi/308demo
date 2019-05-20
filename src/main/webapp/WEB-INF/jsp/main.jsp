@@ -64,6 +64,9 @@
                     <input onclick="selectIA()" type="button" id="IA" value="Iowa">
                 </div>
             </div><!--select-state div over-->
+            <div class="aa-color-set" id="aa-color-set">
+                <button id="aa-color-btn" onclick= "setAAPDcolor();" style="display: none;"><i class="fa fa-asterisk"></i> Menu</button>
+            </div>
             <div id = "sidebar">
                 <button onclick = "closeSidebar();" class = "icon"><i class="fa fa-close"></i></button>
                 <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
