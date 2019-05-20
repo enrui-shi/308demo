@@ -221,9 +221,7 @@ public class Algorithm {
             count --;
         }
         System.out.println("finish");
-
-
-        return null;
+        return currentState.generateSummary();
     }
 
     public Move testMove(Precinct candidate){
