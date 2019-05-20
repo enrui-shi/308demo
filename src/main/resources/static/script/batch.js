@@ -35,7 +35,7 @@ $(document).ready(function(){
               e.preventDefault();
         } else {
 
-              var d_data = {upperBound: $("#dMAX").val(), lowerBound: $("#dMIN").val()}
+              var d_data = {upperBound: parseInt($("#dMAX").val()), lowerBound: parseInt($("#dMIN").val())}
               var mm_data = {upperBound: $("#mmMAX").val(), lowerBound: $("#mmMIN").val()};
               var ep_data = {upperBound: $("#eqMAX").val(), lowerBound: $("#eqMIN").val()};
               var c_data = {upperBound: $("#cMAX").val(), lowerBound: $("#cMIN").val()};

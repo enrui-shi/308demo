@@ -29,4 +29,36 @@ public class Bound {
     public double generateValue() {
         return (Math.random()) * (upperBound - lowerBound) + lowerBound;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getUpperBound() {
+        return upperBound;
+    }
+
+    public void setUpperBound(double upperBound) {
+        this.upperBound = upperBound;
+    }
+
+    public double getLowerBound() {
+        return lowerBound;
+    }
+
+    public void setLowerBound(double lowerBound) {
+        this.lowerBound = lowerBound;
+    }
+
+    @Override
+    public String toString() {
+        return "Bound{" +
+                "upperBound=" + upperBound +
+                ", lowerBound=" + lowerBound +
+                '}';
+    }
 }
