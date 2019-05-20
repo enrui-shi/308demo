@@ -31,6 +31,9 @@ public class Cluster implements Comparable<Cluster> , Serializable {
 
     private boolean paired;
 
+    @Transient
+    private String color;
+
     public Cluster(){
         neighborClusters = new ArrayList<>();
         clusterEdges = new ArrayList<>();
@@ -92,6 +95,14 @@ public class Cluster implements Comparable<Cluster> , Serializable {
 
     public void setPaired(boolean paired) {
         this.paired = paired;
+    }
+
+    public void setColor(String color){
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public void merge(Cluster c) {
