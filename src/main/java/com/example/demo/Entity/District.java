@@ -84,6 +84,10 @@ public class District {
         return minorityDistrict;
     }
 
+    public void setMinorityDistrict(boolean minorityDistrict) {
+        this.minorityDistrict = minorityDistrict;
+    }
+
     public EthnicGroup getTargetEthnic() {
         return targetEthnic;
     }
@@ -124,6 +128,13 @@ public class District {
         return measureScore;
     }
 
+    public boolean isMinorityTarget() {
+        return minorityTarget;
+    }
+
+
+    public District(){ }
+
     public District(List<Precinct> precincts, Demographic demographic, Long districtId) {
         this.precincts = new HashMap<>();
         neighborDistrict = new ArrayList<>();
@@ -134,6 +145,9 @@ public class District {
         this.demographic = demographic;
         this.districtId = districtId;
         this.neighborDistrict = new ArrayList<>();
+        minorityTarget = false;
+        minorityDistrict = false;
+        targetEthnic = EthnicGroup.WHITE;
     }
 
     public void removePrecinct(Precinct p){
@@ -155,14 +169,19 @@ public class District {
             if (precincts.containsValue(p)) {
                 int total = demographic.getTotalPopulation() - p.getDemographic().getTotalPopulation();
                 int group = demographic.getNumberByGroup(targetEthnic) - p.getDemographic().getNumberByGroup(targetEthnic);
-                return ethnicBound.checkInbound((double) group / total);
+                double ratio = (double) group / (double)total;
+                double before = demographic.getRatioByGroup(targetEthnic);
+                return ethnicBound.better(before,ratio);
             } else {
                 int total = demographic.getTotalPopulation() + p.getDemographic().getTotalPopulation();
                 int group = demographic.getNumberByGroup(targetEthnic) + p.getDemographic().getNumberByGroup(targetEthnic);
-                return ethnicBound.checkInbound((double) group / total);
+                double n = (double) group / (double)total;
+                double before= demographic.getRatioByGroup(targetEthnic);
+                return ethnicBound.better(before,n);
             }
         }
     }
+
 
     public List<Precinct> getBoundPrecinct(){
         List<Precinct>bound = new ArrayList<>();
@@ -206,20 +225,25 @@ public class District {
     }
 
     public boolean checkContiguity(){
-        List<Precinct>bound = this.getBoundPrecinct();
         List<Precinct>used = new ArrayList<>();
-        boolean flag = true;
-        Precinct p = bound.get(0);
-        while(flag ||used.size() == bound.size()){
-            flag = false;
-            for(long neighbour:p.getNeighbourPrecincts()){
-                if(bound.contains(precincts.get(neighbour))&& (!used.contains(precincts.get(neighbour)))){
-                    used.add(precincts.get(neighbour));
-                    flag = true;
+        List<Precinct>queue = new ArrayList<>();
+        queue.add(getRandomPrecinct());
+        while(queue.size()!= 0){
+            Precinct p = queue.remove(0);
+            for(Long pID:p.getNeighbourPrecincts()){
+                if(precincts.get(pID)!= null &&!used.contains(precincts.get(pID))&&!queue.contains(precincts.get(pID))){
+                    queue.add(precincts.get(pID));
                 }
             }
+            used.add(p);
         }
-        return used.size() == bound.size();
+        return used.size()== precincts.size();
+    }
+    public Precinct getRandomPrecinct(){
+        for(Precinct p:precincts.values()){
+            return p;
+        }
+        return null;
     }
 
     public String precinctString() {

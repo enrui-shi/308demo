@@ -227,6 +227,14 @@ public class Algorithm {
             count --;
         }
         System.out.println("finish");
+        for(District d:currentState.getDistricts()){
+            if(d.isMinorityTarget()){
+                double value = d.getDemographic().getRatioByGroup(d.getTargetEthnic());
+                if(currentState.getPreference().getEthnicGroupBound().get(d.getTargetEthnic()).checkInbound(value)){
+                    d.setMinorityDistrict(true);
+                }
+            }
+        }
 
         phaseTwoChange.add(new colorChange(Long.valueOf(0),"0"));
         return currentState.generateSummary();

@@ -26,6 +26,21 @@ public class Bound {
         return value < upperBound && value > lowerBound;
     }
 
+    public double differentFromBound(double value){
+        if(checkInbound(value)){
+            return 0;
+        }else{
+            if(value>upperBound){
+                return value-upperBound;
+            }else{
+                return lowerBound-value;
+            }
+        }
+    }
+    public boolean better(double old, double n){
+        return n<=old;
+    }
+
     public double generateValue() {
         return (Math.random()) * (upperBound - lowerBound) + lowerBound;
     }
