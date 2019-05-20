@@ -82,7 +82,7 @@ public class mainController {
         }
     }
 
-    @PostMapping(value = "/main/getphasechange",consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/main/getPhaseIChange",consumes = "application/json", produces = "application/json")
     public Map getPhaseOneChange(HttpSession session){
         List<Map<Long,String>> list = (List<Map<Long, String>>) session.getAttribute("PhaseOneChange");
         if(list.size()>0) {
@@ -111,7 +111,7 @@ public class mainController {
         return response;
     }
 
-    @RequestMapping("/main/getChangeOfPhase2")
+    @RequestMapping("/main/getPhaseIIChange")
     public Map getPhase2Change(@RequestParam(required = false) Long timestamp, HttpSession session) {
         // TO DO get change from list
         return null;

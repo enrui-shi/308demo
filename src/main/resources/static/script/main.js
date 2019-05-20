@@ -75,16 +75,22 @@ $(document).ready(function () {
 
             if (document.getElementById('sep_process').checked) {
                 // show phase with process
-                ajaxPhaseI('/home/main/phaseOneWithUpdate');
-            } else {
-                // start phase I without process
-                ajaxPhaseI('/home/main/startPhaseOne');
-            }
-
-            function ajaxPhaseI(str) {
                 $.ajax({
                     type: 'post',
-                    url: str,
+                    url: '/home/main/phaseOneWithUpdate',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(preference_data),
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("phase one process start....");
+                    }
+                })
+                ajaxPhaseI();
+            } else {
+                // start phase I without process
+                $.ajax({
+                    type: 'post',
+                    url: '/home/main/startPhaseOne',
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(preference_data),
                     dataType: "json",
@@ -144,11 +150,70 @@ $(document).ready(function () {
                 })
             }
 
+            // start to get the change of phase1
+            function ajaxPhaseI() {
+                $.ajax({
+                    type: 'get',
+                    url: "/home/main/getPhaseIChange",
+                    contentType: "application/json; charset=utf-8",
+                    header: {"accept": "application/json"},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("if end? 0 is end: "+Object.keys(data)[0]);
+
+                        if (data[Object.keys(data)[0]] == 'end') {
+                            // after phase 1 finish, enable playphase2
+                            $('#phase1').prop('disabled', true);
+                            $('#phase2').prop('disabled', false);
+                        } else {
+                            // update GUI
+                            if (map.hasLayer(districtLayer)) {
+                                map.removeLayer(districtLayer);
+                            }
+
+                            if (Object.keys(data)[0].charAt(0) == '1') {
+                                districtLayer = L.geoJSON(oh_data.FeatureCollection, {
+                                    onEachFeature: clusterOnEachFeature,
+                                    style: function (feature) {
+                                        return {
+                                            fillColor: data[feature.properties.id], fillOpacity: 1,
+                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
+                            } else if (Object.keys(data)[0].charAt(0) == '2') {
+                                districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                                    onEachFeature: clusterOnEachFeature,
+                                    style: function (feature) {
+                                        return {
+                                            fillColor: data[feature.properties.id], fillOpacity: 1,
+                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
+                            } else {
+                                districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                                    onEachFeature: clusterOnEachFeature,
+                                    style: function (feature) {
+                                        return {
+                                            fillColor: data[feature.properties.id], fillOpacity: 1,
+                                            opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
+                            }
+                            // continue send ajax call
+                            ajaxPhaseI();
+                        }
+                    }
+                });
+            }
+
             // start to get the change of phase2
             function ajaxPhaseII() {
                 $.ajax({
                     type: 'get',
-                    url: "/home/main/getChangeOfPhase2",
+                    url: "/home/main/getPhaseIIChange",
                     contentType: "application/json; charset=utf-8",
                     header: {"accept": "application/json"},
                     dataType: "json",
