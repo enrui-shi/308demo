@@ -19,6 +19,7 @@ var stateLayer = L.geoJSON(statesData,{
 
 var districtLayer;
 var precinctLayer;
+var AALayer;
 
 /* add data into map */
 /* way one
@@ -45,6 +46,7 @@ function selectOH(){
     if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
+    $.cookie('currentStateName', 'OH')
     map.setView([40.4173, -82.9071], 7);
 
     if(map.hasLayer(precinctLayer)) {
@@ -86,6 +88,8 @@ function selectNY(){
     if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
+    $.cookie('currentStateName', 'NY')
+
     map.setView([42.34, -76.0060], 7);
 
     if(map.hasLayer(precinctLayer))
@@ -122,6 +126,8 @@ function selectIA(){
     if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
+    $.cookie('currentStateName', 'IA')
+
     map.setView([41.8780, -93.0977], 7);
 
     if(map.hasLayer(precinctLayer))
@@ -427,7 +433,6 @@ function clusterOnEachFeature(feature, layer) {
     layer.on({
         mouseover: clusterHoverFeature,
         mouseout: resetCluster,
-        click: zoomToFeature
     });
 }
 
@@ -454,3 +459,91 @@ map.on('zoomend', function () {
         map.addLayer(precinctLayer);
     }
 });
+
+
+function AAstyle(feature){
+    $.ajax({
+        type: 'post',
+        url: "/home/main/showDemoAA?districtID=" + layer.feature.properties.id,
+        contentType: "application/json; charset=utf-8",
+        header: {"accept": "application/json"},
+        dataType: "json",
+        success: function (data) {
+            return {fillColor: getAAColor(data.AFRIAN_AMERICAN)};
+        }
+    })
+}
+
+
+function getAAColor(x) {
+    switch (parseInt(x)) {
+        case x < 0.1: return "#f9e6ff";
+        case x < 0.2: return "#f2ccff";
+        case x < 0.3: return "#e699ff";
+        case x < 0.4: return "#df80ff";
+        case x < 0.5: return "#d966ff";
+        case x < 0.6: return "#d24dff";
+        case x < 0.7: return "#cc33ff";
+        case x < 0.8: return "#ac00e6";
+        case x < 0.9: return "#9900cc";
+        case x < 1: return "#4d0066";
+    }
+}
+
+function AAHoverFeature(e) {
+    var layer = e.target;
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+
+    $.ajax({
+        type: 'post',
+        url: "/home/main/showDemoAA?districtID=" + layer.feature.properties.id,
+        contentType: "application/json; charset=utf-8",
+        header: {"accept": "application/json"},
+        dataType: "json",
+        success: function (data) {
+            var popContent;
+
+            popContent = "<b>African-American population distribution in district" + "</b>"+data.AFRIAN_AMERICAN;
+            layer.bindPopup(popContent);
+            layer.on('mouseover', function (e) {
+                this.openPopup();
+            });
+        }
+    })
+}
+
+function resetAA(e) {
+    e.target.setStyle( {
+    });
+}
+
+function setAAPDcolor() {
+    if ($.cookie('currentStateName') == 'IA') {
+        AALayer = L.geoJSON(IA_districtsData.FeatureCollection, {
+            style: AAStyle,
+            onEachFeature: AAOnEachFeature
+        }).addTo(map);
+    } else if($.cookie('currentStateName') == 'OH') {
+        AALayer = L.geoJSON(oh_data.FeatureCollection, {
+            style: AAStyle,
+            onEachFeature: AAOnEachFeature
+        }).addTo(map);
+    } else if($.cookie('currentStateName') == 'NY') {
+        AALayer = L.geoJSON(NY_districtsData.FeatureCollection, {
+            style: AAStyle,
+            onEachFeature: AAOnEachFeature
+        }).addTo(map);
+    } else {
+        console.log("Doesn't select state");
+    }
+}
+
+function AAOnEachFeature(feature, layer) {
+    layer.on({
+        mouseover: AAHoverFeature,
+        mouseout: resetAA
+    });
+}
