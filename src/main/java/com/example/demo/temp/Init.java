@@ -28,7 +28,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//@Component
+@Component
 public class Init implements CommandLineRunner {
     @Autowired
     private InitService initService;
@@ -40,7 +40,7 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data_1.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
@@ -112,14 +112,14 @@ public class Init implements CommandLineRunner {
         System.out.println("number to edge:" +precinctEdges.size());
         System.out.println("number of es:" + es.size());
         System.out.println("number of ds:" + ds.size());
-//        System.out.println("starting add edges");
-//        System.out.println(precinctEdges.size());
-//        initService.addAllPrecinctEdge(precinctEdges);
-//        System.out.println("add edges success");
-//        System.out.println("starting add electionresult");
-//        initService.addAllElectionResult(es);
-//        System.out.println("starting add demographic");
-//        initService.addAllDemographic(ds);
+        System.out.println("starting add edges");
+        System.out.println(precinctEdges.size());
+        initService.addAllPrecinctEdge(precinctEdges);
+        System.out.println("add edges success");
+        System.out.println("starting add electionresult");
+        initService.addAllElectionResult(es);
+        System.out.println("starting add demographic");
+        initService.addAllDemographic(ds);
         System.out.println("starting add preciects");
         initService.addAllPrecinct(precincts);
         System.out.println("finished!!!!!!!!!!!!!!!!");
@@ -136,8 +136,8 @@ public class Init implements CommandLineRunner {
         //set the value of precinct
         precinct.setMaxX((double) bounds.get("maxX"));
         precinct.setMinX((double) bounds.get("minX"));
-        precinct.setMaxY((double) bounds.get("MaxY"));
-        precinct.setMinY((double) bounds.get("MinY"));
+        precinct.setMaxY((double) bounds.get("maxY"));
+        precinct.setMinY((double) bounds.get("minY"));
         precinct.setPrecinctID(Long.parseLong((String) info.get("id")));
         precinct.setCounty((String) info.get("county"));
         precinct.setDemographic(CreateDemographic(demo));
