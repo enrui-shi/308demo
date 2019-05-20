@@ -299,24 +299,14 @@ public class Algorithm {
 
     // set district color after phase one finish
     public void setColor() {
-        String[] colors = new String[]{"#ff0000","#0040ff","#ff8000","#00ff00","#ffb3d9","#9900cc","#ffff00","#006600"};
+        String[] colors = new String[]{"#ff0000","#0040ff","#ff8000","#00ff00","#ffb3d9","#9900cc","#ffff00","#006600","#00bfff","#00ffbf","#996600"};
         List<District> d = currentState.getDistricts();
-        int needColor = 0;
         for (int i=0; i<d.size(); i++) {
             if (d.get(i).getColor()==null) {
-                d.get(i).setColor(colors[0]);
-                List<District> neighbor = d.get(i).getNeighborDistrict();
-                for (int j = 0; j < neighbor.size(); j++) {
-                    if (neighbor.get(j).getColor()==null) {
-                        needColor++;
-                        if (needColor <= 7) {
-                            neighbor.get(j).setColor(colors[needColor]);
-                        }
-                    }
-                }
+                d.get(i).setColor(colors[randomIndex(11)]);
             }
         }
-        //checkColor();
+        checkColor();
     }
 
     // check if adjacent districts are in different colors
