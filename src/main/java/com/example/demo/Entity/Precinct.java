@@ -6,11 +6,12 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Precinct {
+public class Precinct implements Serializable {
     @Id
     private Long precinctID;
 

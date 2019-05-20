@@ -3,10 +3,11 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.Party;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Map;
 
 @Entity
-public class ElectionResult {
+public class ElectionResult implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

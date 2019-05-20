@@ -13,12 +13,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.example.demo.Enum.EthnicGroup.*;
 
@@ -41,18 +42,25 @@ public class PhaseOneService {
             System.out.println("OH DATA LOAD");
             //algorithm.setClusterEdges(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.ohe), new TypeReference<List<ClusterEdge>>(){}));
             //algorithm.setClusters(objectMapper.readValue(objectMapper.writeValueAsString(GVAL.oh), new TypeReference<List<Cluster>>(){}));
-            algorithm.setClusterEdges(GVAL.ohe);
-            algorithm.setClusters(GVAL.oh);
+//            List<ClusterEdge> ohe_t = new ArrayList<>(GVAL.ohe);
+//            List<Cluster> oh_t = new ArrayList<>(GVAL.oh);
+            algorithm.setClusterEdges(cloneClusterEdge(GVAL.ohe));
+            algorithm.setClusters(cloneCluster(GVAL.oh));
             System.out.println(algorithm.getClusterEdges().get(0));
         } else if(stateName == stateName.NY) {
-            algorithm.setClusterEdges(GVAL.nye);
-            algorithm.setClusters(GVAL.ny);
+            System.out.println("NY DATA LOAD");
+            algorithm.setClusterEdges(cloneClusterEdge(GVAL.nye));
+            algorithm.setClusters(cloneCluster(GVAL.ny));
         } else {
-            algorithm.setClusterEdges(GVAL.iae);
-            algorithm.setClusters(GVAL.ia);
+            System.out.println("IA DATA LOAD");
+            System.out.println(GVAL.iae.size());
+            System.out.println(GVAL.ia.size());
+            algorithm.setClusterEdges(cloneClusterEdge(GVAL.iae));
+            algorithm.setClusters(cloneCluster(GVAL.ia));
         }
         }catch (Exception e){
-            System.out.println(e);
+            System.out.println("error!!!!!!!!!!!!!");
+            System.out.println(e.getStackTrace());
         }
         algorithm.startGraphPartition();
 
@@ -92,6 +100,8 @@ public class PhaseOneService {
             response.put("Demographic", "Undefined");
             return response;
         }
+
+
     }
 
     public Map showDemoAfterPlay(Long c_ID, Map<Long, District> pToD) {
@@ -110,6 +120,40 @@ public class PhaseOneService {
             response.put("AFRIAN_AMERICAN", pToD.get(c_ID).getDemographic().getEthnicData().get(AFRIAN_AMERICAN) + "");
             return response;
         }
+    }
+    public static List<ClusterEdge> cloneClusterEdge(List<ClusterEdge> clusterEdges) {
+        List<ClusterEdge> copy = null;
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos;
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(clusterEdges);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            copy = (List<ClusterEdge>) ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return copy;
+    }
+    public static List<Cluster> cloneCluster(List<Cluster> clusters) {
+        List<Cluster> copy = null;
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos;
+            oos = new ObjectOutputStream(baos);
+            oos.writeObject(clusters);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            copy = (List<Cluster>) ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return copy;
     }
 
 }

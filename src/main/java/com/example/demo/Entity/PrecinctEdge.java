@@ -3,9 +3,10 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class PrecinctEdge {
+public class PrecinctEdge implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -3,10 +3,11 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.EthnicGroup;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Map;
 
 @Entity
-public class Demographic {
+public class Demographic implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
