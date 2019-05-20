@@ -32,7 +32,7 @@ public class batchController {
     BatchService batchService;
 
     @PostMapping(value = "/creatPiratesBatch", consumes = "application/json", produces = "application/json")
-    public void createBatch(@RequestBody Batch batch, HttpSession session) {
+    public Map createBatch(@RequestBody Batch batch, HttpSession session) {
         System.out.println("create batch");
         System.out.println(batch);
         Algorithm algorithm = new Algorithm();
@@ -53,6 +53,7 @@ public class batchController {
         for(int i=0; i<s.size(); i++) {
             result.put(s.get(i).getStateId(), s.get(i).toString());
         }
+        return result;
     }
 
 }
