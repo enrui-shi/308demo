@@ -522,9 +522,9 @@ function resetAA(e) {
 }
 
 function setAAPDcolor() {
-    if(map.has(precinctLayer))
+    if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
-    if(map.has(districtLayer))
+    if(map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
 
     if ($.cookie('currentStateName') == 'IA') {
@@ -556,9 +556,9 @@ function AAOnEachFeature(feature, layer) {
 
 
 function setMMcolor() {
-    if (map.has(precinctLayer))
+    if (map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);
-    if (map.has(districtLayer))
+    if (map.hasLayer(districtLayer))
         map.removeLayer(districtLayer);
     $.ajax({
         type: 'post',
@@ -606,9 +606,9 @@ function setMMcolor() {
 }
 
 function setOriginalcolor(){
-    if(map.has(MMLayer))
+    if(map.hasLayer(MMLayer))
         map.removeLayer(MMLayer);
-    if(map.has(AALayer))
+    if(map.hasLayer(AALayer))
         map.remove(AALayer)
     map.addLayer(precinctLayer);
     map.addLayer(districtLayer);
