@@ -3,7 +3,6 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Type.Bound;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.*;
@@ -30,18 +29,18 @@ public class Preference {
 
     private double equalPopulationWeight;
 
-    private double lengthWidthWeigth;
+    private double lengthWidthWeight;
 
     public Preference(){
 
     }
 
-    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight, double lengthWidthWeigth) {
+    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight, double lengthWidthWeight) {
         this.numberOfDistrict = numberOfDistrict;
         this.compactnessWeight = compactnessWeight;
         this.partisanFairnessWeight = partisanFairnessWeight;
         this.equalPopulationWeight = equalPopulationWeight;
-        this.lengthWidthWeigth = lengthWidthWeigth;
+        this.lengthWidthWeight = lengthWidthWeight;
     }
 
     public int getNumberByGroup(EthnicGroup eg) {
@@ -94,7 +93,7 @@ public class Preference {
     }
 
     public double getTotalWeight(){
-        return compactnessWeight+partisanFairnessWeight+equalPopulationWeight+lengthWidthWeigth;
+        return compactnessWeight+partisanFairnessWeight+equalPopulationWeight+ lengthWidthWeight;
     }
     public double getNormCompactness(){
         return compactnessWeight/getTotalWeight();
@@ -105,5 +104,5 @@ public class Preference {
     public double getNormEqualPopulation(){
         return equalPopulationWeight/getTotalWeight();
     }
-    public double getNormLengthWidth(){return lengthWidthWeigth/getTotalWeight();}
+    public double getNormLengthWidth(){return lengthWidthWeight /getTotalWeight();}
 }

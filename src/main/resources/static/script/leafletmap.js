@@ -86,7 +86,7 @@ function selectNY(){
     if($.cookie('currentuser') != "" && $.cookie('currentuser') != undefined) {
         $('#menubtn').prop('disabled', false);
     }
-    map.setView([40.7128, -74.0060], 7);
+    map.setView([42.34, -76.0060], 7);
 
     if(map.hasLayer(precinctLayer))
         map.removeLayer(precinctLayer);

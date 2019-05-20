@@ -80,18 +80,23 @@
                             <input type="range" min="0" max="100" value="0" id="compactness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness</label> <br>
+                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness weight</label> <br>
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="partisanFairness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness</label><br>
+                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness weight</label><br>
 
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="equalPopulation"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
+                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population weight</label><br>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="lengthWidth"
+                                   onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <label id="lengthWidthValue">0.00</label></u><label>&emsp;length width compactness weight</label> <br>
                         </b>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
