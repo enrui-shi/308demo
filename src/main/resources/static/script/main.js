@@ -411,10 +411,9 @@ function sleep(milliseconds) {
 function compareScore(){
     fakeLog('The gerrymandering score of measurement in this run: ')
     var data = $.cookie('currentSummary');
-    fakeLog('&nbspTotal: '+data.TOTAL);
-    fakeLog('&nbspPartisan fairness: '+data.PARTISAN_FAIRNESS);
-    fakeLog('&nbspEqual population: '+data.EQUAL_POPULATION);
-    fakeLog('&nbsp:Simple compactness '+data.SIMPLE_COMPACTNESS);
-    fakeLog('&nbspLength width: '+data.LENGTH_WIDTH);
+    console.log(data);
+    for(var i=0; i<Object.keys(data).length; i++) {
+        fakeLog('&nbsp'+Object.keys(data)[i]+': '+data[Object.keys(data)[i]]);
+    }
     $.cookie('currentSummary', "");
 }
