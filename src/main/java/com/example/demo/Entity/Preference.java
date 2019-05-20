@@ -110,4 +110,17 @@ public class Preference {
     public Map<EthnicGroup, Bound> getEthnicGroupBound() {
         return ethnicGroupBound;
     }
+
+    public double getTotalWeight(){
+        return compactnessWeight+partisanFairnessWeight+equalPopulationWeight;
+    }
+    public double getNormCompactness(){
+        return compactnessWeight/getTotalWeight();
+    }
+    public double getNormPartisanFairness(){
+        return partisanFairnessWeight/getTotalWeight();
+    }
+    public double getNormEqualPopulation(){
+        return equalPopulationWeight/getTotalWeight();
+    }
 }

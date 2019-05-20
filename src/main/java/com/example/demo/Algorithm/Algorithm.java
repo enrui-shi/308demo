@@ -172,24 +172,21 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
-        List<Long> used = new ArrayList<>();
-        List<Precinct>movable = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
             double score = measureDistrict(d);
             d.setScore(score);
-            movable.addAll(d.getBoundPrecinct());
         }
-        boolean hasMove = true;
         int count = 1000;
         while (count!=0){
             Precinct candidate = null;
             while(candidate == null) {
                 int districtIndex = randomIndex(currentState.getDistricts().size());
-                currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
+                candidate =currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
             }
             Move move = testMove(candidate);
             if(move != null){
                 move.execute();
+                precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
             count --;
         }
@@ -228,17 +225,15 @@ public class Algorithm {
 
     public double measureDistrict(District d){
         Preference p = currentState.getPreference();
-
-
-        return 0;
+        return p.getNormEqualPopulation()*equalPopulationMeasure(d)+p.getNormPartisanFairness()*efficiencyGapMeasure(d);
     }
 
     public double compactnessMeasure(District d){
         int bound = d.getBoundPrecinct().size();
         int total = d.getPrecincts().size();
-        return (total-bound)/total;
+        return (double)(total-bound)/(double)total;
     }
-    public double checkPoliticalFairness(District d){
+    public double efficiencyGapMeasure(District d){
         int dvote = 0;
         int rvote = 0;
         for(Precinct p:d.getPrecincts().values()){
@@ -248,11 +243,21 @@ public class Algorithm {
         int total = dvote+rvote;
         double winrate = 0.0;
         if(dvote>rvote){
-            winrate = (dvote/total-0.5)*2;
+            winrate = ((double)dvote/(double)total-0.5)*2;
         }else{
-            winrate = (rvote/total -0.5)*2;
+            winrate = ((double)rvote/(double)total -0.5)*2;
         }
         return 1.0-winrate;
+    }
+    public double equalPopulationMeasure(District d){
+        int dp =d.getDemographic().getTotalPopulation();
+        double ap = (double)currentState.getTotalPopulation()/(double)currentState.getPreference().getNumberOfDistrict();
+        double difference = Math.abs((double)dp-ap);
+        if(difference>ap){
+            return 1.0;
+        }else{
+            return 1-(difference)/ap;
+        }
     }
 
 
