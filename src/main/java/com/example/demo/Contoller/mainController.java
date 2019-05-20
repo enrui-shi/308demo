@@ -87,7 +87,7 @@ public class mainController {
     @RequestMapping("/main/getChangeOfPhase2")
     public Map getPhase2Change(@RequestParam(required = false) Long timestamp, HttpSession session) {
         // TO DO get change from list
-        
+        return null;
     }
 
     @PostMapping(value = "/main/showDemo", consumes = "application/json", produces = "application/json")
