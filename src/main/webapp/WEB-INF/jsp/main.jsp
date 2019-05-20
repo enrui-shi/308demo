@@ -122,7 +122,7 @@
                         <label>max population (%)</label> <input type="number" id="maxLatino" min="0" max="100" value="0"><br><p></p>
                     </div><!--my-numberInput div over-->
                     <div class="my-map-checkbox-container">
-                        <input type="checkbox"> Run Phase I with a GUI update at the end of each discrete process<br>
+                        <input type="checkbox" id="sep_process"> Run Phase I with a GUI update at the end of each discrete process<br>
                     </div>
                     <div class="my-map-button-container">
                         <button id="phase1" class="my-map-btn" type="submit" title="Run Phase I with a GUI update at the end."><i class="fa fa-play"></i> Play Phase One</button>
