@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class AdminController {
     @PostMapping(value = "/deleteUser", produces = "application/json")
     public Map<String,String> deleteUser(@RequestBody User user){
         Map<String,String> map = new HashMap<>();
+        System.out.println(user);
         boolean result=adminService.deleteUser(user);
         if(result){
             map.put("status","OK");
@@ -41,4 +43,10 @@ public class AdminController {
         }
         return map;
     }
+
+    @PostMapping(value = "/getusers", produces = "application/json")
+    public List<User> getUsers(){
+        return adminService.getUsers();
+    }
+
 }
