@@ -1,5 +1,16 @@
 // get slide bar value
 $(document).ready(function () {
+    document.getElementById('menubtn').style.display = 'none';
+
+    // if user log in
+    if($.cookie('currentuser') != "" || $.cookie('currentuser') != undefined) {
+        $('#guest_s').prop('disabled', false);
+        $('#guest_b').prop('disabled', false);
+        $('#guest_a').prop('disabled', false);
+        document.getElementById('menubtn').style.display = 'block';
+    }
+
+
     $('#phase1').prop('disabled', false);
     $('#phase2').prop('disabled', true);
     var preference_form = $('#preference');
