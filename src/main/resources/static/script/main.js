@@ -98,7 +98,9 @@ $(document).ready(function () {
                         if (map.hasLayer(districtLayer)) {
                             map.removeLayer(districtLayer);
                         }
-
+                        if (map.hasLayer(precinctLayer)) {
+                            map.removeLayer(precinctLayer);
+                        }
                         if (Object.keys(data)[0].charAt(0) == '1') {
                             districtLayer = L.geoJSON(oh_data.FeatureCollection, {
                                 onEachFeature: clusterOnEachFeature,
@@ -106,6 +108,15 @@ $(document).ready(function () {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 1,
                                         opacity: 1, weight: 1, color: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
+                            precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
+                                onEachFeature: precinctOnEachFeature,
+                                style: function (feature) {
+                                    return {weight: 2,opacity: 1, dashArray: '3',
+                                      fillOpacity: 0.7, color: 'white',
+                                      fillColor: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -119,6 +130,15 @@ $(document).ready(function () {
                                     };
                                 }
                             }).addTo(map);
+                            precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                                onEachFeature: precinctOnEachFeature,
+                                style: function (feature) {
+                                    return {weight: 2,opacity: 1, dashArray: '3',
+                                      fillOpacity: 0.7, color: 'white',
+                                      fillColor: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
                         } else {
                             districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
                                 onEachFeature: clusterOnEachFeature,
@@ -126,6 +146,15 @@ $(document).ready(function () {
                                     return {
                                         fillColor: data[feature.properties.id], fillOpacity: 1,
                                         opacity: 1, weight: 1, color: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
+                            precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                                onEachFeature: precinctOnEachFeature,
+                                style: function (feature) {
+                                    return {weight: 2,opacity: 1, dashArray: '3',
+                                      fillOpacity: 0.7, color: 'white',
+                                      fillColor: data[feature.properties.id]
                                     };
                                 }
                             }).addTo(map);
@@ -170,7 +199,9 @@ $(document).ready(function () {
                             if (map.hasLayer(districtLayer)) {
                                 map.removeLayer(districtLayer);
                             }
-
+                            if (map.hasLayer(precinctLayer)) {
+                                map.removeLayer(precinctLayer);
+                            }
                             if (Object.keys(data)[0].charAt(0) == '1') {
                                 districtLayer = L.geoJSON(oh_data.FeatureCollection, {
                                     onEachFeature: clusterOnEachFeature,
@@ -178,6 +209,15 @@ $(document).ready(function () {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 1,
                                             opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
+                                precinctLayer = L.geoJSON(oh_data.FeatureCollection, {
+                                    onEachFeature: precinctOnEachFeature,
+                                    style: function (feature) {
+                                        return {weight: 2,opacity: 1, dashArray: '3',
+                                          fillOpacity: 0.7, color: 'white',
+                                          fillColor: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
@@ -191,6 +231,15 @@ $(document).ready(function () {
                                         };
                                     }
                                 }).addTo(map);
+                                precinctLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                                    onEachFeature: precinctOnEachFeature,
+                                    style: function (feature) {
+                                        return {weight: 2,opacity: 1, dashArray: '3',
+                                          fillOpacity: 0.7, color: 'white',
+                                          fillColor: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
                             } else {
                                 districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
                                     onEachFeature: clusterOnEachFeature,
@@ -198,6 +247,15 @@ $(document).ready(function () {
                                         return {
                                             fillColor: data[feature.properties.id], fillOpacity: 1,
                                             opacity: 1, weight: 1, color: data[feature.properties.id]
+                                        };
+                                    }
+                                }).addTo(map);
+                                precinctLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                                    onEachFeature: precinctOnEachFeature,
+                                    style: function (feature) {
+                                        return {weight: 2,opacity: 1, dashArray: '3',
+                                          fillOpacity: 0.7, color: 'white',
+                                          fillColor: data[feature.properties.id]
                                         };
                                     }
                                 }).addTo(map);
