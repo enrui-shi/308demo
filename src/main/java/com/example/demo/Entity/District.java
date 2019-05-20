@@ -44,6 +44,10 @@ public class District {
         this.neighborDistrict = neighborDistrict;
     }
 
+    public Long getDistrictId() {
+        return districtId;
+    }
+
     public String getColor() {
         return color;
     }

@@ -76,10 +76,10 @@ public class PhaseOneService {
 
     public Map showDemo(Long p_ID) {
         Optional<Precinct> p = precinctRepository.findById(p_ID);
+        Map<String, String> response = new HashMap<>();
         if(p.isPresent()){
             Precinct precinct = p.get();
             System.out.println(precinct.getDemographic());
-            Map<String, String> response = new HashMap<>();
             response.put("Demographic", "found");
             response.put("totalPopulation", precinct.getDemographic().getTotalPopulation()+"");
             response.put("ASIAN_PACIFIC", precinct.getDemographic().getEthnicData().get(EthnicGroup.ASIAN_PACIFIC)+"");
@@ -89,8 +89,25 @@ public class PhaseOneService {
             return response;
         } else {
             System.out.println("Can't find precinct");
-            Map<String, String> response = new HashMap();
             response.put("Demographic", "Undefined");
+            return response;
+        }
+    }
+
+    public Map showDemoAfterPlay(Long c_ID, Map<Long, District> pToD) {
+        Map<String, String> response = new HashMap<>();
+
+        if (pToD.size() == 0) {
+            response.put("Demographic", "Undefined");
+            return response;
+        } else {
+            response.put("Demographic", "found");
+            response.put("id", Long.toString(pToD.get(c_ID).getDistrictId()));
+            response.put("totalPopulation", pToD.get(c_ID).getDemographic().getTotalPopulation() + "");
+            response.put("ASIAN_PACIFIC", pToD.get(c_ID).getDemographic().getEthnicData().get(EthnicGroup.ASIAN_PACIFIC) + "");
+            response.put("LATINO", pToD.get(c_ID).getDemographic().getEthnicData().get(LATINO) + "");
+            response.put("WHITE", pToD.get(c_ID).getDemographic().getEthnicData().get(WHITE) + "");
+            response.put("AFRIAN_AMERICAN", pToD.get(c_ID).getDemographic().getEthnicData().get(AFRIAN_AMERICAN) + "");
             return response;
         }
     }
