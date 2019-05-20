@@ -24,6 +24,8 @@ public class Algorithm {
 
     private State currentState;
 
+    private List<Precinct>used;
+
     private List<ClusterPair> clusterPairs = new ArrayList<ClusterPair>();
 
     private Map<Long, District> precinctToDistrict;
@@ -203,6 +205,7 @@ public class Algorithm {
     }
 
     public Summary startSimulateAnnealing() {
+        used = new ArrayList<>();
         for (District d : currentState.getDistricts()) {
             Map<Measurement,Double>score= measureDistrict(d);
             d.setScore(score);
@@ -220,21 +223,27 @@ public class Algorithm {
             while(candidate == null &&!flag  ) {
                 int districtIndex = randomIndex(currentState.getDistricts().size());
                 candidate =currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
+                if(used.contains(candidate)){
+                    candidate = null;
+                }
                 tryTime ++;
                 if(tryTime >currentState.getDistricts().size()){
                     flag = true;
                 }
+                System.out.println(tryTime);
             }
-            Move move = testMove(candidate);
-            if(move != null){
-                System.out.println(move);
-                move.execute();
-                count --;
-                phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
-                precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
+            if(!flag) {
+                used.add(candidate);
+                System.out.println(candidate.getPrecinctID() + ":" + getPrecinctBelongs(candidate.getPrecinctID()).getDistrictId());
+                Move move = testMove(candidate);
+                if (move != null) {
+                    System.out.println(move);
+                    move.execute();
+                    count--;
+                    phaseTwoChange.add(addChnage(move, move.getTo().getColor()));
+                    precinctToDistrict.put(move.getPrecinct().getPrecinctID(), move.getTo());
+                }
             }
-
-
         }
         System.out.println("finish");
         Map<Long,String> map =new HashMap<>();
@@ -358,7 +367,7 @@ public class Algorithm {
             System.out.print(currentState.getPreference());
             this.startGraphPartition();
             Summary s = this.startSimulateAnnealing();
-            batchService.addState(currentState);
+            //batchService.addState(currentState);
             summaries.add(s);
         }
         return summaries;
