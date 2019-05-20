@@ -65,8 +65,10 @@ public class Algorithm {
         initData();
         System.out.println("######Start Graph Partition##########");
         int targetNumber = currentState.getPreference().getNumberOfDistrict();
+        int zeroCount = 0;
+        precinctToDistrict = new HashMap<>();
 
-        while (clusters.size() / 2 > targetNumber) {
+        while (clusters.size() / 2 > targetNumber||zeroCount==3) {
             System.out.println("Try to merge "+clusters.size()+" clusters");
             tempClusters = new ArrayList<>();
             clusterPairs = new ArrayList<>();
@@ -81,6 +83,11 @@ public class Algorithm {
 
             determineCandidatePair();
             System.out.println("Find "+clusterPairs.size()+" pairs");
+            if(clusterPairs.size()==0){
+                zeroCount++;
+            }else{
+                zeroCount=0;
+            }
             for (ClusterPair cp : clusterPairs) {
                 //System.out.println("C1 is "+cp.getCluster1().getId()+" C2 is "+cp.getCluster2().getId());
                 Cluster c = cp.combine();
@@ -91,6 +98,7 @@ public class Algorithm {
         }
         finish(targetNumber);
         toDistrict();
+        phaseOneChange.add(setColor());
     }
 
     public Map<Long,String> genChange(){
@@ -155,7 +163,7 @@ public class Algorithm {
     }
 
     public void toDistrict() {
-        precinctToDistrict = new HashMap<>();
+
         Map<Long, District> idMap = new HashMap<>();
         clusterEdges = new ArrayList<>();
         for (int i = 0; i < clusters.size(); i++) {
@@ -313,7 +321,7 @@ public class Algorithm {
 
 
     // set district color after phase one finish
-    public void setColor() {
+    public Map setColor() {
         String[] colors = new String[]{"#ff0000","#0040ff","#ff8000","#00ff00","#ffb3d9","#9900cc","#ffff00","#006600","#00bfff","#00ffbf","#996600"};
         List<District> d = currentState.getDistricts();
         for (int i=0; i<d.size(); i++) {
@@ -322,6 +330,13 @@ public class Algorithm {
             }
         }
         checkColor();
+        Map<Long,String>colorMap = new HashMap();
+        for(District dis :currentState.getDistricts()){
+            for(Long pId:dis.getPrecincts().keySet()){
+                colorMap.put(pId,dis.getColor());
+            }
+        }
+        return colorMap;
     }
 
     // check if adjacent districts are in different colors

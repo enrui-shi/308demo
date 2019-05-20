@@ -2,6 +2,8 @@ package com.example.demo.Entity;
 
 
 import com.example.demo.Enum.StateName;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class Precinct {
     private double majMinRatio;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Long>NeighbourPrecincts;
 
     public void setNeighbourPrecincts(List<Long> neighbourPrecincts) {
@@ -134,11 +137,19 @@ public class Precinct {
     public void setMaxY(double maxY) {
         this.maxY = maxY;
     }
+    public String neighbourList(){
+        String str = "[";
+        for(Long id:NeighbourPrecincts){
+            str+=(id+",");
+        }
+        return str+"]";
+    }
 
     @Override
     public String toString() {
         return "Precinct{" +
                 "precinctID=" + precinctID +
+                ", neighbourPrecinct"+neighbourList()+
                 ", electionResult=" + electionResult.toString() +
                 ", precinctEdges=" + precinctEdges.toString() +
                 ", demographic=" + demographic.toString() +

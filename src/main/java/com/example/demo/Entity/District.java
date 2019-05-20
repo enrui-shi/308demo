@@ -124,6 +124,7 @@ public class District {
     public List<Precinct> getBoundPrecinct(){
         List<Precinct>bound = new ArrayList<>();
         for(Precinct p :precincts.values()){
+            System.out.println(p);
             if(!this.isInnerPrecinct(p)){
                 bound.add(p);
             }

@@ -35,4 +35,9 @@ public class PageController {
     public String summary() {
         return "summary";
     }
+
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "admin";
+    }
 }

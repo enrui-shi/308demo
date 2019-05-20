@@ -77,11 +77,6 @@
                     <div class="my-slidebar-box">
                         <b>
                             <label>0</label>
-                            <input type="range" min="0" max="100" value="0" id="efficiencyGap"
-                                   onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <u><label id="efficiencyGapValue">0.00</label></u><label>&emsp;efficiency gap</label><br>
-                            <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="compactness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
@@ -97,12 +92,6 @@
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
                             <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
-
-                            <label>0</label>
-                            <input type="range" min="0" max="100" value="0" id="naturalConstraint"
-                                   onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <label id="naturalConstraintValue">0.00</label></u><label>&emsp;natural constraint</label>
                         </b>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
