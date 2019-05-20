@@ -34,7 +34,7 @@ public class batchController {
     @PostMapping(value = "/creatPiratesBatch", consumes = "application/json", produces = "application/json")
     public void createBatch(@RequestBody Batch batch, HttpSession session) {
         System.out.println("create batch");
-
+        System.out.println(batch);
         Algorithm algorithm = new Algorithm();
         List<Cluster>clusters = new ArrayList<>();
         List<ClusterEdge>ces = new ArrayList<>();

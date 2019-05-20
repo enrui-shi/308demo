@@ -2,7 +2,11 @@ package com.example.demo.Type;
 
 
 import com.example.demo.Entity.Preference;
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 public class Batch {
 
@@ -114,6 +118,26 @@ public class Batch {
     public Preference generatePreference() {
         Preference p = new Preference((int)numDistrictBound.generateValue(), compactnessBound.generateValue(),
                 partisanFairnessBound.generateValue(), equalPopulationBound.generateValue(),lengthWidthCompactnessBound.generateValue());
+        Map<EthnicGroup,Bound> map =new EnumMap(EthnicGroup.class);
+        map.put(EthnicGroup.AFRIAN_AMERICAN,new Bound(0.7,0.3));
+        map.put(EthnicGroup.ASIAN_PACIFIC, new Bound(0.7,0.3));
+        map.put(EthnicGroup.LATINO, new Bound(0.7,0.3));
+        p.setEthnicGroupBound(map);
         return p;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Batch{" +
+                "numBatch=" + numBatch +
+                ", numDistrictBound=" + numDistrictBound +
+                ", stateName='" + stateName + '\'' +
+                ", numOfMMBound=" + numOfMMBound +
+                ", equalPopulationBound=" + equalPopulationBound +
+                ", compactnessBound=" + compactnessBound +
+                ", partisanFairnessBound=" + partisanFairnessBound +
+                ", lengthWidthCompactnessBound=" + lengthWidthCompactnessBound +
+                '}';
     }
 }
