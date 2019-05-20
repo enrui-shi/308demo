@@ -209,24 +209,32 @@ public class Algorithm {
 
         }
         if(currentState.getDistricts().size()==1){
-            return null;
+            return currentState.generateSummary();
         }
-        int count = 1000;
-        while (count!=0){
+        int count = 100;
+        boolean flag = false;
+        while (count!=0&&!flag){
             System.out.println("------"+count+"-----");
             Precinct candidate = null;
-            while(candidate == null) {
+            int tryTime = 0;
+            while(candidate == null &&!flag  ) {
                 int districtIndex = randomIndex(currentState.getDistricts().size());
                 candidate =currentState.getDistricts().get(districtIndex).getCandidatePrecinct();
+                tryTime ++;
+                if(tryTime >currentState.getDistricts().size()){
+                    flag = true;
+                }
             }
             Move move = testMove(candidate);
             if(move != null){
                 System.out.println(move);
                 move.execute();
-                count--;
+                count --;
                 phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
+
+
         }
         System.out.println("finish");
         Map<Long,String> map =new HashMap<>();
@@ -337,6 +345,7 @@ public class Algorithm {
 
     public List<Summary> runBatch(Batch b, BatchService batchService,List<Cluster>cls,List<ClusterEdge>ces) {
         List<Summary> summaries = new ArrayList<>();
+        phaseTwoChange = new ArrayList<>();
         for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);

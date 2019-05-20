@@ -106,6 +106,18 @@ public class Preference {
     }
     public double getNormLengthWidth(){return lengthWidthWeight /getTotalWeight();}
 
+    public void setEthnicGroupNumber(Map<EthnicGroup, Integer> ethnicGroupNumber) {
+        this.ethnicGroupNumber = ethnicGroupNumber;
+    }
+
+    public double getLengthWidthWeight() {
+        return lengthWidthWeight;
+    }
+
+    public void setLengthWidthWeight(double lengthWidthWeight) {
+        this.lengthWidthWeight = lengthWidthWeight;
+    }
+
     @Override
     public String toString() {
         return "Preference{" +

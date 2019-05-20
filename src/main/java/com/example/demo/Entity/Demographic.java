@@ -41,7 +41,9 @@ public class Demographic implements Serializable {
 
     public void merge(Demographic d) {
         totalPopulation += d.totalPopulation;
-        ethnicData.forEach((k, v) -> v += d.getEthnicData().get(k));
+        for(EthnicGroup ethnicGroup:ethnicData.keySet()){
+            ethnicData.replace(ethnicGroup,ethnicData.get(ethnicGroup)+d.getEthnicData().get(ethnicGroup));
+        }
     }
 
     public int getNumberByGroup(EthnicGroup eg) {
@@ -55,7 +57,9 @@ public class Demographic implements Serializable {
 
     public void removeDemo(Demographic d){
         totalPopulation -= d.totalPopulation;
-        ethnicData.forEach((k, v) -> v -= d.getEthnicData().get(k));
+        for(EthnicGroup ethnicGroup:ethnicData.keySet()){
+            ethnicData.replace(ethnicGroup,ethnicData.get(ethnicGroup)-d.getEthnicData().get(ethnicGroup));
+        }
 
     }
 

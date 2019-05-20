@@ -120,8 +120,11 @@ public class Batch {
                 partisanFairnessBound.generateValue(), equalPopulationBound.generateValue(),lengthWidthCompactnessBound.generateValue());
         Map<EthnicGroup,Bound> map =new EnumMap(EthnicGroup.class);
         map.put(EthnicGroup.AFRIAN_AMERICAN,new Bound(0.7,0.3));
-        map.put(EthnicGroup.ASIAN_PACIFIC, new Bound(0.7,0.3));
-        map.put(EthnicGroup.LATINO, new Bound(0.7,0.3));
+        //map.put(EthnicGroup.ASIAN_PACIFIC, new Bound(0.7,0.3));
+        //map.put(EthnicGroup.LATINO, new Bound(0.7,0.3));
+        Map<EthnicGroup,Integer> map2 = new EnumMap<EthnicGroup, Integer>(EthnicGroup.class);
+        map2.put(EthnicGroup.AFRIAN_AMERICAN,((Double) numOfMMBound.generateValue()).intValue());
+        p.setEthnicGroupNumber(map2);
         p.setEthnicGroupBound(map);
         return p;
     }
