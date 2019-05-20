@@ -129,7 +129,7 @@ $(document).ready(function () {
                                     };
                                 }
                             }).addTo(map);
-                            removeLayer(precinctLayer);
+                            map.removeLayer(precinctLayer);
                         } else if (Object.keys(data)[0].charAt(0) == '2') {
                             districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                                 onEachFeature: clusterOnEachFeature,
@@ -149,7 +149,7 @@ $(document).ready(function () {
                                     };
                                 }
                             }).addTo(map);
-                            removeLayer(precinctLayer);
+                            map.removeLayer(precinctLayer);
                         } else {
                             districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
                                 onEachFeature: clusterOnEachFeature,
@@ -169,7 +169,7 @@ $(document).ready(function () {
                                     };
                                 }
                             }).addTo(map);
-                            removeLayer(precinctLayer);
+                            map.removeLayer(precinctLayer);
                         }
 
                         // enable phase2 button to start simulating annealing
@@ -219,7 +219,7 @@ $(document).ready(function () {
                                         };
                                     }
                                 }).addTo(map);
-                                removeLayer(precinctLayer);
+                                map.removeLayer(precinctLayer);
                             } else if (Object.keys(data)[0].charAt(0) == '2') {
                                 districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                                     onEachFeature: clusterOnEachFeature,
@@ -239,7 +239,7 @@ $(document).ready(function () {
                                         };
                                     }
                                 }).addTo(map);
-                                removeLayer(precinctLayer);
+                                map.removeLayer(precinctLayer);
                             } else {
                                 districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
                                     onEachFeature: clusterOnEachFeature,
@@ -259,7 +259,7 @@ $(document).ready(function () {
                                         };
                                     }
                                 }).addTo(map);
-                                removeLayer(precinctLayer);
+                                map.removeLayer(precinctLayer);
                             }
                             // continue send ajax call
                             ajaxPhaseI();
@@ -326,7 +326,7 @@ $(document).ready(function () {
                                       };
                                   }
                               }).addTo(map);
-                              removeLayer(precinctLayer);
+                              map.removeLayer(precinctLayer);
                           } else if (Object.keys(data)[0].charAt(0) == '2') {
                               districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                                   onEachFeature: clusterOnEachFeature,
@@ -346,7 +346,7 @@ $(document).ready(function () {
                                       };
                                   }
                               }).addTo(map);
-                              removeLayer(precinctLayer);
+                              map.removeLayer(precinctLayer);
                           } else {
                               districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
                                   onEachFeature: clusterOnEachFeature,
@@ -366,7 +366,7 @@ $(document).ready(function () {
                                       };
                                   }
                               }).addTo(map);
-                              removeLayer(precinctLayer);
+                              map.removeLayer(precinctLayer);
                           }
                         }
                     }

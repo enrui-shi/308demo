@@ -66,37 +66,30 @@
             </div><!--select-state div over-->
             <div id = "sidebar">
                 <button onclick = "closeSidebar();" class = "icon"><i class="fa fa-close"></i></button>
-                <button onclick="sideSetting();" class = "icon"><i class = "fa fa-cog"></i></button>
+                <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
                 <div class = "setting" id = "setting">
                     <div class="arrow-up"></div>
-                    <button>Load Saved Setting</button><br>
-                    <button>Save Current Setting</button><br>
-                    <button>Set as default</button>
                 </div><!--setting div over-->
                 <form id="preference">
                     <div class="my-slidebar-box">
                         <div class="my-slidebar-box-b">
-                            <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="compactness"
                                    onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness weight</label> <br>
-                            <label>0</label>
+                            <label>&emsp;</label>
+                            <label id="compactnessValue">0.00</label></u><label>&emsp;Simple Compactness</label> <br>
                             <input type="range" min="0" max="100" value="0" id="partisanFairness"
                                    onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness weight</label><br>
+                            <label>&emsp;</label>
+                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;Partisan Fairness</label><br>
 
-                            <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="equalPopulation"
                                    onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population weight</label><br>
-                            <label>0</label>
+                            <label>&emsp;</label>
+                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;Equal Population</label><br>
                             <input type="range" min="0" max="100" value="0" id="lengthWidth"
                                    onchange="updateTextInput(this.value,this.id);">
-                            <label>1&emsp;</label>
-                            <label id="lengthWidthValue">0.00</label></u><label>&emsp;length width compactness weight</label> <br>
+                            <label>&emsp;</label>
+                            <label id="lengthWidthValue">0.00</label></u><label>&emsp;LW Compactness</label> <br>
                         </div>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">
