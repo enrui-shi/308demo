@@ -40,13 +40,13 @@ public class Init implements CommandLineRunner {
         ArrayList<PrecinctEdge> precinctEdges = new ArrayList<>();
         //load precinct to precincts
         try {
-            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_data_1.json"));
+            Object p_obj = parser.parse(new FileReader("src/main/resources/static/data/NY_data_1.json"));
             JSONObject jsonObject = (JSONObject) p_obj;
             JSONArray p_arr = (JSONArray) jsonObject.get("precincts");
             for (int i = 0; i < p_arr.size(); i++) {
                 JSONObject precinctData = (JSONObject) p_arr.get(i);
                 Precinct precinct = CreatePrecinct(precinctData);
-                precinct.setStateName(StateName.OH);
+                precinct.setStateName(StateName.NY);
                 precinct.setNeighbourPrecincts(new ArrayList<Long>());
                 precincts.put(precinct.getPrecinctID(), precinct);
             }
@@ -60,7 +60,7 @@ public class Init implements CommandLineRunner {
         }
         //load edge
         try {
-            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/OH_edges.json"));
+            Object e_obj = parser.parse(new FileReader("src/main/resources/static/data/NY_edges.json"));
             JSONObject jsonObject = (JSONObject) e_obj;
             JSONArray e_arr = (JSONArray) jsonObject.get("edges");
             int count = 0;
@@ -69,7 +69,9 @@ public class Init implements CommandLineRunner {
                 Long p1 = (Long) edge.get("precinct1");
                 Long p2 = (Long) edge.get("precinct2");
                 Precinct precinct1 = precincts.get(p1);
+                System.out.println(p1);
                 Precinct precinct2 = precincts.get(p2);
+                System.out.println(p2);
                 PrecinctEdge precinctEdge = CreatePrecinctEdge(edge, precinct1, precinct2);
                 precinctEdges.add(precinctEdge);
                 if (precinct1.getPrecinctEdges() == null) {
@@ -182,7 +184,9 @@ public class Init implements CommandLineRunner {
     static PrecinctEdge CreatePrecinctEdge(JSONObject edge, Precinct p1, Precinct p2) {
 
         PrecinctEdge precinctEdge = new PrecinctEdge();
+        //System.out.println("p1:"+p1.getPrecinctID());
         precinctEdge.setPrecinct1(p1.getPrecinctID());
+        //System.out.println("p2:"+p2.getPrecinctID());
         precinctEdge.setPrecinct2(p2.getPrecinctID());
         precinctEdge.setStateName(p1.getStateName());
         if ((boolean) edge.get("county")) {

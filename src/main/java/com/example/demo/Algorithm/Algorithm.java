@@ -6,7 +6,9 @@ import com.example.demo.Enum.StateName;
 import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 
 public class Algorithm {
@@ -23,7 +25,7 @@ public class Algorithm {
 
     private Map<Long, District> precinctToDistrict;
 
-    private List<Map<Long,District>> phaseOneChange = new ArrayList<>();
+    private List<Map<Long,String>> phaseOneChange = new ArrayList<>();
 
     public Algorithm() {
     }
@@ -85,12 +87,23 @@ public class Algorithm {
                 clusters.add(c);
             }
             tempBack();
-
+            phaseOneChange.add(genChange());
         }
         finish(targetNumber);
         toDistrict();
     }
 
+    public Map<Long,String> genChange(){
+        Map<Long,String> map =new HashMap<>();
+        for(Cluster cluster : clusters){
+            Color c=new Color((int)(Math.random() * 0x1000000));
+            String rgb = Integer.toHexString(c.getRGB());
+            for(Precinct p:cluster.getPrecincts()){
+                map.put(p.getPrecinctID(),rgb);
+            }
+        }
+        return map;
+    }
     public void initData(){
         for (ClusterEdge ce:this.clusterEdges){
             ce.getCluster1().addCE(ce);
