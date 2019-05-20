@@ -69,6 +69,7 @@
                 <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
                 <div class = "setting" id = "setting">
                     <div class="arrow-up"></div>
+                    <h3>Term explainning</h3>
                     <p>LW Compactness:Compare ratio of Weight and Height of the minimum bounding rectangle, ratio closer to 1 more compact</p>
                     <p>Simple Compactness: Compare inner precincts number and bound precinct number</p>
                     <p>Partisan Fairnes:Measure efficiency gap</p>
@@ -118,7 +119,7 @@
                     <div class="my-map-button-container">
                         <button id="phase1" class="my-map-btn" type="submit" title="Run Phase I with a GUI update at the end."><i class="fa fa-play"></i> Play Phase One</button>
                         <label>&emsp;</label>
-                        <button id="phase2" class="my-map-btn" onclick="ajaxPhase2()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
+                        <button id="phase2" class="my-map-btn" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
                     <div class="my-console-container">
                         <p id="log"></p>

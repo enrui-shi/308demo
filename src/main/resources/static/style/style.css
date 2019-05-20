@@ -288,30 +288,26 @@ html {
   position:fixed;
   margin-top: 3px;
   z-index:12;
-  width:300px;
-  height: 230px;
+  width:400px;
+  height: 220px;
   border-style: solid;
-  border-width: 1.5px;
+  border-width: 3px;
   display: none;
   border-radius: 5px;
   background-color:white;
-  padding: 3px;
 }
-.setting button{
-  height: 30px;
-  width: 180px;
-  margin:10px;
-  border-radius:5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
+
+.setting p{
+  margin: 10px;
 }
-.setting button:hover{
-  background-color: lightgray;
+.setting h3{
+  text-align: center;
 }
+
+
 .setting .arrow-up{
   position: relative;
-  top:-9px;
+  top:-5px;
   left:53px;
   width: 10px;
   height: 10px;
