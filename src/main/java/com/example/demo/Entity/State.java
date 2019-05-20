@@ -2,6 +2,8 @@ package com.example.demo.Entity;
 
 
 import com.example.demo.Enum.EthnicGroup;
+import com.example.demo.Enum.Measurement;
+import com.example.demo.Enum.Party;
 import com.example.demo.Enum.StateName;
 import com.example.demo.Type.Summary;
 
@@ -113,7 +115,34 @@ public class State {
         Summary summary = new Summary();
         summary.setStateId(stateId);
         summary.setStateName(stateName);
-
+        Map<Party, Integer>vote = new HashMap<>();
+        vote.put(Party.REPUBLICAN,0);
+        vote.put(Party.DEMOCRATIC,0);
+        for(Precinct p:precincts){
+            vote.forEach((k,v)->v+=p.getElectionResult().getVoteData().get(k));
+        }
+        summary.setSeatsByParty(vote);
+        Map<Measurement,Double> score= new HashMap<>();
+        score.put(Measurement.TOTAL,0.0);
+        score.put(Measurement.LENGTH_WIDTH,0.0);
+        score.put(Measurement.EQUAL_POPULATION,0.0);
+        score.put(Measurement.PARTISAN_FAIRNESS,0.0);
+        score.put(Measurement.SIMPLE_COMPACTNESS,0.0);
+        for(District d:districts){
+            score.forEach((k,v)->v+=d.getMeasureScore().get(k));
+        }
+        score.forEach((k,v)->v /=(double)districts.size());
+        summary.setScore(score);
+        Map<EthnicGroup,Integer>mm = new HashMap<>();
+        mm.put(EthnicGroup.AFRIAN_AMERICAN,0);
+        mm.put(EthnicGroup.ASIAN_PACIFIC,0);
+        mm.put(EthnicGroup.LATINO,0);
+        for(District d:districts){
+            if(d.isMinorityDistrict()){
+                mm.replace(d.getTargetEthnic(),mm.get(d.getTargetEthnic())+1);
+            }
+        }
+        summary.setMajorityMinorityDistrict(mm);
         return summary;
     }
 

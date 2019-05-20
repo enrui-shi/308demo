@@ -107,10 +107,8 @@ public class Algorithm {
     public Map<Long,String> genChange(){
         Map<Long,String> map =new HashMap<>();
         for(Cluster cluster : clusters){
-            Color c=new Color((int)(Math.random() * 0x1000000));
-            String rgb ="#" + Integer.toHexString(c.getRGB()).substring(2);;
             for(Precinct p:cluster.getPrecincts()){
-                map.put(p.getPrecinctID(),rgb);
+                map.put(p.getPrecinctID(), cluster.getColor());
             }
         }
         return map;
@@ -123,6 +121,11 @@ public class Algorithm {
             ce.getCluster2().addCE(ce);
             ce.getCluster1().addNeighbour(ce.getCluster2());
             ce.getCluster2().addNeighbour(ce.getCluster1());
+        }
+        for(Cluster c :clusters){
+            Color color=new Color((int)(Math.random() * 0x1000000));
+            String rgb ="#" + Integer.toHexString(color.getRGB()).substring(2);
+            c.setColor(rgb);
         }
     }
 
@@ -224,10 +227,10 @@ public class Algorithm {
             count --;
         }
         System.out.println("finish");
+
         phaseTwoChange.add(new colorChange(Long.valueOf(0),"0"));
+        return currentState.generateSummary();
 
-
-        return null;
     }
 
     public Move testMove(Precinct candidate){
