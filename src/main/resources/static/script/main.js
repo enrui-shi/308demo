@@ -278,7 +278,6 @@ $(document).ready(function () {
 
 function ajaxPhaseII() {
     console.log("phase two process is ready ... ")
-    ajaxPhase2();
     $.ajax({
         type: 'post',
         url: "/home/main/startPhaseTwo",
@@ -289,6 +288,8 @@ function ajaxPhaseII() {
             console.log("phase2 ... " + data);
         }
     })
+    sleep(2000);
+    ajaxPhase2();
 }
 
 // start to get the change of phase2
