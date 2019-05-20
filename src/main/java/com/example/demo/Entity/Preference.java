@@ -81,7 +81,7 @@ public class Preference {
     public void setEqualPopulationWeight(double equalPopulationWeight) {
         this.equalPopulationWeight = equalPopulationWeight;
     }
-    
+
     public int getNumberOfDistrict() {
         return numberOfDistrict;
     }

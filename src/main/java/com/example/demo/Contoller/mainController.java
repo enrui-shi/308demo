@@ -124,4 +124,12 @@ public class mainController {
         return p1s.showDemo(precinctID);
     }
 
+    @PostMapping(value = "/main/showDemoAfterPlay", consumes = "application/json", produces = "application/json")
+    public Map showDemoAfterPlay(@RequestParam Long clusterID, HttpSession session) {
+        System.out.println(clusterID);
+        Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
+        // find precinct demographic data
+        return p1s.showDemoAfterPlay(clusterID, pToD);
+    }
+
 }

@@ -185,7 +185,8 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         console.log("if end? 0 is end: "+Object.keys(data)[0]);
-
+                        console.log("p id list: "+Object.keys(data));
+                        console.log("first color: "+data[Object.keys(data)[0]]);
                         if (data[Object.keys(data)[0]] == 'end') {
                             // after phase 1 finish, enable playphase2
                             $('#phase1').prop('disabled', true);
