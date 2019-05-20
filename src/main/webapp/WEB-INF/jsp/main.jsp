@@ -25,8 +25,8 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/')">Home</a>
-        <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
         <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
+        <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
         <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
@@ -64,6 +64,9 @@
                     <input onclick="selectIA()" type="button" id="IA" value="Iowa">
                 </div>
             </div><!--select-state div over-->
+            <div class="aa-color-set" id="aa-color-set">
+                <button id="aa-color-btn" onclick= "setAAPDcolor();" style="display: none;"><i class="fa fa-asterisk"></i> Menu</button>
+            </div>
             <div id = "sidebar">
                 <button onclick = "closeSidebar();" class = "icon"><i class="fa fa-close"></i></button>
                 <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
@@ -119,7 +122,7 @@
                     <div class="my-map-button-container">
                         <button id="phase1" class="my-map-btn" type="submit" title="Run Phase I with a GUI update at the end."><i class="fa fa-play"></i> Play Phase One</button>
                         <label>&emsp;</label>
-                        <button id="phase2" class="my-map-btn" type="button" onclick="ajaxPhaseII()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
+                        <button id="phase2" class="my-map-btn" onclick="ajaxPhaseII()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
                     <div class="my-console-container">
                         <p id="log"></p>

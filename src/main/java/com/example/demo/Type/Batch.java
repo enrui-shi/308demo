@@ -12,6 +12,8 @@ public class Batch {
 
     private String stateName;
 
+    private Bound numOfMMBound;
+
     private Bound equalPopulationBound;
 
     private Bound compactnessBound;
@@ -24,11 +26,12 @@ public class Batch {
 
     }
 
-    public Batch(int numBatch, Bound numDistrictBound, String stateName, Bound equalPopulationBound,
+    public Batch(int numBatch, Bound numDistrictBound, String stateName, Bound numOfMMBound, Bound equalPopulationBound,
                  Bound compactnessBound, Bound partisanFairnessBound, Bound lengthWidthCompactnessBound) {
         this.numBatch = numBatch;
         this.numDistrictBound = numDistrictBound;
         this.stateName = stateName;
+        this.numOfMMBound = numOfMMBound;
         this.equalPopulationBound = equalPopulationBound;
         this.compactnessBound = compactnessBound;
         this.partisanFairnessBound = partisanFairnessBound;
@@ -54,6 +57,10 @@ public class Batch {
     }
     public Bound getNumDistrictBound() {
         return numDistrictBound;
+    }
+
+    public Bound getNumOfMMBound() {
+        return numOfMMBound;
     }
 
     public Bound getEqualPopulationBound() {
@@ -82,6 +89,10 @@ public class Batch {
 
     public void setNumDistrictBound(Bound numDistrictBound) {
         this.numDistrictBound = numDistrictBound;
+    }
+
+    public void setNumOfMMBound(Bound numOfMMBound) {
+        this.numOfMMBound = numOfMMBound;
     }
 
     public void setEqualPopulationBound(Bound equalPopulationBound) {

@@ -278,6 +278,7 @@ $(document).ready(function () {
 
 function ajaxPhaseII() {
     console.log("phase two process is ready ... ")
+    ajaxPhase2();
     $.ajax({
         type: 'post',
         url: "/home/main/startPhaseTwo",
@@ -288,8 +289,6 @@ function ajaxPhaseII() {
             console.log("phase2 ... " + data);
         }
     })
-    sleep(2000);
-    ajaxPhase2();
 }
 
 // start to get the change of phase2
@@ -301,13 +300,13 @@ function ajaxPhase2() {
         header: {"accept": "application/json"},
         dataType: "json",
         success: function (data) {
-            console.log("if end? 0 is end: "+Object.keys(data)[0]);
-            console.log("p id list: "+Object.keys(data));
-            console.log("first color: "+data[Object.keys(data)[0]]);
             if (data[Object.keys(data)[0]] == 'end') {
                 // after phase two finish, enable playphase1
                 $('#phase1').prop('disabled', false);
                 $('#phase2').prop('disabled', true);
+
+                // button show up: display african-american population distribution
+                document.getElementById('#aa-color-btn').style.display='block';
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
                 ajaxPhase2();
@@ -384,13 +383,4 @@ function ajaxPhase2() {
             }
         }
     });
-}
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
 }

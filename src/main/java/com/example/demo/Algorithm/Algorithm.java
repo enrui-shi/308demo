@@ -30,7 +30,7 @@ public class Algorithm {
 
     private List<Map<Long,String>> phaseOneChange = new ArrayList<>();
 
-    private List<colorChange> phaseTwoChange;
+    private List<Map<Long,String>> phaseTwoChange;
 
     public Algorithm() {
     }
@@ -223,22 +223,15 @@ public class Algorithm {
             if(move != null){
                 System.out.println(move);
                 move.execute();
-                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getTo().getColor()));
+                phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
             count --;
         }
         System.out.println("finish");
-        for(District d:currentState.getDistricts()){
-            if(d.isMinorityTarget()){
-                double value = d.getDemographic().getRatioByGroup(d.getTargetEthnic());
-                if(currentState.getPreference().getEthnicGroupBound().get(d.getTargetEthnic()).checkInbound(value)){
-                    d.setMinorityDistrict(true);
-                }
-            }
-        }
-
-        phaseTwoChange.add(new colorChange(Long.valueOf(0),"0"));
+        Map<Long,String> map =new HashMap<>();
+        map.put(Long.valueOf(0),"end");
+        phaseTwoChange.add(map);
         return currentState.generateSummary();
 
     }
@@ -253,7 +246,7 @@ public class Algorithm {
             double origin = from.getTotalScore()+to.getTotalScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
                 move.tryMove();
-                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getTo().getColor()));
+                phaseTwoChange.add(addChnage(move,move.getTo().getColor()));
                 double changed = -1;
                 if(move.checkContiguity()) {
                     move.setChangedFromScore(measureDistrict(move.getFrom()));
@@ -262,7 +255,9 @@ public class Algorithm {
                     System.out.println(changed);
                 }
                 move.undo();
-                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getFrom().getColor()));
+
+                //phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getFrom().getColor()));
+                phaseTwoChange.add(addChnage(move,move.getFrom().getColor()));
                 if(changed-origin>0){
                     scoreChange.put(changed-origin,move);
                 }
@@ -501,11 +496,22 @@ public class Algorithm {
         this.phaseOneChange = phaseOneChange;
     }
 
-    public List<colorChange> getPhaseTwoChange() {
+    public List<Map<Long, String>> getPhaseTwoChange() {
         return phaseTwoChange;
     }
 
-    public void setPhaseTwoChange(List<colorChange> phaseTwoChange) {
+    public void setPhaseTwoChange(List<Map<Long, String>> phaseTwoChange) {
         this.phaseTwoChange = phaseTwoChange;
+    }
+    public Map<Long,String> addChnage(Move move,String color){
+        Map<Long,String> map = new HashMap<>();
+        for(District d:currentState.getDistricts()){
+            for(Precinct p:d.getPrecincts().values()){
+                map.put(p.getPrecinctID(),d.getColor());
+            }
+        }
+        map.put(move.getPrecinct().getPrecinctID(),color);
+        phaseTwoChange.add(map);
+        return map;
     }
 }

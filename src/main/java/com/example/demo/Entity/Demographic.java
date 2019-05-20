@@ -49,7 +49,7 @@ public class Demographic implements Serializable {
     }
 
     public double getRatioByGroup(EthnicGroup eg) {
-        return (double) ethnicData.get(eg) / (double)totalPopulation;
+        return (double) (ethnicData.get(eg) / totalPopulation);
     }
 
 

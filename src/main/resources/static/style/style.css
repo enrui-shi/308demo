@@ -190,14 +190,20 @@ html {
   top:25%;
 }
 
-.select-state{
+.aa-color-set{
   position: fixed;
   z-index: 10000;
+  right:10px;
+  top:45%;
+}
+.select-state{
+  position: fixed;
+  z-index: 10001;
   right:10px;
   top:35%;
 }
 
-.my-menu button, .select-state-btn{
+.my-menu button, .select-state-btn, .aa-color-set button{
   background-color: #333;
   border: none;
   color: white;
@@ -208,7 +214,7 @@ html {
   cursor: pointer;
 }
 
-.my-menu button:hover, .select-state-btn:hover, .select-state-btn:focus{
+.my-menu button:hover, .select-state-btn:hover, .select-state-btn:focus, .aa-color-set button:hover{
   background-color: grey;
 }
 

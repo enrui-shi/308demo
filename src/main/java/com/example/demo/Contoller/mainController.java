@@ -97,19 +97,15 @@ public class mainController {
     }
     @PostMapping(value = "/main/getPhaseIIChange",consumes = "application/json", produces = "application/json")
     public Map<Long,String> getPhaseTwoChange(HttpSession session){
-        List<colorChange> colorChanges = (List<colorChange>) session.getAttribute("phaseTwoChange");
-        Map<Long,String> result = new HashMap<>();
+        List<Map<Long,String>> colorChanges = (List<Map<Long,String>>) session.getAttribute("phaseTwoChange");
+        //Map<Long,String> result = new HashMap<>();
         if(colorChanges.size()>0){
-            colorChange c = colorChanges.remove(0);
-            if(c.getPid()==0){
-                result.put(Long.valueOf(0),"end");
-            }else{
-                result.put(c.getPid(),c.getColor());
-            }
+            return colorChanges.remove(0);
         }else{
+            Map<Long,String> result = new HashMap<>();
             result.put(Long.valueOf(-1),"wait");
+            return result;
         }
-        return result;
     }
 
     //private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
@@ -122,7 +118,7 @@ public class mainController {
         State s = (State) session.getAttribute("state");
         Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
         Algorithm a = new Algorithm(s, pToD);
-        List<colorChange> colorChanges = new ArrayList<>();
+        List<Map<Long,String>> colorChanges = new ArrayList<>();
         session.setAttribute("phaseTwoChange",colorChanges);
         a.setPhaseTwoChange(colorChanges);
         a.startSimulateAnnealing();
