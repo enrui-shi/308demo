@@ -105,4 +105,15 @@ public class Preference {
         return equalPopulationWeight/getTotalWeight();
     }
     public double getNormLengthWidth(){return lengthWidthWeight /getTotalWeight();}
+
+    @Override
+    public String toString() {
+        return "Preference{" +
+                "numberOfDistrict=" + numberOfDistrict +
+                ", compactnessWeight=" + compactnessWeight +
+                ", partisanFairnessWeight=" + partisanFairnessWeight +
+                ", equalPopulationWeight=" + equalPopulationWeight +
+                ", lengthWidthWeight=" + lengthWidthWeight +
+                '}';
+    }
 }
