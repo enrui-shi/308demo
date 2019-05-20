@@ -337,6 +337,7 @@ public class Algorithm {
 
     public List<Summary> runBatch(Batch b, BatchService batchService,List<Cluster>cls,List<ClusterEdge>ces) {
         List<Summary> summaries = new ArrayList<>();
+        phaseTwoChange = new ArrayList<>();
         for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);
