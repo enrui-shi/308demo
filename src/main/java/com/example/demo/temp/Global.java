@@ -22,6 +22,11 @@ public class Global implements CommandLineRunner {
         System.out.println("start init precinct");
         //List<Precinct> ohP = initService.getPrecinctsByState(StateName.OH);
         List<Precinct> iaP = initService.getPrecinctsByState(StateName.IA);
+
+        /*for(Precinct p:iaP){
+            System.out.println(p.getNeighbourPrecincts());
+        }*/
+
         //List<Precinct> nyP = initService.getPrecinctsByState(StateName.NY);
         System.out.println("finish");
         //System.out.println("OH precinct size:"+ohP.size());
