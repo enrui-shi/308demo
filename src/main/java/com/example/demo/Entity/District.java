@@ -206,20 +206,26 @@ public class District {
     }
 
     public boolean checkContiguity(){
-        List<Precinct>bound = this.getBoundPrecinct();
         List<Precinct>used = new ArrayList<>();
-        boolean flag = true;
-        Precinct p = bound.get(0);
-        while(flag ||used.size() == bound.size()){
-            flag = false;
-            for(long neighbour:p.getNeighbourPrecincts()){
-                if(bound.contains(precincts.get(neighbour))&& (!used.contains(precincts.get(neighbour)))){
-                    used.add(precincts.get(neighbour));
-                    flag = true;
+        List<Precinct>queue = new ArrayList<>();
+        queue.add(getRandomPrecinct());
+        while(queue.size()!= 0){
+            Precinct p = queue.remove(0);
+            for(Long pID:p.getNeighbourPrecincts()){
+                if(precincts.get(pID)!= null &&!used.contains(precincts.get(pID))&&!queue.contains(precincts.get(pID))){
+                    queue.add(precincts.get(pID));
                 }
             }
+            used.add(p);
         }
-        return used.size() == bound.size();
+        return used.size()== precincts.size();
+    }
+
+    public Precinct getRandomPrecinct(){
+        for(Precinct p:precincts.values()){
+            return p;
+        }
+        return null;
     }
 
     public String precinctString() {

@@ -99,6 +99,11 @@ public class mainController {
     public Map<Long,String> getPhaseTwoChange(HttpSession session){
         List<Map<Long,String>> colorChanges = (List<Map<Long,String>>) session.getAttribute("phaseTwoChange");
         //Map<Long,String> result = new HashMap<>();
+        if(colorChanges==null){
+            Map<Long,String> result = new HashMap<>();
+            result.put(Long.valueOf(-1),"wait");
+            return result;
+        }
         if(colorChanges.size()>0){
             return colorChanges.remove(0);
         }else{

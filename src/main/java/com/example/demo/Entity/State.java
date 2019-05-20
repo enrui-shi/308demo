@@ -118,8 +118,9 @@ public class State {
         Map<Party, Integer>vote = new HashMap<>();
         vote.put(Party.REPUBLICAN,0);
         vote.put(Party.DEMOCRATIC,0);
-        for(Precinct p:precincts){
-            vote.forEach((k,v)->v+=p.getElectionResult().getVoteData().get(k));
+        for(District d:districts){
+            for(Precinct p:d.getPrecincts().values())
+                vote.forEach((k,v)->v+=p.getElectionResult().getVoteData().get(k));
         }
         summary.setSeatsByParty(vote);
         Map<Measurement,Double> score= new HashMap<>();

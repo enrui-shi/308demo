@@ -1,11 +1,13 @@
 package com.example.demo.Algorithm;
 
 import com.example.demo.Entity.*;
+import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.Measurement;
 import com.example.demo.Enum.Party;
 import com.example.demo.Enum.StateName;
 import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
+import com.example.demo.temp.GVAL;
 
 import java.awt.*;
 import java.util.*;
@@ -250,6 +252,7 @@ public class Algorithm {
                     move.setChangedFromScore(measureDistrict(move.getFrom()));
                     move.setChangedToScore(measureDistrict(move.getTo()));
                     changed =move.getFromTotalScore()+move.getToTotalScore();
+                    System.out.println(changed);
                 }
                 move.undo();
 
@@ -332,20 +335,64 @@ public class Algorithm {
     }
 
 
-    public List<Summary> runBatch(Batch b, BatchService batchService) {
+    public List<Summary> runBatch(Batch b, BatchService batchService,List<Cluster>cls,List<ClusterEdge>ces) {
         List<Summary> summaries = new ArrayList<>();
         for (int i = 0; i < b.getNumBatch(); i++) {
             StateName stateName = b.getEnumStateName();
             this.currentState = new State(stateName);
-            this.clusters = batchService.getClusters(stateName);
-            this.clusterEdges = batchService.getClusterEdges(stateName);
             currentState.setPreference(b.generatePreference());
+            Map<Long,Cluster> ny_t = cloneCluster(cls);
+            List<ClusterEdge> nye_t = cloneClusterEdge(ces,ny_t);
+            List<Cluster> ny_l = new ArrayList<>(ny_t.values());
+            this.clusters = ny_l;
+            this.clusterEdges = nye_t;
+            System.out.print(currentState.getPreference());
             this.startGraphPartition();
             Summary s = this.startSimulateAnnealing();
             batchService.addState(currentState);
             summaries.add(s);
         }
         return summaries;
+    }
+
+    public static List<ClusterEdge> cloneClusterEdge(List<ClusterEdge> clusterEdges,Map<Long,Cluster> cmap) {
+        List<ClusterEdge> copy = new ArrayList<>();
+        for(ClusterEdge ce:clusterEdges){
+            ClusterEdge tce = new ClusterEdge();
+            tce.setNatureJoinability(ce.getNatureJoinability());
+            tce.setDemographicJoinability(ce.getDemographicJoinability());
+            tce.setCountyJoinability(ce.getCountyJoinability());
+            tce.setStateName(ce.getStateName());
+            tce.setCluster1(cmap.get(ce.getCluster1().getId()));
+            tce.setCluster2(cmap.get(ce.getCluster2().getId()));
+            copy.add(tce);
+        }
+
+        return copy;
+    }
+
+    public static Map<Long,Cluster> cloneCluster(List<Cluster> clusters) {
+        Map<Long,Cluster> copy= new HashMap<>();
+        for (Cluster c:clusters){
+            Cluster t = new Cluster();
+            t.setId(c.getId());
+            t.setStateName(c.getStateName());
+            t.setPaired(c.isPaired());
+            Demographic dt =new Demographic();
+            dt.setTotalPopulation(c.getDemographic().getTotalPopulation());
+            Map<EthnicGroup, Integer> tmap = new EnumMap<EthnicGroup, Integer>(EthnicGroup.class);
+            for(EthnicGroup eg: c.getDemographic().getEthnicData().keySet()){
+                tmap.put(eg,c.getDemographic().getEthnicData().get(eg));
+            }
+            dt.setEthnicData(tmap);
+            t.setDemographic(dt);
+            List<Precinct> tp = new ArrayList<>();
+            tp.add(c.getPrecincts().get(0));
+            t.setPrecincts(tp);
+            copy.put(t.getId(),t);
+        }
+
+        return copy;
     }
 
 
