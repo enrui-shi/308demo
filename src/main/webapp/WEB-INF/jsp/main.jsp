@@ -108,7 +108,7 @@
                     <div class="my-numberInput">
                         <span id="inputerror" style="color:red"></span>
                         <label>number of district</label> <input type="number" id="numOfDistrict" min="0" max="200000" value="0"><br><p></p>
-                        <label style="color: red;">ethnic group: African-American</label><br><p></p>
+                        <label style="color: blue;">ethnic group: African-American</label><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" min="0" max="200000" id="mmAA" value="0"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAA" min="0" max="100" value="0"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAA" min="0" max="100" value="0"><br><p></p>
@@ -116,15 +116,18 @@
                         <label>number of majority-minority district</label> <input type="number" id="mmAsian" min="0" max="200000" value="0"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minAsian" min="0" max="100" value="0"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxAsian" min="0" max="100" value="0"><br><p></p>
-                        <label style="color: blue">ethnic group: Latino</label><br><p></p>
+                        <label style="color: red">ethnic group: Latino</label><br><p></p>
                         <label>number of majority-minority district</label> <input type="number" id="mmLatino" min="0" max="200000" value="0"> <br><p></p>
                         <label>min population (%)</label> <input type="number" id="minLatino" min="0" max="100" value="0"><br><p></p>
                         <label>max population (%)</label> <input type="number" id="maxLatino" min="0" max="100" value="0"><br><p></p>
                     </div><!--my-numberInput div over-->
+                    <div class="my-map-checkbox-container">
+                        <input type="checkbox"> Run Phase I with a GUI update at the end of each discrete process<br>
+                    </div>
                     <div class="my-map-button-container">
-                        <button id="phase1" class="my-map-btn" type="submit"><i class="fa fa-play"></i> Play Phase One</button>
+                        <button id="phase1" class="my-map-btn" type="submit" title="Run Phase I with a GUI update at the end."><i class="fa fa-play"></i> Play Phase One</button>
                         <label>&emsp;</label>
-                        <button id="phase2" class="my-map-btn" onclick="ajaxPhase2()" disabled><i class="fa fa-play"></i> Play Phase Two</button>
+                        <button id="phase2" class="my-map-btn" onclick="ajaxPhase2()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
                     <div class="my-console-container">
                         <p id="log"></p>
