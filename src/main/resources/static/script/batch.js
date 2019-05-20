@@ -74,6 +74,7 @@ $(document).ready(function(){
               function frame() {
                   if (width >= 100) {
                     clearInterval(id);
+                    document.getElementById('viewSummary').style.display='block;'
                   } else {
                     width++;
                     elem.style.width = width + '%';
