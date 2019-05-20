@@ -8,16 +8,13 @@ import com.example.demo.Enum.StateName;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 import com.example.demo.Service.PhaseOneService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.example.demo.Service.PhaseTwoService;
 
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.request.async.DeferredResult;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +26,8 @@ import javax.servlet.http.HttpSession;
 public class mainController {
     @Autowired
     PhaseOneService p1s;
-
+    @Autowired
+    PhaseTwoService p2s;
 
     @PostMapping(value = "/main/createState", consumes = "application/json", produces = "application/json")
     public Map createState(@RequestParam String stateName, HttpSession session) {
@@ -69,19 +67,27 @@ public class mainController {
     }
 
 
-    private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
+    //private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
 
     /* long pulling request to response to GUI */
     @RequestMapping("/main/startPhaseTwo")
-    public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException {
+    public Map startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException {
+    //public DeferredResult<List<JsonNode>> startPhaseTwo(@RequestParam(required = false) Long timestamp, HttpSession session) throws IOException {
 
         State s = (State) session.getAttribute("state");
         Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
         Algorithm a = new Algorithm(s, pToD);
 
         a.startSimulateAnnealing();
-        // TO DO
-        return phaseTwoResult;
+        Map<String, String> response = new HashMap();
+        response.put("status", "ok");
+        return response;
+    }
+
+    @RequestMapping("/main/getChangeOfPhase2")
+    public Map getPhase2Change(@RequestParam(required = false) Long timestamp, HttpSession session) {
+        // TO DO get change from list
+        
     }
 
     @PostMapping(value = "/main/showDemo", consumes = "application/json", produces = "application/json")
