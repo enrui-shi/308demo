@@ -43,7 +43,6 @@ public class Precinct {
 
     private String county;
 
-    @ElementCollection
     public Long getPrecinctID() {
         return precinctID;
     }
