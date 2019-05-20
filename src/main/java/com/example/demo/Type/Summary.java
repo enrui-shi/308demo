@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Summary {
 
-    private Map<Party, Integer> seatsByParty;
+    private Map<Party, Integer> vote;
 
     private Map<Measurement, Double> score;
 
@@ -22,11 +22,11 @@ public class Summary {
     private String winner;
 
     public Map<Party, Integer> getSeatsByParty() {
-        return seatsByParty;
+        return vote;
     }
 
     public void setSeatsByParty(Map<Party, Integer> seatsByParty) {
-        this.seatsByParty = seatsByParty;
+        this.vote = seatsByParty;
     }
 
     public Map<Measurement, Double> getScore() {
@@ -67,6 +67,14 @@ public class Summary {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    @Override
+    public String toString(){
+        String form = "%d,%d,%d,%.4f,%.3f,%.3f,%.3f,%.3f";
+        return String.format(form,stateId,vote.get(Party.REPUBLICAN),vote.get(Party.DEMOCRATIC),score.get(Measurement.TOTAL),
+                score.get(Measurement.EQUAL_POPULATION),score.get(Measurement.PARTISAN_FAIRNESS),
+                score.get(Measurement.SIMPLE_COMPACTNESS),score.get(Measurement.LENGTH_WIDTH));
     }
 }
 
