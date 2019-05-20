@@ -106,7 +106,7 @@ public class Algorithm {
         Map<Long,String> map =new HashMap<>();
         for(Cluster cluster : clusters){
             Color c=new Color((int)(Math.random() * 0x1000000));
-            String rgb = Integer.toHexString(c.getRGB());
+            String rgb ="#" + Integer.toHexString(c.getRGB()).substring(2);;
             for(Precinct p:cluster.getPrecincts()){
                 map.put(p.getPrecinctID(),rgb);
             }
