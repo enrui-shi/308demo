@@ -17,6 +17,7 @@ function logout() {
     document.getElementById('log').innerHTML = "";
     // empty the cookie
     $.cookie('currentuser', "");
+    $.cookie('currentSummary', "");
     // back to the start page
     document.getElementById('menubtn').style.display = 'none';
     window.location.replace('/');

@@ -46,6 +46,19 @@ $(document).ready(function(){
               document.getElementById('batchrun').style.display='block';
 
 
+              var elem = document.getElementById("myBar");
+              var width = 1;
+              var id = setInterval(frame, 100);
+
+              function frame() {
+                  if (width >= 100) {
+                      clearInterval(id);
+                  } else {
+                      width++;
+                      elem.style.width = width + '%';
+                      elem.innerHTML = width * 1  + '%';
+                  }
+              }
 
               console.log("start to batch");
               $.ajax({
@@ -56,24 +69,11 @@ $(document).ready(function(){
                   data: JSON.stringify(batch_data),
                   dataType: "json",
                   success: function (data){
-                      //var id = setInterval(frame, 10);
                       console.log("batch "+data);
+                      $.cookie('currentSummary', data);
+                      document.getElementById('viewSummary').style.display='block';
                   }
               })
-              var elem = document.getElementById("myBar");
-              var width = 1;
-              var id = setInterval(frame, 100);
-
-              function frame() {
-                  if (width >= 100) {
-                    clearInterval(id);
-                  } else {
-                    width++;
-                    elem.style.width = width + '%';
-                    elem.innerHTML = width * 1  + '%';
-                  }
-              }
-
         }
     })
 });
