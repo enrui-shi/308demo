@@ -28,6 +28,8 @@ public class Algorithm {
 
     private List<Map<Long,String>> phaseOneChange = new ArrayList<>();
 
+    private List<colorChange> phaseTwoChange;
+
     public Algorithm() {
     }
 
@@ -219,12 +221,16 @@ public class Algorithm {
             if(move != null){
                 System.out.println(move);
                 move.execute();
+                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getTo().getColor()));
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
             count --;
         }
         System.out.println("finish");
+
+        phaseTwoChange.add(new colorChange(Long.valueOf(0),"0"));
         return currentState.generateSummary();
+
     }
 
     public Move testMove(Precinct candidate){
@@ -237,6 +243,7 @@ public class Algorithm {
             double origin = from.getTotalScore()+to.getTotalScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
                 move.tryMove();
+                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getTo().getColor()));
                 double changed = -1;
                 if(move.checkContiguity()) {
                     move.setChangedFromScore(measureDistrict(move.getFrom()));
@@ -244,6 +251,7 @@ public class Algorithm {
                     changed =move.getFromTotalScore()+move.getToTotalScore();
                 }
                 move.undo();
+                phaseTwoChange.add(new colorChange(move.getPrecinct().getPrecinctID(),move.getFrom().getColor()));
                 if(changed-origin>0){
                     scoreChange.put(changed-origin,move);
                 }
@@ -436,5 +444,13 @@ public class Algorithm {
 
     public void setPhaseOneChange(List<Map<Long, String>> phaseOneChange) {
         this.phaseOneChange = phaseOneChange;
+    }
+
+    public List<colorChange> getPhaseTwoChange() {
+        return phaseTwoChange;
+    }
+
+    public void setPhaseTwoChange(List<colorChange> phaseTwoChange) {
+        this.phaseTwoChange = phaseTwoChange;
     }
 }

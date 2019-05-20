@@ -6,6 +6,7 @@ import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import com.example.demo.Service.PhaseTwoService;
 
 import java.io.IOException;
 
+import com.example.demo.Type.colorChange;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +95,22 @@ public class mainController {
             return response;
         }
     }
+    @PostMapping(value = "/main/getPhaseTwoChange",consumes = "application/json", produces = "application/json")
+    public Map<Long,String> getPhaseTwoChange(HttpSession session){
+        List<colorChange> colorChanges = (List<colorChange>) session.getAttribute("phaseTwoChange");
+        Map<Long,String> result = new HashMap<>();
+        if(colorChanges.size()>0){
+            colorChange c = colorChanges.remove(0);
+            if(c.getPid()==0){
+                result.put(Long.valueOf(0),"end");
+            }else{
+                result.put(c.getPid(),c.getColor());
+            }
+        }else{
+            result.put(Long.valueOf(-1),"wait");
+        }
+        return result;
+    }
 
     //private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
 
@@ -104,7 +122,9 @@ public class mainController {
         State s = (State) session.getAttribute("state");
         Map<Long, District> pToD =(Map<Long, District>) session.getAttribute("precinctToDistrict");
         Algorithm a = new Algorithm(s, pToD);
-
+        List<colorChange> colorChanges = new ArrayList<>();
+        session.setAttribute("phaseTwoChange",colorChanges);
+        a.setPhaseTwoChange(colorChanges);
         a.startSimulateAnnealing();
         Map<String, String> response = new HashMap();
         response.put("status", "ok");
