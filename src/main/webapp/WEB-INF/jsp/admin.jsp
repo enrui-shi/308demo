@@ -8,6 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="/script/logout.js"></script>
+        <script src="/script/admin.js"></script>
     </head>
     <header class="topnav">
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
@@ -21,7 +22,9 @@
                 </div>
             </div>
         </div>
+        <div id="users">
 
+        </div>
     </body>
     <footer class="my-footer font-small" style="background-color:#333; color:white;">
         <div class="footer-copyright text-center py-3"> © 2019 Copyright: Pirates
