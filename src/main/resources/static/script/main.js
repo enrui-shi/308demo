@@ -95,18 +95,6 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log("phase one process start....");
                         ajaxPhaseI();
-
-                        console.log("phase two process is ready ... ")
-                        $.ajax({
-                            type: 'post',
-                            url: "/home/main/startPhaseTwo",
-                            contentType: "application/json; charset=utf-8",
-                            header: {"accept": "application/json"},
-                            dataType: "json",
-                            success: function (data) {
-                                console.log("phase2 ... " + data);
-                            }
-                        })
                     }
                 })
             } else {
@@ -190,17 +178,6 @@ $(document).ready(function () {
                         $('#phase2').prop('disabled', false);
                         $('#phase1').prop('disabled', true);
 
-                        console.log("phase two process is ready ... ")
-                        $.ajax({
-                            type: 'post',
-                            url: "/home/main/startPhaseTwo",
-                            contentType: "application/json; charset=utf-8",
-                            header: {"accept": "application/json"},
-                            dataType: "json",
-                            success: function (data) {
-                                console.log("phase2 ... " + data);
-                            }
-                        })
                     }
                 })
             }
@@ -299,8 +276,24 @@ $(document).ready(function () {
     })
 });
 
-// start to get the change of phase2
 function ajaxPhaseII() {
+    console.log("phase two process is ready ... ")
+    ajaxPhase2();
+    $.ajax({
+        type: 'post',
+        url: "/home/main/startPhaseTwo",
+        contentType: "application/json; charset=utf-8",
+        header: {"accept": "application/json"},
+        dataType: "json",
+        success: function (data) {
+            console.log("phase2 ... " + data);
+            ajaxPhase2();
+        }
+    })
+}
+
+// start to get the change of phase2
+function ajaxPhase2() {
     $.ajax({
         type: 'post',
         url: "/home/main/getPhaseIIChange",
@@ -387,7 +380,7 @@ function ajaxPhaseII() {
                     }).addTo(map);
                     map.removeLayer(precinctLayer);
                 }
-                ajaxPhaseII();
+                ajaxPhase2();
             }
         }
     });
