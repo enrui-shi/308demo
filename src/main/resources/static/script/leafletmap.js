@@ -20,6 +20,7 @@ var stateLayer = L.geoJSON(statesData,{
 var districtLayer;
 var precinctLayer;
 var AALayer;
+var MMLayer;
 
 /* add data into map */
 /* way one
@@ -521,6 +522,11 @@ function resetAA(e) {
 }
 
 function setAAPDcolor() {
+    if(map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if(map.has(districtLayer))
+        map.removeLayer(districtLayer);
+
     if ($.cookie('currentStateName') == 'IA') {
         AALayer = L.geoJSON(IA_districtsData.FeatureCollection, {
             style: AAStyle,
@@ -545,5 +551,62 @@ function AAOnEachFeature(feature, layer) {
     layer.on({
         mouseover: AAHoverFeature,
         mouseout: resetAA
+    });
+}
+
+
+function setMMcolor() {
+    if (map.has(precinctLayer))
+        map.removeLayer(precinctLayer);
+    if (map.has(districtLayer))
+        map.removeLayer(districtLayer);
+    $.ajax({
+        type: 'post',
+        url: "/home/main/showMinority",
+        contentType: "application/json; charset=utf-8",
+        header: {"accept": "application/json"},
+        dataType: "json",
+        success: function (data) {
+            if ($.cookie('currentStateName') == 'IA') {
+                MMLayer = L.geoJSON(IA_districtsData.FeatureCollection, {
+                    onEachFeature: clusterOnEachFeature,
+                    style: function (feature) {
+                        return {
+                            fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                            opacity: 0.7, weight: 3, color: 'black'
+                        };
+                    }
+                }).addTo(map);
+            } else if ($.cookie('currentStateName') == 'OH') {
+                MMLayer = L.geoJSON(oh_data.FeatureCollection, {
+                    onEachFeature: clusterOnEachFeature,
+                    style: function (feature) {
+                        return {
+                            fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                            opacity: 0.7, weight: 3, color: 'black'
+                        };
+                    }
+                }).addTo(map);
+            } else if ($.cookie('currentStateName') == 'NY') {
+                MMLayer = L.geoJSON(NY_districtsData.FeatureCollection, {
+                    onEachFeature: clusterOnEachFeature,
+                    style: function (feature) {
+                        return {
+                            fillColor: data[feature.properties.id], fillOpacity: 0.7,
+                            opacity: 0.7, weight: 3, color: 'black'
+                        };
+                    }
+                }).addTo(map);
+            } else {
+                console.log("Doesn't select state");
+            }
+        }
+    })
+}
+
+function MMOnEachFeature(feature, layer) {
+    layer.on({
+        mouseover: clusterHoverFeature,
+        mouseout:  resetCluster
     });
 }
