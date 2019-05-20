@@ -70,12 +70,14 @@ public class mainController {
             response.put("error", "select state first");
             return response;
         } else {
+            Map<String, String> response = new HashMap();
             StateName stateName = (StateName) session.getAttribute("stateName");
             Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
             session.setAttribute("state", algorithm.getCurrentState());
-
-            return null;
+            session.setAttribute("PhaseOneChange",algorithm.getPhaseOneChange());
+            response.put("status","OK");
+            return response;
         }
     }
 

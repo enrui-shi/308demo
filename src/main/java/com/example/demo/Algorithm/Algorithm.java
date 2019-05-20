@@ -347,4 +347,40 @@ public class Algorithm {
             }
         }
     }
+
+    public List<Cluster> getClusters() {
+        return clusters;
+    }
+
+    public List<Cluster> getTempClusters() {
+        return tempClusters;
+    }
+
+    public void setTempClusters(List<Cluster> tempClusters) {
+        this.tempClusters = tempClusters;
+    }
+
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
+    }
+
+    public List<ClusterPair> getClusterPairs() {
+        return clusterPairs;
+    }
+
+    public void setClusterPairs(List<ClusterPair> clusterPairs) {
+        this.clusterPairs = clusterPairs;
+    }
+
+    public void setPrecinctToDistrict(Map<Long, District> precinctToDistrict) {
+        this.precinctToDistrict = precinctToDistrict;
+    }
+
+    public List<Map<Long, String>> getPhaseOneChange() {
+        return phaseOneChange;
+    }
+
+    public void setPhaseOneChange(List<Map<Long, String>> phaseOneChange) {
+        this.phaseOneChange = phaseOneChange;
+    }
 }
