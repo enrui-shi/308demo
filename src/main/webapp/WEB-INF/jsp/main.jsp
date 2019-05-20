@@ -65,7 +65,13 @@
                 </div>
             </div><!--select-state div over-->
             <div class="aa-color-set" id="aa-color-set">
-                <button id="aa-color-btn" onclick= "setAAPDcolor();" style="display: none;"><i class="fa fa-asterisk"></i> Menu</button>
+                <button id="aa-color-btn" onclick= "setAAPDcolor();" style="display: none;"><i class="fa fa-asterisk"></i> View African-American Population%</button>
+            </div>
+            <div class="aa-color-set" style="top:60%" id="mm-color-set">
+                <button id="mm-color-btn" onclick= "setMMcolor();" style="display: none;"><i class="fa fa-asterisk"></i> View majority-minority district</button>
+            </div>
+            <div class="aa-color-set" style="top:75%" id="original-color-set">
+                <button id="original-color-btn" onclick= "setOriginalcolor();" style="display: none;"><i class="fa fa-history"></i> View original phase two result</button>
             </div>
             <div id = "sidebar">
                 <button onclick = "closeSidebar();" class = "icon"><i class="fa fa-close"></i></button>

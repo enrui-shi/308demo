@@ -4,7 +4,7 @@ $(document).ready(function () {
     $('#guest_s').prop('disabled', true);
     $('#guest_b').prop('disabled', true);
     $('#guest_a').prop('disabled', true);
-    
+
     // if user log in
     if($.cookie('currentuser') != "" || $.cookie('currentuser') != undefined) {
         $('#guest_s').prop('disabled', false);
