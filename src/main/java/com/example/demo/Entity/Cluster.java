@@ -3,11 +3,12 @@ package com.example.demo.Entity;
 import com.example.demo.Enum.StateName;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Cluster implements Comparable<Cluster> {
+public class Cluster implements Comparable<Cluster> , Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

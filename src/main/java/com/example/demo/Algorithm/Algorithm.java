@@ -114,6 +114,7 @@ public class Algorithm {
         return map;
     }
     public void initData(){
+       // System.out.println("init!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(clusterEdges.get(0));
         for (ClusterEdge ce:this.clusterEdges){
             ce.getCluster1().addCE(ce);
@@ -220,6 +221,7 @@ public class Algorithm {
             count --;
         }
         System.out.println("finish");
+
 
         return null;
     }
