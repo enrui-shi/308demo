@@ -360,7 +360,7 @@ function clusterHoverFeature(e) {
         setTimeout(function () {
             $.ajax({
                 type: 'post',
-                url: "/home/main/showDemoAfterPlay?precinctID=" + layer.feature.properties.id,
+                url: "/home/main/showDemoAfterPlay?clusterID=" + layer.feature.properties.id,
                 contentType: "application/json; charset=utf-8",
                 header: {"accept": "application/json"},
                 dataType: "json",
