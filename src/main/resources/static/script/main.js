@@ -92,24 +92,21 @@ $(document).ready(function () {
                         districtLayer = L.geoJSON(oh_data.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                console.log("OH");
-                                return {fillColor: data[feature.properties.id]};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
                             }
                         }).addTo(map);
                     } else if (Object.keys(data)[0].charAt(0) == '2') {
                         districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                console.log("NY");
-                                return {fillColor: data[feature.properties.id]};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
                             }
                         }).addTo(map);
                     } else {
                         districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
                             onEachFeature: precinctOnEachFeature,
                             style: function (feature) {
-                                console.log("NJ");
-                                return {fillColor: data[feature.properties.id]};
+                                return {fillColor: data[feature.properties.id], fillOpacity: 0.7, weight: 0};
                             }
                         }).addTo(map);
                     }

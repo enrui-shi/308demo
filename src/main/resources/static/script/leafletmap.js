@@ -273,7 +273,6 @@ function getOriginalColor() {
 // set up district style
 function districtStyle(feature) {
     return {
-        weight: 2,
         opacity: 1,
         dashArray: '3',
         fillOpacity: 0.7,
@@ -284,7 +283,6 @@ function districtStyle(feature) {
 function districtHoverFeature(e) {
     var layer = e.target;
     layer.setStyle({
-        weight: 3,
         dashArray: '',
         fillOpacity: 0.3
     });
@@ -296,7 +294,6 @@ function districtHoverFeature(e) {
 
 function resetDistrict(e) {
     e.target.setStyle( {
-        weight: 2,
         opacity: 1,
         dashArray: '3',
         fillOpacity: 0.7
