@@ -40,11 +40,9 @@ $(document).ready(function () {
             };
 
             var preference_data = {
-                efficiencyGapWeight: $('#efficiencyGap').val(),
                 compactnessWeight: $('#compactness').val(),
                 partisanFairnessWeight: $('#partisanFairness').val(),
                 equalPopulationWeight: $('#equalPopulation').val(),
-                naturalConstraintWeight: $('#naturalConstraint').val(),
                 numberOfDistrict: $('#numOfDistrict').val(),
                 ethnicGroupNumber: mm_data,
                 ethnicGroupBound: enthnic_data
@@ -54,11 +52,9 @@ $(document).ready(function () {
 
             // show current preference data
             fakeLog("Current preference:");
-            fakeLog("&nbspWeight of efficiency:" + preference_data.efficiencyGapWeight);
             fakeLog("&nbspWeight of compactness:" + preference_data.compactnessWeight);
             fakeLog("&nbspWeight of partisan fairness:" + preference_data.partisanFairnessWeight);
             fakeLog("&nbspWeight of equal population:" + preference_data.equalPopulationWeight);
-            fakeLog("&nbspWeight of natural constraint:" + preference_data.naturalConstraintWeight);
             fakeLog("&nbspNumber of district:" + preference_data.numberOfDistrict);
             fakeLog("&nbspAFRIAN_AMERICAN");
             fakeLog("&nbsp&nbspminority district number:" + $('#mmAA').val());

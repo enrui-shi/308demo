@@ -24,15 +24,11 @@ public class Preference {
     @MapKeyColumn()
     private Map<EthnicGroup, Bound> ethnicGroupBound;
 
-    private double efficiencyGapWeight;
-
     private double compactnessWeight;
 
     private double partisanFairnessWeight;
 
     private double equalPopulationWeight;
-
-    private double naturalConstrainWeight;
 
     public Preference(){
 
@@ -54,10 +50,6 @@ public class Preference {
     }
 
 
-    public double getEfficiencyGapWeight() {
-        return efficiencyGapWeight;
-    }
-
     public double getCompactnessWeight() {
         return compactnessWeight;
     }
@@ -70,21 +62,12 @@ public class Preference {
         return equalPopulationWeight;
     }
 
-    public double getNaturalConstrainWeight() {
-        return naturalConstrainWeight;
-    }
-
-
     public void setNumberOfDistrict(int numberOfDistrict) {
         this.numberOfDistrict = numberOfDistrict;
     }
 
     public void setEthnicGroupBound(Map<EthnicGroup, Bound> ethnicGroupBound) {
         this.ethnicGroupBound = ethnicGroupBound;
-    }
-
-    public void setEfficiencyGapWeight(double efficiencyGapWeight) {
-        this.efficiencyGapWeight = efficiencyGapWeight;
     }
 
     public void setCompactnessWeight(double compactnessWeight) {
@@ -98,11 +81,7 @@ public class Preference {
     public void setEqualPopulationWeight(double equalPopulationWeight) {
         this.equalPopulationWeight = equalPopulationWeight;
     }
-
-    public void setNaturalConstrainWeight(double naturalConstrainWeight) {
-        this.naturalConstrainWeight = naturalConstrainWeight;
-    }
-
+    
     public int getNumberOfDistrict() {
         return numberOfDistrict;
     }
