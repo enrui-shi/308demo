@@ -1,7 +1,9 @@
 package com.example.demo.Entity;
 
 import com.example.demo.Enum.EthnicGroup;
+import com.example.demo.Enum.Measurement;
 import com.example.demo.Type.Bound;
+import org.springframework.security.core.parameters.P;
 
 import javax.persistence.*;
 import java.util.*;
@@ -29,7 +31,8 @@ public class District {
 
     private boolean minorityDistrict;
 
-    private double score;
+    private Map<Measurement,Double>measureScore;
+
 
     private String color;
 
@@ -72,14 +75,21 @@ public class District {
         return precincts;
     }
 
-    public double getScore() {
-        return score;
+    public Map<Measurement, Double> getScore() {
+        return measureScore;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setScore(Map<Measurement, Double> score) {
+        this.measureScore = score;
     }
 
+    public void setMeasureScore(Map<Measurement, Double> measureScore) {
+        this.measureScore = measureScore;
+    }
+
+    public double getTotalScore(){
+        return measureScore.get(Measurement.TOTAL);
+    }
 
     public Demographic getDemographic() {
         return demographic;
@@ -128,7 +138,7 @@ public class District {
     public List<Precinct> getBoundPrecinct(){
         List<Precinct>bound = new ArrayList<>();
         for(Precinct p :precincts.values()){
-            System.out.println(p);
+            //System.out.println(p);
             if(!this.isInnerPrecinct(p)){
                 bound.add(p);
             }
@@ -193,5 +203,31 @@ public class District {
         return str;
 
     }
+    public double getWidth(){
+        double minX = 0;
+        double maxX = -500;
+        for(Precinct p:precincts.values()){
+            if(p.getMinX()<minX){
+                minX = p.getMinX();
+            }
+            if(p.getMinX()>maxX);
+                maxX = p.getMaxX();
+        }
+        return maxX-minX;
+    }
+    public double getLength(){
+        double minY = 500;
+        double maxY = 0;
+        for(Precinct p:precincts.values()){
+            if(p.getMinY()<minY){
+                minY= p.getMinY();
+            }
+            if(p.getMaxY()>maxY){
+                maxY = p.getMaxY();
+            }
+        }
+        return maxY -minY;
+    }
+
 
 }

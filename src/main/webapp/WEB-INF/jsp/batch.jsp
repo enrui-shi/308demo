@@ -76,12 +76,12 @@
               <input type="number" class="range" id="pfMAX" value="0" step="0.01" min = "0" max = "1">
           </b>
           <c><span id="pferr" style="color:red"></span></c>
-          <label class = "textField">Nature Constrain Weight:</label>
+          <label class = "textField">Length Width Compactness Weight:</label>
           <b>
-              <input type="number" class="range" id="ncMIN" value="0" step="0.01" min = "0" max = "1"> to
-              <input type="number" class="range" id="ncMAX" value="0" step="0.01" min = "0" max = "1"><br>
+              <input type="number" class="range" id="lwMIN" value="0" step="0.01" min = "0" max = "1"> to
+              <input type="number" class="range" id="lwMAX" value="0" step="0.01" min = "0" max = "1"><br>
           </b>
-          <c><span id="ncerr" style="color:red"></span></c>
+          <c><span id="lwerr" style="color:red"></span></c>
 
           <b>
           </b>

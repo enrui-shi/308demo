@@ -25,9 +25,9 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/')">Home</a>
-        <a onclick="window.location.replace('/summary')">Summary</a>
-        <a onclick="window.location.replace('/batch')">Batch</a>
-        <a onclick="window.location.replace('/about')">About</a>
+        <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
+        <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
+        <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
     <body>
@@ -80,18 +80,23 @@
                             <input type="range" min="0" max="100" value="0" id="compactness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness</label> <br>
+                            <label id="compactnessValue">0.00</label></u><label>&emsp;compactness weight</label> <br>
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="partisanFairness"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness</label><br>
+                            <u><label id="partisanFairnessValue">0.00</label></u><label>&emsp;partisan fairness weight</label><br>
 
                             <label>0</label>
                             <input type="range" min="0" max="100" value="0" id="equalPopulation"
                                    onchange="updateTextInput(this.value,this.id);">
                             <label>1&emsp;</label>
-                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population</label><br>
+                            <label id="equalPopulationValue">0.00</label></u><label>&emsp;equal population weight</label><br>
+                            <label>0</label>
+                            <input type="range" min="0" max="100" value="0" id="lengthWidth"
+                                   onchange="updateTextInput(this.value,this.id);">
+                            <label>1&emsp;</label>
+                            <label id="lengthWidthValue">0.00</label></u><label>&emsp;length width compactness weight</label> <br>
                         </b>
                     </div><!--my-slidebar-box div over-->
                     <div class="my-numberInput">

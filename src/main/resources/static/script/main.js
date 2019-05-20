@@ -1,5 +1,16 @@
 // get slide bar value
 $(document).ready(function () {
+    document.getElementById('menubtn').style.display = 'none';
+
+    // if user log in
+    if($.cookie('currentuser') != "" || $.cookie('currentuser') != undefined) {
+        $('#guest_s').prop('disabled', false);
+        $('#guest_b').prop('disabled', false);
+        $('#guest_a').prop('disabled', false);
+        document.getElementById('menubtn').style.display = 'block';
+    }
+
+
     $('#phase1').prop('disabled', false);
     $('#phase2').prop('disabled', true);
     var preference_form = $('#preference');
@@ -43,6 +54,7 @@ $(document).ready(function () {
                 compactnessWeight: $('#compactness').val(),
                 partisanFairnessWeight: $('#partisanFairness').val(),
                 equalPopulationWeight: $('#equalPopulation').val(),
+                lengthWidthWeight: $('#lengthWidth').val(),
                 numberOfDistrict: $('#numOfDistrict').val(),
                 ethnicGroupNumber: mm_data,
                 ethnicGroupBound: enthnic_data
@@ -55,6 +67,7 @@ $(document).ready(function () {
             fakeLog("&nbspWeight of compactness:" + preference_data.compactnessWeight);
             fakeLog("&nbspWeight of partisan fairness:" + preference_data.partisanFairnessWeight);
             fakeLog("&nbspWeight of equal population:" + preference_data.equalPopulationWeight);
+            fakeLog("&nbspWeight of length width compactness:" + preference_data.lengthWidthWeight);
             fakeLog("&nbspNumber of district:" + preference_data.numberOfDistrict);
             fakeLog("&nbspAFRIAN_AMERICAN");
             fakeLog("&nbsp&nbspminority district number:" + $('#mmAA').val());

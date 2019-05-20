@@ -1,6 +1,7 @@
 package com.example.demo.Algorithm;
 
 import com.example.demo.Entity.*;
+import com.example.demo.Enum.Measurement;
 import com.example.demo.Enum.Party;
 import com.example.demo.Enum.StateName;
 import com.example.demo.Service.BatchService;
@@ -68,7 +69,7 @@ public class Algorithm {
         int zeroCount = 0;
         precinctToDistrict = new HashMap<>();
 
-        while (clusters.size() / 2 > targetNumber||zeroCount==3) {
+        while (clusters.size() / 2 > targetNumber&&zeroCount!=3) {
             System.out.println("Try to merge "+clusters.size()+" clusters");
             tempClusters = new ArrayList<>();
             clusterPairs = new ArrayList<>();
@@ -196,11 +197,16 @@ public class Algorithm {
 
     public Summary startSimulateAnnealing() {
         for (District d : currentState.getDistricts()) {
-            double score = measureDistrict(d);
+            Map<Measurement,Double>score= measureDistrict(d);
             d.setScore(score);
+
+        }
+        if(currentState.getDistricts().size()==1){
+            return null;
         }
         int count = 1000;
         while (count!=0){
+            System.out.println("------"+count+"-----");
             Precinct candidate = null;
             while(candidate == null) {
                 int districtIndex = randomIndex(currentState.getDistricts().size());
@@ -208,11 +214,13 @@ public class Algorithm {
             }
             Move move = testMove(candidate);
             if(move != null){
+                System.out.println(move);
                 move.execute();
                 precinctToDistrict.put(move.getPrecinct().getPrecinctID(),move.getTo());
             }
             count --;
         }
+        System.out.println("finish");
 
         return null;
     }
@@ -220,13 +228,19 @@ public class Algorithm {
     public Move testMove(Precinct candidate){
         District from = getPrecinctBelongs(candidate.getPrecinctID());
         List<District>toDistrict = getToDistrict(candidate);
+        System.out.println("Find movable district "+toDistrict.size());
         Map<Double,Move> scoreChange = new HashMap<>();
         for(District to:toDistrict){
             Move move = new Move(from,to,candidate);
-            double origin = from.getScore()+to.getScore();
+            double origin = from.getTotalScore()+to.getTotalScore();
             if (move.checkMajorityMinority(currentState.getPreference())) {
                 move.tryMove();
-                double changed =measureDistrict(move.getTo())+measureDistrict(move.getFrom());
+                double changed = -1;
+                if(move.checkContiguity()) {
+                    move.setChangedFromScore(measureDistrict(move.getFrom()));
+                    move.setChangedToScore(measureDistrict(move.getTo()));
+                    changed =move.getFromTotalScore()+move.getToTotalScore();
+                }
                 move.undo();
                 if(changed-origin>0){
                     scoreChange.put(changed-origin,move);
@@ -246,15 +260,36 @@ public class Algorithm {
 
     }
 
-    public double measureDistrict(District d){
+    public Map<Measurement,Double> measureDistrict(District d){
         Preference p = currentState.getPreference();
-        return p.getNormEqualPopulation()*equalPopulationMeasure(d)+p.getNormPartisanFairness()*efficiencyGapMeasure(d);
+        Map<Measurement,Double>map = new HashMap<>();
+        double ep = equalPopulationMeasure(d);
+        double lw = lengthWidthMeasure(d);
+        double pf = efficiencyGapMeasure(d);
+        double cm = compactnessMeasure(d);
+        map.put(Measurement.EQUAL_POPULATION,ep);
+        map.put(Measurement.LENGTH_WIDTH,lw);
+        map.put(Measurement.PARTISAN_FAIRNESS,pf);
+        map.put(Measurement.SIMPLE_COMPACTNESS,cm);
+        map.put(Measurement.TOTAL,p.getNormEqualPopulation()*ep+p.getNormPartisanFairness()*pf+p.getNormLengthWidth()*lw+p.getNormCompactness()*cm);
+        return map;
     }
 
     public double compactnessMeasure(District d){
         int bound = d.getBoundPrecinct().size();
         int total = d.getPrecincts().size();
         return (double)(total-bound)/(double)total;
+    }
+    public double lengthWidthMeasure(District d){
+        double width = d.getWidth();
+        double length = d.getLength();
+        double val = width/length;
+        double different = Math.abs(1-val);
+        if(different>2){
+            return 0;
+        }else{
+            return 1-different/2;
+        }
     }
     public double efficiencyGapMeasure(District d){
         int dvote = 0;
