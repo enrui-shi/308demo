@@ -50,11 +50,7 @@ public class mainController {
             return response;
         } else {
             StateName stateName = (StateName) session.getAttribute("stateName");
-
-
             Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
-
-
             session.setAttribute("state", algorithm.getCurrentState());
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
 
@@ -66,6 +62,22 @@ public class mainController {
         }
     }
 
+    @PostMapping(value = "/main/phaseOneWithUpdate",consumes = "application/json", produces = "application/json")
+    public Map phaseOneWithUpdate(@RequestBody Preference preference, HttpSession session){
+        if (session.getAttribute("stateName") == null) {
+            Map<String, String> response = new HashMap();
+            response.put("status", "error");
+            response.put("error", "select state first");
+            return response;
+        } else {
+            StateName stateName = (StateName) session.getAttribute("stateName");
+            Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
+            session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
+            session.setAttribute("state", algorithm.getCurrentState());
+
+            return null;
+        }
+    }
 
     //private final DeferredResult<List<JsonNode>> phaseTwoResult = new DeferredResult<>();
 
