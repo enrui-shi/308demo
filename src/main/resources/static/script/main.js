@@ -287,7 +287,6 @@ function ajaxPhaseII() {
         dataType: "json",
         success: function (data) {
             console.log("phase2 ... " + data);
-            ajaxPhase2();
         }
     })
 }
@@ -310,7 +309,7 @@ function ajaxPhase2() {
                 $('#phase2').prop('disabled', true);
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
-                ajaxPhaseII();
+                ajaxPhase2();
             } else {
                 // update GUI
                 if (map.hasLayer(districtLayer)) {
