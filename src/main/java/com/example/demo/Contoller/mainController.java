@@ -88,8 +88,8 @@ public class mainController {
         if(list.size()>0) {
             return list.remove(0);
         }else{
-            Map<String, String> response = new HashMap();
-            response.put("status","end");
+            Map<Long, String> response = new HashMap();
+            response.put(Long.valueOf(0),"end");
             return response;
         }
     }
