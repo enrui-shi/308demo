@@ -10,6 +10,7 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="/script/logout.js"></script>
         <script src="/script/guest.js"></script>
+        <script src="script/summery.js"></script>
     </head>
     <header class="topnav">
         <a onclick="window.location.replace('/')">Home</a>
@@ -29,6 +30,9 @@
             </div>
         </div>
         <h1>View the summary after batch run</h1>
+        <div id="summery">
+
+        </div>
     </body>
     <footer class="my-footer font-small" style="background-color:#333; color:white;">
         <div class="footer-copyright text-center py-3"> © 2019 Copyright: Pirates

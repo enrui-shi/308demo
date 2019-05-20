@@ -32,7 +32,7 @@ public class batchController {
     BatchService batchService;
 
     @PostMapping(value = "/creatPiratesBatch", consumes = "application/json", produces = "application/json")
-    public Map createBatch(@RequestBody Batch batch, HttpSession session) {
+    public List<String> createBatch(@RequestBody Batch batch, HttpSession session) {
         System.out.println("create batch");
         System.out.println(batch);
         Algorithm algorithm = new Algorithm();
@@ -49,9 +49,9 @@ public class batchController {
             ces = GVAL.iae;
         }
         List<Summary> s = algorithm.runBatch(batch, batchService,clusters,ces);
-        Map<Long, String> result = new HashMap<>();
-        for(int i=0; i<s.size(); i++) {
-            result.put(s.get(i).getStateId(), s.get(i).toString());
+        List<String> result = new ArrayList<>();
+        for(Summary summary:s){
+            result.add(summary.toString());
         }
         return result;
     }

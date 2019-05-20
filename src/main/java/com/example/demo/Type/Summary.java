@@ -7,7 +7,11 @@ import com.example.demo.Enum.StateName;
 
 import java.util.Map;
 
-public class Summary {
+public class
+
+
+
+Summary {
 
     private Map<Party, Integer> seatsByParty;
 
@@ -67,6 +71,18 @@ public class Summary {
 
     public void setWinner(String winner) {
         this.winner = winner;
+    }
+
+    @Override
+    public String toString() {
+        return "Summary{" +
+                "seatsByParty=" + seatsByParty +
+                ", score=" + score +
+                ", stateId=" + stateId +
+                ", stateName=" + stateName +
+                ", majorityMinorityDistrict=" + majorityMinorityDistrict +
+                ", winner='" + winner + '\'' +
+                '}';
     }
 }
 
