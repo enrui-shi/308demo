@@ -120,7 +120,9 @@ public class State {
         vote.put(Party.DEMOCRATIC,0);
         for(District d:districts){
             for(Precinct p:d.getPrecincts().values())
-                vote.forEach((k,v)->v+=p.getElectionResult().getVoteData().get(k));
+                for(Party party:p.getElectionResult().getVoteData().keySet()){
+                    vote.replace(party,vote.get(party)+p.getElectionResult().getVoteData().get(party));
+                }
         }
         summary.setSeatsByParty(vote);
         Map<Measurement,Double> score= new HashMap<>();
@@ -129,10 +131,15 @@ public class State {
         score.put(Measurement.EQUAL_POPULATION,0.0);
         score.put(Measurement.PARTISAN_FAIRNESS,0.0);
         score.put(Measurement.SIMPLE_COMPACTNESS,0.0);
+
         for(District d:districts){
-            score.forEach((k,v)->v+=d.getMeasureScore().get(k));
+            for(Measurement m:score.keySet()){
+                score.replace(m,score.get(m)+d.getMeasureScore().get(m));
+            }
         }
-        score.forEach((k,v)->v /=(double)districts.size());
+        for(Measurement m:score.keySet()){
+            score.replace(m,score.get(m)/districts.size());
+        }
         summary.setScore(score);
         Map<EthnicGroup,Integer>mm = new HashMap<>();
         mm.put(EthnicGroup.AFRIAN_AMERICAN,0);

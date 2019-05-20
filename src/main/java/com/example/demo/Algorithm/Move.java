@@ -53,6 +53,7 @@ public class Move {
     public void tryMove(){
         from.removePrecinct(precinct);
         to.addPrecinct(precinct);
+        to.addUsedPrecinct(precinct);
     }
 
     public void execute(){
