@@ -61,7 +61,9 @@ public class mainController {
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
 
             Map<String, String> result = p1s.returnPhaseOne(algorithm);
-
+            for(int i=0; i<algorithm.getCurrentState().getDistricts().size(); i++){
+                System.out.println(algorithm.getCurrentState().getDistricts().get(i).getColor());
+            }
             return result;
         }
     }
