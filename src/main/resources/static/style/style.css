@@ -288,13 +288,14 @@ html {
   position:fixed;
   margin-top: 3px;
   z-index:12;
-  width:210px;
-  height: 170px;
+  width:300px;
+  height: 230px;
   border-style: solid;
   border-width: 1.5px;
   display: none;
   border-radius: 5px;
   background-color:white;
+  padding: 3px;
 }
 .setting button{
   height: 30px;
@@ -310,7 +311,7 @@ html {
 }
 .setting .arrow-up{
   position: relative;
-  top:-6px;
+  top:-9px;
   left:53px;
   width: 10px;
   height: 10px;

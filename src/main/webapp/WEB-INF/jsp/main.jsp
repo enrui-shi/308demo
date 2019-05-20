@@ -69,6 +69,10 @@
                 <button onclick="sideSetting();" class = "icon"><i class = "fa fa-question-circle"></i></button>
                 <div class = "setting" id = "setting">
                     <div class="arrow-up"></div>
+                    <p>LW Compactness:Compare ratio of Weight and Height of the minimum bounding rectangle, ratio closer to 1 more compact</p>
+                    <p>Simple Compactness: Compare inner precincts number and bound precinct number</p>
+                    <p>Partisan Fairnes:Measure efficiency gap</p>
+
                 </div><!--setting div over-->
                 <form id="preference">
                     <div class="my-slidebar-box">
