@@ -122,7 +122,7 @@ public class Init implements CommandLineRunner {
 //        initService.addAllDemographic(ds);
         System.out.println("starting add preciects");
         initService.addAllPrecinct(precincts);
-        System.out.println("finished!!!!!!!!!!!!!!!");
+        System.out.println("finished!!!!!!!!!!!!!!!!");
 
     }
 
