@@ -18,20 +18,20 @@ $(document).ready(function () {
         document.getElementById('inputerror').style.display="none";
         console.log("start to send preference date")
         // check form data
-        if($('#maxAA').val() < $('#minAA').val()){
+        if(parseInt($('#maxAA').val()) < parseInt($('#minAA').val())){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="American American min population > max!";
             e.preventDefault();
         }
-        else if(($('#mmAA').val()+$('#mmAsian').val()+$('#mmLatino').val()) > $('#numOfDistrict').val()) {
+        else if((parseInt($('#mmAA').val())+parseInt($('#mmAsian').val())+parseInt($('#mmLatino').val())) > parseInt($('#numOfDistrict').val())) {
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Sum of majority minority districts beyond total number!";
             e.preventDefault();
-        } else if($('#maxAsian').val() < $('#minAsian').val()){
+        } else if(parseInt($('#maxAsian').val()) < parseInt($('#minAsian').val())){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Asian min population > max!";
             e.preventDefault();
-        } else if($('#maxLatino').val() < $('#minLatino').val()){
+        } else if(parseInt($('#maxLatino').val()) < parseInt($('#minLatino').val())){
             document.getElementById('inputerror').style.display="block";
             document.getElementById('inputerror').innerHTML="Latino min population > max!";
             e.preventDefault();
@@ -45,9 +45,9 @@ $(document).ready(function () {
             };
 
             var enthnic_data = {
-                AFRIAN_AMERICAN: {upperBound: $('#maxAA').val() / 100, lowerBound: $('#minAA').val() / 100},
-                ASIAN_PACIFIC: {upperBound: $('#maxAsian').val() / 100, lowerBound: $('#minAsian').val() / 100},
-                LATINO: {upperBound: $('#maxLatino').val() / 100, lowerBound: $('#minLatino').val() / 100}
+                AFRIAN_AMERICAN: {upperBound: (parseInt($('#maxAA').val()) / 100), lowerBound: (parseInt($('#minAA').val()) / 100)},
+                ASIAN_PACIFIC: {upperBound: (parseInt($('#maxAsian').val()) / 100), lowerBound: (parseInt($('#minAsian').val()) / 100)},
+                LATINO: {upperBound: (parseInt($('#maxLatino').val()) / 100), lowerBound: (parseInt($('#minLatino').val()) / 100)}
             };
 
             var preference_data = {
@@ -64,23 +64,23 @@ $(document).ready(function () {
 
             // show current preference data
             fakeLog("Current preference:");
-            fakeLog("&nbspWeight of compactness:" + preference_data.compactnessWeight);
-            fakeLog("&nbspWeight of partisan fairness:" + preference_data.partisanFairnessWeight);
-            fakeLog("&nbspWeight of equal population:" + preference_data.equalPopulationWeight);
-            fakeLog("&nbspWeight of length width compactness:" + preference_data.lengthWidthWeight);
-            fakeLog("&nbspNumber of district:" + preference_data.numberOfDistrict);
+            fakeLog("&nbspWeight of compactness: " + preference_data.compactnessWeight);
+            fakeLog("&nbspWeight of partisan fairness: " + preference_data.partisanFairnessWeight);
+            fakeLog("&nbspWeight of equal population :" + preference_data.equalPopulationWeight);
+            fakeLog("&nbspWeight of length width compactness: " + preference_data.lengthWidthWeight);
+            fakeLog("&nbspNumber of district: " + preference_data.numberOfDistrict);
             fakeLog("&nbspAFRIAN_AMERICAN");
-            fakeLog("&nbsp&nbspminority district number:" + $('#mmAA').val());
-            fakeLog("&nbsp&nbspmin population threshold:" + $('#minAA').val() / 100);
-            fakeLog("&nbsp&nbspmax population threshold:" + $('#maxAA').val() / 100);
+            fakeLog("&nbsp&nbspminority district number: " + $('#mmAA').val());
+            fakeLog("&nbsp&nbspmin population threshold: " + (parseInt($('#minAA').val()) / 100));
+            fakeLog("&nbsp&nbspmax population threshold: " + (parseInt($('#maxAA').val()) / 100));
             fakeLog("&nbspASIAN_PACIFIC bound of minority:");
-            fakeLog("&nbsp&nbspminority district number:" + $('#mmAsian').val());
-            fakeLog("&nbsp&nbspmin population threshold:" + $('#minAsian').val() / 100);
-            fakeLog("&nbsp&nbspmax population threshold::" + $('#maxAsian').val() / 100);
+            fakeLog("&nbsp&nbspminority district number: " + $('#mmAsian').val());
+            fakeLog("&nbsp&nbspmin population threshold: " + (parseInt($('#minAsian').val()) / 100));
+            fakeLog("&nbsp&nbspmax population threshold: " + (parseInt($('#minAsian').val()) / 100));
             fakeLog("&nbspLatino bound of minority:");
-            fakeLog("&nbsp&nbspminority district number:" + $('#mmLatino').val());
-            fakeLog("&nbsp&nbspmin population threshold:" + $('#minLatino').val() / 100);
-            fakeLog("&nbsp&nbspmax population threshold:" + $('#maxLatino').val() / 100);
+            fakeLog("&nbsp&nbspminority district number: " + $('#mmLatino').val());
+            fakeLog("&nbsp&nbspmin population threshold: " + (parseInt($('#minLatino').val()) / 100));
+            fakeLog("&nbsp&nbspmax population threshold: " + (parseInt($('#maxLatino').val()) / 100));
 
             if (document.getElementById('sep_process').checked) {
                 // show phase with process
