@@ -7,6 +7,7 @@ import com.example.demo.Algorithm.Algorithm;
 import com.example.demo.Enum.StateName;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.demo.Service.PhaseOneService;
@@ -70,12 +71,26 @@ public class mainController {
             response.put("error", "select state first");
             return response;
         } else {
+            Map<String, String> response = new HashMap();
             StateName stateName = (StateName) session.getAttribute("stateName");
             Algorithm algorithm = p1s.createAlgorithm(stateName, preference);
             session.setAttribute("precinctToDistrict", algorithm.getPrecinctToDistrict());
             session.setAttribute("state", algorithm.getCurrentState());
+            session.setAttribute("PhaseOneChange",algorithm.getPhaseOneChange());
+            response.put("status","OK");
+            return response;
+        }
+    }
 
-            return null;
+    @PostMapping(value = "/main/getphasechange",consumes = "application/json", produces = "application/json")
+    public Map getPhaseOneChange(HttpSession session){
+        List<Map<Long,String>> list = (List<Map<Long, String>>) session.getAttribute("PhaseOneChange");
+        if(list.size()>0) {
+            return list.remove(0);
+        }else{
+            Map<Long, String> response = new HashMap();
+            response.put(Long.valueOf(0),"end");
+            return response;
         }
     }
 

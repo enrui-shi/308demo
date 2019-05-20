@@ -348,10 +348,12 @@ html {
   margin-right: 0%;
   font-size:80%
 }
+
 .my-slidebar-box input{
   width:30%;
   height:25%;
 }
+
 .my-numberInput{
   position: relative;
   width:92%;
@@ -383,15 +385,26 @@ html {
   right: 10px;
 }
 
+.my-map-checkbox-container{
+  position: relative;
+  width:92%;
+  height:7%;
+  left:4%;
+  padding:2%;
+  top:5%;
+  overflow: scroll;
+}
+
 .my-map-button-container{
   position: relative;
   width:92%;
   height:10%;
   left:4%;
   padding:2%;
-  top:7%;
+  top:5%;
   overflow: scroll;
 }
+
 .my-map-btn{
   background-color: #333;
   border: none;
@@ -410,10 +423,10 @@ html {
 .my-console-container{
   position: relative;
   width:92%;
-  height:25%;
+  height:22%;
   left:4%;
   padding:2%;
-  top:7%;
+  top:4%;
   border-style:solid;
   border-width: 3px;
   overflow: scroll;

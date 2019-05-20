@@ -25,6 +25,8 @@ $(document).ready(function () {
             document.getElementById('inputerror').innerHTML="Latino min population > max!";
             e.preventDefault();
         } else {
+
+            // get form data
             var mm_data = {
                 AFRIAN_AMERICAN: $('#mmAA').val(),
                 ASIAN_PACIFIC: $('#mmAsian').val(),
@@ -50,6 +52,7 @@ $(document).ready(function () {
 
             e.preventDefault();
 
+            // show current preference data
             fakeLog("Current preference:");
             fakeLog("&nbspWeight of efficiency:" + preference_data.efficiencyGapWeight);
             fakeLog("&nbspWeight of compactness:" + preference_data.compactnessWeight);
@@ -70,87 +73,98 @@ $(document).ready(function () {
             fakeLog("&nbsp&nbspmin population threshold:" + $('#minLatino').val() / 100);
             fakeLog("&nbsp&nbspmax population threshold:" + $('#maxLatino').val() / 100);
 
-            console.log(preference_data.majorityMinorityDistrictNumber, " ", preference_data.ethnicGroupBound);
-            $.ajax({
-                type: 'post',
-                url: '/home/main/startPhaseOne',
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(preference_data),
-                dataType: "json",
-                success: function (data) {
-                    /* response from controller */
-                    console.log("color color 0 : " + data);
-                    console.log("color color 1 : " + Object.keys(data));
-                    console.log("color color 2 : " + Object.keys(data)[0]);
-                    console.log("color color 3 : " + data[Object.keys(data)[0]]);
+            if (document.getElementById('sep_process').checked) {
+                // show phase with process
+                ajaxPhaseI('/home/main/phaseOneWithUpdate');
+            } else {
+                // start phase I without process
+                ajaxPhaseI('/home/main/startPhaseOne');
+            }
 
-                    if (map.hasLayer(districtLayer)) {
-                        map.removeLayer(districtLayer);
-                    }
-
-                    if (Object.keys(data)[0].charAt(0) == '1') {
-                        districtLayer = L.geoJSON(oh_data.FeatureCollection, {
-                            onEachFeature: clusterOnEachFeature,
-                            style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 1,
-                                  opacity:1, weight: 1, color:data[feature.properties.id]};
-                            }
-                        }).addTo(map);
-                    } else if (Object.keys(data)[0].charAt(0) == '2') {
-                        districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
-                            onEachFeature: clusterOnEachFeature,
-                            style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 1,
-                                  opacity: 1, weight: 1, color:data[feature.properties.id]};
-                            }
-                        }).addTo(map);
-                    } else {
-                        districtLayer = L.geoJSON(NJ_precinctsData.FeatureCollection, {
-                            onEachFeature: clusterOnEachFeature,
-                            style: function (feature) {
-                                return {fillColor: data[feature.properties.id], fillOpacity: 1,
-                                  opacity:1, weight: 1, color:data[feature.properties.id]};
-                            }
-                        }).addTo(map);
-                    }
-                    // enable phase2 button to start simulating annealing
-                    $('#phase2').prop('disabled', false);
-                    $('#phase1').prop('disabled', true);
-
-                    $.ajax({
-                        type: 'get',
-                        url: "/home/main/startPhaseTwo",
-                        contentType: "application/json; charset=utf-8",
-                        header: {"accept": "application/json"},
-                        dataType: "json",
-                        success: function (data) {
-                            console.log("phase2 ... "+data);
+            function ajaxPhaseI(str) {
+                $.ajax({
+                    type: 'post',
+                    url: str,
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(preference_data),
+                    dataType: "json",
+                    success: function (data) {
+                        if (map.hasLayer(districtLayer)) {
+                            map.removeLayer(districtLayer);
                         }
-                    })
 
-                    // start to get the change of phase2
-                    function ajaxPhase2() {
+                        if (Object.keys(data)[0].charAt(0) == '1') {
+                            districtLayer = L.geoJSON(oh_data.FeatureCollection, {
+                                onEachFeature: clusterOnEachFeature,
+                                style: function (feature) {
+                                    return {
+                                        fillColor: data[feature.properties.id], fillOpacity: 1,
+                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
+                        } else if (Object.keys(data)[0].charAt(0) == '2') {
+                            districtLayer = L.geoJSON(NY_precinctsData.FeatureCollection, {
+                                onEachFeature: clusterOnEachFeature,
+                                style: function (feature) {
+                                    return {
+                                        fillColor: data[feature.properties.id], fillOpacity: 1,
+                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
+                        } else {
+                            districtLayer = L.geoJSON(IA_precinctsData.FeatureCollection, {
+                                onEachFeature: clusterOnEachFeature,
+                                style: function (feature) {
+                                    return {
+                                        fillColor: data[feature.properties.id], fillOpacity: 1,
+                                        opacity: 1, weight: 1, color: data[feature.properties.id]
+                                    };
+                                }
+                            }).addTo(map);
+                        }
+
+                        // enable phase2 button to start simulating annealing
+                        $('#phase2').prop('disabled', false);
+                        $('#phase1').prop('disabled', true);
+
+                        // start phase 2
                         $.ajax({
                             type: 'get',
-                            url: "/home/main/getChangeOfPhase2",
+                            url: "/home/main/startPhaseTwo",
                             contentType: "application/json; charset=utf-8",
                             header: {"accept": "application/json"},
                             dataType: "json",
                             success: function (data) {
-                                console.log(data);
-                                if (data.status == 'end') {
-                                    // after phase two finish, enable playphase1
-                                    $('#phase1').prop('disabled', false);
-                                    $('#phase2').prop('disabled', true);
-                                } else {
-                                    // continue send ajax call
-                                    ajaxPhase2();
-                                }
+                                console.log("phase2 ... " + data);
                             }
-                        });
+                        })
                     }
-                }
-            })
+                })
+            }
+
+            // start to get the change of phase2
+            function ajaxPhaseII() {
+                $.ajax({
+                    type: 'get',
+                    url: "/home/main/getChangeOfPhase2",
+                    contentType: "application/json; charset=utf-8",
+                    header: {"accept": "application/json"},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.status == 'end') {
+                            // after phase two finish, enable playphase1
+                            $('#phase1').prop('disabled', false);
+                            $('#phase2').prop('disabled', true);
+                        } else {
+                            // continue send ajax call
+                            ajaxPhaseII();
+                        }
+                    }
+                });
+            }
         }
     })
 });
