@@ -278,6 +278,7 @@ $(document).ready(function () {
 
 function ajaxPhaseII() {
     console.log("phase two process is ready ... ")
+    ajaxPhase2();
     $.ajax({
         type: 'post',
         url: "/home/main/startPhaseTwo",
@@ -288,8 +289,6 @@ function ajaxPhaseII() {
             console.log("phase2 ... " + data);
         }
     })
-    sleep(2000);
-    ajaxPhase2();
 }
 
 // start to get the change of phase2
@@ -384,13 +383,4 @@ function ajaxPhase2() {
             }
         }
     });
-}
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
 }

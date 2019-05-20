@@ -25,8 +25,8 @@
     </head>
     <header class="topnav">
         <a class="active" onclick="window.location.replace('/')">Home</a>
-        <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
         <a id="guest_s" onclick="window.location.replace('/summary')" disabled>Summary</a>
+        <a id="guest_b" onclick="window.location.replace('/batch')" disabled>Batch</a>
         <a id="guest_a" onclick="window.location.replace('/about')" disabled>About</a>
         <input type="image" class="user-icon" onclick="clickProfile()" src="image/user_icon.jpg" />
     </header>
@@ -122,7 +122,7 @@
                     <div class="my-map-button-container">
                         <button id="phase1" class="my-map-btn" type="submit" title="Run Phase I with a GUI update at the end."><i class="fa fa-play"></i> Play Phase One</button>
                         <label>&emsp;</label>
-                        <button id="phase2" class="my-map-btn" type="button" onclick="ajaxPhaseII()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
+                        <button id="phase2" class="my-map-btn" onclick="ajaxPhaseII()" title="Run Phase II: simulating annealing" disabled><i class="fa fa-play"></i> Play Phase Two</button>
                     </div><!--my-map-button-container div over-->
                     <div class="my-console-container">
                         <p id="log"></p>
