@@ -3,7 +3,6 @@ $(document).ready(function(){
     batch_form.submit( function(e) {
         console.log("start to send batch data");
         document.getElementById('derr').style.display="none";
-        document.getElementById('mmerr').style.display="none";
         document.getElementById('eqerr').style.display="none";
         document.getElementById('cerr').style.display="none";
         document.getElementById('pferr').style.display="none";
@@ -13,11 +12,7 @@ $(document).ready(function(){
               document.getElementById('derr').style.display="block";
               document.getElementById('derr').innerHTML="min number of district > max!";
               e.preventDefault();
-        } else if(parseInt($("#mmMAX").val()) < parseInt($("#mmMIN").val())){
-              document.getElementById('mmerr').style.display="block";
-              document.getElementById('mmerr').innerHTML="min number of majority minority district > max!";
-              e.preventDefault();
-        }else if(parseInt($("#eqMAX").val()) < parseInt($("#eqMIN").val())){
+        } else if(parseInt($("#eqMAX").val()) < parseInt($("#eqMIN").val())){
               document.getElementById('eqerr').style.display="block";
               document.getElementById('eqerr').innerHTML="min weight of equal population > max!";
               e.preventDefault();
@@ -36,14 +31,13 @@ $(document).ready(function(){
         } else {
 
               var d_data = {upperBound: $("#dMAX").val(), lowerBound: $("#dMIN").val()}
-              var mm_data = {upperBound: $("#mmMAX").val(), lowerBound: $("#mmMIN").val()};
               var ep_data = {upperBound: $("#eqMAX").val(), lowerBound: $("#eqMIN").val()};
               var c_data = {upperBound: $("#cMAX").val(), lowerBound: $("#cMIN").val()};
               var pf_data = {upperBound: $("#pfMAX").val(), lowerBound: $("#pfMIN").val()};
               var lw_data = {upperBound: $("#lwMAX").val(), lowerBound: $("#lwMIN").val()};
 
               var batch_data = {numBatch: $('#num-of-batch').val(), numDistrictBound: d_data, stateName:$("input[name='state']:checked").val(),
-                  numOfMMBound: mm_data, equalPopulationBound: ep_data, compactnessBound: c_data,
+                  equalPopulationBound: ep_data, compactnessBound: c_data,
                   partisanFairnessBound: pf_data, lengthWidthCompactnessBound: lw_data};
 
               e.preventDefault();

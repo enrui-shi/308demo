@@ -52,12 +52,6 @@
           </b>
           <c><span id="derr" style="color:red"></span></c>
           </div>
-          <label class = "textField">Number of majority minority:</label>
-          <b>
-              <input type="number" class="range" id="mmMIN" value="0" step="1" min = "0" max = "10000"> to
-              <input type="number" class="range" id="mmMAX" value="0" step="1" min = "0" max = "10000000">
-          </b>
-          <c><span id="mmerr" style="color:red"></span></c>
           <label class = "textField">Equal Population Weight:</label>
           <b>
               <input type="number" class="range" id="eqMIN" value="0" step="0.01" min = "0" max = "1"> to
