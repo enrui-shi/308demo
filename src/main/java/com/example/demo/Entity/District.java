@@ -2,6 +2,7 @@ package com.example.demo.Entity;
 
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.Measurement;
+import com.example.demo.Enum.Party;
 import com.example.demo.Type.Bound;
 import org.springframework.security.core.parameters.P;
 
@@ -86,7 +87,19 @@ public class District {
     public EthnicGroup getTargetEthnic() {
         return targetEthnic;
     }
+    public Party getWinner(){
+        Map<Party, Integer>vote = new HashMap<>();
+        vote.put(Party.REPUBLICAN,0);
+        vote.put(Party.DEMOCRATIC,0);
+        for(Precinct p:precincts.values()){
+            vote.forEach((k,v)->v+=p.getElectionResult().getVoteData().get(k));
+        }
+        if(vote.get(Party.REPUBLICAN)>vote.get(Party.DEMOCRATIC)){
+            return Party.REPUBLICAN;
+        }
+        return Party.DEMOCRATIC;
 
+    }
     public Map<Measurement, Double> getScore() {
         return measureScore;
     }

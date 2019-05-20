@@ -19,6 +19,8 @@ public class Summary {
 
     private Map<EthnicGroup,Integer>majorityMinorityDistrict;
 
+    private String winner;
+
     public Map<Party, Integer> getSeatsByParty() {
         return seatsByParty;
     }
@@ -57,6 +59,14 @@ public class Summary {
 
     public void setMajorityMinorityDistrict(Map<EthnicGroup, Integer> majorityMinorityDistrict) {
         this.majorityMinorityDistrict = majorityMinorityDistrict;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 }
 

@@ -142,6 +142,20 @@ public class State {
                 mm.replace(d.getTargetEthnic(),mm.get(d.getTargetEthnic())+1);
             }
         }
+        int dcount = 0;
+        int rcount = 0;
+        for(District d:districts){
+            if(d.getWinner()==Party.DEMOCRATIC){
+                dcount++;
+            }else {
+                rcount++;
+            }
+        }
+        if(dcount>rcount){
+            summary.setWinner("Democratic");
+        }else{
+            summary.setWinner("Republican");
+        }
         summary.setMajorityMinorityDistrict(mm);
         return summary;
     }
