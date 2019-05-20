@@ -30,15 +30,18 @@ public class Preference {
 
     private double equalPopulationWeight;
 
+    private double lengthWidthWeigth;
+
     public Preference(){
 
     }
 
-    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight){
+    public Preference(int numberOfDistrict, double compactnessWeight, double partisanFairnessWeight, double equalPopulationWeight, double lengthWidthWeigth) {
         this.numberOfDistrict = numberOfDistrict;
         this.compactnessWeight = compactnessWeight;
         this.partisanFairnessWeight = partisanFairnessWeight;
         this.equalPopulationWeight = equalPopulationWeight;
+        this.lengthWidthWeigth = lengthWidthWeigth;
     }
 
     public int getNumberByGroup(EthnicGroup eg) {
@@ -91,7 +94,7 @@ public class Preference {
     }
 
     public double getTotalWeight(){
-        return compactnessWeight+partisanFairnessWeight+equalPopulationWeight;
+        return compactnessWeight+partisanFairnessWeight+equalPopulationWeight+lengthWidthWeigth;
     }
     public double getNormCompactness(){
         return compactnessWeight/getTotalWeight();
@@ -102,4 +105,5 @@ public class Preference {
     public double getNormEqualPopulation(){
         return equalPopulationWeight/getTotalWeight();
     }
+    public double getNormLengthWidth(){return lengthWidthWeigth/getTotalWeight();}
 }

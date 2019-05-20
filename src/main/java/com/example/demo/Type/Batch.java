@@ -20,14 +20,14 @@ public class Batch {
 
     private Bound partisanFairnessBound;
 
-    private Bound natureConstrainBound;
+    private Bound lengthWidthCompactnessBound;
 
     public Batch() {
 
     }
 
     public Batch(int numBatch, Bound numDistrictBound, String stateName, Bound numOfMMBound, Bound equalPopulationBound,
-                 Bound compactnessBound, Bound partisanFairnessBound, Bound natureConstrainBound) {
+                 Bound compactnessBound, Bound partisanFairnessBound, Bound lengthWidthCompactnessBound) {
         this.numBatch = numBatch;
         this.numDistrictBound = numDistrictBound;
         this.stateName = stateName;
@@ -35,7 +35,7 @@ public class Batch {
         this.equalPopulationBound = equalPopulationBound;
         this.compactnessBound = compactnessBound;
         this.partisanFairnessBound = partisanFairnessBound;
-        this.natureConstrainBound = natureConstrainBound;
+        this.lengthWidthCompactnessBound = lengthWidthCompactnessBound;
     }
 
     public int getNumBatch() {
@@ -75,8 +75,8 @@ public class Batch {
         return partisanFairnessBound;
     }
 
-    public Bound getNatureConstrainBound() {
-        return natureConstrainBound;
+    public Bound getLengthWidthCompactnessBound() {
+        return lengthWidthCompactnessBound;
     }
 
     public void setNumBatch(int numBatch) {
@@ -107,12 +107,13 @@ public class Batch {
         this.partisanFairnessBound = partisanFairnessBound;
     }
 
-    public void setNatureConstrainBound(Bound natureConstrainBound) {
-        this.natureConstrainBound = natureConstrainBound;
+    public void setLengthWidthCompactnessBound(Bound lengthWidthCompactnessBound) {
+        this.lengthWidthCompactnessBound = lengthWidthCompactnessBound;
     }
 
     public Preference generatePreference() {
-        Preference p = new Preference((int)numDistrictBound.generateValue(), compactnessBound.generateValue(), partisanFairnessBound.generateValue(), equalPopulationBound.generateValue());
+        Preference p = new Preference((int)numDistrictBound.generateValue(), compactnessBound.generateValue(),
+                partisanFairnessBound.generateValue(), equalPopulationBound.generateValue(),lengthWidthCompactnessBound.generateValue());
         return p;
     }
 }
