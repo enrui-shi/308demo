@@ -83,9 +83,9 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (data) {
                         console.log("phase one process start....");
+                        ajaxPhaseI();
                     }
                 })
-                ajaxPhaseI();
             } else {
                 // start phase I without process
                 $.ajax({
