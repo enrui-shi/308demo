@@ -410,10 +410,10 @@ function sleep(milliseconds) {
 
 function compareScore(){
     fakeLog('The gerrymandering score of measurement in this run: ')
-    var data = $.cookie('currentSummary');
+    var data = $.cookie('currentScore');
     console.log(data);
     for(var i=0; i<Object.keys(data).length; i++) {
         fakeLog('&nbsp'+Object.keys(data)[i]+': '+data[Object.keys(data)[i]]);
     }
-    $.cookie('currentSummary', "");
+    $.cookie('currentScore', "");
 }
