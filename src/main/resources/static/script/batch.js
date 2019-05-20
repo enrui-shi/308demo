@@ -64,6 +64,7 @@ $(document).ready(function(){
                   success: function (data){
                       //var id = setInterval(frame, 10);
                       console.log("batch "+data);
+                      $.cookie('currentSummary', data);
                   }
               })
               var elem = document.getElementById("myBar");
