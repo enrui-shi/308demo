@@ -6,12 +6,7 @@ import com.example.demo.Enum.StateName;
 import com.example.demo.Service.BatchService;
 import com.example.demo.Type.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 
 public class Algorithm {
@@ -28,6 +23,7 @@ public class Algorithm {
 
     private Map<Long, District> precinctToDistrict;
 
+    private List<Map<Long,District>> phaseOneChange = new ArrayList<>();
 
     public Algorithm() {
     }
