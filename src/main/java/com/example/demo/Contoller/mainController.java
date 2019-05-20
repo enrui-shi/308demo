@@ -95,7 +95,7 @@ public class mainController {
             return response;
         }
     }
-    @PostMapping(value = "/main/getPhaseTwoChange",consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/main/getPhaseIIChange",consumes = "application/json", produces = "application/json")
     public Map<Long,String> getPhaseTwoChange(HttpSession session){
         List<colorChange> colorChanges = (List<colorChange>) session.getAttribute("phaseTwoChange");
         Map<Long,String> result = new HashMap<>();
@@ -129,12 +129,6 @@ public class mainController {
         Map<String, String> response = new HashMap();
         response.put("status", "ok");
         return response;
-    }
-
-    @RequestMapping("/main/getPhaseIIChange")
-    public Map getPhase2Change(@RequestParam(required = false) Long timestamp, HttpSession session) {
-        // TO DO get change from list
-        return null;
     }
 
     @PostMapping(value = "/main/showDemo", consumes = "application/json", produces = "application/json")
