@@ -3,6 +3,7 @@ package com.example.demo.Entity;
 
 import com.example.demo.Enum.EthnicGroup;
 import com.example.demo.Enum.StateName;
+import com.example.demo.Type.Summary;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -107,7 +108,13 @@ public class State {
                 d.setTargetEthnic(eg);
             }
         }
+    }
+    public Summary generateSummary(){
+        Summary summary = new Summary();
+        summary.setStateId(stateId);
+        summary.setStateName(stateName);
 
+        return summary;
     }
 
 }

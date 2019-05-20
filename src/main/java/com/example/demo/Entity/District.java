@@ -31,6 +31,10 @@ public class District {
 
     private boolean minorityDistrict;
 
+    @ElementCollection
+    @CollectionTable()
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn()
     private Map<Measurement,Double>measureScore;
 
 
