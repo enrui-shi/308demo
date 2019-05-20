@@ -19,6 +19,7 @@ function logout() {
     $.cookie('currentuser', "");
     $.cookie('currentSummary', "");
     $.cookie('currentStateName', "");
+    $.cookie('currentScore', "");
     // back to the start page
     document.getElementById('menubtn').style.display = 'none';
     window.location.replace('/');

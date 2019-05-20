@@ -4,6 +4,7 @@ import com.example.demo.Entity.District;
 import com.example.demo.Entity.State;
 import com.example.demo.Entity.Preference;
 import com.example.demo.Algorithm.Algorithm;
+import com.example.demo.Enum.Measurement;
 import com.example.demo.Enum.StateName;
 
 import java.util.ArrayList;
@@ -16,12 +17,15 @@ import com.example.demo.Service.PhaseTwoService;
 
 import java.io.IOException;
 
+import com.example.demo.Type.Summary;
 import com.example.demo.Type.colorChange;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
+import static com.example.demo.Enum.Measurement.*;
 
 
 @RestController
@@ -126,9 +130,24 @@ public class mainController {
         List<Map<Long,String>> colorChanges = new ArrayList<>();
         session.setAttribute("phaseTwoChange",colorChanges);
         a.setPhaseTwoChange(colorChanges);
-        a.startSimulateAnnealing();
-        Map<String, String> response = new HashMap();
-        response.put("status", "ok");
+
+        Summary summary = a.startSimulateAnnealing();
+
+        Map<String, Double> response = new HashMap();
+
+        // get scores of each measurement
+        for(Map.Entry<Measurement, Double> entry : summary.getScore().entrySet()) {
+            if (entry.getKey() == EQUAL_POPULATION)
+                response.put("EQUAL_POPULATION", entry.getValue());
+            else if (entry.getKey() == PARTISAN_FAIRNESS)
+                response.put("PARTISAN_FAIRNESS", entry.getValue());
+            else if (entry.getKey() == SIMPLE_COMPACTNESS)
+                response.put("SIMPLE_COMPACTNESS", entry.getValue());
+            else if (entry.getKey() == LENGTH_WIDTH)
+                response.put("LENGTH_WIDTH", entry.getValue());
+            else if (entry.getKey() == TOTAL)
+                response.put("TOTAL", entry.getValue());
+        }
         return response;
     }
 

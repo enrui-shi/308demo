@@ -298,6 +298,7 @@ function ajaxPhaseII() {
             document.getElementById('aa-color-btn').style.display='block';
             document.getElementById('mm-color-btn').style.display = 'block';
             document.getElementById('original-color-btn').style.display = 'block';
+            $.cookie('currentScore', data);
         }
     })
     sleep(2000);
@@ -317,6 +318,8 @@ function ajaxPhase2() {
                 // after phase two finish, enable playphase1
                 $('#phase1').prop('disabled', false);
                 $('#phase2').prop('disabled', true);
+                fakeLog("Finish redistricting !!!!!!!!");
+                compareScore();
 
             } else if(data[Object.keys(data)[0]] == 'wait'){
                 // continue send ajax call
@@ -403,4 +406,13 @@ function sleep(milliseconds) {
              break;
         }
      }
+}
+
+function compareScore(){
+    fakeLog('The gerrymandering score of measurement in this run: ')
+    fakeLog('&nbspTotal: '+data.TOTAL);
+    fakeLog('&nbspPartisan fairness: '+data.PARTISAN_FAIRNESS);
+    fakeLog('&nbspEqual population: '+data.EQUAL_POPULATION);
+    fakeLog('&nbsp:Simple compactness '+data.SIMPLE_COMPACTNESS);
+    fakeLog('&nbspLength width: '+data.LENGTH_WIDTH);
 }
