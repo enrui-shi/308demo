@@ -92,6 +92,7 @@ public class Algorithm {
     }
 
     public void initData(){
+        System.out.println(clusterEdges.get(0));
         for (ClusterEdge ce:this.clusterEdges){
             ce.getCluster1().addCE(ce);
             ce.getCluster2().addCE(ce);
