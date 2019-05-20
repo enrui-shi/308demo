@@ -462,10 +462,10 @@ map.on('zoomend', function () {
 });
 
 // show African-American population distribution
-function AAstyle(feature){
+function AfricanAmericanStyle(feature){
     $.ajax({
         type: 'post',
-        url: "/home/main/showDemoAA?districtID=" + layer.feature.properties.id,
+        url: "/home/main/showDemoAA?districtID=" + feature.properties.id,
         contentType: "application/json; charset=utf-8",
         header: {"accept": "application/json"},
         dataType: "json",
@@ -529,17 +529,17 @@ function setAAPDcolor() {
 
     if ($.cookie('currentStateName') == 'IA') {
         AALayer = L.geoJSON(IA_districtsData.FeatureCollection, {
-            style: AAStyle,
+            style: AfricanAmericanStyle,
             onEachFeature: AAOnEachFeature
         }).addTo(map);
     } else if($.cookie('currentStateName') == 'OH') {
         AALayer = L.geoJSON(oh_data.FeatureCollection, {
-            style: AAStyle,
+            style: AfricanAmericanStyle,
             onEachFeature: AAOnEachFeature
         }).addTo(map);
     } else if($.cookie('currentStateName') == 'NY') {
         AALayer = L.geoJSON(NY_districtsData.FeatureCollection, {
-            style: AAStyle,
+            style: AfricanAmericanStyle,
             onEachFeature: AAOnEachFeature
         }).addTo(map);
     } else {
@@ -573,7 +573,7 @@ function setMMcolor() {
                     style: function (feature) {
                         return {
                             fillColor: data[feature.properties.id], fillOpacity: 0.7,
-                            opacity: 0.7, weight: 1, color: 'black'
+                            opacity: 0.7, weight: 1, color: data[feature.properties.id]
                         };
                     }
                 }).addTo(map);

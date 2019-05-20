@@ -72,11 +72,11 @@ $(document).ready(function () {
 
             // show current preference data
             fakeLog("Current preference:");
-            fakeLog("&nbspWeight of compactness: " + preference_data.compactnessWeight);
-            fakeLog("&nbspWeight of partisan fairness: " + preference_data.partisanFairnessWeight);
-            fakeLog("&nbspWeight of equal population :" + preference_data.equalPopulationWeight);
-            fakeLog("&nbspWeight of length width compactness: " + preference_data.lengthWidthWeight);
-            fakeLog("&nbspNumber of district: " + preference_data.numberOfDistrict);
+            fakeLog("&nbspWeight of compactness: " + (parseInt(preference_data.compactnessWeight)/100));
+            fakeLog("&nbspWeight of partisan fairness: " + (parseInt(preference_data.partisanFairnessWeight)/100));
+            fakeLog("&nbspWeight of equal population :" + (parseInt(preference_data.equalPopulationWeight)/100));
+            fakeLog("&nbspWeight of length width compactness: " + (parseInt(preference_data.lengthWidthWeight)/100));
+            fakeLog("&nbspNumber of district: " + (parseInt(preference_data.numberOfDistrict)/100));
             fakeLog("&nbspAFRIAN_AMERICAN");
             fakeLog("&nbsp&nbspminority district number: " + $('#mmAA').val());
             fakeLog("&nbsp&nbspmin population threshold: " + (parseInt($('#minAA').val()) / 100));
@@ -293,7 +293,7 @@ function ajaxPhaseII() {
         dataType: "json",
         success: function (data) {
             console.log("phase2 ... " + data);
-            
+
             // button show up: display african-american population distribution
             document.getElementById('aa-color-btn').style.display='block';
             document.getElementById('mm-color-btn').style.display = 'block';

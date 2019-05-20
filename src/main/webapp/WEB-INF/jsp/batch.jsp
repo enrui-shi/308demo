@@ -104,7 +104,7 @@
               </div>
               <br>
               <div>
-                  <span id="viewSummary" style="display:none"><u><a style = "cursor: pointer"onclick="window.location.replace('/main')">See batch run summaries</a></u></span>
+                  <span id="viewSummary" style="display:none"><u><a style="cursor: pointer" onclick="window.location.replace('/main')">See batch run summaries</a></u></span>
               </div>
           </div>
       </div>
