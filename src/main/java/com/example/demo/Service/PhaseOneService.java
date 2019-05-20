@@ -48,8 +48,8 @@ public class PhaseOneService {
             algorithm.setClusterEdges(GVAL.nye);
             algorithm.setClusters(GVAL.ny);
         } else {
-            algorithm.setClusterEdges(GVAL.ia);
-            algorithm.setClusters(GVAL.iae);
+            algorithm.setClusterEdges(GVAL.iae);
+            algorithm.setClusters(GVAL.ia);
         }
         }catch (Exception e){
             System.out.println(e);
