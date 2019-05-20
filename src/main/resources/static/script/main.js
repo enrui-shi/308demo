@@ -159,18 +159,6 @@ $(document).ready(function () {
                         // enable phase2 button to start simulating annealing
                         $('#phase2').prop('disabled', false);
                         $('#phase1').prop('disabled', true);
-
-                        // start phase 2
-                        $.ajax({
-                            type: 'get',
-                            url: "/home/main/startPhaseTwo",
-                            contentType: "application/json; charset=utf-8",
-                            header: {"accept": "application/json"},
-                            dataType: "json",
-                            success: function (data) {
-                                console.log("phase2 ... " + data);
-                            }
-                        })
                     }
                 })
             }
@@ -178,7 +166,7 @@ $(document).ready(function () {
             // start to get the change of phase1
             function ajaxPhaseI() {
                 $.ajax({
-                    type: 'get',
+                    type: 'post',
                     url: "/home/main/getPhaseIChange",
                     contentType: "application/json; charset=utf-8",
                     header: {"accept": "application/json"},
@@ -263,11 +251,23 @@ $(document).ready(function () {
                     }
                 });
             }
-
+            function ajaxPhase2(){
+                // start phase 2
+                $.ajax({
+                    type: 'post',
+                    url: "/home/main/startPhaseTwo",
+                    contentType: "application/json; charset=utf-8",
+                    header: {"accept": "application/json"},
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("phase2 ... " + data);
+                    }
+                })
+            }
             // start to get the change of phase2
             function ajaxPhaseII() {
                 $.ajax({
-                    type: 'get',
+                    type: 'post',
                     url: "/home/main/getPhaseIIChange",
                     contentType: "application/json; charset=utf-8",
                     header: {"accept": "application/json"},
