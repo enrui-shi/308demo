@@ -124,6 +124,14 @@ public class PhaseOneService {
             return response;
         }
     }
+
+    // show african-american population distribution
+    public Map showDemoAA(Long c_ID, Map<Long, District> pToD) {
+        Map<String, String> response = new HashMap<>();
+        response.put("AFRIAN_AMERICAN", pToD.get(c_ID).getDemographic().getRatioByGroup(AFRIAN_AMERICAN) + "");
+        return response;
+    }
+
     public static List<ClusterEdge> cloneClusterEdge(List<ClusterEdge> clusterEdges,Map<Long,Cluster> cmap) {
         List<ClusterEdge> copy = new ArrayList<>();
         for(ClusterEdge ce:clusterEdges){
@@ -139,6 +147,7 @@ public class PhaseOneService {
 
         return copy;
     }
+
     public static Map<Long,Cluster> cloneCluster(List<Cluster> clusters) {
         Map<Long,Cluster> copy= new HashMap<>();
         for (Cluster c:clusters){
