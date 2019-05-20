@@ -460,7 +460,7 @@ map.on('zoomend', function () {
     }
 });
 
-
+// show African-American population distribution
 function AAstyle(feature){
     $.ajax({
         type: 'post',
